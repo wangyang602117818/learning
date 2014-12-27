@@ -1,0 +1,34 @@
+由于一般处理程序输出html代码要拼接字符串，麻烦，
+所以引入razor模版引擎
+
+Razor使用步骤(Parse)
+1 读取一个静态html页
+   string html = File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "views/02.html"); 
+2 利用Razor.Parse解析html，并传入一个类型，在静态html中@Model就代表这个类型
+   html = Razor.Parse(html, new Person01() { name = "李四", age = 18 });
+3 向浏览器输出html
+   context.Response.Write(html);
+
+静态页使用Model  @符号代表输出
+1 @Model.name   输出Model里面的name属性
+2 @for(int i=0;i<@Model.arr.Length;i++){  //循环Model里面的数组，并输出里面的值
+        @Model.arr[i];
+  }  
+3 @{
+     for(int i=0;i<@Model.arr.Length;i++){    //@{} 大括号里面写c#代码
+         @Model.arr[i];
+     }
+  }
+================================================================================================
+
+扩展：使用模版页(Compile)
+1 读取静态页与模版页
+   string html = File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "views/02.html");   
+   string modelhtml = File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "views/top.html");
+2 编译模版页
+   Razor.Compile(modelhtml, "top");  //在静态页中top就代表modelhtml模版
+3 向浏览器输出html
+   context.Response.Write(html);
+
+静态页使用模版(Include)
+  @Include("top")

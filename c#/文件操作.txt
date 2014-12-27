@@ -1,0 +1,42 @@
+静态类（不能实例化）：
+   File：操作文件 ，Directory：操作目录
+密封类（只能实例化，不能继承）：
+   FileInfo：操作文件 ，DirectoryInfo：操作目录
+File类，Directory类使用时不用实例化，进行单一的调用比较合适
+FileInfo类，DirectoryInfo类需要实例化，当多次调用时使用合适
+
+建立文件流的方法 FileStream
+ 1 使用FileStream类 
+   FileStream aFile=new FileStream("1.txt", FileMode.Append, FileAccess.Read);
+ 2 使用File
+   FileStream aFile=File.OpenRead("1.txt");
+ 3 使用FileInfo
+   FileInfo aFileInfo=new FileInfo("1.txt");
+   FileStream aFile=aFileInfo.OpenRead();
+
+文件流指针Seek
+   将指针移到到第8个字节
+   aFile.Seek(8,SeekOrigin.Begin)
+   将指针相对当前位置向后移到2个字节
+   fs.Seek(2, SeekOrigin.Current);
+
+FileStream类只能处理字节，不能直接读取写入字符串，要处理字符串，用SteamReader，StreamWriter
+创建SteamReader的方法
+  1 使用SteamReader类直接创建
+    StreamReader sr = new StreamReader("dnf.txt",Encoding.GetEncoding("gb2312"));
+  2 使用文件流FileStream对象
+    FileStream fs = new FileStream("dnf.txt", FileMode.Open);
+    StreamReader sr = new StreamReader(fs);
+
+读取文件的方法
+  1 一个字符一个字符的读取 sr.Read()
+  2 一行一行的读取 sr.ReadLine()
+  3 小文件全部读取 sr.ReadToEnd()   
+  4 大文件一行一行的读取 .net4
+    foreach (string line in File.ReadAllLines("dnf.txt", Encoding.GetEncoding("gb2312"))) 
+            {
+                Console.WriteLine(line);
+            }
+
+  
+

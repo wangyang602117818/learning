@@ -1,0 +1,12 @@
+一：页面级错误
+在后台页面类里面添加Page_Error方法，在里面捕获异常
+二：应用程序级错误
+在Application_Error里面处理错误，
+Exception ex = Server.GetLastError().GetBaseException();
+三：配置文件
+如果错误从页面到应用程序都没有清空，则会被web.config捕获
+通过配置文件来处理
+ <customErrors mode="On" defaultRedirect="1.html">
+   <error statusCode="404" redirect="notfound.html"/>
+ </customErrors>
+

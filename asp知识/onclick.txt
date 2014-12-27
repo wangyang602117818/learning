@@ -1,0 +1,5 @@
+  按钮，用于点击跳转到指定页面，并传递参数
+onClick="window.location.href='own_auditing_particular_datum.asp?aid='+<%=aid%>"          
+  
+  javascript，用于自动跳转指定页面，并传递参数
+response.write("<script>alert('重审核完成，已重新生成审核记录!');window.location.href='own_auditing_particular_datum.asp?aid="+aid+"';</script>")

@@ -1,0 +1,77 @@
+两种方式删除表中所有记录
+   --创建表时创建约束
+   create table tb1(
+        cid  int  constraint UQ_cid unique    not null    ---
+   )
+1 delete from [user]
+2 truncate table [user]
+  使用这种方式会还原自动增长列的种子，自动编号从1开始
+
+删除一列
+   alter table [user] drop column username
+增加一列
+   alter table [user] add username varchar(100) null
+修改一下数据类型
+   alter table [user] alter column username varchar(200) not null
+--===================================================================================
+增加主键约束
+1 在创建时就约束 
+  alter table [user] add userid varchar(100) constraint PK_userid primary key
+2 创建后增加主键约束
+  alter  table [user] add constraint PK_user_userid primary key(userid)
+
+增加唯一约束
+1 在创建是就添加
+  alter table [user] add uname varchar(50) constraint UQ_uname unique
+2 在创建后添加
+  alter table [user] add constraint UQ_user_userid unique(useid)
+
+添加默认约束
+1 在创建时添加
+  alter table [user] add usex varchar(1) default('男')
+2 创建后添加
+  alter table [user] add constraint DF_user_usex default('男') for usex
+
+添加检查约束
+1  创建时添加
+  alter  table [user] add uage int check(uage>=0 and uage<150)
+2 创建后添加
+   alter table [user] add constraint CK_user_uage check(uage>=0 and uage<150)
+
+添加外键约束
+   alter table score add constraint FK_score_student foreign key(student_id) references student(id) on delete cascade on update cascade
+
+--==================================================================================
+删除约束(多个)
+alter table score drop constraint FK_score_student,UQ_student_id
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

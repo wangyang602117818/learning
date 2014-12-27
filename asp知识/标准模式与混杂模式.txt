@@ -1,0 +1,1 @@
+标准模式下position：absolute的定位是相对于html的

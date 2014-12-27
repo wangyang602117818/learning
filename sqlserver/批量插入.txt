@@ -1,0 +1,5 @@
+使用insert语句向数据库中插入多条记录使用union或union all
+注意不能使用values关键字,使用union all效率比较好
+insert into [user]
+select '1','111' union all
+select '2','222'

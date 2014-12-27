@@ -1,0 +1,17 @@
+left
+--从左边数，截取10个字符
+select left('hello welcome to China.',10)   --hello welc--
+
+right
+--从右边数，截取10个字符
+select right('hello welcome to China.',10)  -- to China.--
+
+substring
+--从索引为2的开始，截取5个字符。
+--注意：1.索引从1开始数。
+        2.含当前索引。
+select substring('abcdefghijklmn',2,5)     --bcdef---
+
+replace
+--字符替换
+select replace('fjdsalfafdjaslk','f','★')  --★jdsal★a★djaslk---

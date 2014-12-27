@@ -1,0 +1,11 @@
+typeof:用来检测基本数据类型的
+   可能返回 undefined
+            boolean
+	    string
+	    number
+	    object
+	    function
+但是对于对象，要知道它是哪种对象，用typeof仅仅返回object不够
+
+instanceof：检测对象的类型
+alert(p1 instanceof Person)  //p1是Person类型吗？

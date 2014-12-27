@@ -1,0 +1,18 @@
+共6种
+基本类型：
+  Boolean（布尔）
+  Number（数字）
+  String（字符串）
+空类型：
+  Undefined（未定义）
+  Null（空对象）
+
+Object（对象类型）
+
+通过 typeof 检测的数据类型返回的是字符串，
+   var i = 0;
+   var t = typeof i;
+   alert(t=='number');  //true; 返回的是number字符串
+
+    var t1 = typeof j;
+    alert(t1=='undefined');  //true; 返回的是undefined字符串

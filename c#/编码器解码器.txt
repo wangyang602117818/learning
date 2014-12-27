@@ -1,0 +1,4 @@
+解码器：用来将字节流解码为字符
+     Decoder e = Encoding.UTF8.GetDecoder();
+编码器：将字符编码为字节流
+     Encoder e2 = Encoding.UTF8.GetEncoder();

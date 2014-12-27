@@ -1,0 +1,57 @@
+function getpychar(char)
+dim tmp
+tmp=65536+asc(char)
+if(tmp>=45217 and tmp<=45252) then
+getpychar= "A"
+elseif(tmp>=45253 and tmp<=45760) then
+getpychar= "B"
+elseif(tmp>=45761 and tmp<=46317) then
+getpychar= "C"
+elseif(tmp>=46318 and tmp<=46825) then
+getpychar= "D"
+elseif(tmp>=46826 and tmp<=47009) then
+getpychar= "E"
+elseif(tmp>=47010 and tmp<=47296) then
+getpychar= "F"
+elseif(tmp>=47297 and tmp<=47613) then
+getpychar= "G"
+elseif(tmp>=47614 and tmp<=48118) then
+getpychar= "H"
+elseif(tmp>=48119 and tmp<=49061) then
+getpychar= "J"
+elseif(tmp>=49062 and tmp<=49323) then
+getpychar= "K"
+elseif(tmp>=49324 and tmp<=49895) then
+getpychar= "L"
+elseif(tmp>=49896 and tmp<=50370) then
+getpychar= "M"
+elseif(tmp>=50371 and tmp<=50613) then
+getpychar= "N"
+elseif(tmp>=50614 and tmp<=50621) then
+getpychar= "O"
+elseif(tmp>=50622 and tmp<=50905) then
+getpychar= "P"
+elseif(tmp>=50906 and tmp<=51386) then
+getpychar= "Q"
+elseif(tmp>=51387 and tmp<=51445) then
+getpychar= "R"
+elseif(tmp>=51446 and tmp<=52217) then
+getpychar= "S"
+elseif(tmp>=52218 and tmp<=52697) then
+getpychar= "T"
+elseif(tmp>=52698 and tmp<=52979) then
+getpychar= "W"
+elseif(tmp>=52980 and tmp<=53688) then
+getpychar= "X"
+elseif(tmp>=53689 and tmp<=54480) then
+getpychar= "Y"
+elseif(tmp>=54481 and tmp<=62289) then
+getpychar= "Z"
+else '如果不是中文，则不处理
+getpychar=char
+end if
+end Function
+
+char="汪"
+a=getpychar(char)
+response.write a

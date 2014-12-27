@@ -1,0 +1,53 @@
+防止用户通过后退按钮重复提交表单
+
+<%
+response.Buffer=true
+response.Expires=0
+Response.Expires = -1
+response.ExpiresAbsolute=now()-1
+response.CacheControl="no-cache"
+
+%>
+
+response.Buffer=true的意思就是指明输出页面是否被缓冲，当属性值为True时，服务器将不会向客户端发送任何信息，直到所有程序执行完或者遇到 
+<% Response.Flush %>或<% Response.End %> 
+语句，才会释放缓冲区的信息。
+
+Expires 属性 
+Expires 属性指定了在浏览器上缓冲存储的页距过期还有多少时间。如果用户在某个页过期之前又回到此页，就会显示缓冲区中的版本
+
+语法 
+Response.Expires [= number]
+
+参数 
+number 
+距过期还有多少分钟。将此参数设置为 0 可使缓存的页立即过期。 
+注释 
+若此属性在一页上设置了多次，则使用最短的时间。
+
+应用于 
+Response 对象
+
+Response.expires=0也表示立即过期，但如果client和server不在一个时区或者client的时间早于server上的时间，则不能立即过期。所以用负数或者用Response.ExpiresAbsolute=now()-1来表示立即过期，response.expires=1表示在1分钟后过期。
+
+
+asp中Response.ExpiresAbsolute=now()-1
+
+在asp页面中，通常会有这样的设置。
+
+Response.ExpiresAbsolute=now()-1‘设置过期时间的绝对值为当前时间-1,即出来后就过期了
+
+这是因为默认情况下，浏览器将页面先载入缓存，然后才显示出来．通过上述设置，使浏览器对页面不进行缓存，所以当用户点＂后退＂后，由于页面没有缓存，所以浏览器只能再次通过向服务器发出ＨＴＴＰ请求来得到页面，这样就实现了限制了用户对同一网页进行多次操作。
+
+asp中Response.Expires = -1
+
+一般情况下，当用户请求WEB服务器时，服务器把请求回复给客户端。在客户端，浏览器把缓存作为一种加快速度的策略，就是当请求时先检查缓存的情况，如果有就直接调缓存了，而不请求服务器了。 
+在WEB程序设计中，有时为了防止重复的提交或者严格的次序等，必须让用户的数据立即在使用后就过期，当用户后退时就显示过期而不能继续使用。也算是为安全考虑的吧。 
+一般，response.expires写在页面的最上端，后面跟的是一个时间，就是过期的时间，0表示立即过期。
+
+
+asp中对浏览器缓存的设置
+
+Response.CacheControl = "no-cache"
+
+设置不缓存在临时文件中.本句是指,上网时看到的图片通常在internet的临时文件都能够找到对应的文件,如果加上这一句就找不到了。

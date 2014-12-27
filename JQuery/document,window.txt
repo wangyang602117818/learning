@@ -1,0 +1,7 @@
+$(window).ready(function(){})的执行时机与window.onload=function(){}一样
+是等所有文件加载完成后再触发
+
+$(document).ready(function(){})的执行时机早于上面2个
+只要dom树加载完成就可以触发
+
+

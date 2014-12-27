@@ -1,0 +1,10 @@
+Type类的使用方法
+  Person p=new Person();
+  1 对象的GetType()方法
+       Type t=p.GetType();
+  2 Typeof关键字也返回Type类型
+       Type t=typeof(Person);
+  3 程序集对象也有GetType()方法
+       Assembly asm=Assembly.LoadFile("C:\testLib.dll");
+       Type t=asm.GetType("命名空间.类型名");
+     

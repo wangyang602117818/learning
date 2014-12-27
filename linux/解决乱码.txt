@@ -1,0 +1,29 @@
+Red hat下面 /etc/sysconfig/i18n文件配置 解决乱码问题 (2012-05-19 15:26:23)转载▼
+标签： it	分类： 学习笔记
+一般在 Red hat下面 /etc/sysconfig/i18n文件下会显示如下几行配置： 
+
+LANG="zh_CN.GB18030" 
+SUPPORTED="zh_CN.GB18030:zh_CN:zh:en_US.UTF-8:en_US:en" 
+SYSFONT="latarcyrheb-sun16" 
+
+首先etc/sysconfig/i18n 这个文件存放的是系统的区域语言设置， i18n是 国际化internationalization的缩写 i和n之间正好18个字母 
+
+下面对上边的三行具体说明：
+
+第一行 表明你当前系统的语言环境变量设置 ，这里是 zh_CN.GB18030（如果你通过term登录服务器，term中文显示有问题可按照此设置） 
+第二行 表明系统预置了那些语言支持 ，不在项目中的语言不能正常显示 
+第三行 定义控制台终端字体，你文本登录的时候显示的字体就是这个 latarcyrheb-sun16
+
+
+补充：希望在命令行模式下用纯英文的提示的接着看
+
+修改: /etc/sysconfig/i18n
+
+LANG=“en_US”
+
+或者安装zhcon 的包
+这是网上给的答案
+试过了，可以解决，不过原来的乱码全变成了“？”
+再做以下修改就可将提示全部变为英文：
+LANGUAGE="en_US.UTF-8:en_US:en"
+http://yunpan.cn/QNz43ENnpqc9R （访问密码：e00f）

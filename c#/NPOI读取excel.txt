@@ -1,0 +1,26 @@
+1 创建工作表sheet1
+  HSSFWorkbook wb=new HSSFWorkbook();                             //创建wb工作簿
+  Sheet sheet1=wb.CreateSheet("sheet1");                          //创建sheet1工作表
+        //设置格式//////////////
+        sheet1.DefaultRowHeightInPoints=15;                        //默认行高15px
+        sheet1.DefaultColumnWidth=10                              //默认列宽10个字符(一个汉字2个字符)
+
+        sheet1.AddMergedRegion(new CellRangeAddress(0, 0, 0, 6))  //合并单元格
+        sheet1.SetColumnWidth(0,20*256);                          //设置第一列宽度20个字符
+2 创建行
+  Row row=sheet1.CreateRow(0);           //创建第一行
+      row.HeightInPoints=30;            //设置行高30px 与（row.Height=30*20）等价
+3 创建单元格
+  Cell cell = row.CreateCell(0);
+       cell.SetCellValue("xx信息列表"); //设置单元格的值
+4 设置单元格格式
+  CellStyle cellStyle=wb.CreateCellStyle();
+            cellStyle.Alignment=NPOI.SS.UserModel.HorizontalAlignment.CENTER; //居中对齐
+            NPOI.SS.UserModel.Font font=wb.CreateFont();                      //新建字体  
+                                   font.FontName="华文行楷"                   //字体名称
+                                   font.Color=HSSFColor.DARK_YELLOW.index;   //字体颜色
+                                   font.FontHeightInPoints=18                //字号
+            cellStyle.SetFont(font);  //把字体添加到样式
+                         
+  cell.CellStyle=cellStyle;           //把样式关联到单元格
+

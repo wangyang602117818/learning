@@ -1,0 +1,15 @@
+每一个对象都有一个__proto__属性, 这个属性指向该对象的原型
+var Person = function () {
+        this.name = "张三";
+};
+//如果不指定prototype，会默认创建一个prototype，但只包含constructor，里面的其他方法都继承于Object
+Person.prototype = {   //重写prototype属性
+        constructor:Person,
+	sayHello: function () {
+	     alert("hello");
+	}
+}
+var p = new Person();
+alert(p.__proto__ === Person.prototype);  //true
+
+

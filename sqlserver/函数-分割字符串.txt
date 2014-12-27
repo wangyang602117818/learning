@@ -1,0 +1,54 @@
+==========================取分割后子字符串的个数，如果没有返回1================
+create function GetStrArrayLength
+(
+  @str varchar(1024),  ---要分割的字符串
+  @split varchar(10)   --分割符号
+)
+returns int
+as
+begin
+  declare @location int
+  declare @start int
+  declare @length int
+  set @str=ltrim(rtrim(@str))   --除空格
+  set @location=charindex(@split,@str)  --分隔符第一次出现的位置
+  set @length=1
+  while @location<>0  --字符串内有分隔符
+     begin
+        set @start=@location+1  --把搜索的位置放在分隔符的后面一个位置
+        set @location=charindex(@split,@str,@start)
+        set @length=@length+1
+     end
+  return @length
+end
+select dbo.GetStrArrayLength('abcd,k',',')  --使用方法：要加dbo.
+===========================取子字符串=============================================
+create function GetSubByIndex
+(
+  @str varchar(1024),   --要分割的字符串
+  @split varchar(10),   --分割符号
+  @index int            --取第几个元素
+)
+returns varchar(1024)
+as
+begin
+  declare @location int
+  declare @start int
+  declare @next int
+  declare @seed int
+  set @str=ltrim(rtrim(@str))
+  set @start=1
+  set @next=1
+  set @seed=len(@split)
+  
+  set @location=charindex(@split,@str)
+  while @location<>0 and @index>@next
+  begin
+    set @start=@location+@seed
+    set @location=charindex(@split,@str,@start)
+    set @next=@next+1
+  end
+  if @location =0 select @location =len(@str)+1  
+  return substring(@str,@start,@location-@start)
+end
+

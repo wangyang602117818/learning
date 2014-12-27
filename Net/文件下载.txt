@@ -1,0 +1,11 @@
+方式一：<a href="filePath">文件</a>
+       直接指向，这样浏览器遇到自己会解析的文件会直接显示，遇到不会解析的会提示用户下载
+
+方式二：<a href="DownLoad.ashx?f=Chrysanthemum.jpg">Chrysanthemum.jpg</a>
+       把文件名传到 DownLoad.ashx 页面，在这个页面拼接文件路径 
+             string filePath = "Uploads/"+context.Request["f"];
+       然后加
+             context.Response.ContentType = "application/octet-stream";
+             context.Response.AddHeader("Content-Disposition", "attachment; filename=\"" + filePath + "\";");
+       最后把文件作为流输出到客户端
+             context.Response.WriteFile(AppDomain.CurrentDomain.BaseDirectory + filePath);

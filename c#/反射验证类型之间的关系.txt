@@ -1,0 +1,21 @@
+1 加载程序集
+  Assembly asm = Assembly.LoadFile(@"C:\testlib.dll");
+2 获取每个类型
+  Type tChinese = asm.GetType("TestLib.Chinese");
+  Type tPerson = asm.GetType("TestLib.Person");
+  Type tIXiuFu = asm.GetType("TestLib.IZiWoXiuFu");
+  Type typMyAbsClass = asm.GetType("TestLib.MyAbsClass");
+  Type typMyStaticClass = asm.GetType("TestLib.MyStaticClass");
+
+1)IsAssignableFrom：验证某个类是否可以从子类赋值（也可以验证接口）
+  tPerson.IsAssignableFrom(tChinese) :验证tPerson是否可以从tChinese赋值
+
+2)IsInstanceOfType:验证某个类型有没有某个对象
+  object obj=Activator.CreateInstance(tChinese)  //先创建一个对象 
+  bool b=tChinese.IsInstanceOfType(obj);
+
+3)IsSubclassOf:验证某个类型是否是某个类型的子类（只能验证子父类关系）
+  tChinese.IsSubclassOf(tPerson); //验证tChinese是否是tPerson的子类
+  
+4)IsAbstract：验证某个类型是否是抽象的
+  接口、抽象类、静态类都不能被实例化，所以这里都认为是“抽象的”  

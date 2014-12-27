@@ -1,0 +1,67 @@
+========================================如果指定了默认值，则调用的时候可以不传参数==========================
+create procedure usp_add
+ @n1 int=100, -----------存取过程默认值
+ @n2 int=1    -------------默认值
+as
+begin
+  print @n1+@n2
+end
+exec usp_add
+exec usp_add 1,2
+
+=======================================如果第一个指定了默认值，第二个没有指定，调用的时候需要显示指定参数值========
+create procedure usp_add
+ @n1 int=1, -------------存取过程默认值
+ @n2 int    
+as
+begin
+  print @n1+@n2
+end
+exec usp_add @n1=2,@n2=3
+
+======================================= 使用output返回值=========================
+create procedure usp_add
+ @n1 int=1, -------------存取过程默认值
+ @n2 int,   
+ @sum int output   ------返回值
+as
+begin
+  set @sum=@n1+@n2
+end
+declare @var int  ----定义返回值
+exec usp_add 3,4,@var output  --要使用关键字output
+
+===============================ado.net使用存储过程(带返回值（output）的)===========================
+
+SqlParameter[] pms = new SqlParameter[]{
+              new SqlParameter("@pageIndex",pageIndex),
+              new SqlParameter("@pageSize",pageSize),
+              new SqlParameter("@recordCount",SqlDbType.Int),  --output的值只指定类型，不给值
+            };
+pms[2].Direction = ParameterDirection.Output;  --还要指定参数的类型
+执行完以后通过 pms[2].value 来取得存储过程返回的数据
+
+===========================ado.net接受从存储过程return返回的值=======================
+
+SqlParameter[] pms = new SqlParameter[]{
+              new SqlParameter("@pageIndex",pageIndex),
+              new SqlParameter("@pageSize",pageSize),
+              new SqlParameter("@pageSize",SqlDbType.Int)  --只给类型，用于接受return回的值，跟output一样
+            };
+pms[2].Direction = ParameterDirection.ReturnValue;  --指定该参数是通过存储过程return回的。
+执行完以后通过 pms[2].value来取得存储过程return的数据
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

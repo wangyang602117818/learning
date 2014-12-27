@@ -1,0 +1,11 @@
+cast 与 convert 两种方式进行类型转换
+  cast（100 as varchar(10))+'hello' 等同于 convert(varchar(10),100)+'hello'
+设置日期格式只能用convert
+yyyy-mm-dd            convert(varchar(50),getdate,23)
+yyyy-mm-dd hh:mm:ss   convert(varchar(50),getdate,120)
+yyyy/mm/dd            convert(varchar(50),getdate,111)
+
+可以通过varchar来截取年部分
+yyyy                  convert(varchar(4),getdate,23)
+
+

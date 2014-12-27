@@ -1,0 +1,7 @@
+//链式编程返回的是对象
+$("#ul1 li").click(function(){
+     $(this).css("backgroundColor","yellow");     //返回的是当前点击的对象，保持链
+     $(this).prevAll().css("backgroundColor","yellow");  // 返回的是点击对象的前面的对象，破坏了链
+     .end()  //恢复到上一次破坏之前的对象
+     // $(this).prevAll().css("backgroundColor","yellow").end();   //恢复到了prevAll之前的对象
+});

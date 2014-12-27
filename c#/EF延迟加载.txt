@@ -1,0 +1,24 @@
+1  查询：调用的是DbSet<T>里面的 标准查询运算符 方法；
+         DbSet<T>实现了IQueryable接口
+         静态类Queryable为IQueryable扩展了所有的方法
+         所以 标准查询运算符 的源头为Queryable
+     List<course> list = db.courses.Where(d => d.classId == 2).ToList(); --及时查询，因为使用了数据
+
+延迟加载：查询都是返回IQueryable接口，只有当调用方法获取数据时才会查询数据库。
+    IQueryable<course> query = db.courses.Where(d => d.classId == 2); --返回接口，并没有查询数据库
+    string name = query.FirstOrDefault().className; --这时才会查询数据库
+
+外键延迟：EF只在使用外键实体时才会查询数据库，但是当返回一个集合时，每次通过集合的一个属性调用外键实体时，
+          都会查询数据库（相同的外键实体只查询一次）
+    IQueryable<student> query = db.students.Where(d=>d.sex=="m");
+    foreach (student s in query) 
+    {
+        Console.WriteLine(s.name+","+s.course.className);  --这时会多次使用外键实体，也会多次查询数据库
+    }
+
+Include：生成 inner join 连接，解决外键延迟多次查询数据库的缺点
+    IQueryable<student> query = db.students.Include("course").Where(d=>d.sex=="m");
+    foreach (student s in query) 
+    {
+        Console.WriteLine(s.name+","+s.course.className);  --使用了include，虽然多次使用外键实体，但是只会查询一次数据库
+    }

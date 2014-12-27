@@ -1,0 +1,21 @@
+parseInt：将指定的字符串，转换成整数，遇到不能转换的，只返回前几个数字，第一个就不能转换的返回NaN
+  var n='12.7';
+     alert(parseInt(n));  //12
+  var n='13qa';
+     alert(parseInt(n));  //13
+  var n='aaa'
+     alert(parseInt(n));  //NaN
+
+
+Number：把整体任意类型转换成数字，遇到不能转的，返回NaN，
+  var n='12.7';
+  alert(Number(n));  //12.7
+  var n='13qa';
+  alert(Number(n));  //NaN 
+  var n='aaa'
+  alert(Number(n));  //NaN 
+* true被转换成1，
+
+
+isNaN(arg) //判断arg是否为一个非数字
+

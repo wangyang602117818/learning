@@ -1,0 +1,11 @@
+select 
+    fgender  as  性别  ------5筛选组以后选择列显示
+    count(*) as 人数
+from student     ------------1先从表中拿到数据
+where fage>30    ------------2筛选一下
+group by fgender ------------3筛选的结果分组
+having count(*)>10  ---------4基于分组后的结果在筛选出记录大于10的组
+order by 人数 desc  ---------6把显示出来的结果排序
+
+正是因为有这个顺序所以
+   order by 中可以用别名， 而having语句在选择列之前，不能用别名   

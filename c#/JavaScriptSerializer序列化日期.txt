@@ -1,0 +1,21 @@
+//序列化日期的坑
+DateTime dt = DateTime.Now;      //实例化一个时间：2014/9/29 21:26:47
+JavaScriptSerializer js = new JavaScriptSerializer();
+string s = js.Serialize(dt);  //序列化时间，[注意：这个类在序列化日期时候,把当前日期转成了UTC格式(当前时间-8小时)]
+	//验证部分
+	long a =Convert.ToInt64(new Regex(@"\d+").Match(s).Value);  //正则取出毫秒数
+	DateTime dt1 = DateTime.Parse("1970-1-1 00:00:00");  //实例化一个时间
+	Console.WriteLine(dt1.AddMilliseconds(a)); //2014/9/29 13:26:47 把实例化的时间加上取出的毫秒数正好是当前UTC时间
+
+DateTime s1 = (DateTime)js.Deserialize(s, typeof(DateTime)); //反序列化时间
+Console.WriteLine(s1);  // 2014/9/29 13:26:47,[注意：反序列化时间只是把时间从字符串中解析出来(还是UTC时间)，并不做其他任何处理]
+结论：序列化时候把日期转成UTC格式，而反序列化不做任何处理，所以反序列化得到的日期最终比原有日期少8小时。
+
+//处理办法
+DateTime s1 = (DateTime)js.Deserialize(s, typeof(DateTime)); //反序列化时间，得到UTC时间
+  s1.ToLocalTime()  //2014/9/29 21:26:47 把TUC时间转成本地时间
+
+最终结论：
+  JavaScriptSerializer 是把时间转成UTC时间来处理的，
+  进去的时间如果是UTC则不处理，不是则转成UTC，
+  出来的时间自然是UTC，需要用户自己转一下。

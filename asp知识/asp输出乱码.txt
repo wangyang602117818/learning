@@ -1,0 +1,5 @@
+普通的html页面显示的汉字正常，但是一用response.write就出现乱码，这种情况需要制定asp页面的输出编码格式，默认的unicode编码，在asp文档的开始设置
+<%@ codepage=936%> 简体中文
+<%@ codepage=950%> 繁体中文
+<%@ codepage=65001%> UTF-8
+问题解决

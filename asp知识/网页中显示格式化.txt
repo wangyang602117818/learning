@@ -1,0 +1,26 @@
+'1。在网页中显示 
+
+function   HTMLCode(fString) 
+  fString1   =   replace(fString,   "> ",   "&gt; ") 
+  fString1   =   replace(fString1,   " < ",   "&lt; ") 
+  fString1   =   Replace(fString1,   CHR(32),   "&nbsp; ") 
+  fString1   =   Replace(fString1,   CHR(34),   "&quot; ") 
+  fString1   =   Replace(fString1,   CHR(39),   "&#39; ") 
+  fString1   =   Replace(fString1,   CHR(13),   " ") 
+  fString1   =   Replace(fString1,   CHR(10)   &   CHR(10),   " </P> <P> ") 
+  fString1   =   Replace(fString1,   CHR(10),   " <BR> ") 
+  HTMLCode   =   fString1 
+end   function 
+
+'2。在多行文本框中显示 
+function   CodeHTML(fString) 
+  fString   =   replace(fString,   "&gt; ",   "> ") 
+  fString   =   replace(fString,   "&lt; ",   " < ") 
+  fString   =   Replace(fString, "&nbsp; ",chr(32)) 
+  fString   =   Replace(fString, "&quot; ",chr(34)) 
+  fString   =   Replace(fString, "&#39; ",chr(39)) 
+  fString   =   Replace(fString,   " ",   CHR(13)) 
+  fString   =   Replace(fString,   " </P> <P> ",   CHR(10)   &   CHR(10)) 
+  fString   =   Replace(fString,   " <BR> ",   CHR(10)) 
+  CodeHTML   =   fString 
+end   function 

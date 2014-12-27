@@ -1,0 +1,138 @@
+今天转论坛到新服务器，数据库总是出错，找了好久原来才发现是所有者的问题。其它表都是DBO，就其中一个表是原用户名。找到以下方法一搞定的。摘抄到此。一、怎么样把sql server 2000的用户表的所有者，改成dbo，而不是用户名。
+
+(附修改存储过程的方法，在查询器中执行：
+
+
+答：
+方法一：右键点击该表-》设计表，在上面的一排小图标中，点第二个“表和索引属性”，直接在“表”的选项页里更换所有者为dbo即可。
+也可以点后3个任意图标（“管理关系”、“管理关系/键”、“条件约束”），切换到“表”的选项页来操作。(若没有上面的小图标，可以在表设计界面中右键菜单中看到“属性”、“关系”、“索引/键”、“check约束”的4项，和上面介绍的4项对应)
+
+方法二：执行下面语句 EXEC sp_changeobjectowner 'Pqs.Pqs_Objects', 'dbo'，就把用户Pqs的拥护的对象改为dbo了。sp_changeobjectowner存储过程见下面
+
+执行这个语句,就可以把当前库的所有表的所有者改为dbo
+exec    sp_msforeachtable    'sp_changeobjectowner    ''?'',    ''dbo'''
+关于sp_msforeachtable ，参见http://www.cnblogs.com/piaoqingsong/archive/2007/06/12/780290.html
+
+
+--如果是要用户表/存储过程/视图/触发器/自定义函数一齐改,则用游标(不要理会错误提示)
+declare    tb    cursor    local    for
+select    'sp_changeobjectowner    ''['+replace(user_name(uid),']',']]')+'].['
++replace(name,']',']]')+']'',''dbo'''
+from    sysobjects   
+where    xtype    in('U','V','P','TR','FN','IF','TF')    and    status>=0
+open    tb
+declare    @s    nvarchar(4000)
+fetch    tb    into    @s
+while    @@fetch_status=0
+begin
+exec(@s)
+fetch    tb    into    @s
+end
+close    tb
+deallocate    tb
+go
+
+存储过程 ChangeObjectOwner 
+--功能说明：成批更改数据库所有者的对象
+--作者：不详
+--用法：exec ChangeObjectOwner 'nmkspro','dbo'
+--即可将所有nmkspro所有者的对象改为dbo所有
+--运行成功后将提示："注意: 更改对象名的任一部分都可能破坏脚本和存储过程。"
+CREATE PROCEDURE dbo.ChangeObjectOwner
+@OldOwner as NVARCHAR(128),--参数原所有者
+@NewOwner as NVARCHAR(128)--参数新所有者
+AS
+
+DECLARE @Name    as NVARCHAR(128) 
+DECLARE @Owner   as NVARCHAR(128)
+DECLARE @OwnerName as NVARCHAR(128)
+
+DECLARE curObject CURSOR FOR 
+select 'Name'    = name,
+   'Owner'    = user_name(uid)
+from sysobjects
+where user_name(uid)=@OldOwner
+order by name
+
+OPEN   curObject
+FETCH NEXT FROM curObject INTO @Name, @Owner
+WHILE(@@FETCH_STATUS=0)
+BEGIN     
+if @Owner=@OldOwner 
+begin
+   set @OwnerName = @OldOwner + '.' + rtrim(@Name)
+   exec sp_changeobjectowner @OwnerName, @NewOwner
+end
+
+FETCH NEXT FROM curObject INTO @Name, @Owner
+END
+
+close curObject
+deallocate curObject
+GO
+方法三：利用脚本直接执行，用系统帐号或者超户登陆到该数据库，然后执行下面语句：
+
+sp_configure 'allow updates','1'
+go
+reconfigure with override
+go
+update sysobjects set uid=1 where uid<>1 
+go
+sp_configure 'allow updates','0'
+go
+reconfigure with override
+
+第二种方法只能使用一次，第二次使用会出错。
+
+二、数据库恢复时出现诸如“设备激活错误，请使用with move选项来标志该文件的有效位置”报错的解决方法
+
+     别人将一个数据库备份发给了我，我为了看里面的表，所以我就在我机器里装一个MSSQL数据库。现在我想把保存的这个备份数据库 caiwu.db 导入到我的 MS SQL数据库中，发现在企业管理器中，操作：所有任务——>还原数据库——>选择“从设备”还原，在硬盘里找到了那个备份数据库文件caiwu.db,导入。报错：设备激活错误，请使用with move选项来标志该文件的有效位置。
+
+解决方法：右键点“数据库”（注意不是某个特定的数据库）－－》所有任务－－》还原数据库－－》选择“从设备”还原，选择要还原成的数据库名，然后在选项卡中，选择最现有数据库上强制还原数据库，然后在下面修改数据库还原后的物理路径，这个路径要是存在的一个路径，否则就会出现上面的错误，逻辑文件名可以不用改。
+
+三、只有mdf和ldf文件，甚至只有mdf文件，如何恢复数据库
+
+1. 首先确认已经备份了.mdf和.ldf文件。
+2. 在SQL Server中新建一个同名的数据库，然后停止SQL Server服务。
+3. 用原有的.mdf和.ldf文件覆盖新建数据库对应的.mdf和.ldf文件。
+4. 重新启动SQL Server服务，这是应该会看到这个数据库处于置疑（Suspect）状态。（人品好的话，这个时候数据库就已经恢复正常了，上次xrf的数据库就是这样被我恢复的。人品不好的话，下面的步骤也不行，我有一次就是找了一个北京做数据恢复的公司才恢复完毕。）
+5. 在SQL查询分析器中执行以下命令，以允许更新系统表：
+use master
+go
+sp_configure ‘allow updates’,1
+reconfigure with override
+go
+
+6. 将这个数据库置为紧急模式：
+update sysdatabases set status = 32768 where name = 'db_name'
+go
+
+7. 使用DBCC CHECKDB命令检查数据库中的错误：
+DBCC CHECKDB(‘db_name’)
+go
+
+8. 如果DBCC CHECKDB命令失败，请转至第10步，否则先将数据库置为单用户模式，再尝试对其进行修复：
+sp_dboption 'db_name',’single user’,’true’
+DBCC CHECKDB(‘db_name’, REPAIR_ALLOW_DATA_LOSS)
+GO
+
+如果在执行DBCC CHECKDB(‘db_name’, REPAIR_ALLOW_DATA_LOSS)命令时提示说数据库未处于单用户模式状态的话，则重新启动SQL Server服务，然后继续尝试。
+
+9. 如果DBCC CHECKDB(‘db_name’, REPAIR_ALLOW_DATA_LOSS)命令失败，请转至第10步，否则若成功修复了数据库中的错误：
+重新执行DBCC CHECKDB(‘db_name’)命令，确认数据库中已没有错误存在。
+清除数据库的置疑状态：sp_resetstatus 'db_name'
+清除数据库的单用户模式状态：sp_dboption 'db_name',’single user’,’false’
+重新启动SQL Server服务，如果一切正常的话，则数据库已经成功恢复。
+
+10. 如果以上步骤都不能解决问题的话，请参考附件中的文档尝试通过重建事务日志来恢复数据库中的数据。
+如果您只有MDF文件，问题就更加复杂一些，我们需要直接重建事务日志了:
+
+1. 在SQL Server中新建一个同名的数据库，然后停止SQL Server服务。
+2. 用原有的ldf文件覆盖新建数据库对应的.mdf文件，将其日志文件（.ldf）删除。
+3. 启动SQL Server服务，并将数据库置为紧急模式（同上: 步骤5和步骤6）。
+4. 停止并重新启动SQL Server服务。
+5. 执行以下命令重建数据库日志文件：(下面是个示例，您要用您实际的数据库名)
+DBCC REBUILD_LOG（’cas_db’, 'D:\cas_db\cas_db_Log.LDF'）
+6. 重新将该数据库置为单用户模式。(http://support.microsoft.com/?id=264154)
+7. 再次尝试使用DBCC CHECKTABLE或DBCC CHECKDB命令检查并修复数据库中的错误  
+

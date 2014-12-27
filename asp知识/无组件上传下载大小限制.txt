@@ -1,0 +1,44 @@
+Win2003无组件上传文件大小限制的解决 
+一、解决在 IIS 6.0 中，无法上传大容量文件的办法： 
+1、先在服务里关闭 iis admin service 服务。 
+2、找到 windows\system32\inetsrv\ 下的 metabase.xml 文件。 3、用纯文本方式打开，找到 ASPMaxRequestEntityAllowed 把它修改为需要的值（默认为：204800，即：200K）。
+4、存盘，然后重启 iis admin service 服务。 
+
+二、解决在 IIS 6.0 中，无法下载超过4M的附件步骤： 
+1、先在服务里关闭 iis admin service 服务。 
+2、找到 windows\system32\inetsrv\ 下的 metabase.xml 文件。 3、用纯文本方式打开，找到 AspBufferingLimit 把它修改为需要的值（默认为：4194304，即：4MB）。
+ 4、存盘，然后重启 iis admin service 服务
+
+
+
+IIS 上传文件大小配置步骤(默认200K) 和metabase.xml 修改不了的问题 
+
+方法一：
+  其实我们只需要在服务器端对IIS进行一些修改即可突破这个200K的限制，方法如下： 
+  第一步：直接编辑配置数据库设为允许 
+  在IIS中右键“本地计算机”选择“属性”，钩选“允许直接编辑配置数据库”。 
+  第二步：关闭“IIS Admin Service”服务 
+  依次打开“控制面板--管理工具--服务”，在其中右边找到“IIS Admin Service”，选中该项并点击鼠标右键，选中“停止”即可关闭该服务。 
+  第三步：修改“MetaBase.xml”文件 
+  依次打开“X:\WINDOWS\system32\inetsrv”，在该文件夹中找到“MetaBase.xml”文件，将“MetaBase.xml”用记事本打开，在其中搜索“AspMaxRequestEntityAllowed”，将后面的“204800”改成“1024000000”保存文件。 
+  注意：“X”为系统盘的盘符，在执行第二步之前请确保第一步已经操作，否则将无法保存修改后的“MetaBase.xml”文件。 
+  第四步：开启“IIS Admin Service”服务 
+  修改完成后再按照第一步的操作将“IIS Admin Service”服务开启。 
+  经过以上简单的三步设置我们已经将IIS上传文件的大小限制改为了100M，当然你可以随意对上传文件的大小进行修改。 
+  注：本实例的操作环境为Windows 2003、IIS6.0，其他操作系统下设置类似。 
+
+方法二：
+windows\system32\inetsrv\下的metabase.xml 限制了2003服务器上传大小的，但是手动改的话，在iis重启后总是还原了，所以用以下方法可以进行修改。
+
+
+set providerObj=GetObject("winmgmts:/root/MicrosoftIISv2")
+set vdirObj=providerObj.get("IIsWebVirtualDirSetting='W3SVC/1/ROOT'")
+WScript.Echo "Before: " & vdirObj.AspMaxRequestEntityAllowed
+vdirObj.AspMaxRequestEntityAllowed=102400000
+vdirObj.Put_()
+WScript.Echo "Now: " & vdirObj.AspMaxRequestEntityAllowed
+
+
+然后保存为.vbs文件，如：vf.vbs
+然后在命令行模式下，执行 cscript 文件路径及文件名，如：cscript d:\vf.vbs
+这样ASP上传大小就更改为了上面设置的：102400000字节 (100兆)

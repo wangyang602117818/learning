@@ -1,0 +1,12 @@
+对目录操作
+  1 检查目录存在性
+    Directory.Exists(@"c:\abc");
+  2 创建一个目录
+    Directory.CreateDirectory(@"c:\abc");
+  3 删除一个空目录，
+    Directory.Delete(@"c:\abc");
+    Directory.Delete(@"c:\abc",true); //删除所有子目录
+
+  4 重命名目录
+    Directory.Move(@"c:\a", @"c:\abc");
+

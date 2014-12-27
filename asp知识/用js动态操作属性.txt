@@ -1,0 +1,12 @@
+动态删除属性：
+   document.getElementById("last_assurance_id").removeAttribute("isNull")
+动态添加属性：
+   document.getElementById("last_assurance_id").setAttribute("isNull",1)
+
+
+1：动态删除select中所有option：
+   document.getElementById("a1").options.length=0;
+2:动态删除select中的某一项option：
+   document.getElementById("a1").options.remove(index);
+3：动态添加select中的项：
+   document.getElementById("a1").options.add(new Option(text,value));

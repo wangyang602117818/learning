@@ -1,0 +1,8 @@
+'查询空值字段
+SELECT LastName,FirstName,Address FROM Persons
+WHERE Address IS NULL
+
+'查询非空字段
+SELECT LastName,FirstName,Address FROM Persons
+WHERE Address IS NOT NULL
+

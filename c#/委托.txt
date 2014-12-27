@@ -1,0 +1,16 @@
+是用来封装方法的
+    delegate double MyDelegate(double numb);   //定义委托
+    public static double M1(double input){     //定义一个方法
+        return input*2;
+    }
+=================================================================
+    MyDelegate md=M1 或 MyDelegate md=new MyDelegate(M1)   //通过命名方法使用委托
+    md(2)   //使用委托
+=================================================================
+    MyDelegate md=delegate(double input){   //通过匿名方法使用委托
+        return input*input;
+    };   
+    md(2);  //使用
+================================================================
+    MyDelegate md= x =>x*x;     //通过lambda表达式使用委托
+    md(3);   //使用

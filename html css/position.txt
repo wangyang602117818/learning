@@ -1,0 +1,4 @@
+position : static | absolute | fixed | relative 
+父元素不设置position，子元素使用position:absolute，则子元素默认在父元素内部，一旦是用了top right bottom left则子元素相对窗口移动，与父元素无关
+父元素position:absolute ,子元素position:absolute :则子元素相对父元素定位
+父元素position:relative ,子元素position:absolute ：则子元素相对父元素定位

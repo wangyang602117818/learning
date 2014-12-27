@@ -1,0 +1,12 @@
+静态类，专门对文件路径进行操作   
+string a=@"c:\abc\s.txt"
+    获取文件名及扩展名 string filename=Path.GetFileName(a)  //s.txt
+    获取扩展名  string s=Path.GetExtension(a)  //.txt
+    获取路径中的目录 string s1=Path.GetDirectoryName(a) //c:\abc
+    
+    获取当前用户的临时目录 
+       Path.GetTempPath()
+    获取一个随机的文件名，并在临时目录下创建这个文件
+       Path.GetTempFileName()
+    获取一个随机的文件名（也可以用作文件夹名。）
+       Path.GetRandomFileName()

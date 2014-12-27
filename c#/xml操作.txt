@@ -1,0 +1,27 @@
+命名空间 System.Xml.Linq中的XDocument类
+ 1 加载xml文件
+   XDocument XDoc=XDocument.Load("1.xml");
+ 2 获取根节点
+   XElement XRoot=XDoc.Root;
+ 
+获取指定的节点
+ 1 搜索直接子节点
+   XElement xe=XRoot.Element("itcastJava");
+ 2 搜索所有后代元素
+   XRoot.Descendants("itcastJava");
+
+创建xml文档
+ 1 XDocument xdoc=new XDocument(); //创建XDocument对象
+
+ 1 XElement xRoot=new XElement("WebSites");  //创建根节点
+ 2 xdoc.Add(xRoot);                //将根节点添加到文档
+ 
+ 1 XElement xBaidu=new XElement("WebSite"); //创建节点
+ 2 XAttribute xa=new XAttribute("uil","http://www.baidu.com"); //创建属性
+ 3 xBaidu.Add(xa);   //把属性添加到节点
+ 4 xRoot.Add(xBaidu) //把节点添加到根节点
+
+ 1 xRoot.SetElementValue("WebsiteCount",100);            //快速增加节点
+ 2 xBaidu.SetAttributeValue("uil","http://www.baidu.com") //快速增加属性  
+  
+ xdoc.Save(@"C:\1.xml"); //写入磁盘

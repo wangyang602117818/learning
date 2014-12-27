@@ -1,0 +1,7 @@
+set 与 select 赋值的区别
+declare @rcount int   --声明变量，开始没有赋值的变量为null
+  set @rcount=(select count(*) from [user])  --赋值必须使用小括号
+  select @rcount=count(*) from [user]   --赋值语句与查询语句融合了
+
+  set @rcount=(select user from [user])   --set赋多个值报错
+  select @rcount=user from [user]         --select赋多个值选择最后一个

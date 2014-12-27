@@ -1,0 +1,15 @@
+带参数的sql语句防止注入攻击
+select count(*) from [user] where uid=@uid and psd=@psd
+其中@uid和@psd用变量来代替
+方式一：直接添加
+  cmd.Parameters.AddWidthValue("@uid",xxx)
+  cmd.Parameters.AddWidthValue("@psd",xxx)
+方式二：先创建变量在添加
+  SqlParameter p1=new SqlParameter("@uid",xxx)
+  SqlParameter p2=new SqlParameter("@psd",xxx)
+  cmd.Parameters.Add(p1)
+  cmd.Parameters.Add(p2)
+方式三：通过数组的方式添加
+  SqlParameter[] pms=new Sqlparameter[]{new SqlParameter("@uid",xxx),new SqlParameter("@psd",xxx)}
+  cmd.parammeters.AddRange(pms)
+  

@@ -1,0 +1,27 @@
+1 声明数组
+   var arr=new Array();
+       arr[0]='yzk';    //动态添加数组项
+       arr[0] = 'yzk';
+       arr[1] = 'sk';
+       arr[2] = 'jk';
+       arr[3] = 99;
+  
+   var arr=new Array(1,2,'a',false); //声明具有初始大小的数组
+
+   var arr=['a',10,true,'99'];  //推荐写法
+
+   for(var i=0 i<arr.length;i++){  //遍历
+      alert(arr[i]);
+   }
+=============================================================
+方法部分
+var arr=["a","b","c"];
+1 join：将数组按照指定的分隔符进行分割，组合成字符串
+        arr.join('|')  :  //a|b|c 
+2 push与pop：相结合可以形成栈结构
+     arr.push("d")  //向数组末尾插入元素  返回的是新数组的长度
+     arr.pop()     //向数组末尾取出元素并删除。返回的是取出的元素
+3 push与shift：相结合可以形成队列结构
+     push：在末尾添加元素
+     shift：取数组第一个元素并删除。返回的是取出的元素
+4 sort与reverse：排序与倒叙

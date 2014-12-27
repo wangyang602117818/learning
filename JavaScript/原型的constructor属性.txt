@@ -1,0 +1,26 @@
+每创建一个函数，就会创建函数的prototype对象，对象默认包含constructor属性，该属性指向源函数
+  function Person(name, age) {
+      this.name = name;
+      this.age = age;
+  }
+  alert(Person.prototype.constructor);  //打印出函数本身
+
+但是如果重写了prototype对象则constructor指向Object构造函数
+  Person.prototype = {
+       sayHi: function () {
+       alert(this.name);
+       }
+  }
+  alert(Person.prototype.constructor);  //打印出Object构造函数
+
+所以一般在重写prototype对象的内部手动指定constructor
+  Person.prototype = {
+       constructor:Person,
+       sayHi: function () {
+       alert(this.name);
+       }
+  }
+  alert(Person.prototype.constructor);  //打印出Object构造函数
+
+
+

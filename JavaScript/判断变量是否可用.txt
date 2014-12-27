@@ -1,0 +1,12 @@
+方法一：
+if(typeof(x)!='undefined' && x!=null){
+  alert('变量可用');
+}else{
+  alert('变量不可用 ');
+}
+方法二：
+if(x){     x为0,"",null,undefined时等同于false
+  alert('变量可用');
+}else{
+  alert('变量不可用');
+}

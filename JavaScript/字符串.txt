@@ -1,0 +1,21 @@
+常用方法：
+var str="Hello world!"
+1 charAt()  //返回某个位置的字符，字符从0开始
+  var s= str.charAt(1) //e
+
+2 indexOf()  //返回某个子字符串在字符串中首次出现的位置,从左往右搜索，没找到返回-1
+  var s=str.indexOf("l") //2 区分大小写
+
+3 lastIndexOf()  // 返回某个子字符串在字符串中首次出现的位置，从右往左搜索，没找到返回-1
+  var s=str.lastIndexOf("l")  //9
+
+4 search()    //方法用于检索字符串中指定的子字符串，可以使用正则表达式,没有找到返回-1
+  var s=str.search(/ld!$/)   //9
+
+5 substr(start,length)   //可在字符串中抽取从start下标开始的length数目的字符
+  var s=str.substr(1,2)   //el
+
+6 substring(start,stop)  //方法用于提取字符串中介于两个指定下标之间的字符。
+ var s=str.substring(1,2)  //e
+
+7 toLowerCase() 与 toUpperCase() //转换大小写

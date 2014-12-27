@@ -1,0 +1,36 @@
+Db1Entities db = new Db1Entities();  --EF上下文对象
+
+==========================新增================================
+方式一：course c=new course(){ className = "c#", classDescription = ".net" };   --new一个对象
+        db.courses.Add(c);  --将对象加入EF上下文对象的courses集合中
+        db.SaveChanges();   --保存修改到数据库
+方式二：course c=new course(){ className = "c#", classDescription = ".net" };   --new一个对象
+        DbEntityEntry<course> entry = db.Entry<course>(c);  --将对象加入到数据上下文
+        entry.State = System.Data.EntityState.Added;   --修改实体对象的状态
+        db.SaveChanges();
+
+========================删除===============================
+方式一：course c = new course() { classId = 8 };
+        db.courses.Attach(c);  -- 将对象加入到courses集合
+        db.courses.Remove(c);  --将对象标记为删除状态
+        db.SaveChanges();      --删除(为什么只能按照主键删除？)
+        不按照主键删除会引发错误："存储区更新、插入或删除语句影响到了意外的行数(0)。实体在加载后可能被修改或删除。刷新 ObjectStateManager 项。"
+方式二：course c = new course() { classId = 9 };
+        DbEntityEntry<course> entry = db.Entry<course>(c); 
+        entry.State = System.Data.EntityState.Deleted;  --修改对象的状态为删除
+        db.SaveChanges();
+        同样需要按照主键删除，否则报错
+
+======================修改=================================
+方式一：
+  官方推荐先查询，在修改
+   student s = db.students.Where(d => d.id == 11).FirstOrDefault(); --此时返回的s是一个代理类对象，
+   s.name="xxx";  --此时修改的是代理类对象的属性，把属性的状态修改为modified
+   db.SaveChanges();   --根据修改过的对象属性生成sql语句
+方式二：
+  需要关闭实体的验证检查db.Configuration.ValidateOnSaveEnabled = false;
+  student s = new student() { id = 12, name = "xxx" };  --创建对象
+  DbEntityEntry<student> entry= db.Entry<student>(s);  --对象加入EF容器
+  entry.State = System.Data.EntityState.Unchanged;   --设置对象未被修改过
+  entry.Property("name").IsModified = true;  --设置字段name为修改状态
+  db.SaveChanges();  --生成sql语句修改对象

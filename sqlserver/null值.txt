@@ -1,0 +1,11 @@
+--null在数据库中表示不知道不能用 = 或 <> 来找null值
+查询null值
+  select * from [user] where username is null
+查询非null值(包括空值)
+  select * from [user] where username is not null
+设置null值
+  update [user] set username=null where username=''
+
+null值与任何数运算得到的还是null值
+  1+null=null
+  1/null=null

@@ -1,0 +1,38 @@
+offsetX offsetY  ：偏移量，鼠标相对当前层坐标系的位置（FF不支持）
+layerX layerY：偏移量（绝对定位下），鼠标相对当前层坐标系的位置 IE8不支持
+
+clientX clientY  ：客户区坐标，鼠标相对当前浏览器窗口的坐标
+pageX pageY  ：页面坐标，鼠标在页面的绝对位置（包括滚动条）IE8不支持，
+
+x y 
+在chrome中与clientX clientY一致
+在IE8中是指在页面的绝对位置
+FF不支持
+在opera中与clientX clientY一致
+=========================================================================
+总结：
+IE下:
+  偏移量 offsetX offsetY
+  窗口位置 clientX clientY
+  绝对位置 x y 
+FF下：
+  偏移量 layerX layerY
+  窗口位置 clientX clientY
+  绝对位置 pageX pageY
+===========================================================================
+结论：
+获取鼠标相对当前窗口的坐标
+   var x=e.clientX
+   var y=e.clientY
+获取绝对定位下鼠标相对层的偏移量 
+   var x=e.layerX || e.offsetX
+   var y=e.layerY || e.offsetY
+获取鼠标相对整个页面的坐标 
+   var x=e.pageX || e.x
+   var y=e.pageY || e.y
+   或
+   var scrollY = d.documentElement.scrollTop || d.body.scrollTop;  //获取滚动条滚去的高度
+   var scrollX = d.documentElement.scrollLeft || d.body.scrollLeft;
+   var x=e.pageX || e.clientX + scrollX;
+   var y=e.pageY || e.clientY + scrollY;
+

@@ -1,0 +1,28 @@
+<html>
+<head>
+<title>选择排序</title>
+<script type="text/javascript">
+var a=[2,4,1,6,3,8,3,5,10,24,3,5,9];
+selectSort(a);
+alert(a);
+
+function selectSort(a){  //不稳定的排序
+  //var k=0;
+  for(var i=0;i<a.length-1;i++){  //外层选择要排序的元素
+     for(var j=i+1;j<a.length;j++){  //内层将选择的元素跟余下元素依次比较
+	    if(a[i]>a[j]){
+		   var temp=a[i];
+		   a[i]=a[j];
+		   a[j]=temp;
+		   //k++;
+		}
+	 }
+  }
+  //alert(k);
+}
+</script>
+</head>
+<body>
+
+</body>
+</html>

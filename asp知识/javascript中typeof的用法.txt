@@ -1,0 +1,68 @@
+在js里用到数组,比如 多个名字相同(的)input, 若是动态生成(的), 提交时就需要判断其是否是数组. if(document.mylist.length != "undefined" ) {} 这个用法有误. 
+正确(的)是 if( typeof(document.mylist.length) != "undefined" ) {} 
+或 if( !isNaN(document.mylist.length) ) {} 
+typeof(的)运算数未定义,返回(的)就是 "undefined". 
+运算数为数字 typeof(x) = "number" 
+字符串 typeof(x) = "string" 
+布尔值 typeof(x) = "boolean" 
+对象,数组和null typeof(x) = "object" 
+函数 typeof(x) = "function" 
+typeof 运算符返回一个用来表示表达式(的)数据类型(的)字符串。 
+可能(的)字符串有："number"、"string"、"boolean"、"object"、"function" 和 "undefined"。 
+如： 
+alert(typeof (123));//typeof(123)返回"number" 
+alert(typeof ("123"));//typeof("123")返回"string" 
+typeof 运算符 
+返回一个用来表示表达式(的)数据类型(的)字符串。 
+typeof[()expression[]] ; 
+expression 参数是需要查找类型信息(的)任意表达式。 
+脚本之家 www.jb51.net 更多(的)javascript资料可以访问 
+说明 
+typeof 运算符把类型信息当作字符串返回。typeof 返回值有六种可能： "number," "string," "boolean," "object," "function," 和 "undefined." 
+
+typeof 语法中(的)圆括号是可选项。typeof运算符介绍：
+typeof 是一个一元运算，放在一个运算数之前，运算数可以是任意类型。
+它返回值是一个字符串，该字符串说明运算数的类型。
+
+你知道下面typeof运算的结果吗？
+
+typeof(1);
+typeof(NaN);
+typeof(Number.MIN_VALUE);
+typeof(Infinity);
+typeof("123");
+typeof(true);
+typeof(window);
+typeof(document);
+typeof(null);
+typeof(eval);
+typeof(Date);
+typeof(sss);
+typeof(undefined);
+
+看看你会几个？
+
+如果看了以后，不是很明白的话，请看下面（明白的人就不用往下看了）：
+typeof是一个一元运算符，它返回的结果始终是一个字符串，对不同的操作数，它返回不同的结果。
+具体的规则如下：
+一、对于数字类型的操作数而言， typeof 返回的值是 number。比如说：typeof(1)，返回的值就是number。
+上面是举的常规数字，对于非常规的数字类型而言，其结果返回的也是number。比如typeof(NaN)，NaN在
+JavaScript中代表的是特殊非数字值，虽然它本身是一个数字类型。
+在JavaScript中，特殊的数字类型还有几种：
+Infinity 表示无穷大特殊值
+NaN　　　　　　　　　　　　特殊的非数字值
+Number.MAX_VALUE　　　　　可表示的最大数字
+Number.MIN_VALUE　　　　　可表示的最小数字（与零最接近）
+Number.NaN　　　　　　　　特殊的非数字值
+Number.POSITIVE_INFINITY　表示正无穷大的特殊值
+Number.NEGATIVE_INFINITY 表示负无穷大的特殊值
+
+以上特殊类型，在用typeof进行运算进，其结果都将是number。
+
+二、对于字符串类型， typeof 返回的值是 string。比如typeof("123")返回的值是string。 
+三、对于布尔类型， typeof 返回的值是 boolean 。比如typeof(true)返回的值是boolean。
+四、对于对象、数组、null 返回的值是 object 。比如typeof(window)，typeof(document)，typeof(null)返回的值都是object。
+五、对于函数类型，返回的值是 function。比如：typeof(eval)，typeof(Date)返回的值都是function。
+六、如果运算数是没有定义的（比如说不存在的变量、函数或者undefined），将返回undefined。比如：typeof(sss)、typeof(undefined)都返回undefined。
+
+

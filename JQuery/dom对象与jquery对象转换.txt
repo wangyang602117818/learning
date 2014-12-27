@@ -1,0 +1,6 @@
+jqueryתdom
+  var $cr=$("#cr");
+  var cr=$cr[0];
+domתjquery
+  var cr=document.getElementById("cr");
+  var $cr=$(cr);

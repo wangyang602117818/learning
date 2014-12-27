@@ -1,0 +1,42 @@
+<html>
+<head>
+<SCRIPT language="javascript">
+function display_tr(num)
+{     var obj1="tr"+num;
+      if (document.all(obj1).style.display=="none")
+         { if (navigator.appName=="Microsoft Internet Explorer")   //检测浏览器
+              { document.all(obj1).style.display="block";}
+		   else 
+		      {document.all(obj1).style.display="table-row";}
+		 }
+	  else
+	     {document.all(obj1).style.display="none";}
+}
+</script>
+
+</head>
+
+<table width="300px" border="1" cellspacing="0" cellpadding="4">
+    <tr onmouseover="this.bgColor='#cccccc'" onmouseout="this.bgColor=''" onclick="display_tr(2)">
+	   <td colspan="2">我的好友</td>
+	</tr>
+	<tr id="tr2" >
+	   <td width="20">&nbsp</td>
+	   <td><table border="1" width="100%" cellspacing="0" cellpadding="4">
+	         <tr><td>张三</td></tr>
+			 <tr><td>李四</td></tr>
+			 <tr><td>王二</td></tr>
+		   </table>
+	   </td>
+	</tr>
+</table>
+<br>
+<font size="3">以上代码在IE6上运行，没有任何问题；但是在FF上隐藏然后在显示就会出现表格变形，经过分析发现在火狐上运行的两种效果虽然不一样，但是生成的html源代码是完全一样的，为什么源代码一样，运行出的结果不一样呢。查找资料发现display的属性有多种，在tr里面设置了display=block，FF会把这个tr当成一个块级元素显示，而IE6似乎挺智能的，知道用户最终要想什么效果，还是按原样显示出了块级元素里的所有标签，改变js函数里的block为table-row，按照表格的行来显示；发现在FF上运行正常了，而IE6并不支持table-row属性。找到了问题所在，我们就可以通过区分不同的浏览器来运行不同的js代码来达到支持多种浏览器的目的。<br>
+(用Navigator来检测不同的浏览器)
+
+</html>
+
+
+
+
+

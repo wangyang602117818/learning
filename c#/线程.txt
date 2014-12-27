@@ -1,0 +1,14 @@
+通过新建线程来执行方法
+ 一：执行无参方法
+     public void M1(){
+        Consoel.WriteLine("M1");
+     }
+     Thread thread=new Thread(M1);
+     thread.Start();
+ 
+ 二：执行有参方法
+     public void M2(string s){
+        Console.WriteLine(s);
+     }
+     Thread thread=new Thread(M2);
+     thread.Start("xx")  //在这里传递参数

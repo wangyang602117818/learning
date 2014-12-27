@@ -1,0 +1,23 @@
+程序集：Spring.Core Common.Logging
+配置文件
+<configuration>
+	<configSections>
+	    <sectionGroup name="spring">
+	      <section name="context" type="Spring.Context.Support.ContextHandler, Spring.Core"/>
+	      <section name="objects" type="Spring.Context.Support.DefaultSectionHandler, Spring.Core" />
+	    </sectionGroup>
+	</configSections>
+</configuration>
+<spring>
+    <context>
+      <resource uri="config://spring/objects"/>
+    </context>
+    <objects xmlns="http://www.springframework.net">
+      <object name="p" type="SpringNet.Person,SpringNet" singleton="false"></object>
+    </objects>
+</spring>
+
+用法
+IApplicationContext ctx = ContextRegistry.GetContext();   //拿到类
+IUserInfoService lister = (IUserInfoService)ctx.GetObject("UserInfoService");  //创建对象
+MessageBox.Show(lister.ShowMsg("你好"));

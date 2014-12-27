@@ -1,0 +1,15 @@
+meta 标签.
+   name属性 用于SEO
+   <meta name="generator" content="editplus"/>   --文章的编辑工具
+   <meta name="author"    content="wy"/>         ---文章的作者
+   <meta name="keywords"  content="html,asp,javascript,vbscript">  --关键字
+   <meta name="description" content="xxxx">   --文章描述
+   <meta name="date" content="2008-07-12T20:50:30+00:00" /> --定义网页生成时间
+  
+
+   http-equiv属性
+   <meta http-equiv="content-type" content="text/html;charset=utf-8"/>  --告诉浏览器文档的类型及内容编码 
+   <meta http-equiv="content-language" content="zh-cn"/>   --告诉浏览器文档使用了中文
+   <meta http-equiv="refresh" content="3;url=http://www.baidu.com/"/> 设置刷新，3s跳到百度，不设url表示刷新本页
+   <meta http-equiv="expires" content="Sunday 26 October 2008 01:00 GMT"/> --定义网页缓存过期时间
+   <meta http-equiv="pragma"  content="no-cache"/>  --定义网页不缓存页面

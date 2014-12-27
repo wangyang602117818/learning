@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html style="border:solid 1px red">
+<head>
+</head>
+<body style="border:solid 1px green">
+ <div id="dv" style="position:realtive;border:solid 1px red;top:20px;left:20px;height:300px;width:600px"></div>
+</body>
+</html>
+<script type="text/javascript">
+   var body_o_w=document.body.offsetWidth;
+   var body_o_h=document.body.offsetHeight;
+   var body_c_w=document.body.clientWidth;
+   var body_c_h=document.body.clientHeight;
+   
+   var html_o_w=document.documentElement.offsetWidth;
+   var html_o_h=document.documentElement.offsetHeight;
+   var html_c_w=document.documentElement.clientWidth;
+   var html_c_h=document.documentElement.clientHeight;  
+
+   var d=document.getElementById("dv");
+   d.innerHTML="offsetWidth：元素所占的宽度大小<br>clientWidth：元素内容区加上内边距所占宽度大小<br>body元素所占宽度："+body_o_w+"，高度："+body_o_h+"<br>body元素内容区宽度："+body_c_w+",高度："+body_c_h+"<br><br>"+"html元素所占宽度："+html_o_w+"，高度："+html_o_h+"<br>html元素内容区宽度："+html_c_w+"，高度："+html_c_h+"<br><br><br>结论：body与html元素之间默认有一定的外边距，<br>反常的地方：在非IE下，html元素的offsetHeight代表网页内容区的高度，而clientHeight代表整个屏幕的高度,所以要取最高的高度要用clientHeight"   
+   
+</script>
+
+

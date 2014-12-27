@@ -1,0 +1,17 @@
+[XmlIgnoreAttribute] 特性指定不序列化这个类型
+一 对象序列化为xml文件   Person p = new Person() { Age = 20, Name = "sk", Email = "sk@rupeng.com" };
+    1 创建类的一个序列化器
+      XmlSerializer XS=new XmlSerializer(typeof(Person))   //创建Person类的一个序列化器（该序列化器只能序列化Person类的对象）
+    2 创建文件流
+      using(FileStream fs=File.OpenWrite("person.xml"))
+      {
+              XS.Serialize(fs,p);   //p代表Person类的一个对象
+      }
+二 List集合序列化为xml文件  List<Person> list = new List<Person>() { p, p1 };
+    1 创建集合的一个序列化器
+      XmlSerializer XS=new XmlSerializer(typeof(List<Person>)) //创建List<Person>的一个序列化器
+    2 创建文件流
+      using(FileStream fs=File.OpenWrite("ListPerson.xml"))
+      {
+             XS.Serialize(fs,list);   //list代表List<Person>集合的一个对象 
+      }

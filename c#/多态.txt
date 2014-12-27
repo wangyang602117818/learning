@@ -1,0 +1,3 @@
+实现多态的方式：
+     父类使用抽象方法abstract（不实现方法体），子类用override重写。
+     父类使用虚方法virtual（需要实现方法体），子类用override重写。

@@ -1,0 +1,8 @@
+
+sum里面跟表达式语法
+
+select RecordDate,
+sum(case result when '胜' then 1 else 0 end)as 胜,
+sum(case result when '负' then 1 else 0 end)as 负 
+from test 
+group by RecordDate

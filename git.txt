@@ -1,0 +1,60 @@
+git使用前置配置
+   --创建用户名和邮箱
+     git config --global user.name "wangyang"
+     git config --global user.email "60211781@qq.com"
+   --查看特定信息
+     git config --list
+     git config user.name
+
+git的一般使用流程(基本使用)：
+   --创建git仓库
+    1 转到E盘(cd E:)
+    2 新增一个文件用于学习git(mkdir learngit)
+    3 转到learngit目录(cd learngit)
+    4 初始化git仓库(git init)
+   --新增文件并提交
+    1 在learngit目录新增一个文件001.txt，此时文件的状态为未跟踪（Untracked files），文件颜色也没有任何变化 
+    2 通过git add readme.txt命令将文件状态修改为暂存（Changes to be committed:），文件颜色变成蓝色的＋
+    3 使用git commit -m "add a new file" 命令把文件提交到仓库，文件颜色变成绿色的√
+   --修改文件并提交
+    1 修改文件001.txt，此时文件的状态为没有暂存（changes not staged for commit），文件颜色变成红色的叹号
+    2 使用git add 001.txt命令将文件状态修改为暂存（Changes to be committed:）,文件颜色还是红色叹号
+    3 使用git commit -m "add a new line" 命令把文件提交到仓库，文件颜色变成绿色的√
+   --删除文件并提交
+    1 用文件管理器删除文件，这时工作区与版本库的文件不一致了，
+      如果要恢复文件git checkout -- 002.txt
+      如果确实要删除文件git rm 002.txt ,git commit -m 'delete file 002.txt'
+   --查看提交日志
+    1 使用git log，最近的提交显示在最上面，加上--pretty=oneline参数结果会显示在一行上
+   --版本回退
+    1 使用git reset --hard head^(^代表上一个版本,^^代表上上个版本)
+    2 使用git reset --hard 2d50 (2d50代表上一个版本号前几个字符)
+    3 查看命令历史git reflog
+   --撤销修改 git checkout -- 001.txt 
+    1 情况一：没有放到暂存区，文件会回到前一次commit的状态（没有放到暂存区直接修改文件就ok了，还用什么命令？）
+    2 情况二：文件已经放到暂存区，文件会回退到暂存区的文件状态
+    3 情况三：使用git reset head 001.txt 命令把001.txt文件从暂存区撤销掉
+
+git高级之搭建GitHub服务器
+   --从本地库创建远程库
+   1 使用ssh-keygen -t rsa -C "youremail@example.com"命令创建私钥(id_rsa)和公钥(id_rsa.pub)
+   2 建立github远程仓库
+   3 关联远程仓库 git remote add origin git@github.com:wangyang/learngit.git
+   4 把本地master分支内容推送到远程master分支 git push -u origin master (u是关联的意思，以后就可以不用u了)
+   --从远程库创建本地库
+   1 使用 git clone git@github.com:wangyang/learngit.git
+   
+git高级之分支管理
+   1 创建并切换分支 git checkout -b dev 等价于 git checkout dev(创建分支), git branch dev(切换分支)
+   2 合并分支 git merge dev(将dev分支合并到当前分支)
+   3 删除分支 git branch -d dev
+   4 解决冲突 当把新分支修改提交后，本来要用主分支来合并新分支的，但是又修改了主分支，这时合并就会产生冲突
+     在master修改冲突后add并commit，然后删除新分支即可
+
+git高级之保存工作现场
+   1 当正在开发某个功能还没有commit时，
+     用git stash保存当前工作现场，
+     用git stash list查看工作现场，
+     用git stash pop恢复工作现场
+
+

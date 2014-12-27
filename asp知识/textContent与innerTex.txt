@@ -1,0 +1,1 @@
+IE下有个innerText属性，FF下有个textContent属性

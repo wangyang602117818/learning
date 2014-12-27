@@ -1,0 +1,11 @@
+扩展方法
+  1 使用静态类来定义
+      public static class stringExt  //扩展方法
+      {
+         public static bool IsEmail(this string str1, string match) 
+          {
+            return Regex.IsMatch(str1, match);
+          }
+      }
+     //关键字：this 指的是当前方法，string 指的是为那个类指定扩展方法，
+     //参数：str1 指的是调用这个方法的实例类型，后面跟的是方法的参数

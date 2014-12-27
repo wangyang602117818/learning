@@ -1,0 +1,36 @@
+<html>
+<head>
+<title>快速排序</title>
+<script type="text/javascript">
+var a=[2,4,1,6,3,8,3,11,10,24,3,5,9];
+quickSort(a,0,a.length-1)  //0：第一个元素的下标，a.length-1：最后一个元素的下标
+alert(a);
+function quickSort(a,low,high){
+   var pos;
+   if(low<high){
+      pos=findPos(a,low,high);  //找到数组第一个元素所在位置
+      quickSort(a,low,pos-1);   
+	  quickSort(a,pos+1,high);
+   }
+}
+function findPos(a,low,high){
+   var temp=a[low];    //把第一个元素存起来
+   while(low<high){
+	   while(low<high && a[high]>=temp){  //从后往前搜索，找到比第一个小的就交换
+		  high--;
+	   }
+	   a[low]=a[high];
+	   while(low<high && a[low]<=temp){  //从前往后搜索，找到比第一个大的就交换
+		  low++;
+	   }
+	   a[high]=a[low];
+   }
+   a[low]=temp;
+   return low;
+}
+</script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,74 @@
+Asp中引号的用法！
+Asp中引号的用法！ 
+如sql="select * from 表名 where 列名1=[]"
+[]中的内容,若列名的数据类型为数字,则上句该写为
+sql="select * from 表名 where 列名1="&某变量名
+[]中的内容,若列名的数据类型不是数字,则上句该写为
+sql="select * from 表名 where 列名1=' " &某变量名& " ' "
+这是为什么原因呢,因为除了数字之外,都看为字符串类型,而字符串的赋值是需要用引号的,因此,第二种
+写法用了单引号来赋字符串值.而变量名总是不能直接写在sql的引号里面的,总是要独立出来,因此用两
+个&&,来连接因此出现了这两种写法.
+
+   
+很多ASP初学习的朋友都有可能在双引号，单引号以及&号上迷失了方向。最关键的是不理解三类符号的意思，当然也就不能很好地掌握它们的用法了。以下是我对三类符号的看法，技术不精，难免有疏忽之处，肯请大家多提意见。
+1，双引号""
+ASP中处在双引号中的可以是任意的字符、字符串，HTML代码。
+比如
+
+
+<%response.write ("cnbruce here")%><hr>
+<%response.write ("<b>cnbruce here</b>")%>
+
+产生的页面效果分别是：默认文字和加粗文字“cnbruce here”
+下面再想想，如果我要在输出的页面文字上加一颜色效果该怎么办？
+1，一般文字颜色这样写：<font color="#0000ff">cnbruce</font>
+2，response.write写法是这样的：response.write("输入显示的内容")
+3，如果要将上面超链接代码放到response.write中，有没有发现write方法中的双引号和color中的双引号形成嵌套效果，
+势必形成response.write("<font color="#0000ff">cnbruce</font>")
+4，调试结果不容乐观，因为color的前引号和write的前引号形成匹配，内容为<font color=；同样color的后引号也就和write的后引号匹配了，内容为：>cnbruce</font>。最终结果是：中间的 #0000ff 被孤单了。
+5，所以为了结果正确，你可以将 #0000ff 当成字符串放在双引号里面，然后该字符串与前字符串<font color=和后字符串>cnbruce</font>中间的连接就采用&号
+最后结果如下：
+
+<%
+response.write("<font color=" & "#0000ff" & ">cnbruce</font>")
+%>
+
+
+2，单引号''
+正如学习语文课一样，继续放在双引号中的引号可以采用单引号。
+那么上面一条语句response.write("<font color="#0000ff">cnbruce</font>")中的#0000ff就可以将其双引号变为单引号：
+response.write("<font color='#0000ff'>cnbruce</font>")，这样执行同样正确。
+3，连接字符&号
+ASP中&号的主要作用是用来连接的，包括：字符串-字符串、字符串-变量、变量-变量等混合连接。
+比如下面一例题：
+
+<%
+mycolor="#0000ff"
+response.write ("<font color=' "&mycolor&" '>" & "cnbruce" & "</font>")
+%>
+
+
+其中极需要注意的是：color的单引号中又采用了双引号~！你也许会糊了，慢慢看。
+1，现在是自己定义了一个变量mycolor，按照原则，变量放在response.write里面是不需要加双引号的，因为加了双引就表示是字符串，而非变量啊。
+2，所以response.write如果要输出变量可以直接这样写：response.write(mycolor)
+3，但是，现在。我们的变量一定要是放在双引号中的（比如上面程序是放在单引中），那具体的response.write又该如何书写呢？
+4，关键写法：将ASP中的变量继续添加左右的"&包括，就可以放到response.write的引号中了，效果即为：response.write(" "&mycolor&" ")
+5，分析response.write（" "&mycolor&" "）,其实还就是前一空字符串连接mycolor变量再连接后一字符串嘛。
+6，所以，现在对于上方的ASP整个例题应该有所领悟了吧。
+继续强化加深
+
+<%
+mycolor="#0000ff"
+response.write ("<font color=' "&mycolor&" '>" & mycolor & "</font>")
+%>
+
+
+这个里面就包含了字符串，变量以及变量在引号中的使用。相信你也就能够明白了吧。
+最后，你还可以进行HTML和ASP的混合使用。
+
+<%mycolor="#0000ff"%>
+<font color=<%=mycolor%>><%=mycolor%></td>
+
+
+这个不难，容易理解：）
+恩，我想到的就这么多了。

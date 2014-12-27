@@ -1,0 +1,5 @@
+var str="{name:['张三','李四','王五'],age:[12,13,14]}";
+var jsons=new Function("return "+str)();
+for(var key in jsons){
+   alert(jsons[key]);
+}

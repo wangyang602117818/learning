@@ -1,0 +1,20 @@
+一：用数组的方式实现键值对
+    var arr = new Array();
+        arr['yzk'] = '杨中科';
+        arr['sk'] = '苏坤';
+        arr['jk'] = '蒋坤';
+
+        for(var k in arr){   //这里用for in遍历，
+           alert(k+' '+arr[key]);
+        }
+
+二：快速声明一个键值对集合（json）【推荐】
+    var dict={'yzk':'杨中科','sk':'苏坤','age':18,'gender':true};
+       for(var key in dict){
+          alert(dict[key]);
+       }
+
+    alert(dict.yzk);
+    alert(dict.sk);
+    alert(dict.age);
+    alert(dict.gender);

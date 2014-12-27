@@ -1,0 +1,12 @@
+--toggleClass开关类属性的，如果元素有该属性就移除，没有就加上
+  $(".dv1").click(function(){
+       $(this).toggleClass("c")   //元素在有calss="c"与没有该属性之间切换。
+  })
+======使用第二个参数
+  var count=0;
+  $(".dv1").click(function(){
+       $(this).toggleClass("c",count++%3==0)    //每次点击count++当count=3时切换样式
+  })
+
+--toggle依次循环执行里面的方法
+  .toggle(func1,func2)

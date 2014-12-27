@@ -1,0 +1,15 @@
+结构一：
+case 列名
+  when '值' then'结果'
+  when '值' then'结果'
+  else '结果'
+end as 显示列名
+
+结构二
+case
+   when 列='值' then '结果'
+   when 列='值' then '结果'
+   else'结果'
+end as 显示列名
+
+

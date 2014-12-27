@@ -1,0 +1,28 @@
+1 加载程序集
+   Assembly asb = Assembly.LoadFile(@"C:\TestLib.dll");
+2 获取程序集中的所有类型
+   Type[] types=asb.GetTypes();
+  获取所有public类型
+   Type[] types=asb.GetExportedTypes();
+====================================================
+1 获取程序集中类的方法
+   (1)加载程序集
+      Assembly asb=Assembly.LoadFile(@"C:\TestLib.dll");
+   (2)获取程序集中某个类型
+      Type t=asb.GetType("TestLib.Class1");
+   (3)获取该类型的所有方法
+      MethodInfo[] mi=t.GetMethods();
+      获取指定的方法
+      MethodInfo m=t.GetMethod("SayHi");
+======================================================
+2 通过程序集创建对象，并调用方法
+   (1)加载程序集
+      Assembly asb=Assembly.LoadFile(@"C:\TestLib.dll");
+   (2)获取程序集中的某个类型
+      Type t=asb.GetType("TestLib.Class1");
+   (3)获取该类型的一个方法
+      MethodInfo mi=t.GetMethod("SayHi"); 
+   (4)创建该类型的一个对象
+      object obj=Activator.CreateInstance(t);
+   (5)调用方法
+      mi3.Invoke(obj,null);

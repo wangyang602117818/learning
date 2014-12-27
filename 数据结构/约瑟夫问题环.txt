@@ -1,0 +1,20 @@
+List<int> arr = new List<int>() { 1, 2, 3, 4, 5};  //原始集合
+List<int> list = new List<int>();  //保存出列数字
+int i = 0;     //一直往前走,i代表数组元素下标
+int temp = 1;  //当前数到几;
+int fix = 2;  //数两个数出列；
+while (arr.Count != 0)
+{
+    if (temp == fix)   //出列
+    {
+        list.Add(arr[i]);
+        arr.RemoveAt(i);    //集合元素减少一个，数组的下标不能往前走
+        temp = 1;   //出列以后又从1开始数
+    }
+    else
+    {
+        temp++;   //还没有数到fix，temp++，继续数
+        i++;      //当没有数到fix时，数组的下标也要往前移动
+    }
+    if (i >= arr.Count) i = 0;  //构成循环链表
+}

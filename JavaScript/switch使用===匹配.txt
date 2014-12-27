@@ -1,0 +1,13 @@
+switch 使用的是===匹配  先比较类型，在比较值
+        var n = '10';
+        switch (n) {
+            case 10:
+                alert('数字10');
+                break;
+            case '10':
+                alert('字符串10');   //匹配这行
+                break;
+            default:
+                alert('其他');
+                break；
+        }
