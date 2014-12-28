@@ -50,11 +50,15 @@ git高级之分支管理
    3 删除分支 git branch -d dev
    4 解决冲突 当把新分支修改提交后，本来要用主分支来合并新分支的，但是又修改了主分支，这时合并就会产生冲突
      在master修改冲突后add并commit，然后删除新分支即可
-
+git子模块
+   1 为项目添加子模块  t://github.com/chneukirchen/rack.git rack
+   2 将生成的文件 .gitmodules git submodule add gi,文件夹modul提交到远程，这样别人在拉取项目的时候就包含了子模块了
+   3 clone带子模块的项目 git submodule init  , git submit update
 git高级之保存工作现场
    1 当正在开发某个功能还没有commit时，
      用git stash保存当前工作现场，
      用git stash list查看工作现场，
      用git stash pop恢复工作现场
+
 
 
