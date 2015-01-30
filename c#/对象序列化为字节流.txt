@@ -1,0 +1,35 @@
+方法一：BinaryFormatter(必须加[Serializable])
+	//序列化
+	BinaryFormatter bf = new BinaryFormatter();   //创建一个序列化器
+	MemoryStream ms = new MemoryStream();  //创建内存流用于保存序列化后结果
+	bf.Serialize(ms, obj);   //将obj系列化到ms中去
+	//反序列化
+	ms.Position = 0;  //将指针放到内存流开始
+	var obj=(obj)bf.Deserialize(ms);  //反序列化，obj就是原对象
+方法二：XmlSerializer
+	//序列化
+	XmlSerializer xs = new XmlSerializer(typeof(List<Person>));  //创建一个序列化器
+	MemoryStream ms1 = new MemoryStream();
+	xs.Serialize(ms1, list1);
+	//反序列化
+	ms1.Position = 0;
+	List<Person> o2 = (List<Person>)xs.Deserialize(ms1);
+方法三：DataContractJsonSerializer
+	//序列化
+	DataContractJsonSerializer dcj = new DataContractJsonSerializer(typeof(List<Person>));
+	MemoryStream ms2 = new MemoryStream();
+	dcj.WriteObject(ms2, list1);
+	//反序列化
+	ms2.Position = 0;
+	List<Person> o3 = (List<Person>)dcj.ReadObject(ms2);
+
+
+
+
+
+
+List<Person> list1 = new List<Person>()
+{
+      new Person(){Age=10,Name="张三"},
+      new Person(){Age=12,Name="李四"}
+};
