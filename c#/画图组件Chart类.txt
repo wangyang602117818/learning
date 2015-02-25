@@ -1,0 +1,113 @@
+using (Chart chart = new Chart())  //创建画布
+{
+	//画布属性//////////////////////////////////////////////////
+	chart.Width = 800;   //画布宽
+	chart.Height = 400;  //画布高
+	chart.BorderlineDashStyle = ChartDashStyle.Solid;
+	chart.BorderlineWidth = 2;
+	chart.BorderlineColor = Color.Black;
+	chart.BackColor = Color.White;  //画布背景色
+	Title title = new Title("xx年销售量对比");
+	title.Font = new Font("宋体", 14, FontStyle.Bold);
+	chart.Titles.Add(title);
+	
+	ChartArea area = new ChartArea("area1");
+	area.Position = new ElementPosition(2, 13, 85, 80);
+	//x轴相关属性
+	area.AxisX.Title = "月份";  //x轴文字
+	area.AxisX.TitleFont = new Font("宋体", 14, FontStyle.Bold);
+	area.AxisX.Maximum = 13;
+	area.AxisX.Interval = 1;
+	area.AxisX.MajorGrid.LineWidth = 1;      //x轴线宽度宽度
+	area.AxisX.MajorGrid.LineDashStyle = ChartDashStyle.DashDot;
+	area.AxisX.MajorTickMark.Enabled = false;  //设置x轴的线条不延生出来
+	//y轴相关属性
+	area.AxisY.Title = "销 售 量"; //y轴文字
+	area.AxisY.TextOrientation = TextOrientation.Rotated270;  //y轴文字方向
+	area.AxisY.MajorGrid.LineWidth = 1;  //y轴主刻度线宽度
+	area.AxisY.MajorGrid.LineDashStyle = ChartDashStyle.DashDot;
+	area.AxisY.Maximum = 100;   //y轴坐标最大值
+	area.AxisY.Interval = 10;  //设置y轴精度
+	area.AxisY.MajorTickMark.Enabled = false;  //设置主要刻度线不伸出来
+	chart.ChartAreas.Add(area);
+
+	//图表里面的数据属性/////////////////////////////////////////
+	Series series = new Series("销售量");
+	series.ChartType = SeriesChartType.Line;   //图表类型，柱状图，圆饼图，折线图
+	series.BorderWidth = 2;  //图表边框宽度
+	series.BorderColor = Color.Black; //图表边框颜色
+	series.MarkerStyle = MarkerStyle.Circle;
+	series.MarkerSize = 5;
+	//series.MarkerBorderColor = Color.Red;
+	series.MarkerColor = Color.Black;
+	//添加y轴的值
+	series.Points.AddY(70);
+	series.Points.AddY(25);
+	series.Points.AddY(50);
+	series.Points.AddY(50);
+	series.Points.AddY(20);
+	series.Points.AddY(25);
+	series.Points.AddY(30);
+	series.Points.AddY(35);
+	series.Points.AddY(50);
+	series.Points.AddY(45);
+	series.Points.AddY(70);
+	series.Points.AddY(83);
+	//添加x轴的说明
+	series.Points[0].AxisLabel = "一月";
+	series.Points[1].AxisLabel = "二月";
+	series.Points[2].AxisLabel = "三月";
+	series.Points[3].AxisLabel = "四月";
+	series.Points[4].AxisLabel = "五月";
+	series.Points[5].AxisLabel = "六月";
+	series.Points[6].AxisLabel = "七月";
+	series.Points[7].AxisLabel = "八月";
+	series.Points[8].AxisLabel = "九月";
+	series.Points[9].AxisLabel = "十月";
+	series.Points[10].AxisLabel = "十一月";
+	series.Points[11].AxisLabel = "十二月";
+	//显示值
+	series.IsValueShownAsLabel = true;
+	//series.LabelFormat = "0%";  //显示百分比
+	//series.Points[0].Label = "70";
+	//series.Points[1].Label = "25";
+	//图形颜色
+	series.Color = Color.Blue;
+	chart.Series.Add(series);
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	Series series1 = new Series("年龄");
+	series1.BorderWidth = 2;
+	series1.ChartType = SeriesChartType.Line;   //图表类型，柱状图，圆饼图，折线图
+	series1.Points.AddY(25);   //添加y轴的值
+	series1.Points.AddY(35);
+	series1.Points.AddY(60);
+	series1.Points.AddY(70);
+	series1.Points.AddY(90);
+	series1.Points.AddY(80);
+	series1.Points.AddY(70);
+	series1.Points.AddY(60);
+	series1.Points.AddY(50);
+	series1.Points.AddY(54);
+	series1.Points.AddY(75);
+	series1.Points.AddY(62);
+	series1.MarkerStyle = MarkerStyle.Circle;
+	series1.MarkerSize = 5;
+	series1.MarkerColor = Color.Black;
+	series1.Color = Color.Green;
+	series1.IsValueShownAsLabel = true;  //显示实际值
+	chart.Series.Add(series1);
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	//图例
+	Legend legend = new Legend();
+	//图例位置
+	legend.Position = new ElementPosition(88, 10, 10, 12);
+	legend.BorderDashStyle = ChartDashStyle.Dash;
+	legend.BorderWidth = 1;
+	legend.BorderColor = Color.Black;
+	//legend.IsTextAutoFit = true;
+	chart.Legends.Add(legend);
+
+	chart.SaveImage(imgPath + backPath, ChartImageFormat.Jpeg);
+	context.Response.Write(backPath);
+}
