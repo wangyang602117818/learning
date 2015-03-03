@@ -1,8 +1,12 @@
 安装windows服务命令
+方式一
 	转到.net目录下：  cd C:\Windows\Microsoft.NET\Framework\v4.0.30319
 	安装： installutil.exe {服务目录的完整路径}
-
-
+	卸载： installutil.exe /u {服务目录的完整路径}
+方式二
+        打开vs命令提示符
+	安装：installutil.exe {服务目录的完整路径}
+        卸载：installutil.exe /u {服务目录的完整路径}
 
 
 

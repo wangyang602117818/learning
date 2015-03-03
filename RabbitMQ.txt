@@ -1,0 +1,80 @@
+安装
+   1 下载 Erlang Windows Binary File 并安装
+   2 下载 rabbitmq-server-3.4.4.exe 并安装，至此队列服务已安装好
+   3 下载 .Net客户端（RabbitMQ.Client.dll）
+配置
+   1 转到 rabbitmq 的安装目录： cd C:\Program Files (x86)\RabbitMQ Server\rabbitmq_server-3.4.3
+   2 转到 sbin 目录： cd sbin
+   3 查看已安装的插件：rabbitmq-plugins list
+   4 [启用|禁用]图形管理界面：rabbitmq-plugins [enable|disable] rabbitmq_management
+   5 停止rabbitmq服务：rabbitmqctl stop（在sbin目录下执行）
+   6 启动rabbitmq服务：rabbitmq-server -detached
+发送端
+   ConnectionFactory factory = new ConnectionFactory();  //连接工厂
+   factory.Uri = "amqp://guest:guest@localhost";
+   using (IModel channel = connection.CreateModel())
+   {
+	channel.QueueDeclare("q1", false, false, false, null);  //定义一个队列，没有指定路由，默认绑定到（AMQP default）路由
+	XmlSerializer xs = new XmlSerializer(typeof(List<Person>));
+	IBasicProperties property = channel.CreateBasicProperties();
+	property.DeliveryMode = 2;  //2消息持久化；1是默认的不持久化
+	using (MemoryStream ms = new MemoryStream())
+	{
+		xs.Serialize(ms, personList);   //将str系列化到ms中去
+		byte[] bytes = ms.ToArray();
+		for (int i = 0; i < 4; i++)
+		{
+			channel.BasicPublish("", "q1", null, bytes);
+		        channel.BasicPublish("publish", "", null, bytes);
+			channel.BasicPublish("RouteDirect", "k1", property, bytes);
+		}
+	}
+	Console.WriteLine("已发送");
+     }
+接收端
+   ConnectionFactory factory = new ConnectionFactory();
+   factory.Uri = "amqp://guest:guest@localhost";
+   using (IConnection connetion = factory.CreateConnection())  //从工厂创建一个连接
+   {
+	using (IModel channel = connetion.CreateModel())  //从连接创建一个频道
+	{
+	    QueueingBasicConsumer consumer = new QueueingBasicConsumer(channel);
+	    //定义广播路由
+	    //channel.ExchangeDeclare("publish", "fanout");   //广播路由的routeKey没有用，只要发送到该路由的消息都会发给与它绑定的队列
+	    //channel.QueueDeclare("subscriber1", false, false, false, null);  
+	    //channel.QueueBind("subscriber1", "publish", "");
+	    //channel.BasicConsume("subscriber1", true, consumer);  //subscriber1队列消费者
+	    //channel.QueueDeclare("subscriber2", false, false, false, null);
+	    //channel.QueueBind("subscriber2", "publish", "");
+	    //channel.BasicConsume("subscriber2", true, consumer);  //subscriber2队列消费者
+	    //定义Direct路由//////////////////////////////
+	    channel.ExchangeDeclare("RouteDirect", "direct");
+	    channel.QueueDeclare("Qd1", false, false, false, null);
+	    channel.QueueBind("Qd1", "RouteDirect", "k1");
+	    channel.BasicConsume("Qd1", true, consumer);
+	    channel.QueueDeclare("Qd2", false, false, false, null);
+	    channel.QueueBind("Qd2", "RouteDirect", "k2");
+	    channel.BasicConsume("Qd2", true, consumer);
+	    //没有绑定路由的，使用默认路由////////////////
+	    channel.QueueDeclare("q1", false, false, false, null);  //队列定义
+								    //队列持久化 autoDelete=true：当队列的所有接受者都断开时，队列删除
+									exclusive=true：当connection断了，队列删除
+									durable=true：持久队列，保存在硬盘，服务器重启后还会存在
+	    channel.BasicConsume("q1", true, consumer);  //true：消费不发送应答，进入队列即删除；false：发送应答，发送应答后才从服务器删除消息
+	    Console.WriteLine("listening...");
+	    while (true)
+	    {
+		BasicDeliverEventArgs ea = consumer.Queue.Dequeue();
+		Console.WriteLine("接收到数据,处理中...,RoutingKey=" + ea.RoutingKey + "；DeliveryTag=" + ea.DeliveryTag);
+		byte[] body = ea.Body;
+		XmlSerializer xs = new XmlSerializer(typeof(List<Person>));
+		using (MemoryStream ms = new MemoryStream(body))  //吧body内容转成内存流
+		{
+		    List<Person> str = (List<Person>)xs.Deserialize(ms);
+		    Console.WriteLine(str.Count);
+		    //channel.BasicAck(ea.DeliveryTag, false);  //消息处理完后给应答，这样服务器才会删除该消息
+		}
+	    }
+	}
+    }
+
