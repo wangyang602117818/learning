@@ -1,0 +1,43 @@
+直线===============
+var canvas = document.getElementById("can1");  //取得canvas对象
+var ctx = canvas.getContext("2d");  //获取canvas上下文
+ctx.lineWidth = 5;  //设置笔触宽度
+ctx.beginPath();   //开始新路径
+ctx.moveTo(20, 20);
+ctx.lineTo(250, 250);
+ctx.lineTo(250, 100);
+ctx.closePath();  //先关闭路径，再画，三角形(先画，再关闭路径，2条线)
+ctx.stroke();
+矩形============
+ctx.beginPath();
+ctx.rect(250, 250, 120, 130);
+ctx.stroke();
+ctx.closePath();
+圆形==========
+ctx.beginPath();
+ctx.arc(150, 150, 100, 0, Math.PI * 2, false);
+ctx.stroke();
+ctx.closePath();
+旋转============
+ctx.save();   //先保存已有的内容
+ctx.translate(250, 250);  //把坐标系移到250,250
+ctx.rotate(90 / 60 * 2 * Math.PI); //把坐标系旋转90度
+ctx.beginPath();
+.....          //画图
+ctx.closePath(); 
+ctx.restore();  //恢复坐标系
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
