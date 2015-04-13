@@ -1,14 +1,14 @@
-log4net日志框架使用方法
+log4net日志框架配置方法
 mvc项目：
   1  添加dll引用（log4net.dll）
   2  在 网站根目录下 添加配置文件log4net.config
   3  添加log4net系统配置
      方法1：
-     在AssemblyInfo.cs下添加一行配置
-     [assembly: log4net.Config.XmlConfigurator(ConfigFile = "log4net.config", Watch = true)]
+        在AssemblyInfo.cs下添加一行配置
+        [assembly: log4net.Config.XmlConfigurator(ConfigFile = "log4net.config", Watch = true)]
      方法2：在Application_Start方法下配置读取log4net.config文件
-     string path = Server.MapPath("~/log4net.config");
-     log4net.Config.XmlConfigurator.Configure(File.OpenRead(path));
+        string path = Server.MapPath("~/log4net.config");
+        log4net.Config.XmlConfigurator.Configure(File.OpenRead(path));
   4  在程序中获取日志对象，记录日志
      log4net.ILog _log = log4net.LogManager.GetLogger("FileAppender");
      _log.Error("错误信息");
@@ -47,7 +47,7 @@ log4net.config配置文件的配置方法
            <conversionPattern value="%d [%p]=========%n   %m%n" />  <!--日志格式-->
         </layout> 
      </appender>
-   2 已数据库方式记录日志（一般记录操作日志）
+   2 以数据库方式记录日志（一般记录操作日志）
      <appender name="AdoNetAppender" type="log4net.Appender.AdoNetAppender">
         <bufferSize value="0"/>  <!--日志文件缓存到多少个，一起写入数据库，0表示不缓存-->
         <connectionType value="System.Data.SqlClient.SqlConnection,System.Data,Version=2.0.0.0, Culture=neutral,PublicKeyToken=b77a5c561934e089" />  <!--sqlserver数据库连接方式，固定-->
@@ -62,7 +62,7 @@ log4net.config配置文件的配置方法
            </layout>
         </parameter>
         <parameter>
-           <parameterName value="@remark"/>
+           <parameterName value="@remark"/>   <!--在程序中指定的属性名称-->
            <dbType value="String"/>
            <size value="500"/>
            <layout type="EasyOa.Common.MyLayout">
@@ -70,8 +70,8 @@ log4net.config配置文件的配置方法
           </layout>
         </parameter>
         <parameter>
-           <parameterName value="@logDate"/>
+           <parameterName value="@logDate"/>   
            <dbType value="DateTime"/>
            <layout type="log4net.Layout.RawTimeStampLayout"/>
-      </parameter>
-    </appender>
+        </parameter>
+     </appender>

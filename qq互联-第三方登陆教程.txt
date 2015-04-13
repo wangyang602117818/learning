@@ -1,0 +1,23 @@
+一：到腾讯 qq互联官网(http://connect.qq.com) 注册开发者账户
+   qq互联不支持线下测试，所以必须要有一个可用的域名（这一点比较肯跌），本人为了学习花155元买的线上空间和域名
+   1)填写个人信息，点击注册
+   2)点击 创建应用 网站，填好相应信息，成功后，系统会为你生成2个非常重要的秘钥，APP ID和APP KEY（这在开发过程中有用）
+二：4个步骤获取qq用户信息（openid，昵称）
+   具体参数说明见 qq互联官网 的 OAuth2.0开发文档 部分
+   1）获取code（步骤2有用）
+      访问 https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=101207076&state=third_qq&redirect_uri=http://www.wybeijing.com/qqLogin.aspx
+      其中client_id就是APP ID，访问该地址后会跳转到腾讯qq登录界面，用户输入qq号和密码后会回跳到redirect_uri指向的页面，并带回由腾讯服务器生成的code，state参数会原样带回
+   2）获取access_token（步骤3有用）
+      访问 https://graph.qq.com/oauth2.0/token?grant_type=authorization_code&client_id=101207076&client_secret=44d0ca0b6b497434f5407bc8f1ff1c9b&code=FFCEB5691499BC6DB03FBD9B0E3C7947&redirect_uri=http://www.wybeijing.com/qqLogin.aspx
+      其中client_secret就是APP KEY，code为第一步操作生成的code，这一步redirect_uri与第一步相同，并带回有腾讯服务器生成的access_token
+   3）获取openid（步骤4有用）
+      访问 https://graph.qq.com/oauth2.0/me?access_token=C79A166617F001A872777553778B3B7E 
+      其中access_token为上一步返回的access_token，
+      这一步将返回openid，这个id与腾讯服务器的qq用户是一一对应的，非常关键，需要系统进行存储
+   4）使用access_token和openid获取用户信息（昵称）
+      访问 https://graph.qq.com/user/get_user_info?access_token=C79A166617F001A872777553778B3B7E&oauth_consumer_key=101207076&openid=F0470F24D252B610895DF40D404B6568
+三：总结
+   1）qq第三方登陆 腾讯服务器返回的只是一个与qq用户相关联的openid，你的qq号和qq密码不会保存在第三方的系统里面，所以是安全的
+   2）很多系统判断openid，如果openid在系统存在，则要求用户登录，如果不存在，则要求用户注册，并让用户关联该openid；我想说，第三方登录本来是为了方便用户用第三方账号登录的，提高用户体验的，而这样做却多了一步，用户感觉自己是被骗进来的，费力不讨好！
+   3）第三方服务器返回的信息很有限，仅仅有一个openid和一个昵称有点用处，昵称可用作用户名，openid可用作密码，但是对于实名制的系统，比如企业oa，就不太合适第三方登陆了，
+
