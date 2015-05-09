@@ -1,0 +1,8 @@
+1 MVC在页面上使用@Html.Action("M1")会在当前位置原样输出M1方法运行的结果
+2 View与PartialView：
+  局部视图是返回部分html代码所用
+  一般情况是一样的，但是系统在加载正常视图(View)时,会为该视图加载默认的模板页，加载局部视图时(PartialView)会默认Layout=null,在正常视图中加Layout=null与局部视图效果一样
+3 
+
+
+
