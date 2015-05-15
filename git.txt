@@ -38,7 +38,7 @@ git的一般使用流程(基本使用)：
 git高级之搭建GitHub服务器
    --从本地库创建远程库
    1 使用ssh-keygen -t rsa -C "youremail@example.com"命令创建私钥(id_rsa)和公钥(id_rsa.pub)
-   2 建立github远程仓库
+   2 建立github远程仓库(不要初始化)
    3 关联远程仓库 git remote add origin git@github.com:wangyang/learngit.git
    4 把本地master分支内容推送到远程master分支 git push -u origin master (u是关联的意思，以后就可以不用u了)
    --从远程库创建本地库
