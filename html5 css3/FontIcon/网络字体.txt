@@ -1,0 +1,74 @@
+网络字体
+经常在网页上看到这样的图标
+图
+细心的朋友可能注意过它并不是图片，
+而是由css样式
+.icon{
+  content: '\f05f'
+} 
+而生成的，
+其实这是一种字体，
+只要加上font:18px;,那么该“图标”就会变大，而且不会变模糊。
+只需要加上 color:red;样式，那么该“图标”就会变成红色。这些使用图片都做不到。
+接下来学习一下这种字体的制作方法：
+
+1 以.woff  .eot  .ttf  .svg为后缀的文件
+  这几种文件都由浏览器来解析，只不过各种文件的浏览器支持不一致，比如chrome支持.woff，ie支持.eof。
+  .woff文件的内部包含了很多字体，当我们把图片压入这个文件内部的时候，这些图片都会经过woff格式的转换变成字体，而且一个字体对应一个编码，这个编码可能就是上面写的(\f05f) ，这样浏览器解析后就能使用\f05f来代表一个字体了(就是我们看到的图标)，f05f是16进制的编码
+2 @font-face属性
+  这是一个css3的属性，是用来下载.woff  .eot  .ttf  .svg文件来用的，比如以下代码
+  @font-face {
+       font-family: 'iconfont';
+       src: url('//at.alicdn.com/t/font_1430446350_4115865.eot'); /* IE9*/
+       src: url('//at.alicdn.com/t/font_1430446350_4115865.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('//at.alicdn.com/t/font_1430446350_4115865.woff') format('woff'), /* chrome、firefox */
+       url('//at.alicdn.com/t/font_1430446350_4115865.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+       url('//at.alicdn.com/t/font_1430446350_4115865.svg#iconfont') format('svg'); /* iOS 4.1- */
+  }
+  如果你在一个css文件中包含了这样一段代码，那么浏览器会去src制定的路径去下载相应的文件，其中ie9会下载.eot文件，chrome浏览器会忽略.eot而去下载.woff文件，firefox会下载.ttf文件。
+  下载下来以后就由浏览器去解析，然后在在网页中使用。当然你也可以将这些文件包含在本地，然后制定路径。
+3  .woff  .eot  .ttf   .svg  文件的生成
+  这项工作可以由专业的工具来完成，但是太麻烦，你要去画图片，然后再将图片压入这些文件内部，毕竟我们不是专业的美工，光是画图片这样工作就够我们受的。
+  现在有专门的线上工具帮我们完成这件事，你只要将图片上传，然后由它自动生成这些格式的文件
+  请访问阿里巴巴矢量图标库(http://www.iconfont.cn/)，网站中有使用说明，我就不啰嗦了
+4 操练一把
+  我在阿里巴巴线上项目中的字体是这样的，注意红色的编码区，这将是我们引用字体的编码
+  图
+  获取在线链接 
+  图
+  吧生成的代码拷贝到css文件中去，最终代码如下
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <style>
+        @font-face {
+            font-family: 'iconfont';
+            src: url('//at.alicdn.com/t/font_1430446350_4115865.eot'); /* IE9*/
+            src: url('//at.alicdn.com/t/font_1430446350_4115865.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+            url('//at.alicdn.com/t/font_1430446350_4115865.woff') format('woff'), /* chrome、firefox */
+            url('//at.alicdn.com/t/font_1430446350_4115865.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+            url('//at.alicdn.com/t/font_1430446350_4115865.svg#iconfont') format('svg'); /* iOS 4.1- */
+        }
+        .iconfont {
+            font-family: "iconfont";
+            font-size: 50px;
+            font-style: normal;
+        }
+      </style>
+  </head>
+  <body>
+      <i class="iconfont">&#xe60b;</i>
+      <i class="iconfont">&#xe60c;</i>
+      <i class="iconfont">&#xe60a;</i>
+      <i class="iconfont">&#xe608;</i>
+  </body>
+  </html> 
+  如果我用chrome浏览器，则去阿里巴巴服务器下载font_1430446350_4115865.woff文件，该文件将由浏览器来解析，解析完成后，我们就可以在网页上使用&#xe60b;&#xe60c;...带引入字体了！我可以改变font-zie大小，加color属性改变字体颜色，自己去试试，是不是很牛x？
+5 总结
+  1 使用网络字体，可以随意改变字体大小，而不会丢失分辨率，随意改变颜色，这是图片做不到的。
+  2 吧图片变成字体压入.woff文件内部可以大大减小文件大小，改善网络传输，从而改善网站性能
+  3 浏览器渲染字体比渲染图片要快很多，这也可以改善性能。
+  4 各大知名网站都在使用，比如github、淘宝、阿里、百度，
+  5 高大上的技术，用起来感觉超爽！
