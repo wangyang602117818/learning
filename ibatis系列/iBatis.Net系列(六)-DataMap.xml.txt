@@ -1,0 +1,29 @@
+   DataMap.xml文件是专门存放sql语句的文件，他们的命名一般与数据库表的命名一一对应，比如Student.xml，Course.xml
+   该文件还是有很多配置节点的，不过主要用的最多的是alias节点、statements节点，其他节点后面用到再讲。
+   1 alias节点 --配置别名
+   样例：
+   <alias>
+      <typeAlias alias="Student" type="IBNetModel.Student, IBNetModel" />
+   </alias>
+   前面我们讲过在sqlmap.config中也可以配置别名，不过在这里配置的别名是局部的，只能在这个文件中使用；而在sqlmap.config中配置的是全局的，所有文件通用。
+   2 statements节点 --配置所有的sql语句
+   样例：
+   <sqlMap namespace="Student" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+     <statements>
+        <select id="Select" parameterClass="int" resultClass="Student">
+           select * from student
+        </select>
+        <select id="SelectOne" parameterClass="int" resultClass="Student">
+           select * from student where id=#id#
+        </select>
+      </statements>
+   </sqlMap>
+   这是2条最简单的sql语句，我们在程序中通过select节点的id属性来引用相对于的sql语句，其中parameterClass代表传入参数的类型(这里是int类型)，resultClass代表sql语句执行后返回数据的类型，这里使用了别名Student
+   如果你在sqlmap.config文件中这样配置：
+   <settings>
+      <setting useStatementNamespaces="true"/>
+   </settings>
+    那么你在程序中必须加上命名空间("Student.Select"或"Select.SelectOne")来引用相应的sql语句
+
+至此我们项目的配置到此结束，接下来主要是程序和DataMap.xml文件来打交道了，因为程序要访问数据库，而DataMap.xml文件存储了所有的sql语句。项目配置完成后的结构是这样的
+图

@@ -1,0 +1,8 @@
+    IBatis.Net的前身是java的IBatis项目，是Apache软件基金会下的一个子项目，后来被google托管，同学们可以到
+http://code.google.com/p/mybatisnet/ 去下载相关文档和代码。
+    下载下来以后，是4个文件夹，其中前2个以Doc打头的，这是开发文档，后2个是与之对应的项目文件，我们这一系列的文章主要讨论DataMapper,也就是Ibatis.DataMapper.1.6.2.bin这个文件夹里面的内容。
+    图
+    相对于其他的ORM框架来说，IBatis还是很有特点的，首先iBatis的sql语句是由程序员自己来写的，这提供了很大的灵活性，所以说它是半自动化的，如果你在项目中用过if...else...  if...else...来拼接sql语句的，那么来使用ibtais吧！它的动态sql功能把我们从这样无意义的代码中解脱出来。其次它的sql语句是写在xml文档中的，这在很大程度为语句重用提供了可能，而且sql语句和程序代码分离，对项目的维护好处非常多。正如它的官网上所说：obtain 80% of data access functionality using only 20% of the code。
+    
+
+ 

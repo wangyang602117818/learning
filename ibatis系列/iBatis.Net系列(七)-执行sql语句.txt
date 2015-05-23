@@ -1,0 +1,57 @@
+   前面几节中，我们在Student.xml文件中配置了2条简单的sql语句,那么在程序中怎么使用呢?IBatis给我们封装了Mapper类,这个类的一个静态方法Instance()返回了一个ISqlMapper接口,这个接口将会是我们后期调用sql语句的入口
+    public class Student
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Sex { get; set; }
+        public string Address { get; set; }
+        public string Phone { get; set; }
+        public DateTime LoginDate { get; set; }
+        public int ClassId { get; set; }
+        internal ISqlMapper mapper;   //操作sql语句的入口
+        public Student()
+        {
+            mapper = Mapper.Instance();     //返回ISqlMapper
+        }
+        public IList<Student> SelectAll()   //查询方法
+        {
+            return mapper.QueryForList<Student>("Select",null);
+        }
+    }
+    在Student类中,我们在构造函数中实例化一个mapper实例,mapper下有很多方法,用来操作xml中的sql语句并执行.
+    1 添加一条记录,并返回主键id
+      在xml文件中这样配置
+      <insert id="InsertStu" parameterClass="Student" resultClass="int">
+          insert into Student(Name,Sex,Address,Phone,LoginDate,ClassId)
+          values(#Name#,#Sex#,#Address#,#Phone#,#LoginDate#,#ClassId#)
+        <selectKey resultClass="int" type="post" property="Id">select @@IDENTITY as value</selectKey>
+      </insert>
+      其中#Name#引用的是Student对象的Name属性
+      既然是插入数据,那么参数类型parameterClass="Student",返回主键则resultClass="int",注意selectKey节点,sqlserver的主键字段是后生成的,所以该节点要放在sql语句的后面并且type="post",select @@IDENTITY as value是sqlserver的固定语法.
+      在Student类中添加一个方法
+       public int Insert()
+       {
+          return (int)mapper.Insert("InsertStu", this);   //InsertStu就是xml文档中select节点的id
+       }
+       插入数据只需要实例化一个Student对象并且调用Insert方法即可,比如new Student(){...}.Insert();
+     2 删除一条记录,并返回受影响的行数
+      配置:
+       <delete id="DeleteStu" parameterClass="int">
+           delete from Student where id=#id#
+       </delete>
+       当xml中只需要一个参数时,#id#中的id可以是任意值(#aaa#,#bbb#),由IBatis自动判断
+       在Student类中添加一个方法
+       public int Delete(int id)
+       {
+            return mapper.Delete("DeleteStu", id);
+       }
+       要删除直接new Student().Delete(1);就删除了id=1的记录
+     3 修改记录和查询记录就简单了,.Update,.QueryForObject,.QueryForList
+     4 可能有的同学看到这样的语句  delete from Student where id=$id$,
+       为了理解#和$的区别来看一个例子
+       <select id="Select" parameterClass="string" resultClass="Student">
+          select * from student where name= $name$
+       </select>
+       如果用户这样输入new Student().Select("'' or name is not null"),因为数据库中并没有name值为'' or name is not null的人,正常的查询结果是空,可是你要使用name= $name$的话会吧数据库记录全部查询出来,发生了sql注入.而使用name=#name#却没有问题.
+       说明$$只是简单的拼接sql语句,而#name#发生了编译,所以要尽量使用##来预防sql注入
+       最后要注意##中的参数是要区分大小写的,这样写#name#是因为只有一个传入参数,##中的参数和实体对象中属性的命名一致是好的做法,如果不一样的话要做参数映射parameterMap或remapResults

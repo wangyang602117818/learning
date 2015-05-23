@@ -1,0 +1,47 @@
+  providers.config文件配置数据库驱动，这与properties.config文件的原理是一样的。
+  如果把providers.config文件放在与sqlmap.config文件相同的路径下，则系统自动解析，反之需要指定路径。你下载的文件夹Ibatis.DataMapper.1.6.2.bin中应该有一个该文件的样例，每一个驱动都有一个enabled属性，设置该驱动是否启用，default属性设置该驱动是否默认。
+  我配置了2个驱动，使用的是sqlServer4.0，它已经被配置到properties.config中了(<add key="provider" value="sqlServer4.0" />)
+properties.config文件配置示例：
+<?xml version="1.0" encoding="utf-8"?>
+<providers 
+xmlns="http://ibatis.apache.org/providers" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <provider
+    name="sqlServer2.0"
+    enabled="true"
+    default="false" 
+    description="Microsoft SQL Server, provider V2.0.0.0 in framework .NET V2.0" 
+    assemblyName="System.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" 
+    connectionClass="System.Data.SqlClient.SqlConnection" 
+    commandClass="System.Data.SqlClient.SqlCommand"
+    parameterClass="System.Data.SqlClient.SqlParameter"
+    parameterDbTypeClass="System.Data.SqlDbType"
+    parameterDbTypeProperty="SqlDbType"
+    dataAdapterClass="System.Data.SqlClient.SqlDataAdapter"
+    commandBuilderClass=" System.Data.SqlClient.SqlCommandBuilder"
+    usePositionalParameters = "false"
+    useParameterPrefixInSql = "true"
+    useParameterPrefixInParameter = "true" 
+    parameterPrefix="@"
+    allowMARS="true"
+    />
+  <provider
+    name="sqlServer4.0"
+    enabled="true"
+    default="true"
+    description="Microsoft SQL Server, provider V4.0.0.0 in framework .NET V4.0"
+    assemblyName="System.Data, Version=4.0.0.0, Culture=Neutral, PublicKeyToken=b77a5c561934e089"
+    connectionClass="System.Data.SqlClient.SqlConnection"
+    commandClass="System.Data.SqlClient.SqlCommand"
+    parameterClass="System.Data.SqlClient.SqlParameter"
+    parameterDbTypeClass="System.Data.SqlDbType"
+    parameterDbTypeProperty="SqlDbType"
+    dataAdapterClass="System.Data.SqlClient.SqlDataAdapter"
+    commandBuilderClass=" System.Data.SqlClient.SqlCommandBuilder"
+    usePositionalParameters = "false"
+    useParameterPrefixInSql = "true"
+    useParameterPrefixInParameter = "true"
+    parameterPrefix="@"
+    allowMARS="true"
+    />
+</providers>

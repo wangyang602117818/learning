@@ -1,0 +1,21 @@
+    在这个项目中我们分2层来进行，一个web层，一个model层，web层引用model层，我们主要用到IBatisNet.DataMapper.dll和IBatisNet.Common.dll这2个文件，在model层添加引用后项目的结构如下
+    图
+    在这个项目中我们使用数据库中的2张表来做测试，结构如下
+    图
+
+
+附上sql语句，方便偷懒的同学对着看
+CREATE TABLE [dbo].[student](
+	[id] [int] IDENTITY(1,1) NOT FOR REPLICATION NOT NULL,
+	[name] [nvarchar](20) NOT NULL,
+	[sex] [char](1) NOT NULL,
+	[address] [nvarchar](50) NULL,
+	[Phone] [nvarchar](20) NULL,
+	[logindate] [datetime] NOT NULL,
+	[classId] [int] NOT NULL,
+)
+CREATE TABLE [dbo].[course](
+	[classId] [int] NOT NULL,
+	[className] [nvarchar](20) NOT NULL,
+	[classDescription] [nvarchar](max) NULL
+)

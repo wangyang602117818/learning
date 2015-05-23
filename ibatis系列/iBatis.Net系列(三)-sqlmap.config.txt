@@ -1,0 +1,65 @@
+   sqlmap.config文件是整个IBatis框架的核心文件，从他的命名上就可以看得出来
+   当我们调用iBatisNet框架去访问数据库的时候，它会自动去项目的根目录去找sqlmap.config文件，所以这个文件的路径要放在和web.config相同的目录下，而且文件名不能修改，如果该文件不在项目的根目录或者文件名不对，那么你在调用的时候需要自己去解析这个文件。
+   这个文件有很多的配置节点，在IBatis框架启动的时候首先要解析这个文件中的每一个节点，要玩转整个框架就得从这些配置节点开始，接下来一一介绍每个节点的用途
+   1 alias节点  --配置整个框架可以使用的别名
+     样例：
+     <alias>
+        <typeAlias alias="Student" type="IBNetModel.Student"/>
+     </alias>
+     这样的配置，你就可以在整个配置文件中使用别名Student来表示IBNetModel.Student这个对象了
+   2 properties节点  --用来引入额外的数据文件
+     样例：<properties resource="properties.config"/>
+     这样配置，IBatis框架会解析properties.config这个配置文件，然后用${name}的方式来引用配置文件中的数据。一般吧数据库连接字符串，数据库驱动写入这个文件，然后引用，后面会讲到。
+   3 settings节点  --用来设置整个IBatis框架
+     样例：
+     <settings>
+        <setting useStatementNamespaces="false"/>
+        <setting cacheModelsEnabled="false"/>
+        <setting validateSqlMap="false"/>
+     </settings>
+     1)<setting useStatementNamespaces="false"/>
+        useStatementNamespaces属性来设置在调用ibatis的sql语句时候是否要使用完全限定名称。
+     2)<setting cacheModelsEnabled="false"/>
+        cacheModelsEnabled属性来设置全局缓存开关，后面会讲到
+     3)<setting validateSqlMap="false"/>
+        这个配置不知道啥意思？？文档上描述是否启用SqlMapConfig.xsd来验证映射XML文件，设置成true or false有何区别？
+   4  providers节点  --用来设置数据库驱动文件所在路径
+      样例：
+      <providers resource="providers.config"/>
+      ibatis框架会解析当前路径下的providers.config文件里面的内容作为数据库驱动，Ibatis.DataMapper.1.6.2.bin这个文件夹里面有示例文件，当该文件的名字是providers.config，并且路径跟sqlmap.config相同的时候该配置节点可以省略。
+   5  database节点  --用来定义整个ibatis框架使用的数据库
+      样例：
+      <database>
+        <provider name="sqlServer4.0"/>
+        <dataSource name="Home"  connectionString="Data Source=127.0.0.1;Initial Catalog=Db2;User ID=sa;Password=123"/>
+      </database>
+      其中name=sqlServer4.0是引用了 providers.config文件中的名称为sqlServer4.0的驱动。
+      dataSource节点name可以随意起，connectionString是数据库连接字符串(后面会将该配置放到properties.config中）
+   6  sqlMaps节点  --列举所有数据映射文件，也就是存放sql语句的文件
+      样例：
+      <sqlMaps>
+         <sqlMap resource="../IBNetModel/Maps/Student.xml"/>
+         <sqlMap resource="../IBNetModel/Maps/Course.xml"/>
+      </sqlMaps>
+      其中Student.xml，Course.xml两个数据映射文件在IBNetModel项目的Maps文件夹下，所以都要指定路径，这样程序才知道映射文件的路径（后面会吧路径存放到properties.config中）
+    
+根据我的经验这些配置节点之间是有顺序的，顺序不对会报错
+最后贴一下整体sqlmap.config文件的配置样本
+<?xml version="1.0" encoding="utf-8"?>
+<sqlMapConfig xmlns="http://ibatis.apache.org/dataMapper"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+  <properties resource="properties.config"/>
+  <settings>
+    <setting useStatementNamespaces="false"/>
+    <setting cacheModelsEnabled="false"/>
+    <setting validateSqlMap="false"/>
+  </settings>
+  <database>
+    <provider name="sqlServer4.0"/>
+    <dataSource name="Home"  connectionString="Data Source=127.0.0.1;Initial Catalog=Db2;User ID=sa;Password=123"/>
+  </database>
+  <sqlMaps>
+    <sqlMap resource="../IBNetModel/Maps/Student.xml"/>
+    <sqlMap resource="../IBNetModel/Maps/Course.xml"/>
+  </sqlMaps>
+</sqlMapConfig>

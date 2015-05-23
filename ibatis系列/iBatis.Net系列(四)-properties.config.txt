@@ -1,0 +1,43 @@
+   在上一节中我们说到使用核心文件sqlmap.config的properties节点来引用另外的配置文件，这个配置文件就是properties.config，我们一般把 数据库驱动、数据库连接字符串、sql语句映射文件的路径 存放在这个文件中，方便统一管理。
+   我们在上一节中
+     1 配置数据库驱动是这样写的
+        <provider name="sqlServer4.0"/>
+        我们觉得吧sqlServer4.0这样的驱动写在核心文件中不太科学，
+     2 数据库连接字符串是这样配置的
+        <dataSource name="Home"  connectionString="Data Source=127.0.0.1;Initial Catalog=Db2;User ID=sa;Password=123"/>
+       我们觉得把这么长的数据库连接字符串写在核心文件中也不太科学
+     3 配置sql映射文件是这样写的
+       <sqlMaps>
+          <sqlMap resource="../IBNetModel/Maps/Student.xml"/>
+          <sqlMap resource="../IBNetModel/Maps/Course.xml"/>
+       </sqlMaps>
+       我们发现../IBNetModel/Maps/是重复的，如果有上百个这样的文件，那我们得重复写上百次，不便于管理。
+   这一切都可以使用properties.config配置文件来解决，在该文件中这样配置：
+   <?xml version="1.0" encoding="utf-8" ?>
+   <settings>
+      <add key="provider" value="sqlServer4.0" />
+      <add key="connectionString" value="Data Source=127.0.0.1;Initial Catalog=Db2;User ID=sa;Password=123"/>
+      <add key="root" value="../IBNetModel/Maps/" />
+   </settings>
+    这样我们在sqlmap.config文件中就可以通过${name}来引入配置了，其中name是指settings节点中的每一个key，比如${provider}就是指的sqlServer4.0，${connectionString}就是指的连接字符串。
+
+有了properties.config文件那么我们的核心文件（sqlmap.config）就可以这样配置了
+<?xml version="1.0" encoding="utf-8"?>
+<sqlMapConfig xmlns="http://ibatis.apache.org/dataMapper"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+  <properties resource="properties.config"/>
+  <settings>
+    <setting useStatementNamespaces="false"/>
+    <setting cacheModelsEnabled="false"/>
+    <setting validateSqlMap="false"/>
+  </settings>
+  <database>
+    <provider name="${provider}"/>
+    <dataSource name="Home"  connectionString="${connectionString}"/>
+  </database>
+  <sqlMaps>
+    <sqlMap resource="${root}Student.xml"/>
+    <sqlMap resource="${root}Course.xml"/>
+  </sqlMaps>
+</sqlMapConfig>
+
