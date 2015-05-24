@@ -35,23 +35,49 @@
        }
        插入数据只需要实例化一个Student对象并且调用Insert方法即可,比如new Student(){...}.Insert();
      2 删除一条记录,并返回受影响的行数
-      配置:
-       <delete id="DeleteStu" parameterClass="int">
-           delete from Student where id=#id#
-       </delete>
+       xml配置:
+       <delete id="DeleteStu" parameterClass="Student">
+           delete from Student where id=#Id#
+        </delete>
        当xml中只需要一个参数时,#id#中的id可以是任意值(#aaa#,#bbb#),由IBatis自动判断
        在Student类中添加一个方法
-       public int Delete(int id)
+       public int Delete()
        {
-            return mapper.Delete("DeleteStu", id);
-       }
-       要删除直接new Student().Delete(1);就删除了id=1的记录
-     3 修改记录和查询记录就简单了,.Update,.QueryForObject,.QueryForList
-     4 可能有的同学看到这样的语句  delete from Student where id=$id$,
+            return mapper.Delete("DeleteStu", this);   //this代表当前调用对象(Student)
+        }
+       然后就可以这样删除了:
+       int id = new Student() { Id = 11 }.Delete();
+       其中id为受影响的行数
+     3 修改一条记录,并返回受影响的行数
+       xml配置
+       <update id="UpdateStu" parameterClass="Student">
+           update Student set name=#Name#,Sex=#Sex# where id=#Id#
+       </update>
+       程序中方法:
+        public int Update()
+        {
+            return mapper.Update("UpdateStu", this);  //this代表当前调用对象(Student)
+        }
+	然后修改就可以这样进行
+	int id = new Student() { Id = 13, Name = "李四", Sex = "f" }.Update();
+	其中id为受影响的行数
+      4 查询记录
+        xml配置
+        <select id="SelectStudent" parameterClass="int" resultClass="Student">
+           select * from student where id= #id#
+        </select>
+	方法
+        public IList<Student> Select(int id)
+        {
+            return mapper.QueryForList<Student>("SelectStudent", id);
+        }
+	查询方法:
+	IList<Student> list = new Student().Select(15);
+     5 可能有的同学看到这样的语句  delete from Student where id=$id$,
        为了理解#和$的区别来看一个例子
        <select id="Select" parameterClass="string" resultClass="Student">
           select * from student where name= $name$
        </select>
        如果用户这样输入new Student().Select("'' or name is not null"),因为数据库中并没有name值为'' or name is not null的人,正常的查询结果是空,可是你要使用name= $name$的话会吧数据库记录全部查询出来,发生了sql注入.而使用name=#name#却没有问题.
        说明$$只是简单的拼接sql语句,而#name#发生了编译,所以要尽量使用##来预防sql注入
-       最后要注意##中的参数是要区分大小写的,这样写#name#是因为只有一个传入参数,##中的参数和实体对象中属性的命名一致是好的做法,如果不一样的话要做参数映射parameterMap或remapResults
+       最后要注意##中的参数是要区分大小写的,这样写#name#是因为只有一个传入参数,##中的参数和实体对象中属性的命名一致是好的做法,如果不一样的话要做参数映射parameterMap或resultMap

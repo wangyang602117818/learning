@@ -1,0 +1,36 @@
+    参数映射是指给IBatis传对象的时候,或IBatis返回对象的时候做的属性映射关系,主要有parameterMap(传入参数映射),resultMap(返回参数映射).
+    parameterMap:传入参数映射,这个主要用在存储过程中,后面会讲.
+    resultMap:返回参数映射,当我们需要返回不同的对象,主要将我们查询的结果映射成另外一个对象返回,而不用在程序中重新组装新的对象时使用.
+    比如我们有一个新对象
+    public class Stu1
+    {
+        public int UserId { get; set; }
+        public string UserName { get; set; }
+        public string UserSex { get; set; }
+    }
+    要求Student查询结果返回这个对象
+    我们可以这样配置sql节点:
+    <select id="SelectStu" parameterClass="int"  resultMap="Stu">
+       select * from student where id= #id#
+    </select>
+    其中 resultMap="Stu" 指向了一个叫做 Stu 的映射节点,它的配置如下
+    <resultMaps>
+      <resultMap id="Stu" class="IBNetModel.Stu1">
+         <result column="Id" property="UserId"/>
+         <result column="Name" property="UserName"/>
+         <result column="Sex" property="UserSex"/>
+       </resultMap>
+    </resultMaps>
+    注意resultMaps节点是跟statements平行的.
+    column代表返回的列,
+    property代表把这个返回列映射成IBNetModel.Stu1这个类的property属性
+    那我们在程序中就可以这样写了
+    在Student类中的方法
+     public IList<Stu1> SelectStu(int id)
+     {
+        return mapper.QueryForList<Stu1>("SelectStu", id);
+     }
+    调用:
+    IList<Stu1> list = new Student().SelectStu(14);
+    
+    tips:当我们 SelectStu 这个方法时,它去调用id="SelectStu"的sql语句,而返回结果又通过id="Stu"的映射文件映射成了IBNetModel.Stu1这个对象.
