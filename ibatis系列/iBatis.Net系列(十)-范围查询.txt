@@ -1,0 +1,42 @@
+情况一:查询类似 id>13 and id<15 这样的语句
+<select id="SelectStudentRange" parameterClass="Hashtable" resultClass="Student">
+  select * from student
+   <dynamic prepend="where">
+      <isGreaterEqual prepend="and" property="id1" compareValue="0" >
+        <![CDATA[id>=#id1#]]>
+      </isGreaterEqual>
+      <isGreaterEqual prepend="and" property="id2" compareValue="0">
+        <![CDATA[id<=#id2#]]>
+      </isGreaterEqual>
+   </dynamic>
+</select>
+参数使用了Hashtable,
+因为像"<"，">"这样的符号在xml文档中是有意义的，所以使用了<![CDATA[ sql语句写在这里 ]]>这样的语句包起来转义
+Student类中的方法
+public IList<Student> SelectRange(Hashtable ht)
+{
+    return mapper.QueryForList<Student>("SelectStudentRange", ht);
+}
+调用
+ht.Add("id1", 13);
+ht.Add("id2", 15);
+IList<Student> s1 = new Student().SelectRange(ht);  //select * from student where id>13 and id<15
+
+情况二：查询类似 id in(13,14) 这样的语句
+<select id="SelectStudentRange1" resultClass="Student">
+   select * from student
+   <dynamic prepend="where">
+        <iterate open="id in(" close=")" conjunction=",">
+          #[]#
+        </iterate>
+    </dynamic>
+</select>
+<iterate>节点是一个递归语法，递归的开始用open，结束用close，中间用，相隔
+#[]# 就代表数组的每一项了
+Student类中的方法
+public IList<Student> SelectRange1(int[] ids)
+{
+    return mapper.QueryForList<Student>("SelectStudentRange1", ids);
+}
+调用
+IList<Student> s = new Student().SelectRange1(new int[] { 13, 14 }); //select * from student where id in(13,14)

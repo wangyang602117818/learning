@@ -1,0 +1,56 @@
+能执行sql语句并并没有什么特别的,对于下面2条sql语句
+select * from Student where id=14
+select * from Student where id=14 and name='张三'
+这2条sql语句前半部分是相同的,如果按照以前的话,我们得写2个xml配置节点,
+现在我们只需要这样写
+<select id="SelectStudent" parameterClass="Student" resultClass="Student">
+      select * from student
+      <dynamic prepend="where">
+        <isGreaterThan property="Id" prepend="and"  compareValue="0">
+          Id=#Id#
+        </isGreaterThan>
+        <isNotEmpty  property="Name" prepend="and">
+          Name=#Name#
+        </isNotEmpty>
+      </dynamic>
+ </select>
+1 dynamic节点是个动态节点,表示里面的内容可有可无,如果里面有内容的话在内容前加where,这就是prepend属性的作用
+2 isGreaterThan节点:拿属性Id(property="Id")跟0(compareValue="0")做比较,如果大于0则该节点会生成 and Id=#Id#(当然在编译的时候发现前面有where,又会去掉and)
+3 isNotEmpty节点:如果Name属性不为null或"",该节点会生成 and Name=#Name#
+
+我们写一个这样的方法
+public IList<Student> Select()
+{
+        return mapper.QueryForList<Student>("SelectStudent",this);
+}
+当我们这样调的时候
+1 IList<Student> list = new Student().Select();   //select * from student
+  list就是数据库中所有数据记录
+2 IList<Student> s = new Student() { Id = 15 }.Select(); //select * from student where Id=15
+  查询的id=15的记录
+3 IList<Student> s = new Student() { Id = 15, Name="张三" }.Select(); //select * from student where Id=15 and Name='张三'
+  查询的是id=15 and Name='张三'的信息
+
+而更新可以这样写
+<update id="UpdateStu" parameterClass="Student">
+      update Student
+      <dynamic prepend="set">
+        <isNotEmpty prepend="," property="Name">
+          Name=#Name#
+        </isNotEmpty>
+        <isNotEmpty prepend="," property="Sex">
+          Sex=#Sex#
+        </isNotEmpty>
+      </dynamic>
+      where Id=#Id#
+</update>
+这样就可以根据不同的对象属性生成不同的sql语句了
+这样的动态节点还有很多
+<isEqual></isEqual> 等于某个值的时候执行
+<isLessEqual></isLessEqual> 小于等于某个值的时候执行
+<isGreaterEqual></isGreaterEqual> 大于等于某个值的时候执行
+....
+其他的根据xsd的提示和英文的意思来猜,不会错的.
+
+tips:如果数据库的字段大小写与程序中对象的大小写不一致的话可能返回的信息映射不成功哦.
+
