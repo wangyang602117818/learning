@@ -5,7 +5,9 @@ git使用前置配置
    --查看特定信息
      git config --list
      git config user.name
-
+git配置
+   --别名
+     git config --global alias.st status
 git的一般使用流程(基本使用)：
    --创建git仓库
     1 转到E盘(cd E:)
