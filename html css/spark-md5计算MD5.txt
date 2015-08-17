@@ -1,0 +1,28 @@
+首先在页面引用 spark-md5.js 文件
+一：计算字符串MD5值
+    方式1： 直接计算
+       var hash=SparkMD5.hash("123456")     //e10adc3949ba59abbe56e057f20f883e
+    方式2： 拼接字符串的形式计算
+       var spark = new SparkMD5();  //得到对象
+           spark.append("123");
+           spark.append("456");
+       var str1 = spark.end();   //计算结果 e10adc3949ba59abbe56e057f20f883e
+二：计算文件MD5值
+    这里用到了html5的 FileReader 、File 两个对象。
+    File对象：表示一个具体的文件，里面有name（文件名），size（数据大小，字节），type（类型），该对象继承自 Blob 接口
+        其中File对象(Blob对象)的slice方法返回一个新的Blob对象（文件的一部分）
+    FileReader对象：用来读取文件所用，
+        readAsArrayBuffer(Blob blob)方法：以ArrayBuffer的形式读取一个文件，读取完成后结果存在于result属性中
+	readAsBinaryString(Blob blob)方法：以BinaryString的形式读取一个文件，读取完成后结果存在于result属性中，该属性ie不支持
+        onload方法：当readAsArrayBuffer或readAsBinaryString方法读取完成后调用 。 
+    FileList对象：File对象的集合，页面上的<input type="file",id="f1"/>被js读取后结果便是一个FileList对象
+        var file_list=document.getElementById("f1").files;   
+        通过遍历file_list中的每一个File对象，来进行后续的操作。
+
+    对于SparkMD5库：
+     如果我们使用的是readAsArrayBuffer方法，则应该使用 new SparkMD5.ArrayBuffer() 对象
+     如果使用的是 readAsBinaryString 方法，则应该使用 new SparkMD5() 对象，ie不支持readAsBinaryString方法
+
+    例子：
+ 
+

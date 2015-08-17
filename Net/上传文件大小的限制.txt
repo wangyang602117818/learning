@@ -1,0 +1,15 @@
+微软针对iis服务器可接收的请求数据大小做了限制，默认4m
+1 通过修改web.config配置文件来修改上传文件的大小
+  <httpRuntime targetFramework="4.5" maxRequestLength="102400"/>
+  maxRequestLength的单位是kb，这里设置成100m了
+
+2 通过第一步修改后还不行，因为它只是iis运行时的设置，请求进入asp.net内部还有个过滤
+  <system.webServer>
+    <security>
+      <requestFiltering>
+        <requestLimits maxAllowedContentLength="104857600"></requestLimits>
+      </requestFiltering>
+    </security>
+  </system.webServer>
+  这里的maxAllowedContentLength的单位是字节，这里设置成了100m
+
