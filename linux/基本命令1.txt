@@ -1,0 +1,14 @@
+apt-get方式安装：要求联网
+  linux本地有一个文件，保存着可以下载软件的服务器列表，/etc/apt/sources.list
+  sudo apt-get update  ：更新源，把远程服务器上可以下载的软件的名字缓存到本地
+  sudo apt-cache search qq  ：到本地缓存查找qq这个软件
+  sudo apt-get install qq ：到服务器下载qq并安装软件
+  sudo apt-get remove qq ：卸载软件
+deb包安装
+  sodu dpkg -i xxx.deb   --安装
+  sodu dpkg -r xxx.deb   --卸载
+ 
+
+who ：查看当前都有哪些用户登录
+
+
