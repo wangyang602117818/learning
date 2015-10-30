@@ -1,0 +1,26 @@
+tar命令：
+	文件归档
+	  tar -cvf name.tar file1.txt   =创建归档文件
+	  tar -rvf name.tar file2.txt   =添加新文件到归档文件
+	  tar -uvf name.tar file1.txt   =更新归档文件
+	  tar --delete -f name.tar file2.txt   =从归档文件删除文件
+	文件释放
+	  tar -xvf name.tar
+	=========== 打gz压缩包
+        文件压缩
+	  tar -zcvf name.tar.gz file1.txt  =创建压缩文件
+	文件解压缩 
+	  tar -zxvf name.tar.gz   
+	    如果文件是通过归档文件（.tar）压缩到.tar.gz的，则解压先变成.tar，然后再变成文件
+            如果文件是直接压缩到.tar.gz的，则解压直接变成文件
+        =========== 打bz2压缩包
+	  tar -jcvf name.tar.bz2 file1.txt  =压缩
+          tar -jxvf name.tar.bz2 =解压缩
+
+rar命令：
+
+zip命令：
+	zip name.zip file1.txt file2.txt   =压缩
+	unzip name.zip   ==解压缩
+
+	
