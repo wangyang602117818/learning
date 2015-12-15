@@ -13,6 +13,6 @@ express -V   --查看express版本
 express-generator    --express命令行
 
 express myweb -e   --用ejs模板引擎创建一个项目myweb
-express install    --安装常用的
+npm install    --安装常用的组件
 
 
