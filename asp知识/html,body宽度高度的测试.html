@@ -23,3 +23,8 @@
 </script>
 
 
+var offsettop = $("#div1").offset().top;  //物体实际偏移高度
+        var window_height = $(window).height();  //窗口高度
+        var scrolltop = $(document).scrollTop();  //滚动条卷去的高度
+        var item_distance = offsettop - scrolltop - window_height;  //物体距离显示还有多少高度
+        $("#sp1").text(offsettop + "-" + scrolltop + "-" + window_height + "=" + item_distance);

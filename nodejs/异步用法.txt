@@ -1,0 +1,21 @@
+var async = require('async');
+//异步的用法，避免无限回调
+router.post('/m1',function(req,res){
+    async.waterfall(          //[]中的 函数列表 依次执行，每一个函数执行完成后  都可以将值传递给下一个函数
+       [
+          fucntion(cb){      //cb是回调函数，作为函数的最后一个参数
+            cb(null,"abc")   //值"abc"将会作为下一个函数的参数
+          },
+          function(data,cb){    //data是由上一个函数传过来的参数，此处是"abc"
+	    throw error;       //如果此处抛异常，则直接进入最后一个函数执行，它后面的函数都不会执行
+	    cb(null,"edf");   //值"edf"将会作为下一个函数的参数
+          },
+          function(data,cb){     //data="edf"
+            cb(null,"123");     // 执行最后一个函数
+          }
+       ],
+       function (error,data){   //data="123";  //最后一个函数，所有函数执行完后 或 有异常抛出时 执行改函数，
+          res.send("ok");
+       }
+    )
+})
