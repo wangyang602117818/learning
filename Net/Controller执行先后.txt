@@ -1,0 +1,13 @@
+Controller执行过程：
+针对异步的Controller（默认）
+	BeginExecute
+	BeginExecuteCore
+	EndExecute
+	EndExecuteCore
+针对同步的Controller
+	BeginExecute
+	EndExecute
+	Execute
+	ExecuteCore
+
+
