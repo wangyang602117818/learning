@@ -59,5 +59,20 @@ async.waterfall([      //[]ÖĞµÄ º¯ÊıÁĞ±í ÒÀ´ÎÖ´ĞĞ£¬Ã¿Ò»¸öº¯ÊıÖ´ĞĞÍê³Éºó  ¶¼¿ÉÒÔ½
   }
 )
 
-
-
+var _data={};   //ÏÈ¶¨ÒåÈ«¾Ö±äÁ¿
+ÁíÒ»ÖÖ´®ĞĞÖ´ĞĞ·½Ê½£¬Ê¹ÓÃÂ·ÓÉ £¬Ã¿Ò»´ÎÖ´ĞĞÍêÒ»¸ö£¬_dataµÄÖµ¾Í»á±ä»¯
+var getUser=function(req,res,next) {
+    _data.user = "abc"
+    next()
+}
+var getSupplier=function(req,res,next) {
+    req.supplier = "345"
+    _data.supplier = {supplier:'1'}
+    next()
+}
+var getSomthing=function(req,res,next) {
+    req.something = "456"
+    _data.something = {something:'1'}
+    res.json(_data);   //×îÖÕµÄ·µ»ØÔÚ×îºóÒ»¸ö·½·¨ÖĞ
+}
+router.get('/routerasync',[getUser,getSupplier,getSomthing]);
