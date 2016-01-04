@@ -1,0 +1,25 @@
+注册公匙值： sn.exe -Vr *,31BF3856AD364E35
+
+MvcHandler
+   IHttpAsyncHandler.BeginProcessRequest
+   BeginProcessRequest
+
+Controller
+   IAsyncController.BeginExecute
+   BeginExecuteCore
+       AsyncInvoker.BeginInvokeAction   //AsyncInvoker  实际是 AsyncControllerActionInvoker
+
+AsyncControllerActionInvoker
+   //关键一步，参数的绑定和验证
+   IDictionary<string, object> parameters = GetParameterValues(controllerContext, actionDescriptor);
+
+ControllerActionInvoker
+   GetParameterValues  //到这一步能获取到所有参数的 parameterDescriptors 数组，循环数组，方法的参数有多少个，parameterDescriptors就有多少个，比如参数是一个string，一个int，则 parameterDescriptors 就是2个简单类型，参数是Person，则 parameterDescriptors就是一个 复杂类型，并以此来判断是绑定简单类型还是复杂类型
+   
+   GetParameterValue   //通过 parameterDescriptor 获取ModelBinder（DefaultModelBinder），然后调
+   binder.BindModel(controllerContext, bindingContext)，//其中bindingContext中就封装了参数(单个)绑定所需信息
+
+DefaultModelBinder
+   BindModel    //绑定单个的参数，如果参数是简单类型 调 BindSimpleModel，复杂类型调 BindComplexModel。
+   
+                
