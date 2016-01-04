@@ -1,0 +1,63 @@
+var async = require('async');
+// async.series  串行无关联，依次执行，其实是一个同步的思想
+async.series({
+     	one:function(cb){
+           cb(null,"123");    //cb的第一个参数是错误信息，第二个参数是函数的执行结果，
+     	},
+     	two:function(cb){
+           cb("error info ","456");  //传了错误信息，则它后面的函数都不会执行，直接执行最后的回调
+     	},
+     	three:function(cb){
+           cb(null,"789");
+     	}
+     },
+     function(error,result){   //error，以上任何函数一个抛出异常 或 所有函数执行完成，则立即执行这个函数，
+        if(error){
+     	   res.json(error);
+     	   return;
+     	}
+        res.json(result);   //{"one":"123","two":"456"}
+})
+
+//async.parallel  并行无关联，并行执行，异步思想
+//各函数并行执行，互不干扰，最后执行完成，调用最后一个函数，
+//代码与 async.parallel 一模一样 ，只是换了关键词
+async.parallel({
+    	one:function(cb){
+           cb(null,"123");
+     	},
+     	two:function(cb){
+           cb(null,"456");
+     	},
+     	three:function(cb){
+           cb(null,"789");
+     	}
+     },function(error,result){
+     	if(error){
+     		res.json(error);
+     		return;
+     	}
+        res.json(result);
+        console.timeEnd('series');
+})
+
+//async.waterfall 串行有关联，每一步的运行，都需要上一步的结果作为参数
+//不支持对象参数，只能传数组类型的
+async.waterfall([      //[]中的 函数列表 依次执行，每一个函数执行完成后  都可以将值传递给下一个函数
+  fucntion(cb){        //cb是回调函数，作为函数的最后一个参数
+    cb(null,"abc")     // 值"abc"将会作为下一个函数的参数
+  },
+  function(data,cb){    //data是由上一个函数传过来的参数，此处是"abc"
+    throw error;       //如果此处抛异常，则直接进入最后一个函数执行，它后面的函数都不会执行
+    cb(null,"edf");   //第一个参数如果传异常，则跟抛出异常效果一样 值"edf"将会作为下一个函数的参数
+  },
+  function(data,cb){     //data="edf"
+    cb(null,"123");     // 执行最后一个函数
+  }],
+  function (error,data){   //data="123";  //最后一个函数，所有函数执行完后 或 有异常抛出时 执行改函数，
+    res.send("ok");
+  }
+)
+
+
+
