@@ -1,0 +1,9 @@
+var moment = require('moment');
+var now = new moment()   //当前时间，utc时间
+var data = new moment("1995-12-25")   //通过字符串创建一个时间
+var boo = new moment("2015-02-29").isValid();   //验证日期是否合法
+var d = moment("2015-01-02 15:30:30").format("YYYY-MM-DD HH:mm:ss");   //格式化时间
+
+
+
+//其他unix时间戳等问题，实际用到在研究
