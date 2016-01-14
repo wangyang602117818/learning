@@ -1,0 +1,5 @@
+文件查找
+  1 find ./ -name "*.jpeg"  --在当前目录查找jpeg文件
+    find  / -iname  sublime*   --在整个磁盘搜索名字以sublime开头的文件,-i,忽略大小写
+内容查找
+  1 grep "hellow" ./* -R   --R递归查找，默认是不递归

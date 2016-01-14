@@ -7,8 +7,6 @@ apt-get方式安装：要求联网
 deb包安装
   sodu dpkg -i xxx.deb   --安装
   sodu dpkg -r xxx.deb   --卸载
- 
 
-who ：查看当前都有哪些用户登录
 
 

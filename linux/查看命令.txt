@@ -1,0 +1,5 @@
+gcc  --version    查看系统gcc版本
+g++  --version    查看系统g++版本
+who               查看当前都有哪些用户登录
+whereis node      查看node的安装目录
+
