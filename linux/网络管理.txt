@@ -1,0 +1,4 @@
+ifconfig   查看网卡信息
+sudo ifconfig eth0 down   关闭网卡,断网
+sudo ifconfig eth0 up    开启网卡,联网
+sudo ifconfig eth0 192.168.80.120  配置临时ip,重启失效

@@ -1,0 +1,7 @@
+在系统中网卡名称显示 eno16777736
+sudo gedit /etc/default/grub   打开引导程序
+   在 GRUB_CMDLINE_LINUX="" (12行)  这一行下添加这样的一行
+   GRUB_CMDLINE_LINUX="net.ifnames=0 biosdevname=0"
+sudo gedit /etc/network/interfaces  打开网卡配置文件
+   将 eno16777736 全部修改成 eth0  ,如果没有该文件则不必修改
+重启搞定
