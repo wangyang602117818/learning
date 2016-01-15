@@ -1,0 +1,5 @@
+ var d=2.12;
+ var f = parseFloat(d.toFixed(2));
+ 
+ toFixed(2)    //保留 n位有效数字
+ parseFloat()   //去掉小数位后面无用的0

@@ -1,0 +1,13 @@
+在菜单栏 虚拟机 安装 VMTools
+然后在系统的  /media/wangyang/  下可以看到安装文件
+进入 VMware Tools 目录 ,此时 VMwareTools-9.9.0-2304977.tar.gz 文件是只读的,把他复制到其他目录
+     cp VMwareTools-9.9.0-2304977.tar.gz /opt/
+解压之 
+   sudo tar -zxvf VMwareTools-9.9.0-2304977.tar.gz
+进入解压后的目录然后安装
+   sudo ./vmware-install.pl
+   一路回车默认值
+安装完成 重启
+删除安装文件
+   sudo rm VMwareTools-9.9.0-2304977.tar.gz
+   sudo rm -r vmware-tools-distrib/ 

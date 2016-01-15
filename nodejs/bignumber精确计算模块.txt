@@ -1,0 +1,33 @@
+//针对js计算的缺陷
+<script type="text/javascript" src="bignumber.js"></script>
+//加法运算
+	var a = 0.1 , b = 0.2 ;  // a+b = 0.30000000000000004
+	var x = new BigNumber(a);
+	var y = new BigNumber(b);
+	console.log(x.plus(y).toNumber())  //0.3
+//减法运算
+	var a = 2.1 , b = 2 ;    // a-b = 0.10000000000000009      
+	var x = new BigNumber(a);
+	var y = new BigNumber(b);
+	console.log(x.minus(y).toNumber())   //0.1
+//乘法运算
+	var a = 11, b = 22.9;    //a*b = 251.89999999999998
+	var x = new BigNumber(a);
+	var y = new BigNumber(b);
+	console.log(x.times(y).toNumber())  //251.9
+//除法运算
+	var a = 1.2, b = 3;    // a/b = 0.39999999999999997
+	var x = new BigNumber(a);
+	var y = new BigNumber(b);
+	console.log(x.div(y).toNumber())  //0.4
+
+服务端
+安装
+npm install bignumber.js
+使用
+var bignumber = require('bignumber.js');
+//用法与客户端一直
+
+//其他特征用到的时候在研究
+...
+
