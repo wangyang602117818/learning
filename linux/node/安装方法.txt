@@ -1,0 +1,7 @@
+1 编译好的二进制文件安装
+  直接下载文件,解压,把bin文件的路径陪配进环境变量即可
+2 源码安装
+  下载 wget https://nodejs.org/dist/v4.2.4/node-v4.2.4.tar.gz
+  解压 tar -zxvf node-v4.2.4.tar.gz
+  配置 ./configure
+  安装 make && make install
