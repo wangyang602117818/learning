@@ -1,0 +1,14 @@
+1 安装 react-native  命令行
+  ///巨坑,以后别加
+	npm config set registry https://registry.npm.taobao.org
+	npm config set disturl https://npm.taobao.org/dist
+  //////////////////
+  npm install -g react-native-cli    
+
+2 初始化项目
+  react-native init MyProject
+
+3 运行项目
+  web:           react-native start
+  android:       react-native run-android
+
