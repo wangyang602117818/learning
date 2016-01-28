@@ -1,0 +1,13 @@
+
+var AwesomeProject = React.createClass({
+     //设置对象的初始状态
+     getInitialState:function(){
+	return {name:"wangyang"};
+     },
+     handleClick: function(event) {
+        this.setState({name: "zhangsan"});  //重设对象状态
+     },
+     render:function(){
+        return(<Text>{this.state.name}</Text>)   //获取对象状态
+     }
+})

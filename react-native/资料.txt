@@ -1,2 +1,6 @@
 °¸Àı  https://github.com/facebook/react-native/tree/master/Examples
 ×ÊÁÏ https://js.coach/react-native/react-native-select-contact-android?filters=android
+
+
+
+http://api.rottentomatoes.com/api/public/v1.0/lists/movies/in_theaters.json?apikey=7waqfqbprs7pajbz28mqf6vz&page_limit=25

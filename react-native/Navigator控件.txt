@@ -1,0 +1,35 @@
+Navigator对象简介:
+   因为每一个应用当前仅有一个页面呈现在用户面前,所以用一个Nativator对象来承载,页面.
+1) 直接跳转(不需要点按钮触发)的,
+   通过 return 一个 Navigator 对象,需要设置很多参数
+   return (
+      <Navigator 
+        //设置初始路由,FirstPageComponent:是通过require引入的页面对象
+        initialRoute={{ name: 'FirstPageComponent', component: FirstPageComponent }} 
+	//配置页面跳转动画
+	configureScene={()=>{return Navigator.SceneConfigs.FloatFromRight;}}
+	//渲染页面,并且给页面传值
+	renderScene={(route, navigator) => {   //route就是initialRoute初始化后的对象 navigator就是这个Navigator对象
+          let Component = route.component;
+          if(route.component) {
+              return <Component {...route.params} navigator={navigator} name='wangyang'/>   //页面传值的方式
+          }
+        }} />
+      );
+   )
+2) 点击跳转
+   _pressButton: function() {
+        const { navigator } = this.props;
+        if(navigator) {
+            navigator.push({    //跳转到新的场景,并入栈,和 pop 方法配对,出栈后保留原有页面的状态
+                name: 'SecondPageComponent',
+                component: SecondPageComponent,
+		params:{age:12},    //页面传值,跟 直接跳转 页面传值的效果一样
+            })
+        }
+    },
+   <TouchableOpacity onPress={this._pressButton}>
+        <Text>FirstPageComponent点我跳转</Text>
+   </TouchableOpacity>
+
+

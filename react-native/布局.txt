@@ -1,0 +1,28 @@
+flex:
+    //自动伸缩(占满父容器),如果元素设置了宽度,则按设置的宽度来算,
+    //此处经过试验,最外层 flex ,设置了 width 无效,但是嵌套层可以同时设置 flex width,有效果
+
+flexDirection  :
+     //一般在容器中使用(View),
+     //设置不同的值,则子元素的默认行为不同
+   column:    //列布局,默认容器中每一个元素占一行
+   row:       //行布局,默认容器中的元素都是往左靠(跟css中 float:left 行为类似)
+
+alignSelf :
+     //自对齐,设置元素自己的水平对齐方式
+     //用于文本(<Text style={{alignSelf: 'center'}}>文字水平对齐</Text>)
+     //用于控件(<View style={{alignSelf: 'center'}}>控件水平对齐</View>)
+   flex-start :   //默认,左对齐
+   flex-end :   //右对齐
+   center :  //水平居中
+textAlign :设置文字对齐
+alignItems : 设置控件中的元素的对齐方式,属性值与 alignSelf 类似
+
+justifyContent:设置控件内容的垂直对齐方式,属性值与 alignSelf 类似
+   
+图片
+通过Image.resizeMode来适配图片布局，包括contain, cover, stretch
+默认不设置模式等于cover模式
+contain模式自适应宽高，给出高度值即可
+cover铺满容器，但是会做截取
+stretch铺满容器，拉伸
