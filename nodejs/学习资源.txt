@@ -1,0 +1,7 @@
+https://github.com/jaredhanson/passport
+https://github.com/qdsang/passport-qq
+https://github.com/liangyali/passport-wechat
+https://github.com/xiaoao/passport-baidu
+https://github.com/xinbenlv/passport-weibo
+https://github.com/jaredhanson/passport-linkedin
+https://github.com/jaredhanson/passport-evernote
