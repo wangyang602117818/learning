@@ -1,1 +1,6 @@
 ListView 列表控件
+1)获取列表控件中某一行的数据
+  先获取dom元素(ListView) 
+    this.refs.item_list
+  后取某一行的数据
+    this.refs.item_list.props.dataSource.getRowData(0,1);  //第一个参数 sectionid ,第二个参数 rowid
