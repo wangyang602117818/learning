@@ -5,3 +5,7 @@ https://github.com/xiaoao/passport-baidu
 https://github.com/xinbenlv/passport-weibo
 https://github.com/jaredhanson/passport-linkedin
 https://github.com/jaredhanson/passport-evernote
+
+
+
+н╒пе https://github.com/node-webot/wechat

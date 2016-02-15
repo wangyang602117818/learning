@@ -1,0 +1,3 @@
+var index =  Math.floor(Math.random() * my_arr.length);
+
+my_arr 是一个数组,index是随机数组的下标

@@ -21,8 +21,8 @@ alignItems : 设置控件中的元素的对齐方式,属性值与 alignSelf 类似
 justifyContent:设置控件内容的垂直对齐方式,属性值与 alignSelf 类似
    
 图片
-通过Image.resizeMode来适配图片布局，包括contain, cover, stretch
+通过 Image.resizeMode 来适配图片布局，包括 contain, cover, stretch
 默认不设置模式等于cover模式
-contain模式自适应宽高，给出高度值即可
-cover铺满容器，但是会做截取
-stretch铺满容器，拉伸
+contain 模式自适应宽高，给出高度值即可
+cover 铺满容器，但是会做截取
+stretch 铺满容器，拉伸
