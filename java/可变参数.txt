@@ -1,0 +1,10 @@
+
+jdk 1.5 以上才有的新特性,在类型后面加 ... 
+和 .net 的 params 效果一样,在编译器内部把可变参数生成数组
+public static int add(int a,int ... args){  
+   int sum = a;
+   for(int i=0;i<args.length;i++){
+	 sum+=args[i];
+    }
+    return sum;
+}

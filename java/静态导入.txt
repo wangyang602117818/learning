@@ -1,0 +1,4 @@
+jdk 1.5 以上版本才有的特性,为了方便调用静态方法的
+import static java.lang.Math.*;
+后面就可以直接使用 Math 下的方法了,不需要 Math.max ...
+
