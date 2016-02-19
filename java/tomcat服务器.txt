@@ -1,0 +1,22 @@
+tomcatÅäÖÃÍøÕ¾·þÎñÆ÷µÄ¼¸ÖÖ·½Ê½
+Ò»: ·þÎñÆ÷ÔÚ Ò»¸öÄ¿Â¼ ,ÍøÕ¾Ó¦ÓÃ³ÌÐòÔÚ ÆäËûÄ¿Â¼ ,ÕâÖÖ·½Ê½ ÅäÖÃÐéÄâÄ¿Â¼
+    1):ÐÞ¸Ä conf Ä¿Â¼ÏÂµÄ server.xml ÎÄ¼þ 
+	ÔÚ Host ½ÚµãÏÂ Ìí¼Ó <Context path="/date" docBase="E:\learning\JavaScript\date"/>
+	http://127.0.0.1:8080/date/index.html  ·ÃÎÊµÄ¾ÍÊÇ E ÅÌÏÂµÄÏîÄ¿ÁË
+	ÕâÖÖ·½Ê½ÐÞ¸ÄÁË server.xmlÎÄ¼þ ÐèÒªÖØÆô·þÎñÆ÷²ÅÉúÐ§, ²»ÍÆ¼ö
+	È±Ê¡Â·¾¶ÅäÖÃ·½Ê½: <Context path="" docBase="E:\learning\JavaScript\date"/>
+	·ÃÎÊ·½Ê½: http://127.0.0.1:8080/index.html
+    2):ÔÚ$Catalina\localhostÄ¿Â¼ÏÂÐÂ½¨Ò»¸öxmlÎÄ¼þ date.xml ,ÔÚ¸ÃÎÄ¼þÖÐÅäÖÃÐéÄâÄ¿Â¼
+	<?xml version="1.0" encoding="ISO-8859-1"?>
+		<Context docBase="E:\learning\JavaScript\date"/>
+	´ËºóÎÄ¼þÃû¿ÉÒÔ×÷Îª·ÃÎÊÂ·¾¶,ºÍµÚÒ»ÖÖÅäÖÃ·½Ê½µÄ·ÃÎÊ·½Ê½Ò»Ñù ,Ö»²»¹ý²»ÐèÒªÖØÆô·þÎñÆ÷,ÍÆ¼öÊ¹ÓÃ
+	È±Ê¡Â·¾¶ÅäÖÃ:ÐÞ¸ÄÎÄ¼þÃûÎªROOT.xml
+¶þ: ½«ÍøÕ¾Ö±½Ó¸´ÖÆµ½ webapps\ Ä¿Â¼ÏÂ,Èç¹ûÓÐÍøÕ¾ WEB-INF Ä¿Â¼µÄ»° web.xml ¸ñÊ½ÒªÕýÈ· ,²»È»±¨´í
+ 
+Ä¬ÈÏÒ³Ãæ
+	È«¾ÖÄ¬ÈÏÒ³ÃæÅäÖÃ conf\web.xml ÎÄ¼þÏÂµÄ welcome-file-list ½Úµã¾ÍÊÇÅäÖÃÄ¬ÈÏÒ³ÃæÁÐ±í
+	Ó¦ÓÃ³ÌÐò¼¶µÄÄ¬ÈÏÒ³Ãæ ÔÚ WEB-INF\web.xml ÎÄ¼þÏÂÅäÖÃ,¸ñÊ½¿ÉÒÔ²Î¿¼ conf\web.xml Ä£°å
+¹ÜÀí½çÃæ
+	ÔÚ conf\tomcat-users.xml ÎÄ¼þÖÐÌí¼Ó
+	<role rolename="manager-gui"/>
+	<user username="tomcat" password="tomcat" roles="manager-gui"/>
