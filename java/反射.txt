@@ -1,0 +1,16 @@
+三种方式获取Class对象(对应.net是Type对象)
+1) 知道对象, obj.getClass()    //.net中obj.GetType()
+2) 知道方法的全名称 Class.forName("home.day1.student")  //.net中 assembly.GetType("home.day1.student")
+3) 知道类型 Person.class  // .net 中Typeof(Person)
+例子:
+1)通过对象获取属性
+  Class myClass = stu.getClass();   //获取 Class 对象
+  Field field = myClass.getField("name");  //通过属性名称获取 Field
+  Object object = field.get(stu);   //取得属性
+2)通过对象调用方法
+  Class myClass = stu.getClass();
+  Class[] argsClass = new Class[2];  
+  argsClass[0] = int.class;   //参数类型
+  argsClass[1] = int.class;   //参数类型
+  Method method= myClass.getMethod("add",argsClass);  //获取method
+  Object object = method.invoke(stu, 3,5);  //调用
