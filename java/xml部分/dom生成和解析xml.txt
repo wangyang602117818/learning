@@ -1,0 +1,35 @@
+1 dom生成xml文件
+	DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+	DocumentBuilder builder = factory.newDocumentBuilder();
+	Document document = builder.newDocument();
+
+	Element rootEle = document.createElement("employees"); // 根节点
+	document.appendChild(rootEle); // 将根节点添加到文档
+
+	Element employee = document.createElement("employee"); // employee节点
+		// 将name节点添加到employee
+		Element name = document.createElement("name");
+		name.appendChild(document.createTextNode("丁宏亮"));
+		employee.appendChild(name);
+		// 将sex节点添加到employee
+		Element sex = document.createElement("sex");
+		sex.appendChild(document.createTextNode("m"));
+		employee.appendChild(sex);
+		// 将age节点添加到employee
+		Element age = document.createElement("age");
+		age.appendChild(document.createTextNode("30"));
+		employee.appendChild(age);
+	// 将employee节点添加到根节点
+	rootEle.appendChild(employee);
+
+	TransformerFactory tf = TransformerFactory.newInstance();
+	Transformer transformer = tf.newTransformer();
+	DOMSource source = new DOMSource(document);
+	transformer.setOutputProperty(OutputKeys.ENCODING, "utf-8");
+
+	PrintWriter pWriter =new PrintWriter(new FileOutputStream("01.xml"));
+	StreamResult result = new StreamResult(pWriter);
+	transformer.transform(source, result);   //转换成本地文件
+	System.out.println("ok");
+2 dom解析xml文件
+	
