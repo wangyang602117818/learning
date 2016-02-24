@@ -1,0 +1,10 @@
+1: 查看连接状态
+   数据线连接手机,通过 adb devices 查看连接状态,如果 List of devices attached 下面出现设备并且状态不为offline,则已连接好
+2: 部署到手机
+   react-native run-android 部署到手机上以后可以能出现
+   白屏:请打开允许悬浮窗权限
+   红屏:请摇晃手机,选择最后一项,填好电脑的ip和端口,然后 reload js
+
+   
+   
+
