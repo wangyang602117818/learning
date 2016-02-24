@@ -1,0 +1,18 @@
+//创建sax解析器
+SAXParser sax = SAXParserFactory.newInstance().newSAXParser() ;
+//获取内容读取器
+XMLReader xml =  sax.getXMLReader();
+//注册事件处理程序
+xmlReader.setContentHandler(new DefaultHandler(){
+	public void startElement(String uri, String localName, String qName, Attributes attributes)
+		throws SAXException {
+		System.out.println("开始标签:"+qName+"-"+uri);
+	}
+	public void characters(char[] ch, int start, int length) throws SAXException {
+		String str = new String(ch,start,length);
+		if(str.trim().length()>0){
+		System.out.println(str + "文本");
+		}			
+	}
+});
+xmlReader.parse("./src/01.xml");  //开始解析

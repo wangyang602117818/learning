@@ -32,4 +32,24 @@
 	transformer.transform(source, result);   //转换成本地文件
 	System.out.println("ok");
 2 dom解析xml文件
+	DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();   
+	DocumentBuilder db = dbf.newDocumentBuilder();   
+	Document document = db.parse("src/01.xml");   
+	NodeList employees = document.getChildNodes();  
+		 
+	Node root = employees.item(0);  //获取根节点
+	NodeList employeeList = root.getChildNodes();  //根节点下的第一层元素
+	for(int i=0;i<employeeList.getLength();i++){
+		Node employee = employeeList.item(i);
+		if(employee.getNodeType() == Node.ELEMENT_NODE){    //小心空白的节点
+			System.out.println(employee.getNodeName());
+			NodeList employeeMeta = employee.getChildNodes();
+			for(int j=0;j<employeeMeta.getLength();j++){
+				Node meta = employeeMeta.item(j);
+				if(meta.getNodeType() == Node.ELEMENT_NODE){
+					System.out.println(meta.getNodeName()+":"+meta.getTextContent());
+				}
+			}
+		}
+	}	
 	
