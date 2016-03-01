@@ -1,0 +1,7 @@
+1 解析
+	SAXReader reader = new SAXReader();   //dom4j中的
+	Document document = reader.read("src/01.xml");  //得到Document ,dom4j中的
+	Element root = document.getRootElement();  //获取根节点
+	List<Element> listEle = root.elements("Employee");  //根节点下的所有employee节点
+	Element element =  listEle.get(1);  
+	element.elementText("Name");   //得到Name节点的文本值
