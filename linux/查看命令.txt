@@ -2,4 +2,4 @@ gcc  --version    查看系统gcc版本
 g++  --version    查看系统g++版本
 who               查看当前都有哪些用户登录
 whereis node      查看node的安装目录
-
+lsof -i 8080      查看端口号被那个程序占用
