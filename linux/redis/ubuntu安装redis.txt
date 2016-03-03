@@ -1,0 +1,14 @@
+下载与安装
+	下载 redis-3.0.7.tar.gz
+	tar -zxvf redis-3.0.7.tar.gz    //解压
+	cd  redis-3.0.7                //进入解压后的目录
+	make                           //编译，编译以后在 src目录下可以看到出现若干可执行程序
+	make install                   //可选的步骤 ，这一步把 src 下的可执行文件复制到 /usr/local/bin 下 ，以后在任何地方都可以执行这些命令了
+
+运行与停止
+	redis-server                   //启动server ，默认6379端口
+	redis-cli 命令可以向server发送命令
+		redis-cli                        //连接server ，（存：set my "wangyang" ， 取：get my）
+		redis-cli shutdown               //停止server，
+		redis-cli -h 127.0.0.1 -p 6379  //停止服务器为127.0.0.1，端口号为6379的redis服务
+	
