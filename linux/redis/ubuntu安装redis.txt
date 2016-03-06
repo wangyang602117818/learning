@@ -10,5 +10,13 @@
 	redis-cli 命令可以向server发送命令
 		redis-cli                        //连接server ，（存：set my "wangyang" ， 取：get my）
 		redis-cli shutdown               //停止server，
-		redis-cli -h 127.0.0.1 -p 6379  //停止服务器为127.0.0.1，端口号为6379的redis服务
-	
+		redis-cli -h 127.0.0.1 -p 6379   //停止服务器为127.0.0.1，端口号为6379的redis服务
+
+随服务器启动
+	复制 redis-3.0.7/utils/redis_init_script 文件 到 /etc/init.d/redis_init_script    ：redis启动文件
+	建立目录  /etc/redis :存放redis配置文件（redis.conf） ，
+	修改配置文件(redis.conf) ,
+		daemonize yes                      //以后台方式启动 
+		dir /var/redis/persistence_data    //存放持久化文件的
+		logfile /var/redis/log             //存放日志的
+		
