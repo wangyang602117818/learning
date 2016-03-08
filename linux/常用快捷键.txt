@@ -1,3 +1,4 @@
-ctrl+a     光标移动到行首(ahead of line)  ctrl+e  光标移动到行尾(end of line)
-ctrl+u     删除光标到行首的字符           ctrl+k 删除光标到行尾的字符
+ctrl+a/ctrl+e    光标移动到行首/行尾(ahead of line/end of line)
+ctrl+u/ctrl+k    删除光标到行首的字符/删除光标到行尾的字符
 ctrl+l     清屏
+ctrl+shift+t/alt+1   开启新终端/切换终端
