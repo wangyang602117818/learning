@@ -3,20 +3,23 @@
 	tar -zxvf redis-3.0.7.tar.gz    //解压
 	cd  redis-3.0.7                //进入解压后的目录
 	make                           //编译，编译以后在 src目录下可以看到出现若干可执行程序
-	make install                   //可选的步骤 ，这一步把 src 下的可执行文件复制到 /usr/local/bin 下 ，以后在任何地方都可以执行这些命令了
+	make install                   //可选的步骤 ，这一步把 src 下的可执行文件复制到 /usr/local/bin 下 ，以后在任何地方都可以执行这些命令了(redis-benchmark,redis-check-aof,redis-check-dump,redis-cli,redis-sentinel,redis-server)
 
 运行与停止
 	redis-server                   //启动server ，默认6379端口
 	redis-cli 命令可以向server发送命令
 		redis-cli                        //连接server ，（存：set my "wangyang" ， 取：get my）
 		redis-cli shutdown               //停止server，
-		redis-cli -h 127.0.0.1 -p 6379   //停止服务器为127.0.0.1，端口号为6379的redis服务
+		redis-cli -h 127.0.0.1 -p 6379  shutdown  //停止服务器为127.0.0.1，端口号为6379的redis服务
 
-随服务器启动
-	复制 redis-3.0.7/utils/redis_init_script 文件 到 /etc/init.d/redis_init_script    ：redis启动文件
-	建立目录  /etc/redis :存放redis配置文件（redis.conf） ，
+随服务器启动而启动
+	1 复制 redis-3.0.7/utils/redis_init_script 文件 到 /etc/init.d/redis_init_script(redis启动文件)
+	2 建立目录  /etc/redis/ :存放redis配置文件（redis.conf 改名为 6379.conf） ，
 	修改配置文件(redis.conf) ,
 		daemonize yes                      //以后台方式启动 
-		dir /var/redis/persistence_data    //存放持久化文件的
-		logfile /var/redis/log             //存放日志的
-		
+		dir /var/redis/                    //存放持久化文件的,指定文件夹
+		logfile /var/redis/log             //存放日志的,是个文件
+        启动redis服务器 
+        sudo /etc/init.d/redis_init_script         //启动redis,终端关闭后,服务不停止
+	随系统启动而启动
+	sudo update-rc.d  redis_init_script  defaults

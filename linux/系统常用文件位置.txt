@@ -1,4 +1,4 @@
 /etc/environment   系统环境变量所在的位置 (快捷方式 echo $PATH)  环境变量立即生效 source /etc/environment
 cat /etc/issue     系统版本
 ~/.bashrc          用于设置用户环境变量,每启动一个终端就会执行改文件,所以加入环境变量后,只要重开终端立即生效
-
+/etc/default/local 系统语言文件
