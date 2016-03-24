@@ -59,7 +59,7 @@ git子模块
    2 将生成的文件 .gitmodules ,文件夹modul提交到远程，这样别人在拉取项目的时候就包含了子模块了
    3 clone带子模块的项目 
      git submodule init 
-     git submit update
+     git submodule update
 git高级之保存工作现场
    1 当正在开发某个功能还没有commit时，
      用git stash保存当前工作现场，
