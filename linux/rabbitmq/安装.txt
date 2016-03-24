@@ -1,0 +1,14 @@
+1 安装 erlang 
+  sudo apt-get install erlang
+2 安装rabbitmq服务器端,最新版,官网有安装教程
+  Add the following line to your /etc/apt/sources.list: deb http://www.rabbitmq.com/debian/ testing main
+  Add RabbitMQ public key to trusted key list: wget http://www.rabbitmq.com/rabbitmq-signing-key-public.asc, then sudo apt-key add rabbitmq-signing-key-public.asc
+  Run apt-get update.
+  Uninstall existing RabbitMQ installation: sudo apt-get remove rabbitmq-server
+  Uninstall existing erlang-nox: sudo apt-get remove erlang-nox
+  Re-install latest RabbitMQ: sudo apt-get install rabbitmq-server
+3 启用图形界面
+  查看插件列表 rabbitmq-plugins list
+  启用界面管理工具 rabbitmq-plugins [enable|disable] rabbitmq_management   
+  rabbitmq处于安全考虑初始只能用 http://localhost:15672 登录图形界面
+
