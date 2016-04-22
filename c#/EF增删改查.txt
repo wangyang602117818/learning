@@ -34,3 +34,7 @@ Db1Entities db = new Db1Entities();  --EF上下文对象
   entry.State = System.Data.EntityState.Unchanged;   --设置对象未被修改过
   entry.Property("name").IsModified = true;  --设置字段name为修改状态
   db.SaveChanges();  --生成sql语句修改对象
+
+  =====这种方式生成的sql语句,包含了全部需要更新的字段
+  db.Set<T>().Attach(entity);
+  db.Entry<T>(entity).State = EntityState.Modified;

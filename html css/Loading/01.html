@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="Scripts/jquery-1.10.2.js"></script>
+    <style>
+        .throbber-loader-con {
+            display: inline-block;
+            margin: auto auto;
+            background-color: transparent;
+            padding: 0;
+        }
+
+            .throbber-loader-con > div {
+                display: inline-block;
+                width: 0.8em;
+                height: 0.8em;
+                background: #dde2e7;
+            }
+
+        .throbber-loader1 {
+            animation: throbber-loader 2000ms 300ms infinite;
+        }
+
+        .throbber-loader2 {
+            animation: throbber-loader 2000ms 100ms infinite;
+        }
+
+        .throbber-loader3 {
+            animation: throbber-loader 2000ms 500ms infinite;
+        }
+
+        .throbber-loader4 {
+            animation: throbber-loader 2000ms 900ms infinite;
+        }
+
+        .throbber-loader5 {
+            animation: throbber-loader 2000ms 700ms infinite;
+        }
+
+        @keyframes throbber-loader {
+            0% {
+                background: #dde2e7;
+            }
+
+            25% {
+                background: #6b9dc8;
+            }
+
+            50% {
+                background: #dde2e7;
+            }
+
+            75% {
+                background: #6b9dc8;
+            }
+
+            100% {
+                background: #dde2e7;
+            }
+        }
+
+        #loading-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 400px;
+            width: 400px;
+            border: 1px solid red;
+            background-color: rgba(200,200,200,0.2);
+        }
+
+        #loading {
+            position: absolute;
+            display: inline-block;
+            background-color: #fff;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    sfs
+    sdfsdfs
+    dfssdf
+    sd
+
+    <div id="loading-background">
+        <div id="loading">
+            <div class="throbber-loader-con">
+                <div class="throbber-loader1"></div>
+                <div class="throbber-loader2"></div>
+                <div class="throbber-loader3"></div>
+                <div class="throbber-loader4"></div>
+                <div class="throbber-loader5"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    var loadingback = $("#loading-background");
+    var loading = $("#loading");
+    var ltop = (loadingback.height() - loading.height()) / 2;
+    var left = (loadingback.width() - loading.width()) / 2;
+    loading.css({top:top});
+    
+</script>
