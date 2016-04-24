@@ -4,17 +4,24 @@
     <title></title>
     <script src="Scripts/jquery-1.10.2.js"></script>
     <style>
+        .loading-background {
+            position: absolute;
+            background-color: rgba(217,217,217,0.15);
+        }
+
+        .loading {
+            position: absolute;
+            display: inline-block;
+        }
+
         .throbber-loader-con {
             display: inline-block;
-            margin: auto auto;
-            background-color: transparent;
-            padding: 0;
         }
 
             .throbber-loader-con > div {
                 display: inline-block;
-                width: 0.8em;
-                height: 0.8em;
+                width: 0.7em;
+                height: 0.7em;
                 background: #dde2e7;
             }
 
@@ -59,50 +66,89 @@
                 background: #dde2e7;
             }
         }
-
-        #loading-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 400px;
-            width: 400px;
-            border: 1px solid red;
-            background-color: rgba(200,200,200,0.2);
-        }
-
-        #loading {
-            position: absolute;
-            display: inline-block;
-            background-color: #fff;
-            padding: 10px;
-        }
     </style>
 </head>
 <body>
+    <br />
+    <br />
+    <table style="border: 1px solid red;overflow: hidden" width="200px" height="100px" id="tb1">
+        <tr><td>1111111111111111111111111111</td></tr>
+        <tr><td>1111111111111111111111111111</td></tr>
+        <tr><td>1111111111111111111111111111</td></tr>
+        <tr><td>1111111111111111111111111111</td></tr>
+        <tr><td>1111111111111111111111111111</td></tr>
+        <tr><td>1111111111111111111111111111</td></tr>
+        <tr><td>1111111111111111111111111111</td></tr>
+        <tr><td>1111111111111111111111111111</td></tr>
+        <tr><td>1111111111111111111111111111</td></tr>
+    </table>
+    <button value="b1" id="b1">加载</button>
+    <button value="b1" id="b2">取消</button>
 
-    sfs
-    sdfsdfs
-    dfssdf
-    sd
+    <div style="border: 1px solid blue; height: 300px; height: 300px" id="dv1">
 
-    <div id="loading-background">
-        <div id="loading">
-            <div class="throbber-loader-con">
-                <div class="throbber-loader1"></div>
-                <div class="throbber-loader2"></div>
-                <div class="throbber-loader3"></div>
-                <div class="throbber-loader4"></div>
-                <div class="throbber-loader5"></div>
-            </div>
-        </div>
     </div>
+    <button value="b1" id="b3">加载</button>
+    <button value="b1" id="b4">取消</button>
 </body>
 </html>
 <script type="text/javascript">
-    var loadingback = $("#loading-background");
-    var loading = $("#loading");
-    var ltop = (loadingback.height() - loading.height()) / 2;
-    var left = (loadingback.width() - loading.width()) / 2;
-    loading.css({top:top});
+    (function (jQuery) {
+        jQuery.fn.extend({
+            Loading: function () {
+                var partentObject = $(this);
+                var background = partentObject.find(".loading-background");
+                if (background.length > 0) {
+                    background.remove();
+                    return;
+                }
+                partentObject.bgLocation = {  //使用一个内部对象保存状态
+                    bgWidth: partentObject.width(),
+                    bgHeight: partentObject.height(),
+                    bgLeft: partentObject.offset().left + 1,
+                    bgTop: partentObject.offset().top + 1
+                }
+                background = getLoading(partentObject);
+                partentObject.append(background);
+                var conLeft = (partentObject.bgLocation.bgWidth - partentObject.loaderCon.width()) / 2;
+                var conTop = (partentObject.bgLocation.bgHeight - partentObject.loaderCon.height()) / 2;
+                partentObject.loaderCon.css({ left: conLeft, top: conTop });
+            }
+        });
+
+        function getLoading(partentObject) {
+            var background = getBackground(partentObject);
+            return background;
+        }
+        function getBackground(partentObject) {
+            var bg = "<div class=\"loading-background\"></div>";
+            var background = $(bg).css(
+            {
+                left: partentObject.bgLocation.bgLeft,
+                top: partentObject.bgLocation.bgTop,
+                width: partentObject.bgLocation.bgWidth,
+                height: partentObject.bgLocation.bgHeight
+            });
+            partentObject.loaderCon = getLoaderCon();
+            return background.append(partentObject.loaderCon);
+        }
+        function getLoaderCon() {
+            var loaderCon = $("<div class=\"loading\"> </div>");
+            var loadingIcons = getLoaderIcons();
+            return loaderCon.append(loadingIcons);
+        }
+        function getLoaderIcons() {
+            var icons = $("<div class=\"throbber-loader-con\"><div class=\"throbber-loader1\"></div> <div class=\"throbber-loader2\"></div> <div class=\"throbber-loader3\"></div> <div class=\"throbber-loader4\"></div> <div class=\"throbber-loader5\"></div></div>");
+            return icons;
+        }
+    })(jQuery);
+
+    $("#b1").click(function () {
+        $("#tb1").Loading();
+    });
+
+    $("#b3").click(function () {
+        $("#dv1").Loading();
+    });
     
 </script>
