@@ -2,71 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
-    <script src="Scripts/jquery-1.10.2.js"></script>
-    <style>
-        .loading-background {
-            position: absolute;
-            background-color: rgba(217,217,217,0.15);
-        }
-
-        .loading {
-            position: absolute;
-            display: inline-block;
-        }
-
-        .throbber-loader-con {
-            display: inline-block;
-        }
-
-            .throbber-loader-con > div {
-                display: inline-block;
-                width: 0.7em;
-                height: 0.7em;
-                background: #dde2e7;
-            }
-
-        .throbber-loader1 {
-            animation: throbber-loader 2000ms 300ms infinite;
-        }
-
-        .throbber-loader2 {
-            animation: throbber-loader 2000ms 100ms infinite;
-        }
-
-        .throbber-loader3 {
-            animation: throbber-loader 2000ms 500ms infinite;
-        }
-
-        .throbber-loader4 {
-            animation: throbber-loader 2000ms 900ms infinite;
-        }
-
-        .throbber-loader5 {
-            animation: throbber-loader 2000ms 700ms infinite;
-        }
-
-        @keyframes throbber-loader {
-            0% {
-                background: #dde2e7;
-            }
-
-            25% {
-                background: #6b9dc8;
-            }
-
-            50% {
-                background: #dde2e7;
-            }
-
-            75% {
-                background: #6b9dc8;
-            }
-
-            100% {
-                background: #dde2e7;
-            }
-        }
-    </style>
+    <script src="../Scripts/jquery-1.10.2.js"></script>
+    <script src="loading.js"></script>
+    <link href="loading.css" rel="stylesheet" />
+   
 </head>
 <body>
     <br />
@@ -83,66 +22,16 @@
         <tr><td>1111111111111111111111111111</td></tr>
     </table>
     <button value="b1" id="b1">加载</button>
-    <button value="b1" id="b2">取消</button>
 
     <div style="border: 1px solid blue; height: 300px; height: 300px" id="dv1">
 
     </div>
     <button value="b1" id="b3">加载</button>
-    <button value="b1" id="b4">取消</button>
+    
 </body>
 </html>
 <script type="text/javascript">
-    (function (jQuery) {
-        jQuery.fn.extend({
-            Loading: function () {
-                var partentObject = $(this);
-                var background = partentObject.find(".loading-background");
-                if (background.length > 0) {
-                    background.remove();
-                    return;
-                }
-                partentObject.bgLocation = {  //使用一个内部对象保存状态
-                    bgWidth: partentObject.width(),
-                    bgHeight: partentObject.height(),
-                    bgLeft: partentObject.offset().left + 1,
-                    bgTop: partentObject.offset().top + 1
-                }
-                background = getLoading(partentObject);
-                partentObject.append(background);
-                var conLeft = (partentObject.bgLocation.bgWidth - partentObject.loaderCon.width()) / 2;
-                var conTop = (partentObject.bgLocation.bgHeight - partentObject.loaderCon.height()) / 2;
-                partentObject.loaderCon.css({ left: conLeft, top: conTop });
-            }
-        });
-
-        function getLoading(partentObject) {
-            var background = getBackground(partentObject);
-            return background;
-        }
-        function getBackground(partentObject) {
-            var bg = "<div class=\"loading-background\"></div>";
-            var background = $(bg).css(
-            {
-                left: partentObject.bgLocation.bgLeft,
-                top: partentObject.bgLocation.bgTop,
-                width: partentObject.bgLocation.bgWidth,
-                height: partentObject.bgLocation.bgHeight
-            });
-            partentObject.loaderCon = getLoaderCon();
-            return background.append(partentObject.loaderCon);
-        }
-        function getLoaderCon() {
-            var loaderCon = $("<div class=\"loading\"> </div>");
-            var loadingIcons = getLoaderIcons();
-            return loaderCon.append(loadingIcons);
-        }
-        function getLoaderIcons() {
-            var icons = $("<div class=\"throbber-loader-con\"><div class=\"throbber-loader1\"></div> <div class=\"throbber-loader2\"></div> <div class=\"throbber-loader3\"></div> <div class=\"throbber-loader4\"></div> <div class=\"throbber-loader5\"></div></div>");
-            return icons;
-        }
-    })(jQuery);
-
+    
     $("#b1").click(function () {
         $("#tb1").Loading();
     });
