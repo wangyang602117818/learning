@@ -8,8 +8,6 @@
 .loading {
     position: absolute;
     display: inline-block;
-    /*width: 100px;height: 100px;*/
-    border: 1px solid blue;
 }
 /***************************方块加载效果********************************/
 .throbber-loader-con {
@@ -93,11 +91,10 @@
 }
 /***************************转动加载效果********************************/
 .rotate-loader-con {
-    position: absolute;
+    position: relative;
     display: inline-block;
     width: 25px;
     height: 31px;
-    border: 1px solid red;
 }
 
     .rotate-loader-con > div {
@@ -116,8 +113,8 @@
         transform: rotate(-90deg);
         -ms-transform: rotate(-90deg); /* IE 9 */
         -webkit-transform: rotate(-90deg); /* Safari and Chrome */
-        animation-delay: 0.2695s;
-        -webkit-animation-delay: 0.2695s;
+        animation-delay: 0;
+        -webkit-animation-delay: 0;
     }
 
     .rotate-loader-con > .rotate-loader2 {
@@ -126,8 +123,8 @@
         transform: rotate(-45deg);
         -ms-transform: rotate(-45deg); /* IE 9 */
         -webkit-transform: rotate(-45deg); /* Safari and Chrome */
-        animation-delay: 0.366s;
-        -webkit-animation-delay: 0.366s;
+        animation-delay: 100ms;
+        -webkit-animation-delay: 100ms;
     }
 
     .rotate-loader-con > .rotate-loader3 {
@@ -136,8 +133,8 @@
         transform: rotate(0deg);
         -ms-transform: rotate(0deg); /* IE 9 */
         -webkit-transform: rotate(0deg); /* Safari and Chrome */
-        animation-delay: 0.4525s;
-        -webkit-animation-delay: 0.4525s;
+        animation-delay: 200ms;
+        -webkit-animation-delay: 200ms;
     }
 
     .rotate-loader-con > .rotate-loader4 {
@@ -146,8 +143,8 @@
         transform: rotate(45deg);
         -ms-transform: rotate(45deg); /* IE 9 */
         -webkit-transform: rotate(45deg); /* Safari and Chrome */
-        animation-delay: 0.549s;
-        -webkit-animation-delay: 0.549s;
+        animation-delay: 300ms;
+        -webkit-animation-delay: 300ms;
     }
 
     .rotate-loader-con > .rotate-loader5 {
@@ -156,8 +153,8 @@
         transform: rotate(90deg);
         -ms-transform: rotate(90deg); /* IE 9 */
         -webkit-transform: rotate(90deg); /* Safari and Chrome */
-        animation-delay: 0.6355s;
-        -webkit-animation-delay: 0.6355s;
+        animation-delay: 400ms;
+        -webkit-animation-delay: 400ms;
     }
 
     .rotate-loader-con > .rotate-loader6 {
@@ -166,8 +163,8 @@
         transform: rotate(135deg);
         -ms-transform: rotate(135deg); /* IE 9 */
         -webkit-transform: rotate(135deg); /* Safari and Chrome */
-        animation-delay: 0.732s;
-        -webkit-animation-delay: 0.732s;
+        animation-delay: 500ms;
+        -webkit-animation-delay: 500ms;
     }
 
     .rotate-loader-con > .rotate-loader7 {
@@ -176,8 +173,8 @@
         transform: rotate(180deg);
         -ms-transform: rotate(180deg); /* IE 9 */
         -webkit-transform: rotate(180deg); /* Safari and Chrome */
-        animation-delay: 0.8185s;
-        -webkit-animation-delay: 0.8185s;
+        animation-delay: 600ms;
+        -webkit-animation-delay: 600ms;
     }
 
     .rotate-loader-con > .rotate-loader8 {
@@ -186,8 +183,8 @@
         transform: rotate(-135deg);
         -ms-transform: rotate(-135deg); /* IE 9 */
         -webkit-transform: rotate(-135deg); /* Safari and Chrome */
-        animation-delay: 0.905s;
-        -webkit-animation-delay: 0.905s;
+        animation-delay: 700ms;
+        -webkit-animation-delay: 700ms;
     }
 
 @keyframes rotate-loader {

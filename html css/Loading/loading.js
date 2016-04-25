@@ -1,12 +1,17 @@
 ﻿(function (jQuery) {
     jQuery.fn.extend({
-        Loading: function () {
+        Loading: function (options) {
+            //loadType:throbber|rotate
+            var defaults = { loadType: "throbber" }
+            options = options || {};
+            if (options.loadType) defaults.loadType = options.loadType;
             var partentObject = $(this);
             var background = partentObject.find(".loading-background");
             if (background.length > 0) {
                 background.remove();
                 return;
             }
+            partentObject.defaults = defaults;
             partentObject.bgLocation = {  //使用一个内部对象保存状态
                 bgWidth: partentObject.width(),
                 bgHeight: partentObject.height(),
@@ -34,16 +39,26 @@
             width: partentObject.bgLocation.bgWidth,
             height: partentObject.bgLocation.bgHeight
         });
-        partentObject.loaderCon = getLoaderCon();
+        partentObject.loaderCon = getLoaderCon(partentObject);
         return background.append(partentObject.loaderCon);
     }
-    function getLoaderCon() {
+    function getLoaderCon(partentObject) {
         var loaderCon = $("<div class=\"loading\"> </div>");
-        var loadingIcons = getLoaderIcons();
+        var loadingIcons;
+        switch (partentObject.defaults.loadType) {
+            case "throbber":
+                loadingIcons = getThrobberIcons();
+                break;;
+            case "rotate":
+                loadingIcons = getRotateIcons();
+                break;
+            default:
+                loadingIcons = getThrobberIcons();
+        }
         return loaderCon.append(loadingIcons);
     }
     //方块效果
-    function getLoaderIcons() {
+    function getThrobberIcons() {
         var icons = $("<div class=\"throbber-loader-con\"><div class=\"throbber-loader1\"></div> <div class=\"throbber-loader2\"></div> <div class=\"throbber-loader3\"></div> <div class=\"throbber-loader4\"></div> <div class=\"throbber-loader5\"></div></div>");
         return icons;
     }
