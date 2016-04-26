@@ -93,13 +93,13 @@
 .rotate-loader-con {
     position: relative;
     display: inline-block;
-    width: 25px;
-    height: 31px;
+    width:15px;
+	height:19px;
 }
 
     .rotate-loader-con > div {
-        width: 4px;
-        height: 10px;
+        width:2px;
+	    height:6px;
         position: absolute;
         background-color: rgba(221,226,231,0.75);
         border-radius: 3px 3px 0 0;
@@ -108,8 +108,8 @@
     }
 
     .rotate-loader-con > .rotate-loader1 {
-        left: 0;
-        top: 11px;
+        left:0;
+	    top:7px;
         transform: rotate(-90deg);
         -ms-transform: rotate(-90deg); /* IE 9 */
         -webkit-transform: rotate(-90deg); /* Safari and Chrome */
@@ -118,8 +118,8 @@
     }
 
     .rotate-loader-con > .rotate-loader2 {
-        left: 3px;
-        top: 4px;
+        left:2px;
+	top:2px;
         transform: rotate(-45deg);
         -ms-transform: rotate(-45deg); /* IE 9 */
         -webkit-transform: rotate(-45deg); /* Safari and Chrome */
@@ -128,8 +128,8 @@
     }
 
     .rotate-loader-con > .rotate-loader3 {
-        left: 10px;
-        top: 1px;
+        left:6px;
+	top:1px;
         transform: rotate(0deg);
         -ms-transform: rotate(0deg); /* IE 9 */
         -webkit-transform: rotate(0deg); /* Safari and Chrome */
@@ -138,8 +138,8 @@
     }
 
     .rotate-loader-con > .rotate-loader4 {
-        right: 3px;
-        top: 4px;
+        right:2px;
+	top:2px;
         transform: rotate(45deg);
         -ms-transform: rotate(45deg); /* IE 9 */
         -webkit-transform: rotate(45deg); /* Safari and Chrome */
@@ -148,8 +148,8 @@
     }
 
     .rotate-loader-con > .rotate-loader5 {
-        right: 0;
-        top: 11px;
+        right:0;
+	top:7px;
         transform: rotate(90deg);
         -ms-transform: rotate(90deg); /* IE 9 */
         -webkit-transform: rotate(90deg); /* Safari and Chrome */
@@ -158,8 +158,8 @@
     }
 
     .rotate-loader-con > .rotate-loader6 {
-        right: 3px;
-        bottom: 3px;
+        right:2px;
+	bottom:2px;
         transform: rotate(135deg);
         -ms-transform: rotate(135deg); /* IE 9 */
         -webkit-transform: rotate(135deg); /* Safari and Chrome */
@@ -168,8 +168,8 @@
     }
 
     .rotate-loader-con > .rotate-loader7 {
-        bottom: 0;
-        left: 10px;
+        bottom:0;
+	left:6px;
         transform: rotate(180deg);
         -ms-transform: rotate(180deg); /* IE 9 */
         -webkit-transform: rotate(180deg); /* Safari and Chrome */
@@ -178,8 +178,8 @@
     }
 
     .rotate-loader-con > .rotate-loader8 {
-        left: 3px;
-        bottom: 3px;
+        left:2px;
+	bottom:2px;
         transform: rotate(-135deg);
         -ms-transform: rotate(-135deg); /* IE 9 */
         -webkit-transform: rotate(-135deg); /* Safari and Chrome */
