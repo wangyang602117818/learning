@@ -59,7 +59,7 @@
     }
     //方块效果
     function getThrobberIcons() {
-        var icons = $("<div class=\"throbber-loader-con\"><div class=\"throbber-loader1\"></div> <div class=\"throbber-loader2\"></div> <div class=\"throbber-loader3\"></div> <div class=\"throbber-loader4\"></div> <div class=\"throbber-loader5\"></div></div>");
+        var icons = $("<div class=\"throbber-loader-con\"><div class=\"throbber-loader1\"></div><div class=\"throbber-loader2\"></div><div class=\"throbber-loader3\"></div><div class=\"throbber-loader4\"></div><div class=\"throbber-loader5\"></div></div>");
         return icons;
     }
     //转动效果

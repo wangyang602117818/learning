@@ -16,34 +16,36 @@
 
     .throbber-loader-con > div {
         display: inline-block;
-        width: 0.5em;
-        height: 0.5em;
+        width: 0.4em;
+        height: 0.4em;
         background: #dde2e7;
+		margin-left:5px;
+		margin-bottom:3px;
     }
 
 .throbber-loader1 {
-    animation: throbber-loader 2000ms 300ms infinite;
-    -webkit-animation: throbber-loader 2000ms 300ms infinite;
+    animation: throbber-loader 1000ms 100ms infinite;
+    -webkit-animation: throbber-loader 1000ms 100ms infinite;
 }
 
 .throbber-loader2 {
-    animation: throbber-loader 2000ms 100ms infinite;
-    -webkit-animation: throbber-loader 2000ms 100ms infinite;
+    animation: throbber-loader 1000ms 300ms infinite;
+    -webkit-animation: throbber-loader 1000ms 300ms infinite;
 }
 
 .throbber-loader3 {
-    animation: throbber-loader 2000ms 500ms infinite;
-    -webkit-animation: throbber-loader 2000ms 500ms infinite;
+    animation: throbber-loader 1000ms 500ms infinite;
+    -webkit-animation: throbber-loader 1000ms 500ms infinite;
 }
 
 .throbber-loader4 {
-    animation: throbber-loader 2000ms 900ms infinite;
-    -webkit-animation: throbber-loader 2000ms 900ms infinite;
+    animation: throbber-loader 1000ms 900ms infinite;
+    -webkit-animation: throbber-loader 1000ms 900ms infinite;
 }
 
 .throbber-loader5 {
-    animation: throbber-loader 2000ms 700ms infinite;
-    -webkit-animation: throbber-loader 2000ms 700ms infinite;
+    animation: throbber-loader 1000ms 700ms infinite;
+    -webkit-animation: throbber-loader 1000ms 700ms infinite;
 }
 
 @keyframes throbber-loader {
@@ -51,15 +53,7 @@
        background-color: rgba(0,0,0,0.94);
     }
 
-    25% {
-        background-color: rgba(221,226,231,0.75);
-    }
-
     50% {
-        background-color: rgba(0,0,0,0.94);
-    }
-
-    75% {
         background-color: rgba(221,226,231,0.75);
     }
 
@@ -73,15 +67,7 @@
         background-color: rgba(0,0,0,0.94);
     }
 
-    25% {
-        background-color: rgba(221,226,231,0.75);
-    }
-
     50% {
-        background-color: rgba(0,0,0,0.94);
-    }
-
-    75% {
         background-color: rgba(221,226,231,0.75);
     }
 
