@@ -16,8 +16,8 @@
 
     .throbber-loader-con > div {
         display: inline-block;
-        width: 0.7em;
-        height: 0.7em;
+        width: 0.5em;
+        height: 0.5em;
         background: #dde2e7;
     }
 
@@ -48,45 +48,45 @@
 
 @keyframes throbber-loader {
     0% {
-        background: #dde2e7;
+       background-color: rgba(0,0,0,0.94);
     }
 
     25% {
-        background: #6b9dc8;
+        background-color: rgba(221,226,231,0.75);
     }
 
     50% {
-        background: #dde2e7;
+        background-color: rgba(0,0,0,0.94);
     }
 
     75% {
-        background: #6b9dc8;
+        background-color: rgba(221,226,231,0.75);
     }
 
     100% {
-        background: #dde2e7;
+        background-color: rgba(0,0,0,0.94);
     }
 }
 
 @-webkit-keyframes throbber-loader {
     0% {
-        background: #dde2e7;
+        background-color: rgba(0,0,0,0.94);
     }
 
     25% {
-        background: #6b9dc8;
+        background-color: rgba(221,226,231,0.75);
     }
 
     50% {
-        background: #dde2e7;
+        background-color: rgba(0,0,0,0.94);
     }
 
     75% {
-        background: #6b9dc8;
+        background-color: rgba(221,226,231,0.75);
     }
 
     100% {
-        background: #dde2e7;
+        background-color: rgba(0,0,0,0.94);
     }
 }
 /***************************转动加载效果********************************/
