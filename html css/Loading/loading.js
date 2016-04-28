@@ -2,7 +2,7 @@
     jQuery.fn.extend({
         Loading: function (options) {
             //loadType:throbber|rotate
-            var defaults = { loadType: "throbber" }
+            var defaults = { loadType: "rotate" }
             options = options || {};
             if (options.loadType) defaults.loadType = options.loadType;
             var partentObject = $(this);
