@@ -1,0 +1,24 @@
+css3的弹性盒
+弹性盒父元素
+布局
+	display:flex     设置弹性盒的容器,则弹性盒的子元素默认以(inline-box)显示,且高度默认扩充到父元素大小
+	flex-direction:  row(默认)行布局,column 列布局,
+	flex-wrap:       规定若子元素内容超过父元素的行为,nowrap(默认)单行显示,wrap多行显示
+	flex-flow:       flex-direction和flex-wrap的混合形式,row wrap
+对齐
+	align-items:     设置子元素的垂直对齐方式: 
+		flex-start : (默认)居上对齐,
+		center   :  垂直居中对齐,
+		flex-end :  底部对齐,
+		stretch  :  垂直拉伸到父元素大小
+	justify-content  设置子元素水平对齐方式:
+		flex-start  :(默认)居左对齐,
+		center   :  居中对齐
+		flex-end  : 居右对齐
+		space-around : 水平对齐,并且在各个子元素之间平分配剩余空间
+弹性盒子元素
+	flex:n    数字,代表每一个子元素所占比例,此时设置宽度无效,但是可以设置高度
+
+
+
+示例:
