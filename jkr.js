@@ -1,24 +1,24 @@
-/*
+ï»¿/*
 **	2013-8-26 02:04:01
-**	jkr¶ÔÏóÌá¹©ËÄ¸ö·½·¨
+**	jkrå¯¹è±¡æä¾›å››ä¸ªæ–¹æ³•
 **	
 **	isMatch
-**		Óï·¨£º		boolean jkr.isMatch(ÕıÔò±í´ïÊ½, ×Ö·û´®);
-**		¹¦ÄÜ£º		¼ì²éÊÇ·ñÆ¥Åä£¬Æ¥ÅäÉÏ·µ»Øtrue
-**		°¸Àı£º
+**		è¯­æ³•ï¼š		boolean jkr.isMatch(æ­£åˆ™è¡¨è¾¾å¼, å­—ç¬¦ä¸²);
+**		åŠŸèƒ½ï¼š		æ£€æŸ¥æ˜¯å¦åŒ¹é…ï¼ŒåŒ¹é…ä¸Šè¿”å›true
+**		æ¡ˆä¾‹ï¼š
 **			var isTrue = jkr.isMatch(/^\d+/, '1a');
 **			alert(isTrue);
 **	match	
-**		Óï·¨£º		object jkr.match(ÕıÔò±í´ïÊ½, ×Ö·û´®);
-**		¹¦ÄÜ£º		½«×Ö·û´®ÖĞÆ¥Åäµ½µÄµÚÒ»¸ö×Ö·û´®ÌáÈ¡³öÀ´
-**					·µ»Ø¶ÔÏó¾ßÓĞ
-**						success			ÊôĞÔ£¬±íÊ¾ÊÇ·ñÆ¥Åä³É¹¦
-**						index			ÊôĞÔ£¬Æ¥Åä×Ö·û´®ÔÚÔ­Ê¼×Ö·û´®ÖĞµÄÎ»ÖÃ
-**						value			ÊôĞÔ£¬Æ¥Åäµ½µÄ×Ö·û´®
-**						length			ÊôĞÔ£¬Æ¥Åäµ½µÄ×Ö·û´®µÄ³¤¶È
-**						groups			·½·¨£¬¸ù¾İË÷Òı»ñµÃÆ¥Åäµ½µÄ×é
-**						groups.count	ÊôĞÔ£¬Æ¥Åäµ½×éµÄ¸öÊı
-**		°¸Àı£º
+**		è¯­æ³•ï¼š		object jkr.match(æ­£åˆ™è¡¨è¾¾å¼, å­—ç¬¦ä¸²);
+**		åŠŸèƒ½ï¼š		å°†å­—ç¬¦ä¸²ä¸­åŒ¹é…åˆ°çš„ç¬¬ä¸€ä¸ªå­—ç¬¦ä¸²æå–å‡ºæ¥
+**					è¿”å›å¯¹è±¡å…·æœ‰
+**						success			å±æ€§ï¼Œè¡¨ç¤ºæ˜¯å¦åŒ¹é…æˆåŠŸ
+**						index			å±æ€§ï¼ŒåŒ¹é…å­—ç¬¦ä¸²åœ¨åŸå§‹å­—ç¬¦ä¸²ä¸­çš„ä½ç½®
+**						value			å±æ€§ï¼ŒåŒ¹é…åˆ°çš„å­—ç¬¦ä¸²
+**						length			å±æ€§ï¼ŒåŒ¹é…åˆ°çš„å­—ç¬¦ä¸²çš„é•¿åº¦
+**						groups			æ–¹æ³•ï¼Œæ ¹æ®ç´¢å¼•è·å¾—åŒ¹é…åˆ°çš„ç»„
+**						groups.count	å±æ€§ï¼ŒåŒ¹é…åˆ°ç»„çš„ä¸ªæ•°
+**		æ¡ˆä¾‹ï¼š
 **			var m = jkr.match(/^((.:).+\\)((.+)(\..+))$/, "C:\\1\\2\\3\\456.mp3");
 **			alert(m.success);
 **			if(m.success) {
@@ -26,25 +26,25 @@
 **					+ "value = " + m.value + "\r\n"
 **					+ "length = " + m.length + "\r\n"
 **					+ "groups(0) = " + m.groups(0) + "\r\n"
-**					+ "groups(1) = " + m.groups(1) + "      ÎÄ¼şÂ·¾¶\r\n"
-**					+ "groups(2) = " + m.groups(2) + "      ¸ùÄ¿Â¼\r\n"
-**					+ "groups(3) = " + m.groups(3) + "      ÎÄ¼şÃû\r\n"
-**					+ "groups(4) = " + m.groups(4) + "      ÎŞºó×ºÎÄ¼şÃû\r\n"
-**					+ "groups(5) = " + m.groups(5) + "      ºó×ºÃû\r\n"
+**					+ "groups(1) = " + m.groups(1) + "      æ–‡ä»¶è·¯å¾„\r\n"
+**					+ "groups(2) = " + m.groups(2) + "      æ ¹ç›®å½•\r\n"
+**					+ "groups(3) = " + m.groups(3) + "      æ–‡ä»¶å\r\n"
+**					+ "groups(4) = " + m.groups(4) + "      æ— åç¼€æ–‡ä»¶å\r\n"
+**					+ "groups(5) = " + m.groups(5) + "      åç¼€å\r\n"
 **					+ "groups.count = " + m.groups.count 
 **					);
 **			}
 **
 **	matches
-**		Óï·¨£º		Array jkr.matches(ÕıÔò±í´ïÊ½, ×Ö·û´®);
-**		¹¦ÄÜ£º		½«Ñ­»·Æ¥Åä×Ö·û´®£¬²¢½«Æ¥Åäµ½µÄÊı¾İÒÔÊı×éµÄĞÎÊ½·µ»Ø£¬Êı×éµÄÃ¿Ò»¸ö³ÉÔ±¾ßÓĞ
-**						success			ÊôĞÔ£¬±íÊ¾ÊÇ·ñÆ¥Åä³É¹¦
-**						index			ÊôĞÔ£¬Æ¥Åä×Ö·û´®ÔÚÔ­Ê¼×Ö·û´®ÖĞµÄÎ»ÖÃ
-**						value			ÊôĞÔ£¬Æ¥Åäµ½µÄ×Ö·û´®
-**						length			ÊôĞÔ£¬Æ¥Åäµ½µÄ×Ö·û´®µÄ³¤¶È
-**						groups			·½·¨£¬¸ù¾İË÷Òı»ñµÃÆ¥Åäµ½µÄ×é
-**						groups.count	ÊôĞÔ£¬Æ¥Åäµ½×éµÄ¸öÊı
-**		°¸Àı£º
+**		è¯­æ³•ï¼š		Array jkr.matches(æ­£åˆ™è¡¨è¾¾å¼, å­—ç¬¦ä¸²);
+**		åŠŸèƒ½ï¼š		å°†å¾ªç¯åŒ¹é…å­—ç¬¦ä¸²ï¼Œå¹¶å°†åŒ¹é…åˆ°çš„æ•°æ®ä»¥æ•°ç»„çš„å½¢å¼è¿”å›ï¼Œæ•°ç»„çš„æ¯ä¸€ä¸ªæˆå‘˜å…·æœ‰
+**						success			å±æ€§ï¼Œè¡¨ç¤ºæ˜¯å¦åŒ¹é…æˆåŠŸ
+**						index			å±æ€§ï¼ŒåŒ¹é…å­—ç¬¦ä¸²åœ¨åŸå§‹å­—ç¬¦ä¸²ä¸­çš„ä½ç½®
+**						value			å±æ€§ï¼ŒåŒ¹é…åˆ°çš„å­—ç¬¦ä¸²
+**						length			å±æ€§ï¼ŒåŒ¹é…åˆ°çš„å­—ç¬¦ä¸²çš„é•¿åº¦
+**						groups			æ–¹æ³•ï¼Œæ ¹æ®ç´¢å¼•è·å¾—åŒ¹é…åˆ°çš„ç»„
+**						groups.count	å±æ€§ï¼ŒåŒ¹é…åˆ°ç»„çš„ä¸ªæ•°
+**		æ¡ˆä¾‹ï¼š
 **			var mc = jkr.matches(/\d+(\d+)/, "1a23bc456");
 **			for(var i in mc) {
 **				var m = mc[i];
@@ -60,34 +60,34 @@
 **
 **
 **	replace
-**		Óï·¨£º		string jkr.replace(Ô­Ê¼×Ö·û´®, ÕıÔò±í´ïÊ½, ĞÂ×Ö·û´®);
-**		¹¦ÄÜ£º		¸Ã·½·¨¶ÔÔ­Ê¼×Ö·û´®Ê¹ÓÃÕıÔò±í´ïÊ½½øĞĞ´¦Àí£¬²¢½«Æ¥Åäµ½µÄÊı¾İÓÃĞÂµÄ×Ö·û´®´úÌæ
-**		°¸Àı£º
-**			var str = "2013Äê8ÔÂ25ÈÕ";
-**			var res = jkr.replace(str, /(\d+)Äê(\d+)ÔÂ(\d+)ÈÕ/, "$1-$2-$3");
+**		è¯­æ³•ï¼š		string jkr.replace(åŸå§‹å­—ç¬¦ä¸², æ­£åˆ™è¡¨è¾¾å¼, æ–°å­—ç¬¦ä¸²);
+**		åŠŸèƒ½ï¼š		è¯¥æ–¹æ³•å¯¹åŸå§‹å­—ç¬¦ä¸²ä½¿ç”¨æ­£åˆ™è¡¨è¾¾å¼è¿›è¡Œå¤„ç†ï¼Œå¹¶å°†åŒ¹é…åˆ°çš„æ•°æ®ç”¨æ–°çš„å­—ç¬¦ä¸²ä»£æ›¿
+**		æ¡ˆä¾‹ï¼š
+**			var str = "2013å¹´8æœˆ25æ—¥";
+**			var res = jkr.replace(str, /(\d+)å¹´(\d+)æœˆ(\d+)æ—¥/, "$1-$2-$3");
 **			alert(res);
 **
 */
 (function(window) {
 	var Regex = {
 		isMatch	:	function(regex, input) {
-						// Æ¥ÅäµÄ·½·¨£¬·µ»ØbooleanÀàĞÍ
-						if( !(regex instanceof RegExp) || typeof input !== 'string' ) /* throw {msg:"²ÎÊı²»ÕıÈ·"}; // ¿¼ÂÇÊ¹ÓÃÒì³£*/ return false;
+						// åŒ¹é…çš„æ–¹æ³•ï¼Œè¿”å›booleanç±»å‹
+						if( !(regex instanceof RegExp) || typeof input !== 'string' ) /* throw {msg:"å‚æ•°ä¸æ­£ç¡®"}; // è€ƒè™‘ä½¿ç”¨å¼‚å¸¸*/ return false;
 						return regex.test(input);
 					},
 		match	:	function(regex, input) {
-						// Æ¥ÅäÌáÈ¡£¬½«½á¹û·µ»Ø
-						if( !(regex instanceof RegExp) || typeof input !== 'string' ) throw {msg:"²ÎÊı²»ÕıÈ·"}; 
+						// åŒ¹é…æå–ï¼Œå°†ç»“æœè¿”å›
+						if( !(regex instanceof RegExp) || typeof input !== 'string' ) throw {msg:"å‚æ•°ä¸æ­£ç¡®"}; 
 						var m = regex.exec(input); 
-						// ·â×°Ò»¸ömatch¶ÔÏó£¬ÀïÃæÓĞÒ»¸ögroups¼¯ºÏ£¬ºÍvalueÊôĞÔÒÔ¼°indexÊôĞÔÓëlengthÊôĞÔµÈ
+						// å°è£…ä¸€ä¸ªmatchå¯¹è±¡ï¼Œé‡Œé¢æœ‰ä¸€ä¸ªgroupsé›†åˆï¼Œå’Œvalueå±æ€§ä»¥åŠindexå±æ€§ä¸lengthå±æ€§ç­‰
 						var _m = {
-										success	:	!!m, // Èç¹ûÃ»ÓĞÆ¥ÅämÎªnull
+										success	:	!!m, // å¦‚æœæ²¡æœ‰åŒ¹é…mä¸ºnull
 										index	:	m ? m.index : 0,
 										length	:	m ? m[0].length : 0,
 										value	:	m ? m[0] : null,
 										groups	:	function(i) {
 														if(!m) return [];
-														if( i > m.length - 1 ) throw {msg:"³¬³öÊı×éË÷Òı·¶Î§"};
+														if( i > m.length - 1 ) throw {msg:"è¶…å‡ºæ•°ç»„ç´¢å¼•èŒƒå›´"};
 														return m[i];
 													}
 									};
@@ -95,9 +95,9 @@
 						return _m;
 					},
 		matches	:	function(regex, input) {
-						// Æ¥ÅäËùÓĞÄÚÈİ·µ»ØmatchCollection
-						if( !(regex instanceof RegExp) || typeof input !== 'string' ) throw {msg:"²ÎÊı²»ÕıÈ·"}; 
-						// ±£Ö¤Ö§³ÖÈ«¾ÖÄ£Ê½
+						// åŒ¹é…æ‰€æœ‰å†…å®¹è¿”å›matchCollection
+						if( !(regex instanceof RegExp) || typeof input !== 'string' ) throw {msg:"å‚æ•°ä¸æ­£ç¡®"}; 
+						// ä¿è¯æ”¯æŒå…¨å±€æ¨¡å¼
 						var r = regex.toString();
 						var that = this;
 						regex = this.isMatch(/g[^\/]*$/i, r) 
@@ -106,9 +106,9 @@
 											var m = that.match(/\/([^\/]+)\/(.*)/, r);
 											return new RegExp(m.groups(1), m.groups(2) + "g");
 										})();
-						// ×¼±¸¼¯ºÏ
+						// å‡†å¤‡é›†åˆ
 						var matchCollection = [];
-						// Ñ­»·Æ¥Åä×°Åä¼¯ºÏ
+						// å¾ªç¯åŒ¹é…è£…é…é›†åˆ
 						
 						do {
 							var temp = this.match(regex, input);
@@ -121,7 +121,7 @@
 						if(typeof oldStr === 'string' && typeof newStr === 'string' && regex instanceof RegExp) {
 							return oldStr.replace(regex, newStr);
 						} else {
-							throw {msg : "²ÎÊıĞÅÏ¢´íÎó"};
+							throw {msg : "å‚æ•°ä¿¡æ¯é”™è¯¯"};
 						}
 					}
 	};

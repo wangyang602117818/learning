@@ -1,68 +1,68 @@
-log4netÈÕÖ¾¿ò¼ÜÅäÖÃ·½·¨
-mvcÏîÄ¿£º
-  1  Ìí¼ÓdllÒıÓÃ£¨log4net.dll£©
-  2  ÔÚ ÍøÕ¾¸ùÄ¿Â¼ÏÂ Ìí¼ÓÅäÖÃÎÄ¼şlog4net.config
-  3  Ìí¼Ólog4netÏµÍ³ÅäÖÃ
-     ·½·¨1£º
-        ÔÚAssemblyInfo.csÏÂÌí¼ÓÒ»ĞĞÅäÖÃ
+ï»¿log4netæ—¥å¿—æ¡†æ¶é…ç½®æ–¹æ³•
+mvcé¡¹ç›®ï¼š
+  1  æ·»åŠ dllå¼•ç”¨ï¼ˆlog4net.dllï¼‰
+  2  åœ¨ ç½‘ç«™æ ¹ç›®å½•ä¸‹ æ·»åŠ é…ç½®æ–‡ä»¶log4net.config
+  3  æ·»åŠ log4netç³»ç»Ÿé…ç½®
+     æ–¹æ³•1ï¼š
+        åœ¨AssemblyInfo.csä¸‹æ·»åŠ ä¸€è¡Œé…ç½®
         [assembly: log4net.Config.XmlConfigurator(ConfigFile = "log4net.config", Watch = true)]
-     ·½·¨2£ºÔÚApplication_Start·½·¨ÏÂÅäÖÃ¶ÁÈ¡log4net.configÎÄ¼ş
+     æ–¹æ³•2ï¼šåœ¨Application_Startæ–¹æ³•ä¸‹é…ç½®è¯»å–log4net.configæ–‡ä»¶
         string path = Server.MapPath("~/log4net.config");
         log4net.Config.XmlConfigurator.Configure(File.OpenRead(path));
-  4  ÔÚ³ÌĞòÖĞ»ñÈ¡ÈÕÖ¾¶ÔÏó£¬¼ÇÂ¼ÈÕÖ¾
+  4  åœ¨ç¨‹åºä¸­è·å–æ—¥å¿—å¯¹è±¡ï¼Œè®°å½•æ—¥å¿—
      log4net.ILog _log = log4net.LogManager.GetLogger("FileAppender");
-     _log.Error("´íÎóĞÅÏ¢");
+     _log.Error("é”™è¯¯ä¿¡æ¯");
 
-webÓ¦ÓÃ³ÌĞò£º
-  1  Ìí¼ÓdllÒıÓÃ£¨log4net.dll£©
-  2  ÔÚ ÍøÕ¾¸ùÄ¿Â¼ÏÂ Ìí¼ÓÅäÖÃÎÄ¼şlog4net.config
-  3  Ìí¼Ólog4netÏµÍ³ÅäÖÃ
-     ÔÚApplication_Start·½·¨ÏÂÅäÖÃ¶ÁÈ¡log4net.configÎÄ¼ş
+webåº”ç”¨ç¨‹åºï¼š
+  1  æ·»åŠ dllå¼•ç”¨ï¼ˆlog4net.dllï¼‰
+  2  åœ¨ ç½‘ç«™æ ¹ç›®å½•ä¸‹ æ·»åŠ é…ç½®æ–‡ä»¶log4net.config
+  3  æ·»åŠ log4netç³»ç»Ÿé…ç½®
+     åœ¨Application_Startæ–¹æ³•ä¸‹é…ç½®è¯»å–log4net.configæ–‡ä»¶
      string path = Server.MapPath("~/log4net.config");
      log4net.Config.XmlConfigurator.Configure(File.OpenRead(path));
-  4  ÔÚ³ÌĞòÖĞ»ñÈ¡ÈÕÖ¾¶ÔÏó£¬¼ÇÂ¼ÈÕÖ¾
+  4  åœ¨ç¨‹åºä¸­è·å–æ—¥å¿—å¯¹è±¡ï¼Œè®°å½•æ—¥å¿—
      log4net.ILog _log = log4net.LogManager.GetLogger("FileAppender");
-     _log.Error("´íÎóĞÅÏ¢");
+     _log.Error("é”™è¯¯ä¿¡æ¯");
 ==================================================================================
-log4net.configÅäÖÃÎÄ¼şµÄÅäÖÃ·½·¨
-  ÈÕÖ¾¼ÇÂ¼Æ÷
-     <logger name="FileAppender">  <!--ÓÃÓÚÔÚ³ÌĞòÖĞ»ñÈ¡ÈÕÖ¾¶ÔÏóµÄÃû³Æ-->
-       <level value="ALL"/>   <!--ÈÕÖ¾µÈ¼¶ -->
-       <appender-ref ref="FileAppender"/> <!--Ö¸ÏòÈÕÖ¾¼ÇÂ¼ÅäÖÃ½Úµã-->
+log4net.configé…ç½®æ–‡ä»¶çš„é…ç½®æ–¹æ³•
+  æ—¥å¿—è®°å½•å™¨
+     <logger name="FileAppender">  <!--ç”¨äºåœ¨ç¨‹åºä¸­è·å–æ—¥å¿—å¯¹è±¡çš„åç§°-->
+       <level value="ALL"/>   <!--æ—¥å¿—ç­‰çº§ -->
+       <appender-ref ref="FileAppender"/> <!--æŒ‡å‘æ—¥å¿—è®°å½•é…ç½®èŠ‚ç‚¹-->
      </logger>
      <logger name="SqlServerAppender">
        <level value="ALL"/>
        <appender-ref ref="AdoNetAppender"/>
      </logger>
-  1  ÒÔÎÄ±¾ÎÄ¼ş·½Ê½¼ÇÂ¼ÈÕÖ¾£¨Ò»°ã¼ÇÂ¼´íÎóÈÕÖ¾£©
+  1  ä»¥æ–‡æœ¬æ–‡ä»¶æ–¹å¼è®°å½•æ—¥å¿—ï¼ˆä¸€èˆ¬è®°å½•é”™è¯¯æ—¥å¿—ï¼‰
      <appender name="FileAppender" type="log4net.Appender.RollingFileAppender">
-        <!--ÊÇ·ñÊ¹ÓÃ¾²Ì¬ÎÄ¼şÃû true:ĞèÒªÔÚfileÀïÃæÖÆ¶¨ÎÄ¼şÃû;false:Ö»ĞèÒªÖ¸¶¨Â·¾¶£¬ÎÄ¼şÃûÓÉdatePatternÖ¸¶¨-->
+        <!--æ˜¯å¦ä½¿ç”¨é™æ€æ–‡ä»¶å true:éœ€è¦åœ¨fileé‡Œé¢åˆ¶å®šæ–‡ä»¶å;false:åªéœ€è¦æŒ‡å®šè·¯å¾„ï¼Œæ–‡ä»¶åç”±datePatternæŒ‡å®š-->
         <staticLogFileName value="false"/>
-        <file value="App_Data/error/"/>  <!--ÎÄ¼şÂ·¾¶-->
-        <rollingStyle value="Composite"/> <!--´´½¨ĞÂÎÄ¼şµÄ·½Ê½-->
-        <datePattern value="yyyy-MM-dd/&quot;log.txt&quot;"/>  <!--ÎÄ¼şÃû£¬Ö»ÓĞÊ¹ÓÃ¶¯Ì¬ÎÄ¼şÃû²ÅÓĞĞ§-->
-        <maxSizeRollBackups value="-1"/>  <!--±¸·İÎÄ¼ş¸öÊı£¬-1±íÊ¾²»ÏŞ¸öÊı-->
-        <maximumFileSize value="100kb"/>  <!--×î´óÎÄ¼ş´óĞ¡-->
+        <file value="App_Data/error/"/>  <!--æ–‡ä»¶è·¯å¾„-->
+        <rollingStyle value="Composite"/> <!--åˆ›å»ºæ–°æ–‡ä»¶çš„æ–¹å¼-->
+        <datePattern value="yyyy-MM-dd/&quot;log.txt&quot;"/>  <!--æ–‡ä»¶åï¼Œåªæœ‰ä½¿ç”¨åŠ¨æ€æ–‡ä»¶åæ‰æœ‰æ•ˆ-->
+        <maxSizeRollBackups value="-1"/>  <!--å¤‡ä»½æ–‡ä»¶ä¸ªæ•°ï¼Œ-1è¡¨ç¤ºä¸é™ä¸ªæ•°-->
+        <maximumFileSize value="100kb"/>  <!--æœ€å¤§æ–‡ä»¶å¤§å°-->
         <layout type="log4net.Layout.PatternLayout">
-           <conversionPattern value="%d [%p]=========%n   %m%n" />  <!--ÈÕÖ¾¸ñÊ½-->
+           <conversionPattern value="%d [%p]=========%n   %m%n" />  <!--æ—¥å¿—æ ¼å¼-->
         </layout> 
      </appender>
-   2 ÒÔÊı¾İ¿â·½Ê½¼ÇÂ¼ÈÕÖ¾£¨Ò»°ã¼ÇÂ¼²Ù×÷ÈÕÖ¾£©
+   2 ä»¥æ•°æ®åº“æ–¹å¼è®°å½•æ—¥å¿—ï¼ˆä¸€èˆ¬è®°å½•æ“ä½œæ—¥å¿—ï¼‰
      <appender name="AdoNetAppender" type="log4net.Appender.AdoNetAppender">
-        <bufferSize value="0"/>  <!--ÈÕÖ¾ÎÄ¼ş»º´æµ½¶àÉÙ¸ö£¬Ò»ÆğĞ´ÈëÊı¾İ¿â£¬0±íÊ¾²»»º´æ-->
-        <connectionType value="System.Data.SqlClient.SqlConnection,System.Data,Version=2.0.0.0, Culture=neutral,PublicKeyToken=b77a5c561934e089" />  <!--sqlserverÊı¾İ¿âÁ¬½Ó·½Ê½£¬¹Ì¶¨-->
-        <connectionString value="Data Source=.;Initial Catalog=DbTest;User ID=sa;Password=123"/> <!--Á¬½Ó×Ö·û´®-->
-        <commandText value="Insert into [log1](name,remark,logDate)values(@name,@remark,@logDate)"/><!--sqlÓï¾ä-->
-        <parameter>   <!--×Ö¶Î²ÎÊı-->
+        <bufferSize value="0"/>  <!--æ—¥å¿—æ–‡ä»¶ç¼“å­˜åˆ°å¤šå°‘ä¸ªï¼Œä¸€èµ·å†™å…¥æ•°æ®åº“ï¼Œ0è¡¨ç¤ºä¸ç¼“å­˜-->
+        <connectionType value="System.Data.SqlClient.SqlConnection,System.Data,Version=2.0.0.0, Culture=neutral,PublicKeyToken=b77a5c561934e089" />  <!--sqlserveræ•°æ®åº“è¿æ¥æ–¹å¼ï¼Œå›ºå®š-->
+        <connectionString value="Data Source=.;Initial Catalog=DbTest;User ID=sa;Password=123"/> <!--è¿æ¥å­—ç¬¦ä¸²-->
+        <commandText value="Insert into [log1](name,remark,logDate)values(@name,@remark,@logDate)"/><!--sqlè¯­å¥-->
+        <parameter>   <!--å­—æ®µå‚æ•°-->
            <parameterName value="@name"/>
            <dbType value="String"/>
            <size value="50"/>
            <layout type="EasyOa.Common.MyLayout">
-              <conversionPattern value="%property{name}"/>   <!--ÔÚ³ÌĞòÖĞÖ¸¶¨µÄÊôĞÔÃû³Æ-->
+              <conversionPattern value="%property{name}"/>   <!--åœ¨ç¨‹åºä¸­æŒ‡å®šçš„å±æ€§åç§°-->
            </layout>
         </parameter>
         <parameter>
-           <parameterName value="@remark"/>   <!--ÔÚ³ÌĞòÖĞÖ¸¶¨µÄÊôĞÔÃû³Æ-->
+           <parameterName value="@remark"/>   <!--åœ¨ç¨‹åºä¸­æŒ‡å®šçš„å±æ€§åç§°-->
            <dbType value="String"/>
            <size value="500"/>
            <layout type="EasyOa.Common.MyLayout">
