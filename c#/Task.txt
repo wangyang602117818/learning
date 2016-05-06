@@ -1,1 +1,90 @@
 Task (.Net 4.0新增的异步编程类)
+
+public void DownloadStep(ObjectId fid, IGridFSBucket gfs = null)
+        {
+            IGridFSBucket g = m_gfs;
+            if (gfs != null) { g = gfs; }
+
+            try
+            {
+                IAsyncCursor<GridFSFileInfo> gfsi = g.Find(new BsonDocument() { { "_id", fid } });
+                GridFSFileInfo fi = gfsi.FirstOrDefault();
+                HttpContext.Current.Response.ContentType = "application/octet-stream";
+                HttpContext.Current.Response.AddHeader("Content-Disposition", "attachement;filename=" + HttpUtility.UrlEncode(Path.GetFileName(fi.Filename)));
+                HttpContext.Current.Response.AddHeader("Content-Length", fi.Length.ToString());
+
+                g.DownloadToStream(fid, HttpContext.Current.Response.OutputStream);
+                HttpContext.Current.Response.Flush();
+                HttpContext.Current.Response.Clear();
+            }
+            finally
+            {
+                HttpContext.Current.Response.Close();
+            }
+
+        }
+
+public void Download(Stream stream, string attachementName, int chunkSize = 261120)
+        {
+            byte[] buffer = new byte[chunkSize];
+            long dataToRead = stream.Length; ;
+            try
+            {
+                HttpContext.Current.Response.ContentType = "application/octet-stream";
+                HttpContext.Current.Response.AddHeader("Content-Disposition", "attachement;filename=" + HttpUtility.UrlEncode(Path.GetFileName(attachementName)));
+                HttpContext.Current.Response.AddHeader("Content-Length", dataToRead.ToString());
+
+                while (dataToRead > 0)
+                {
+                    if (HttpContext.Current.Response.IsClientConnected)
+                    {
+                        int length = stream.Read(buffer, 0, chunkSize);
+                        HttpContext.Current.Response.OutputStream.Write(buffer, 0, length);
+                        HttpContext.Current.Response.Flush();
+                        HttpContext.Current.Response.Clear();
+                        dataToRead -= length;
+                    }
+                    else
+                    {
+                        //防止client失去连接
+                        dataToRead = -1;
+                    }
+                }
+            }
+            finally
+            {
+                HttpContext.Current.Response.Close();
+            }
+}
+ 
+
+ 5721e1587479e94e10b90643
+
+http://localhost:26530/Rtfapi/imageDMZ.ashx?aid=571f2ce095180f167ceb1b4a&pid=571862669829c83c64c0958b&fid=5721e1587479e94e10b90643
+http://localhost:26540/rtfapi/image.ashx?aid=571f2ce095180f167ceb1b4a&pid=571862669829c83c64c0958b&id=5721e1587479e94e10b90643
+
+http://localhost:26540/Page.aspx?aid=571f2ce095180f167ceb1b4a&pid=571862669829c83c64c0958b&id=57297da17479e9a848a02e86
+
+附件 http://localhost:26540/Page.aspx?aid=571f2ce095180f167ceb1b4a&pid=571862669829c83c64c0958b&id=572991c57479e9afd02cf065
+
+http://localhost:26540/Page.aspx?aid=5728487d538cad3ef4a13ee6&pid=57285a66538cae3ef4d591a7&id=57297e867479e99470082488
+
+
+https://mobileappsuat.pwchk.com/uiengine/page.aspx?aid=5728487d538cad3ef4a13ee6&pid=5729a126538caa27d0640a59&_id=572989e87479e99470083505
+https://mobileappsuat.pwchk.com/uiengine/Page.aspx?aid=5728487d538cad3ef4a13ee6&pid=5729d362538caf27d0c8b5c3&UniversalID_System=9C5507793D34543048256CB40004F9A9&ServiceTicket=Q04xMTU5MzZ8MjNlMmY2ZDItY2IzYS00NzQyLTlmNzgtNjQ4NzZjZWNlYTJk
+
+
+<img src="https://mobileappsuat.pwchk.com/uiengine/RTFAPI/image.ashx?aid=5728487d538cad3ef4a13ee6&pid=5729a126538caa27d0640a59&_id=572989e87479e99470083505"/>
+
+RTFAPI/image.ashx?id=572980857479e994700827bd
+
+http://localhost:26540/RTFAPI/image.ashx?aid=5728487d538cad3ef4a13ee6&pid=57285a66538cae3ef4d591a7&id=5729807d7479e994700827bc
+
+http://localhost:26540/Page.aspx?aid=5728487d538cad3ef4a13ee6&pid=57285a66538cae3ef4d591a7&id=5729807d7479e994700827bc
+
+
+
+
+
+
+
