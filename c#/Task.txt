@@ -58,29 +58,16 @@ public void Download(Stream stream, string attachementName, int chunkSize = 2611
 }
  
 
- 5721e1587479e94e10b90643
 
-http://localhost:26530/Rtfapi/imageDMZ.ashx?aid=571f2ce095180f167ceb1b4a&pid=571862669829c83c64c0958b&fid=5721e1587479e94e10b90643
-http://localhost:26540/rtfapi/image.ashx?aid=571f2ce095180f167ceb1b4a&pid=571862669829c83c64c0958b&id=5721e1587479e94e10b90643
-
-http://localhost:26540/Page.aspx?aid=571f2ce095180f167ceb1b4a&pid=571862669829c83c64c0958b&id=57297da17479e9a848a02e86
-
-附件 http://localhost:26540/Page.aspx?aid=571f2ce095180f167ceb1b4a&pid=571862669829c83c64c0958b&id=572991c57479e9afd02cf065
-
-http://localhost:26540/Page.aspx?aid=5728487d538cad3ef4a13ee6&pid=57285a66538cae3ef4d591a7&id=57297e867479e99470082488
-
+附件
+ http://localhost:26540/Page.aspx?aid=5728487d538cad3ef4a13ee6&pid=57285a66538cae3ef4d591a7&id=572c0b6c7479e97220c342a3
+http://localhost:26540/Page.aspx?aid=5728487d538cad3ef4a13ee6&pid=57285a66538cae3ef4d591a7&id=572c0b627479e97220c34293&ServiceTicket=Q04xMTU5MzZ8OTZmMzc0YWEtNDIzNC00ZGI4LWIzODEtYmJlYTIxMmUwYjk4
 
 https://mobileappsuat.pwchk.com/uiengine/page.aspx?aid=5728487d538cad3ef4a13ee6&pid=5729a126538caa27d0640a59&_id=572989e87479e99470083505
 https://mobileappsuat.pwchk.com/uiengine/Page.aspx?aid=5728487d538cad3ef4a13ee6&pid=5729d362538caf27d0c8b5c3&UniversalID_System=9C5507793D34543048256CB40004F9A9&ServiceTicket=Q04xMTU5MzZ8MjNlMmY2ZDItY2IzYS00NzQyLTlmNzgtNjQ4NzZjZWNlYTJk
 
 
-<img src="https://mobileappsuat.pwchk.com/uiengine/RTFAPI/image.ashx?aid=5728487d538cad3ef4a13ee6&pid=5729a126538caa27d0640a59&_id=572989e87479e99470083505"/>
 
-RTFAPI/image.ashx?id=572980857479e994700827bd
-
-http://localhost:26540/RTFAPI/image.ashx?aid=5728487d538cad3ef4a13ee6&pid=57285a66538cae3ef4d591a7&id=5729807d7479e994700827bc
-
-http://localhost:26540/Page.aspx?aid=5728487d538cad3ef4a13ee6&pid=57285a66538cae3ef4d591a7&id=5729807d7479e994700827bc
 
 
 
