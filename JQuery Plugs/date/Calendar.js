@@ -87,10 +87,10 @@
                 left = $(that).offset().left + "px";
             var calendar_div = "<div id=\"calendar\" class=\"calendar\">";
             calendar_div += "<div id=\"calendar_title_containter\" class=\"calendar_title_containter\">";
-            calendar_div += "<div class=\"last_year\"><span id=\"last_year\" title=\"" + commonstr[1] + "\"></span></div><div class=\"last_month\"><span id=\"last_month\" title=\"" + commonstr[4] + "\"></span></div><div class=\"title_year\"><span id=\"title_year\">" + curr_time_arr[0] + commonstr[0] + "</span></div><div class=\"title_month\"><span id=\"title_month\">" + monthFormat((curr_time_arr[1] + 1), 2) + commonstr[3] + "</span></div><div class=\"next_month\"><span id=\"next_month\" title=\"" + commonstr[5] + "\"></span></div><div class=\"next_year\"><span id=\"next_year\" title=\"" + commonstr[2] + "\"></span></div></div>";  //title
+            calendar_div += "<div class=\"calendar_last_year\"><span class=\"last_year calendar_img\" title=\"" + commonstr[1] + "\"></span></div><div class=\"calendar_last_month\"><span class=\"last_month calendar_img\" title=\"" + commonstr[4] + "\"></span></div><div class=\"calendar_title_year\"><span class=\"title_year\">" + curr_time_arr[0] + commonstr[0] + "</span></div><div class=\"calendar_title_month\"><span class=\"title_month\">" + monthFormat((curr_time_arr[1] + 1), 2) + commonstr[3] + "</span></div><div class=\"calendar_next_month\"><span class=\"next_month calendar_img\" title=\"" + commonstr[5] + "\"></span></div><div class=\"calendar_next_year\"><span class=\"next_year calendar_img\" title=\"" + commonstr[2] + "\"></span></div></div>";  //title
             //容器部分
             calendar_div += "<div id=\"calendar_maindata_containter\" class=\"calendar_maindata_containter\">";
-            calendar_div += "<div id=\"week_container\" class=\"week_container\"><div id=\"calendar_week\" class=\"calendar_week\">";
+            calendar_div += "<div id=\"calendar_week_container\" class=\"calendar_week_container\"><div id=\"calendar_week\" class=\"calendar_week\">";
             for (var item in week) {
                 calendar_div += "<div>" + week[item] + "</div>";
             }
@@ -113,17 +113,17 @@
             con_year = createYearEle(curr_time_arr[0]);
             con_month = createMonthEle();
             calendar.append(con_year, con_month);
-            calendar.find("#title_year").bind("click", displayYearDiv);
-            calendar.find("#title_month").bind("click", displayMonthDiv);
-            calendar.find("#last_year").bind("click", lastYear);
-            calendar.find("#next_year").bind("click", nextYear);
-            calendar.find("#last_month").bind("click", lastMonth);
-            calendar.find("#next_month").bind("click", nextMonth);
+            calendar.find(".title_year").bind("click", displayYearDiv);
+            calendar.find(".title_month").bind("click", displayMonthDiv);
+            calendar.find(".last_year").bind("click", lastYear);
+            calendar.find(".next_year").bind("click", nextYear);
+            calendar.find(".last_month").bind("click", lastMonth);
+            calendar.find(".next_month").bind("click", nextMonth);
         }
         //初始化时间面板
         function renderCalendarTime() {
             var time_div = "<div id=\"calendar_time\" class=\"calendar_time\">";
-            time_div += "<span id=\"hover_txt\"><input type=\"text\" class=\"time_txt\" value=\"" + monthFormat(curr_time_arr[3],2) + "\" maxlength=\"2\" id=\"hour\"/></span>:<span id=\"minute_txt\"><input type=\"text\" class=\"time_txt\" value=\"" + monthFormat(curr_time_arr[4], 2) + "\" maxlength=\"2\" id=\"minute\"/></span>:<span id=\"second_txt\"><input type=\"text\" class=\"time_txt\" value=\"" + monthFormat(curr_time_arr[5], 2) + "\" maxlength=\"2\" id=\"second\"/></span>";
+            time_div += "<span id=\"hover_txt\"><input type=\"text\" class=\"time_txt\" value=\"" + monthFormat(curr_time_arr[3], 2) + "\" maxlength=\"2\" id=\"hour\"/></span>:<span id=\"minute_txt\"><input type=\"text\" class=\"time_txt\" value=\"" + monthFormat(curr_time_arr[4], 2) + "\" maxlength=\"2\" id=\"minute\"/></span>:<span id=\"second_txt\"><input type=\"text\" class=\"time_txt\" value=\"" + monthFormat(curr_time_arr[5], 2) + "\" maxlength=\"2\" id=\"second\"/></span>";
             time_div += "</div>";
             calendar_time = $(time_div);
             initTime();

@@ -18,6 +18,10 @@
     overflow: hidden;
 }
 
+.calendar_img {
+    background: url(calendar.png) no-repeat;
+}
+
 .date {
     background: url(date.png) no-repeat;
     background-position: right;
@@ -54,7 +58,12 @@
         cursor: pointer;
     }
 
-.last_year, .last_month, .title_year, .title_month, .next_year, .next_month { /*标题按钮*/
+.calendar_last_year,
+.calendar_last_month,
+.calendar_title_year,
+.calendar_title_month,
+.calendar_next_year,
+.calendar_next_month { /*标题按钮*/
     /*border: 1px solid red;*/
     /*border-top:1px solid red;*/
     display: inline-block;
@@ -65,43 +74,41 @@
     float: left;
 }
 
-#last_year, #last_month, #next_year, #next_month {
+.last_year, .last_month, .next_year, .next_month {
     display: inline-block;
 }
 
-.last_year { /*向前年按钮*/
+.calendar_last_year, .calendar_next_year { /*向前/向后 年按钮*/
     width: 30px;
 }
 
-#last_year {
+.last_year {
     /*border:1px solid red;*/
     width: 25px;
     height: 22px;
-    background: url(calendar.png) no-repeat;
     background-position: -72px 0;
 }
 
-    #last_year:hover {
+    .last_year:hover {
         background-position: -72px -20px;
     }
 
-.last_month { /*向前月按钮*/
+.calendar_last_month, .calendar_next_month { /*向前,向后月按钮*/
     width: 23px;
 }
 
-#last_month {
+.last_month {
     /*border:1px solid red;*/
     width: 20px;
     height: 22px;
-    background: url(calendar.png) no-repeat;
     background-position: -54px 0;
 }
 
-    #last_month:hover {
+    .last_month:hover {
         background-position: -54px -20px;
     }
 
-.title_year { /*年按钮*/
+.calendar_title_year { /*年按钮*/
     width: 50px;
     padding: 0 3px;
     text-align: right;
@@ -109,7 +116,7 @@
     font-size: 14px;
 }
 
-.title_month { /*月按钮*/
+.calendar_title_month { /*月按钮*/
     width: 35px;
     padding: 0 3px;
     text-align: left;
@@ -117,36 +124,26 @@
     font-size: 14px;
 }
 
-.next_month { /*向后月按钮*/
-    width: 23px;
-}
-
-#next_month {
+.next_month {
     /*border: 1px solid red;*/
     width: 20px;
     height: 22px;
-    background: url(calendar.png) no-repeat;
     background-position: -27px 0;
 }
 
-    #next_month:hover {
+    .next_month:hover {
         background-position: -27px -20px;
     }
 
-.next_year { /*向后年按钮*/
-    width: 30px;
-}
-
-#next_year {
+.next_year {
     display: inline-block;
     /*border:1px solid red;*/
     width: 25px;
     height: 22px;
-    background: url(calendar.png) no-repeat;
     background-position: -5px 0;
 }
 
-    #next_year:hover {
+    .next_year:hover {
         background-position: -5px -20px;
     }
 
@@ -169,7 +166,7 @@
     height: 198px;
 }
 
-.week_container { /*周容器*/
+.calendar_week_container { /*周容器*/
     /*position: absolute;
     top:26px;*/
     border-bottom: 1px solid #ccc;
