@@ -48,9 +48,9 @@
         start_disp_year,  //year层的起始年
         has_time = false,     //
         that = this,
-        //date_regex = /([yY]+)([/-])([mM]+)\2([dD]*)\s*([hH]*):?([mM]*):?([sS]*)/,
         time_regex = /[Hh]{1,2}(:[Mm]{1,2})?(:[Ss]{1,2})?/,   //仅仅用作验证文本框是否有时间
-        date_val_regex = /(\d{2,4})(?:[/-])?(\d{1,2})?(?:[/-])?(\d{1,2})?\s*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?/; //提取文本框的日期
+        date_val_regex = /(\d{2,4})(?:[/-])?(\d{1,2})?(?:[/-])?(\d{1,2})?\s*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?/; //提取文本框的日期,针对中国时间
+        
         //全局对象
         var calendar,  //主日期框对象
             calendar_time,  //时间对象
@@ -350,7 +350,7 @@
             if (direction == "left") {
                 dataEle.css({ left: calendar_width }).attr("flag", "0");  //创建日期数据主面板element
                 main_data_containter.append(dataEle);  //吧日期主面板加入父容器,这时连同以前一个数据面板，一共有2个数据面板
-                var containter = calendar.find(".calendar_data_containter");   //获取这2个数据面板 
+                var containter = calendar.find(".calendar_data_containter");   //获取这2个数据面板
                 //2个面板一同移动
                 containter.filter(":[flag=1]").animate({ left: "-" + calendar_width }, dur, function () {
                     $(this).remove();
@@ -372,23 +372,23 @@
             var newdate = defaults.format;
             var realMonth = time_arr[1];
             newdate = newdate.replace(/([Mm]onth)/, commonlang[lang].month[realMonth]);
-            newdate = newdate.replace(/(\W)([yY]+)(\W)/, function (g1, g2, g3, g4) {
-                return yearFormat(g2 + time_arr[0] + g4, g3.length);
+            newdate = newdate.replace(/([\W]|^)([yY]+)(\W|$)/, function (g1, g2, g3, g4) {
+                return g2+yearFormat(time_arr[0], g3.length)+g4;
             });
-            newdate = newdate.replace(/(\W)M+(\D)/, function (res) {
-                return monthFormat(realMonth + 1, res.length);
+            newdate = newdate.replace(/([\W]|^)(M+)(\W|$)/, function (g1, g2, g3, g4) {
+                return g2+monthFormat(realMonth + 1, g3.length)+g4;
             });
-            newdate = newdate.replace(/[dD]+/, function (res) {
-                return monthFormat(time_arr[2], res.length);
+            newdate = newdate.replace(/([\W]|^)([dD]+)(\W|$)/, function (g1, g2, g3, g4) {
+                return g2+monthFormat(time_arr[2], g3.length)+g4;
             });
-            newdate = newdate.replace(/h+/, function (res) {
-                return monthFormat(time_arr[3], res.length);
+            newdate = newdate.replace(/([\W]|^)(h+)(\W|$)/, function (g1, g2, g3, g4) {
+                return g2+monthFormat(time_arr[3], g3.length)+g4;
             });
-            newdate = newdate.replace(/m+/, function (res) {
-                return monthFormat(time_arr[4], res.length);
+            newdate = newdate.replace(/([\W]|^)(m+)(\W|$)/, function (g1, g2, g3, g4) {
+                return g2+ monthFormat(time_arr[4], g3.length)+g4;
             });
-            newdate = newdate.replace(/s+/, function (res) {
-                return monthFormat(time_arr[5], res.length);
+            newdate = newdate.replace(/([\W]|^)(s+)(\W|$)/, function (g1, g2, g3, g4) {
+                return g2+monthFormat(time_arr[5], g3.length)+g4;
             });
             return newdate;
         }
