@@ -60,7 +60,7 @@
 
 .calendar_last_year,
 .calendar_last_month,
-.calendar_title_year,
+.calendar_title_date,
 .calendar_title_month,
 .calendar_next_year,
 .calendar_next_month { /*标题按钮*/
@@ -108,18 +108,9 @@
         background-position: -54px -20px;
     }
 
-.calendar_title_year { /*年按钮*/
-    width: 50px;
+.calendar_title_date { /*标题按钮*/
+    width: 90px;
     padding: 0 3px;
-    text-align: right;
-    font-weight: 600;
-    font-size: 14px;
-}
-
-.calendar_title_month { /*月按钮*/
-    width: 35px;
-    padding: 0 3px;
-    text-align: left;
     font-weight: 600;
     font-size: 14px;
 }

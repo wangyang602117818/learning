@@ -19,27 +19,38 @@
     jQuery.fn.Calendar = function (options) {
         //默认配置
         var defaults = {
-            format: "yyyy-mm-dd",  //日期模板yyyy-mm-dd hh:mm:ss
-            start: "2015-01-01 00:00:00",   //start: new Date(),
-            end: "2049-12-31 00:00:00"  //end: new Date().addYear(1)
+            format: "dd Month yyyy hh:mm:ss",  //日期模板 yyyy-MM-dd hh:mm:ss|yyyy/MM/dd hh:mm:ss|19 May 2016 02:10:23(dd Month yyyy hh:mm:ss)
+            start: "2000-01-01 00:00:00",   //start: new Date(),
+            end: "2049-12-31 00:00:00"      //end: new Date().addYear(1)
         };
+        //用户配置优先级较高
         init(options);
         //全局参数
-        var week = ["日", "一", "二", "三", "四", "五", "六"],
-            month = ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
-            commonstr = ["年", "上一年", "下一年", "月", "上一月", "下一月"],
-            date = new Date(),
-            curr_time_arr = [date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()],
-            text_time_arr,  //保存选中日期
-            start_time_arr,
-            end_time_arr,
-            dur = 300,   //动画速度
-            start_disp_year,  //year层的起始年
-            has_time = false,     //
-            that = this,
-            date_regex = /([yY]+)([/-])([mM]+)\2([dD]*)\s*([hH]*):?([mM]*):?([sS]*)/,
-            time_regex = /[Hh]{1,2}(:[Mm]{1,2})?(:[Ss]{1,2})?/,
-            date_val_regex = /(\d{2,4})(?:[/-])?(\d{1,2})?(?:[/-])?(\d{1,2})?\s*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?/;
+        var lang = "en-us",       //界面语言 en-us|zh-cn
+        commonlang = {
+            "zh-cn": {
+                week: ["日", "一", "二", "三", "四", "五", "六"],
+                month: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"],
+                title: ["年", "上一年", "下一年", "月", "上一月", "下一月"]
+            },
+            "en-us": {
+                week: ["Sa", "Mo", "Tu", "We", "Th", "Fr", "Su"],
+                month: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                title: ["", "Last Year", "Next Year", "", "Last Month", "Next Month"]
+            }
+        },
+        date = new Date(),
+        curr_time_arr = [date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()],
+        text_time_arr,  //保存选中日期
+        start_time_arr,
+        end_time_arr,
+        dur = 300,   //动画速度
+        start_disp_year,  //year层的起始年
+        has_time = false,     //
+        that = this,
+        //date_regex = /([yY]+)([/-])([mM]+)\2([dD]*)\s*([hH]*):?([mM]*):?([sS]*)/,
+        time_regex = /[Hh]{1,2}(:[Mm]{1,2})?(:[Ss]{1,2})?/,   //仅仅用作验证文本框是否有时间
+        date_val_regex = /(\d{2,4})(?:[/-])?(\d{1,2})?(?:[/-])?(\d{1,2})?\s*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?/; //提取文本框的日期
         //全局对象
         var calendar,  //主日期框对象
             calendar_time,  //时间对象
@@ -87,12 +98,17 @@
                 left = $(that).offset().left + "px";
             var calendar_div = "<div id=\"calendar\" class=\"calendar\">";
             calendar_div += "<div id=\"calendar_title_containter\" class=\"calendar_title_containter\">";
-            calendar_div += "<div class=\"calendar_last_year\"><span class=\"last_year calendar_img\" title=\"" + commonstr[1] + "\"></span></div><div class=\"calendar_last_month\"><span class=\"last_month calendar_img\" title=\"" + commonstr[4] + "\"></span></div><div class=\"calendar_title_year\"><span class=\"title_year\">" + curr_time_arr[0] + commonstr[0] + "</span></div><div class=\"calendar_title_month\"><span class=\"title_month\">" + monthFormat((curr_time_arr[1] + 1), 2) + commonstr[3] + "</span></div><div class=\"calendar_next_month\"><span class=\"next_month calendar_img\" title=\"" + commonstr[5] + "\"></span></div><div class=\"calendar_next_year\"><span class=\"next_year calendar_img\" title=\"" + commonstr[2] + "\"></span></div></div>";  //title
+            calendar_div += "<div class=\"calendar_last_year\"><span class=\"last_year calendar_img\" title=\"" + commonlang[lang].title[1] + "\"></span></div>" +
+                "<div class=\"calendar_last_month\"><span class=\"last_month calendar_img\" title=\"" + commonlang[lang].title[4] + "\"></span></div>" +
+                "<div class=\"calendar_title_date\">" + createCalendarTitle() + "</div>" +
+                "<div class=\"calendar_next_month\"><span class=\"next_month calendar_img\" title=\"" + commonlang[lang].title[5] + "\"></span></div>" +
+                "<div class=\"calendar_next_year\"><span class=\"next_year calendar_img\" title=\"" + commonlang[lang].title[2] + "\"></span></div>" +
+                "</div>";  //title
             //容器部分
             calendar_div += "<div id=\"calendar_maindata_containter\" class=\"calendar_maindata_containter\">";
             calendar_div += "<div id=\"calendar_week_container\" class=\"calendar_week_container\"><div id=\"calendar_week\" class=\"calendar_week\">";
-            for (var item in week) {
-                calendar_div += "<div>" + week[item] + "</div>";
+            for (var item in commonlang[lang].week) {
+                calendar_div += "<div>" + commonlang[lang].week[item] + "</div>";
             }
             calendar_div += "</div></div>";
             calendar_div += createDataDiv();   //天数
@@ -107,6 +123,17 @@
             $("body").append(calendar);
             initDate();
             if (has_time) renderCalendarTime().appendTo(calendar);   //时间
+        }
+        function createCalendarTitle() {
+            var title = "";
+            if (lang === "zh-cn") {  //中文
+                title = "<span class=\"title_year\">" + curr_time_arr[0] + commonlang[lang].title[0] + "</span>" +
+                    " <span class=\"title_month\">" + monthFormat((curr_time_arr[1] + 1), 2) + commonlang[lang].title[3] + "</span>";
+            } else {  //英文
+                title = " <span class=\"title_month\">" + commonlang[lang].month[curr_time_arr[1]] + "</span> " +
+                    " <span class=\"title_year\">" + curr_time_arr[0] + "</span> ";
+            }
+            return title;
         }
         //日期面板的点击事件
         function initDate() {
@@ -257,7 +284,7 @@
             if (isMonthDisplay()) {   //month目前在展现
                 nextMonthDisplay("right");
             }
-            calendar.find("#title_year").text(curr_time_arr[0] + "年");
+            calendar.find(".title_year").text(curr_time_arr[0] + commonlang[lang].title[0]);
             changeMainData("right");  //动画改变日期面板
         }
         //下一年
@@ -270,7 +297,7 @@
             if (isMonthDisplay()) {   //month目前在展现
                 nextMonthDisplay("left");
             }
-            calendar.find("#title_year").text(curr_time_arr[0] + "年");
+            calendar.find(".title_year").text(curr_time_arr[0] + commonlang[lang].title[0]);
             changeMainData("left");  //动画改变日期面板
         }
         //上一月
@@ -279,10 +306,10 @@
             if (curr_time_arr[1] < 0) {
                 curr_time_arr[0]--;
                 curr_time_arr[1] = 11;
-                calendar.find("#title_year").text(curr_time_arr[0] + "年");
+                calendar.find(".title_year").text(curr_time_arr[0] + commonlang[lang].title[0]);
                 if (isMonthDisplay()) nextMonthDisplay("right");
             }
-            calendar.find("#title_month").text(monthFormat(parseInt(curr_time_arr[1], 10) + 1, 2) + "月");
+            calendar.find(".title_month").text(commonlang[lang].month[curr_time_arr[1]].substring(0, 6) + commonlang[lang].title[3]);
             changeMainData("right");//动画改变日期面板
         }
         //下一月
@@ -291,10 +318,10 @@
             if (curr_time_arr[1] > 11) {
                 curr_time_arr[0]++;
                 curr_time_arr[1] = 0;
-                calendar.find("#title_year").text(curr_time_arr[0] + "年");
+                calendar.find(".title_year").text(curr_time_arr[0] + commonlang[lang].title[0]);
                 if (isMonthDisplay()) nextMonthDisplay("left");
             }
-            calendar.find("#title_month").text(monthFormat(parseInt(curr_time_arr[1], 10) + 1, 2) + "月");
+            calendar.find(".title_month").text(commonlang[lang].month[curr_time_arr[1]].substring(0, 6) + commonlang[lang].title[3]);
             changeMainData("left");
         }
         //改变主日期面板,direction=动画方向
@@ -340,22 +367,29 @@
                 containter.filter(":[flag=0]").animate({ left: 0 }, dur).attr("flag", "1");
             }
         }
-        //格式化日期 time_arr=数组
+        //格式化日期 time_arr=数组,往界面输出 格式化后的日期
         function dateFormat(time_arr) {
-            var date_arr = date_regex.exec(defaults.format);
-            var real_month = time_arr[1];
-            real_month++;   //用来显示的月份,要加1
-            var year = yearFormat(time_arr[0], date_arr[1].length),
-                month = monthFormat(real_month, date_arr[3].length),
-                day = monthFormat(time_arr[2], date_arr[4].length),
-                hour = monthFormat(time_arr[3], date_arr[5].length),
-                minutes = monthFormat(time_arr[4], date_arr[6].length),
-                seconds = monthFormat(time_arr[5], date_arr[7].length);
-            var newdate = year + date_arr[2] + month;
-            if (day.length != 0) newdate += date_arr[2] + day;
-            if (hour.length != 0) newdate += " " + hour;
-            if (minutes.length != 0) newdate += ":" + minutes;
-            if (seconds.length != 0) newdate += ":" + seconds;
+            var newdate = defaults.format;
+            var realMonth = time_arr[1];
+            newdate = newdate.replace(/([Mm]onth)/, commonlang[lang].month[realMonth]);
+            newdate = newdate.replace(/(\W)([yY]+)(\W)/, function (g1, g2, g3, g4) {
+                return yearFormat(g2 + time_arr[0] + g4, g3.length);
+            });
+            newdate = newdate.replace(/(\W)M+(\D)/, function (res) {
+                return monthFormat(realMonth + 1, res.length);
+            });
+            newdate = newdate.replace(/[dD]+/, function (res) {
+                return monthFormat(time_arr[2], res.length);
+            });
+            newdate = newdate.replace(/h+/, function (res) {
+                return monthFormat(time_arr[3], res.length);
+            });
+            newdate = newdate.replace(/m+/, function (res) {
+                return monthFormat(time_arr[4], res.length);
+            });
+            newdate = newdate.replace(/s+/, function (res) {
+                return monthFormat(time_arr[5], res.length);
+            });
             return newdate;
         }
         //格式化年，len=位数
@@ -422,16 +456,16 @@
         //创建月容器div
         function createMonthEle() {
             var month_div = "<div class=\"calendar_mainmonth_containter\" flag=\"0\">";
-            for (var i = 0; i < month.length; i++) {
+            for (var i = 0; i < commonlang[lang].month.length; i++) {
                 var disabled = false;  //禁用标记
                 var months = Number(curr_time_arr[0]) * 12 + i,
                     startmonths = Number(start_time_arr[0]) * 12 + Number(start_time_arr[1]),
                     endmonths = Number(end_time_arr[0]) * 12 + Number(end_time_arr[1]);
                 if (months < startmonths || months > endmonths) disabled = true;
                 if (disabled) {
-                    month_div += "<div class=\"disabled\">" + month[i] + "</div>";
+                    month_div += "<div class=\"disabled\">" + commonlang[lang].month[i] + "</div>";
                 } else {
-                    month_div += "<div>" + month[i] + "</div>";
+                    month_div += "<div>" + commonlang[lang].month[i] + "</div>";
                 }
             }
             month_div += "</div>";
@@ -482,7 +516,7 @@
                 } if (txt < curr_year) {
                     changeMainData("right");
                 }
-                calendar.find("#title_year").text(txt + "年");
+                calendar.find(".title_year").text(txt + commonlang[lang].title[0]);
                 displayYearDiv();
             }
         }
@@ -490,8 +524,8 @@
             var srcElement = $(event.target);  //触发事件的原对象
             if (srcElement.hasClass("disabled")) return false;
             var txt = srcElement.text();  //点击的月份
-            for (var i = 0; i < month.length; i++) {
-                if (month[i] == txt) {
+            for (var i = 0; i < commonlang[lang].month.length; i++) {
+                if (commonlang[lang].month[i] == txt) {
                     var curr_month = curr_time_arr[1];   //保存当前的月份
                     curr_time_arr[1] = i;  //修改全局月份
                     if (i > curr_month) {
@@ -500,7 +534,7 @@
                     if (i < curr_month) {
                         changeMainData("right");
                     }
-                    calendar.find("#title_month").text(monthFormat(i + 1, 2) + "月");
+                    calendar.find(".title_month").text(commonlang[lang].month[i] + commonlang[lang].title[3]);
                     displayMonthDiv();
                     return;
                 }
