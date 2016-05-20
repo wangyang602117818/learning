@@ -8,14 +8,13 @@
     jQuery.fn.Calendar = function (options) {
         //默认配置
         var defaults = {
-            format: "dd Month yyyy",  //显示到界面的格式 yyyy-MM-dd hh:mm:ss|yyyy/MM/dd hh:mm:ss|19 May 2016 02:10:23(dd Month yyyy hh:mm:ss)
+            format: "dd Month yyyy",  //界面展示的格式 yyyy-MM-dd hh:mm:ss|yyyy/MM/dd hh:mm:ss|19 May 2016 02:10:23(dd Month yyyy hh:mm:ss)
             start: "2000-01-01 00:00:00",      //start: new Date(),
             end: "2049-12-31 00:00:00",        //end: new Date().addYear(1)
-            dateString: "",                    //字符串,要显示到界面的时间值,格式必须与dateformat一致
+            dateString: "",                    //字符串,默认显示的时间值,yyyy-MM-dd hh:mm:ss|yyyy/MM/dd hh:mm:ss
             useFormat: "yyyy-MM-dd hh:mm:ss"  //与程序交互的时间格式
+
         };
-        //用户配置优先级较高
-        init(options);
         //全局参数
         var lang = "en-us",       //界面语言 en-us|zh-cn
         commonlang = {
@@ -51,15 +50,18 @@
             con_minute,
             con_second;
 
+        init(options);     //初始化用户配置
         that.bind("click", renderCalendar);
-        that.keypress(function () { return false; });
-        setDate(defaults.dateString);
+        that.keypress(function (event) {
+            return false;
+        });  //禁用文本框输入
+
         return {
             setDate: setDate,
             getDate: getDate
-        };    
-
+        };
         function setDate(dateString) {
+            that.attr("dateval", "");
             if (dateString.trim()) {
                 date = inputDateConvert(dateString);
                 curr_time_arr = [date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()];
@@ -79,11 +81,13 @@
             defaults.start = options.start || defaults.start;
             defaults.end = options.end || defaults.end;
             defaults.dateString = options.dateString || defaults.dateString;
+            if (time_regex.test(defaults.format)) has_time = true;  //标记是否有时间
+            if (!has_time) defaults.useFormat = defaults.useFormat.split(" ")[0];
+            setDate(defaults.dateString);  //显示用户设置的默认值
         }
         //显示日期层
         function renderCalendar() {
             $("#calendar").remove();
-            if (time_regex.test(defaults.format)) has_time = true;
             if (defaults.start instanceof Date) {
                 start_time_arr = [defaults.start.getFullYear(), defaults.start.getMonth(), defaults.start.getDate(), defaults.start.getHours(), defaults.start.getMinutes(), defaults.start.getSeconds()];
             } else {

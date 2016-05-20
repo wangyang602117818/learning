@@ -12,10 +12,14 @@
         $(function () {
             $("#txt1").Calendar();
             $("#txt2").Calendar({ format: "dd Month yyyy hh:mm:ss" });
-            $("#txt3").Calendar().setDate("2014-01-01")
-            //$("#txt2").Calendar({ dateString: "2017-04-28 12:22:33" });
-            //$("#txt3").Calendar({ start: new Date(), end: new Date().addYear(1).addMonth(1).addDay(1) });
-            //$("#txt4").Calendar().setDate("2025-08-11 18:47:00");
+            $("#txt3").Calendar({ dateString: "2014-01-01" });
+            var txt4 = $("#txt4").Calendar();
+            $("#btn4").click(function () {
+                alert(txt4.getDate());
+            });
+
+            $("#txt5").Calendar({ start: new Date(), end: new Date().addYear(1).addMonth(1).addDay(1) });
+            $("#txt6").Calendar({ start: "2014-01-01 00:00:00", end: "2018-01-01 00:00:00" });
 
 
         });
@@ -55,38 +59,40 @@
     <br />
     用法二:设置要展示的时间格式,<br />
     &nbsp; $("#txt2").Calendar({format:"dd Month yyyy hh:mm:ss"})<br />
-    &nbsp; 可用的格式:(yyyy-MM-dd hh:mm:ss | yyyy/MM/dd hh:mm:ss | dd Month yyyy hh:mm:ss),默认的展示格式:dd Month yyyy<br/>
+    &nbsp; 可用的格式:(yyyy-MM-dd hh:mm:ss | yyyy/MM/dd hh:mm:ss | dd Month yyyy hh:mm:ss),默认的展示格式:dd Month yyyy,(如用法一)<br />
     <input type="text" id="txt2" />
     <br />
     <br />
-    用法三:设置文本框的默认值(有2种方式) <br />
+    用法三:设置文本框的默认值 2种方式<br />
     &nbsp; 方式一: $("#txt3").Calendar({dateString:"2014-01-01"})<br />
-    &nbsp; 方式二: $("#txt3").Calendar().setDate("2014-01-01")<br />
-    &nbsp; 注: dateString只能有2种格式(yyyy-MM-dd hh:mm:ss | yyyy/MM/dd hh:mm:ss),因为从数据库取出来的大部分都是这2种格式<br />
+    &nbsp; 方式二: $("#txt3").Calendar().setDate("2014-01-01");<br />
+    &nbsp; 注: dateString只能有2种格式(yyyy-MM-dd hh:mm:ss | yyyy/MM/dd hh:mm:ss)<br />
     <input type="text" id="txt3" />
-    <!--用法二：带日期和时间框:  <br />
-        $("#txt1").Calendar({ format: "yyyy-MM-dd hh:mm:ss" });<br />
-    <input type="text" id="txt3"/>-->
-    <!--<br />
     <br />
     <br />
+    用法四:获取文本框的日期值 2种方式<br />
+    &nbsp;方式一: var txt4 = $("#txt4").Calendar();<br />
+    &nbsp;alert(txt4.getDate()) //日期值 <br>
+    &nbsp;方式二: $("#txt4").attr("dateval")  //日期值<br/>
+    <input type="text" id="txt4" /> <input type="button" value="get" id="btn4" />
+    <br />
+    <br />
+    <br />
+    <br />
+    <font color="red">=======================特殊需求=====================================</font>
+    <br>
     技巧一：时间范围限制:<br />
     start:开始时间（今天）： new Date()<br />
     end:结束时间在（在今天的基础上加一年零一个月零一天）： new Date().addYear(1).addMonth(1).addDay(1)<br />
     $("#txt3").Calendar({ start: new Date(), end: new Date().addYear(1).addMonth(1).addDay(1) }});<br />
-    <input type="text" id="txt3" />
-    <br />
-    <br />
-    <br />
-    <br />
+    <input type="text" id="txt5" />
     <br />
     <br />
     技巧二：绝对时间范围限制：<br />
-    $("#txt4").Calendar({ format: "yyyy-MM-dd hh:mm:ss", start: "2014-01-01 00:00:00", end: "2016-01-01 00:00:00" });<br />
-    <input type="text" id="txt4" />
+    $("#txt4").Calendar({ start: "2014-01-01 00:00:00", end: "2018-01-01 00:00:00" });<br />
+    <input type="text" id="txt6" />
     <br />
     <br />
-    <br />-->
 </body>
 </html>
 
