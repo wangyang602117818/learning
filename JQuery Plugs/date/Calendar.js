@@ -2,26 +2,17 @@
 /***************************调用说明:***********************************
 /*
 开发者:wangyang
-1 没有任何参数的调用(不带时间)
-       $(".className").Calendar()
-2 带时间和范围的调用
-       $(".className").Calendar({isTime:true,start:new Date(),end:new Date().addYear(1)})
-       isTime:显示时间
-       start:开始时间,有两种设置方式
-             1:对象形式:new Date()
-             2:字符串形式: "2015-01-01 00:00:00"
-       end:结束时间,有两种设置方式
-             1:对象形式:  new Date()
-             2:字符串形式:"2016-01-01 00:00:00"
-   其中对象形式的调用有3个扩展方法可用 new Date().addYear(1) ,new Date().addMonth(1),new Date().addMonth(1)
+调用方法请参考文档
 **********************************************************************/
 (function (win, jQuery) {
     jQuery.fn.Calendar = function (options) {
         //默认配置
         var defaults = {
-            format: "dd Month yyyy hh:mm:ss",  //日期模板 yyyy-MM-dd hh:mm:ss|yyyy/MM/dd hh:mm:ss|19 May 2016 02:10:23(dd Month yyyy hh:mm:ss)
-            start: "2000-01-01 00:00:00",   //start: new Date(),
-            end: "2049-12-31 00:00:00"      //end: new Date().addYear(1)
+            format: "dd Month yyyy",  //显示到界面的格式 yyyy-MM-dd hh:mm:ss|yyyy/MM/dd hh:mm:ss|19 May 2016 02:10:23(dd Month yyyy hh:mm:ss)
+            start: "2000-01-01 00:00:00",      //start: new Date(),
+            end: "2049-12-31 00:00:00",        //end: new Date().addYear(1)
+            dateString: "",                    //字符串,要显示到界面的时间值,格式必须与dateformat一致
+            useFormat: "yyyy-MM-dd hh:mm:ss"  //与程序交互的时间格式
         };
         //用户配置优先级较高
         init(options);
@@ -40,7 +31,7 @@
             }
         },
         date = new Date(),
-        curr_time_arr = [date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()],
+        curr_time_arr = [date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()],  //文本框中的日期
         text_time_arr,  //保存选中日期
         start_time_arr,
         end_time_arr,
@@ -48,9 +39,8 @@
         start_disp_year,  //year层的起始年
         has_time = false,     //
         that = this,
-        time_regex = /[Hh]{1,2}(:[Mm]{1,2})?(:[Ss]{1,2})?/,   //仅仅用作验证文本框是否有时间
+        time_regex = /[Hh]{1,2}:([Mm]{1,2})?(:[Ss]{1,2})?/,   //仅仅用作验证文本框是否有时间
         date_val_regex = /(\d{2,4})(?:[/-])?(\d{1,2})?(?:[/-])?(\d{1,2})?\s*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?/; //提取文本框的日期,针对中国时间
-
         //全局对象
         var calendar,  //主日期框对象
             calendar_time,  //时间对象
@@ -60,14 +50,35 @@
             con_hour,
             con_minute,
             con_second;
+
         that.bind("click", renderCalendar);
-        return this;    //返回JQuery对象,方便继续往后.
+        that.keypress(function () { return false; });
+        setDate(defaults.dateString);
+        return {
+            setDate: setDate,
+            getDate: getDate
+        };    
+
+        function setDate(dateString) {
+            if (dateString.trim()) {
+                date = inputDateConvert(dateString);
+                curr_time_arr = [date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()];
+                text_time_arr = curr_time_arr.slice(0);
+                var showdate = dateFormat(curr_time_arr, defaults.format);
+                var usedate = dateFormat(curr_time_arr, defaults.useFormat);
+                that.val(showdate);
+                that.attr("dateval", usedate);
+            }
+        }
+        function getDate() {
+            return that.attr("dateval");
+        }
         function init(options) {
             options = options || {};
-            if (options.isTime) defaults.format = "yyyy-mm-dd hh:mm:ss";
             defaults.format = options.format || defaults.format;
             defaults.start = options.start || defaults.start;
             defaults.end = options.end || defaults.end;
+            defaults.dateString = options.dateString || defaults.dateString;
         }
         //显示日期层
         function renderCalendar() {
@@ -83,8 +94,8 @@
             } else {
                 end_time_arr = startEndDateConvert(defaults.end);
             }
-            if (that.val().trim() != "") {
-                date = inputDateConvert(that.val());
+            if (that.attr("dateval") && that.attr("dateval").trim() != "") {
+                date = inputDateConvert(that.attr("dateval"));
                 curr_time_arr = [date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()];
                 text_time_arr = curr_time_arr.slice(0);
             }
@@ -368,29 +379,28 @@
             }
         }
         //格式化日期 time_arr=数组,往界面输出 格式化后的日期
-        function dateFormat(time_arr) {
-            var newdate = defaults.format;
+        function dateFormat(time_arr, format) {
             var realMonth = time_arr[1];
-            newdate = newdate.replace(/([Mm]onth)/, commonlang[lang].month[realMonth]);
-            newdate = newdate.replace(/([\W]|^)([yY]+)(\W|$)/, function (g1, g2, g3, g4) {
-                return g2+yearFormat(time_arr[0], g3.length)+g4;
+            format = format.replace(/([Mm]onth)/, commonlang[lang].month[realMonth]);
+            format = format.replace(/([\W]|^)([yY]+)(\W|$)/, function (g1, g2, g3, g4) {
+                return g2 + yearFormat(time_arr[0], g3.length) + g4;
             });
-            newdate = newdate.replace(/([\W]|^)(M+)(\W|$)/, function (g1, g2, g3, g4) {
-                return g2+monthFormat(realMonth + 1, g3.length)+g4;
+            format = format.replace(/([\W]|^)(M+)(\W|$)/, function (g1, g2, g3, g4) {
+                return g2 + monthFormat(realMonth + 1, g3.length) + g4;
             });
-            newdate = newdate.replace(/([\W]|^)([dD]+)(\W|$)/, function (g1, g2, g3, g4) {
-                return g2+monthFormat(time_arr[2], g3.length)+g4;
+            format = format.replace(/([\W]|^)([dD]+)(\W|$)/, function (g1, g2, g3, g4) {
+                return g2 + monthFormat(time_arr[2], g3.length) + g4;
             });
-            newdate = newdate.replace(/([\W]|^)(h+)(\W|$)/, function (g1, g2, g3, g4) {
-                return g2+monthFormat(time_arr[3], g3.length)+g4;
+            format = format.replace(/([\W]|^)(h+)(\W|$)/, function (g1, g2, g3, g4) {
+                return g2 + monthFormat(time_arr[3], g3.length) + g4;
             });
-            newdate = newdate.replace(/([\W]|^)(m+)(\W|$)/, function (g1, g2, g3, g4) {
-                return g2+ monthFormat(time_arr[4], g3.length)+g4;
+            format = format.replace(/([\W]|^)(m+)(\W|$)/, function (g1, g2, g3, g4) {
+                return g2 + monthFormat(time_arr[4], g3.length) + g4;
             });
-            newdate = newdate.replace(/([\W]|^)(s+)(\W|$)/, function (g1, g2, g3, g4) {
-                return g2+monthFormat(time_arr[5], g3.length)+g4;
+            format = format.replace(/([\W]|^)(s+)(\W|$)/, function (g1, g2, g3, g4) {
+                return g2 + monthFormat(time_arr[5], g3.length) + g4;
             });
-            return newdate;
+            return format;
         }
         //格式化年，len=位数
         function yearFormat(year, len) {
@@ -551,8 +561,10 @@
                     curr_time_arr[4] = calendar_time.find("#minute").val();
                     curr_time_arr[5] = calendar_time.find("#second").val();
                 }
-                var date = dateFormat(curr_time_arr);
-                that.val(date);
+                var showdate = dateFormat(curr_time_arr, defaults.format);
+                var usedate = dateFormat(curr_time_arr, defaults.useFormat);
+                that.val(showdate);
+                that.attr("dateval", usedate);
                 calendar.hide();
             }
         }
