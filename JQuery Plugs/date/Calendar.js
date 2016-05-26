@@ -8,7 +8,7 @@
     jQuery.fn.Calendar = function (options) {
         //默认配置
         var defaults = {
-            format: "dd Month yyyy",  //界面展示的格式 yyyy-MM-dd hh:mm:ss|yyyy/MM/dd hh:mm:ss|19 May 2016 02:10:23(dd Month yyyy hh:mm:ss)
+            format: "dd Month yyyy",           //界面展示的格式 yyyy-MM-dd hh:mm:ss|yyyy/MM/dd hh:mm:ss|19 May 2016 02:10:23(dd Month yyyy hh:mm:ss)
             start: "2000-01-01 00:00:00",      //start: new Date(),
             end: "2049-12-31 00:00:00",        //end: new Date().addYear(1)
             dateString: "",                    //字符串,默认显示的时间值,yyyy-MM-dd hh:mm:ss|yyyy/MM/dd hh:mm:ss
