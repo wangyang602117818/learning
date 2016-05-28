@@ -1,4 +1,4 @@
-﻿git使用前置配置
+git使用前置配置
    --创建用户名和邮箱
      git config --global user.name "wangyang"
      git config --global user.email "60211781@qq.com"
@@ -66,5 +66,4 @@ git高级之保存工作现场
      用git stash list查看工作现场，
      用git stash pop恢复工作现场
 
-
-
+aa
