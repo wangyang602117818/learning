@@ -1,0 +1,10 @@
+基础使用线程的方式
+	Thread thread=new Thread(M1);
+	thread.Start();      //无法返回值
+使用Task的方式,启动即执行,会默认使用线程池
+	Task.Factory.StartNew(M1);
+	Task.Run(new Action(M1));
+
+直接使用线程池的方式
+	ThreadPool.QueueUserWorkItem(M1,"m1");
+
