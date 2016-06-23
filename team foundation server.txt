@@ -1,0 +1,15 @@
+Team Foundation Server的使用
+1:下载tfs服务器安装好,安装好后在服务器控制台,可以看到项目collection信息(这一步在服务器上进行)
+2:把项目传到TFS服务器
+	1)打开tfs管理界面(http://ywang363pri1:8080/tfs/) ,新建一个团队项目,此时该项目还是空的,没有任何代码
+	2)用vs打开将要上传的项目,选择 Team Explorer -> source control explorer
+	3)在服务器上选好一个项目,然后mapping,此时服务器端还没有任何代码,
+	4)转到solution explorer 右击解决方案,add solution to source control,此时本地的项目和服务器端的项目做了一个映射,然后checkin就完成了
+3:删除项目
+	1)断开与服务器的mapping,只要删掉工作空间就行了
+	2)到网页管理界面上删除项目
+
+总结:
+新建一个空的项目是在服务器端完成的,打开本地的项目,mapping 以后才能把本地的代码传到服务器
+
+Administration Consoel Users:配置的是可以登录web管理界面的用户列表
