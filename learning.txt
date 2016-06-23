@@ -1,0 +1,5 @@
+1.下载elastic Search  :https://www.elastic.co/downloads/elasticsearch   [ZIP]
+2.下载jdk （64位）：java官方最新版本
+3.安装jdk：http://jingyan.baidu.com/article/3c343ff70bc6ea0d377963df.html
+4.安装es:http://www.oschina.net/translate/elasticsearch-getting-started
+5.各种插件：http://www.cnblogs.com/huangfox/p/3541300.html 
