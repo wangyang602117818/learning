@@ -1,0 +1,5 @@
+第一步:开通qq通讯组价
+登陆 http://shang.qq.com/
+点击 推广工具->立即免费开通
+第二部:生成连接
+http://connect.qq.com/intro/wpa
