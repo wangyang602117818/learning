@@ -1,0 +1,41 @@
+主语:句子叙述的主体
+谓语:描述主语做了什么动作,处在什么状态
+宾语:动作的承受对象
+系动词:又称联系动词,后跟(表语)构成(表系结构),用来修饰主语
+表语:系动词后面就是表语
+
+句式一:主+谓
+句式二:主+系+表语
+句式三:主+谓+宾语
+句式四:主+谓+间接宾语+直接宾语
+句式五:主+谓+宾语+宾语补足语
+
+主谓宾 和 主系表 区别
+	主谓宾:主语和宾语没有关系,强调动作的
+	主系表:主语和表语是有关系的,表语是主语的状态或身份,强调状态的
+及物动词和不及物动词
+	及物动词:后面可以直接跟宾语
+		She speaks English   speaks是及物动词
+		I give you a toy     give是及物动词
+	不及物动词:要借助介词才可以跟宾语
+		she speak at the meeting  speak是不及物动词
+系动词种类
+	1)状态系动词:be(am,is,are,was,were,be,being.been)
+	2)持续系动词:keep,remain,stay,rest,lie,stand
+		He always kept silent at meeting.
+		The door remained closed
+	3)表象系动词:seem,appear,look
+		He looks tired
+		He seems (to be) quite happy
+	4)感官系动词:feel,smell,sound,taste
+		This kind of cloth feels very soft
+		It sounds good idea
+		This food tastes good
+	5)变化系动词:become,grow,turn,fall,get,go,come,run
+		He became mad
+		She had grown thinner and thinner
+		The milk will soon turn sour
+		Several people fell ill
+	6)终止系动词:prove,turn out
+		His story proved false
+		My intuition turned out to be correct
