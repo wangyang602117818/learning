@@ -1,0 +1,13 @@
+主格代词:主语上的代词
+	I,he,she,it,you,we,they
+宾格代词:宾语上的代词
+	me,him,her,it,you,us,them
+形容词性的物主代词:可以做形容词的代词,翻译成 xxx的
+	单数:my,your.his,her,its,(我的,你的,他的)
+	复数:our,your,their,  (我们的,你们的,他们的)
+名词形式的物主代词:可以做名词使用的代词,		
+	单数:mine,yours,his,her,its,
+	复数:ours,yours,theirs
+反身代词:指代句子主语自己,我自己,你自己,他自己
+	单数: myself,yourself,herself,himself,itself,
+	复数: ourselves,yourselves,themselves

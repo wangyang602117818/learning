@@ -1,4 +1,4 @@
-am,is,are,was,were,be,being.been  总共8种
+am,is,are,was,were,be,being,been  总共8种
 一般现代时
 	am:	第一人称单数 
 			I am twelve
@@ -13,3 +13,16 @@ am,is,are,was,were,be,being.been  总共8种
 一般过去时
 	was : 单数 am 和 is 的过去时 
 	were: 复数 are 的过去时
+一般将来时
+	be:   be 动词原形
+现在完成时
+	been: be 动词过去分词
+		they have been back
+
+
+
+
+===========================
+否定形式:直接在后面加 not  
+am not  isn't   aren't    wasn't    weren't
+
