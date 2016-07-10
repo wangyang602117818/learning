@@ -1,0 +1,20 @@
+实意动词:有实际意义的动词
+实意动词变否定:借助助动词(do,does,did)
+1 一般现在时&主语不是第三人称单数:
+	变否定:动词前面加 don't
+		I want to go to Beijing  =>  I don't want to go to Beijing
+	变疑问:在句首加Do
+		They live in Chongqing  =>    Do They Live in Chongqing?
+		Lucy and Lily know about China  => Do Lucy and Lily know about China?
+2 一般现在时&主语是第三人称单数:
+	变否定 :动词前面加 doesn't ,然后动词变原形
+		He wants to go to Beijing  => He doesn't want to go to Beijing
+	变疑问:在句首加Does ,然后动词变原形
+		He wants to go to Beijing  => Does He want to go to Beijing?
+3 如果句子是过去时:动词前面加 didn't (动词变原形,因为did本身就是过去时,所以后面的动词要变原形)
+	I swim last night   =>  I didn't swim last night
+
+
+	
+
+

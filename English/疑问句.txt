@@ -1,0 +1,20 @@
+六大疑问词
+who whose where when what how
+1) 含有be动词(am|is|are)的一般疑问句
+	直接把be动词调至句首,第一人称要变第二人称,some要变any
+	I'm in Class2,Grade1 => Are you in Class2,Grade1?
+	They are student  => Are they student?
+	There are some books on my desk => Are there any books on my desk?
+2) 含有情态动词的一般疑问句
+	直接把情态动词调至句首,和be动词的一般疑问句类似
+	I can spell the words   => Can you spell the words?
+3) 含有实意动词的一般疑问句
+	要在句首加 do|does|did (does用在主语是单三形式,did在一般过去时使用)
+	I like English   =>  Do you like English?
+	She goes to school today  => Does she go to school today?
+	We sweep the floor every day  => Do you sweep the floor every day? 
+
+how long :多久
+how far  :多远,距离
+how often :频率
+why  :原因

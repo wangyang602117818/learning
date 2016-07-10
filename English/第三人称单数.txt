@@ -4,8 +4,19 @@
 		例子 He likes watching TV
 	2)单个 人名|地名|称呼 做主语 是第三人称单数
 		例子 Tom looks like her mother
-
-
+		     Beijing is in China
+	3)单数可数名字|this|that|the+单数可数名词 做主语,是单三形式
+		A horse is a useful animal
+		This book is yours
+	4)不定代词(someone, somebody, nobody, everything, something)以及指示代词(this, that),做主语,是单三形式
+		Everyone is here.
+		There is something wrong with the watch.
+		This is a pen.
+	5)不可数名词作主语,是单三形式
+		The milk is in the glass
+		The bread is very small
+	6)数字和字母做主语时
+		"I" is a letter
 动词的单三形式
 	1)直接在后面加s
 	2)以 s|x|ch|o 结尾的 后面加es
@@ -13,3 +24,4 @@
 
 动词 have 的单三形式 has；
 动词 be 的第三人称单数形式是is。
+动词 do 的单三形式是 does
