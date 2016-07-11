@@ -1,0 +1,41 @@
+第一组5个:some,any,most,every,all
+	some,any :都表示一些
+		some 主要用于肯定句,希望得到肯定回答时,也可以用在疑问句,后面接可数名词复数
+		any  只用在否定和疑问句中
+	most :大多数
+		后面是可数名词时,复数
+	every :每一个,
+		后面接可数名词单数
+	all :所有
+		后面接可数名词复数 , 不可数名词单数
+
+第二组3个:both,either,neither
+	both :两者都
+	either :两者之一
+	neither :两者都不
+第三组4个: many,mnuch,a lot of(lots of),plenty of
+	many : 修饰可数名词,表示许多
+	much : 修饰不可数名词,表示许多
+	a lot of(lots of),plenty of:可数和不可数都可以修饰
+第四组2个: a few,few ,后面都接可数名词的复数
+	a few :肯定含义,几个
+		A few books are put into the box
+	few : 否定含义,没几个
+		Few books are put into the box
+第五组2个: a little, little,后面都接不可数名词
+	a little : 肯定含义,一点
+		There is a little water in the bottle
+	little: 否定含义,没多点
+		There is little water int the bottle
+第六组2个: none,no one
+	区别一:
+		none:可以指人或物,暗示一定的范围,通常和of短语一起使用
+			None of that money on the table is mine
+			None of us enjoy getting up early
+		no one:指人,不能与of短语一起使用
+			No one knows about it
+	区别二:与回答有关
+		none : 与数量有关,可回答 how many , 表示一个也没有
+			How many people are there in that room?   -- none
+		no one : 与人有关,可回答 who ,表示什么人也没有
+			Who was late today?  -- No one
