@@ -1,0 +1,10 @@
+被动语态:主语是动作的承受着
+	一般现在时: be + done + by sb
+		He is taken to America by his mother
+	一般过去时: was|were + done
+	一般将来时: will be done
+	现在进行时: be being done  (being是固定的)
+	过去进行时: was|were being done
+		The book was being read by him
+	现在完成时: have|has been done
+	过去完成时: had been done

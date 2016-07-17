@@ -4,16 +4,25 @@
 	一:基本助动词
 		do(does|did),have(has|had),be
 	二:情态助动词
-		may(might),can(could),will(would),shall(should),
+		may(might),can,could,will,would,shall,should,
 		must,need,dare,used to,ought to
 情态动词:
 	本身具有一定词义,给谓语添加情态色彩,表示态度,看法,可能,应该,必要.
 	情态动词后加动词原形
 	一:只做情态动词
-		must,can(could),may(might),ought to
+		must,can,could,may(might),ought to
 	二:可做情态动词和实意动词
 		need,dare
 	三:可做情态动词和助动词
-		shall(should),will(would)
+		shall,should,,will,would
 	四:具有情态动词的特征
 		have(had) to , used to
+
+=======================================
+had better   +动词原形  //最好**
+would rather +动词原形  //还是**为好
+used to   +v    //过去常常
+would    +v     //表示反复发生的动作
+
+
+
