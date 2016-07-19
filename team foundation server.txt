@@ -13,3 +13,5 @@ Team Foundation Server的使用
 新建一个空的项目是在服务器端完成的,打开本地的项目,mapping 以后才能把本地的代码传到服务器
 
 Administration Consoel Users:配置的是可以登录web管理界面的用户列表
+
+
