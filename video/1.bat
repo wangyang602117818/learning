@@ -1,1 +1,1 @@
-ffmpeg -i 1.mp4 -c:v libx264 -c:a aac -strict -2 -f hls -hls_time 5 output.m3u8 
+ffmpeg -i 1.mp4 -c:v libx264 -c:a aac -strict -2 -f hls -hls_time 20 output.m3u8 
