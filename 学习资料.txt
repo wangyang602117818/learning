@@ -1,8 +1,8 @@
-1.ÏÂÔØelastic Search  :https://www.elastic.co/downloads/elasticsearch   [ZIP]
-2.ÏÂÔØjdk £¨64Î»£©£ºjava¹Ù·½×îĞÂ°æ±¾
-3.°²×°jdk£ºhttp://jingyan.baidu.com/article/3c343ff70bc6ea0d377963df.html
-4.°²×°es:http://www.oschina.net/translate/elasticsearch-getting-started
-5.¸÷ÖÖ²å¼ş£ºhttp://www.cnblogs.com/huangfox/p/3541300.html 
+1.ä¸‹è½½elastic Search  :https://www.elastic.co/downloads/elasticsearch   [ZIP]
+2.ä¸‹è½½jdk ï¼ˆ64ä½ï¼‰ï¼šjavaå®˜æ–¹æœ€æ–°ç‰ˆæœ¬
+3.å®‰è£…jdkï¼šhttp://jingyan.baidu.com/article/3c343ff70bc6ea0d377963df.html
+4.å®‰è£…es:http://www.oschina.net/translate/elasticsearch-getting-started
+5.å„ç§æ’ä»¶ï¼šhttp://www.cnblogs.com/huangfox/p/3541300.html 
 
 http://www.asp.net/aspnet/overview/owin-and-katana
 
@@ -12,3 +12,6 @@ http://zhidao.baidu.com/link?url=BkwuIATCLpFQlqKqkINn0KriCDCgp698AqZybNOI4R_0ajN
 http://www.52player.com/Demos/HLSPlayer/
 http://itindex.net/detail/48329-%E5%88%A9%E7%94%A8-ffmepg-ts
 https://github.com/fzninja/FZ-live 
+
+
+smooth streaming , http live streaming, mpeg-dash
