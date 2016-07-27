@@ -2,7 +2,13 @@
 2.下载jdk （64位）：java官方最新版本
 3.安装jdk：http://jingyan.baidu.com/article/3c343ff70bc6ea0d377963df.html
 4.安装es:http://www.oschina.net/translate/elasticsearch-getting-started
-5.各种插件：http://www.cnblogs.com/huangfox/p/3541300.html 
+5.各种插件：http://www.cnblogs.com/huangfox/p/3541300.html
+6.C#操作es:http://www.cnblogs.com/eggTwo/p/4425269.html
+7.c#操作es：https://www.elastic.co/guide/en/elasticsearch/client/net-api/1.x/nest-basics.html
+8.script_fields: http://www.du52.com/text.php?id=629
+9.MS SQL驱动：http://www.techovity.com/create-river-elasticsearch-ms-sql-server-automatic-data-transfer/
+
+10：head：http://localhost:9200/_plugin/head/ 
 
 http://www.asp.net/aspnet/overview/owin-and-katana
 
@@ -12,6 +18,8 @@ http://zhidao.baidu.com/link?url=BkwuIATCLpFQlqKqkINn0KriCDCgp698AqZybNOI4R_0ajN
 http://www.52player.com/Demos/HLSPlayer/
 http://itindex.net/detail/48329-%E5%88%A9%E7%94%A8-ffmepg-ts
 https://github.com/fzninja/FZ-live 
+
+http://blog.peer5.com/http-live-streaming-in-javascript/
 
 
 smooth streaming , http live streaming, mpeg-dash
