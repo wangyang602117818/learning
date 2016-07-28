@@ -1,0 +1,12 @@
+1. 下载 elasticsearch windows 版
+	1)解压->进入到bin目录->运行 elasticsearch.bat
+	2)http://localhost:9200/  能打开则ok
+2.  安装 kibana (elasticsearch 的管理界面)
+	1)下载 kibana -> 解压 -> 进入到bin目录 -> 运行 kibana.bat(前置:elasticsearch.bat 在运行)
+3.  安装 marvel (每一个节点的监控程序)
+	1)确保elasticsearch 和 kibana 都在运行,打开另外一个命令行,进入到 kibana/bin
+	2)执行 kibana plugin --install elasticsearch/marvel/latest
+	3)重启elasticsearch,打开 http://localhost:5601/ , 点击图中的小方块,就可以看到marvel插件了
+4.  安装 head (可选,另外一种管理界面)
+	1)进入到 elasticsearch/bin ,运行 plugin install mobz/elasticsearch-head
+	2)http://localhost:9200/_plugin/head/
