@@ -1,0 +1,18 @@
+使用特性来自定义映射
+
+ [Nest.ElasticsearchType(Name = "employee")]
+    public class M
+    {
+        [String(Index = Nest.FieldIndexOption.NotAnalyzed)]
+        public string first_name { get; set; }
+        [String(Index = Nest.FieldIndexOption.NotAnalyzed)]
+        public string last_name { get; set; }
+        public int age { get; set; }
+        public string[] interests { get; set; }
+
+        public DateTime datetime { get; set; }
+    }
+1: 首先要创建 index
+	client.CreateIndex("megacorp");
+2: 自定义映射
+	client.Map<M>(aa => aa.AutoMap());
