@@ -1,0 +1,26 @@
+通过term匹配查找字段时,会发生分词,导致结果异常
+所以必须设置响应的字段为 not_analyzed
+1:删除索引 DELETE /my_store  ,数据都被删除了
+2:自定义映射:只为不需要分词的属性添加 not_analyzed
+put /megacorp
+{
+   "mappings":{         --固定值
+	"employee":{      --type
+		"properties":{   --映射的属性
+			"first_name":{
+				"type":"string",
+				"index":"not_analyzed"
+			},
+			"last_name":{
+				"type":"string",
+				"index":"not_analyzed"
+			}
+		}
+	}
+   }
+}
+
+3:重新添加数据,
+
+##  这个要事先确定好,添加数据以后再想改就麻烦了
+

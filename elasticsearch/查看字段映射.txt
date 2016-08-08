@@ -1,0 +1,1 @@
+查看 megacorp 索引的 employee 类型的所有字段映射 http://localhost:9200/megacorp/_mapping/employee/
