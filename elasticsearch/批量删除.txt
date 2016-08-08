@@ -1,4 +1,5 @@
 批量删除需要插件 delete-by-query
+进入到bin目录->运行 plugin install delete-by-query
 示例:
 http://localhost:9200/kosmos-document/permission/_query
 {
