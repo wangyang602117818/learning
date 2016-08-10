@@ -26,3 +26,7 @@ smooth streaming , http live streaming, mpeg-dash
 
 
 
+http://gxu014sec2/KosmosWcf/api/document/
+
+
+
