@@ -30,3 +30,9 @@ http://gxu014sec2/KosmosWcf/api/document/
 
 
 
+select row_number() over(order by lastModifiedDate desc) uid,* from (
+  select departmentid,min(lastModifiedDate) lastModifiedDate,min(CategoryName) CategoryName from category group by departmentid
+) as tb1
+
+
+documentId

@@ -1,0 +1,93 @@
+"query": {
+    "query": {
+        "filtered": {
+            "filter": {
+                "and": [
+                    {
+                        "match_all": {
+
+                        }
+                    }
+                ]
+            },
+            "query": {
+                "bool": {
+                    "minimum_number_should_match": 1,
+                    "should": [
+                        {
+                            "text": {
+                                "name.keyword_name": {
+                                    "operator": "and",
+                                    "query": "kentucky",
+                                    "type": "boolean",
+                                    "fuzziness": 0.8
+                                }
+                            }
+                        },
+                        {
+                            "text": {
+                                "address": {
+                                    "operator": "and",
+                                    "query": "kentucky",
+                                    "type": "boolean"
+                                }
+                            }
+                        },
+                        {
+                            "text": {
+                                "neighborhoods.name": {
+                                    "operator": "and",
+                                    "query": "kentucky",
+                                    "type": "boolean",
+                                    "fuzziness": 0.8
+                                }
+                            }
+                        },
+                        {
+                            "text": {
+                                "categories.name": {
+                                    "operator": "and",
+                                    "query": "kentucky",
+                                    "type": "boolean",
+                                    "fuzziness": 0.8
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "facets": {
+        "neighborhoods.id": {
+            "terms": {
+                "field": "neighborhoods.id",
+                "size": 10
+            }
+        },
+        "categories.id": {
+            "terms": {
+                "field": "categories.id",
+                "size": 10
+            }
+        }
+    },
+    "size": 15,
+    "from": 15,
+    "fields": [
+        "id",
+        "categories.id",
+        "name",
+        "address",
+        "city",
+        "state",
+        "zipcode",
+        "location",
+        "_id",
+        "pos_review_count",
+        "neg_review_count",
+        "wishlist_count",
+        "recommender_count",
+        "checkin_count"
+    ]
+},
