@@ -36,3 +36,6 @@ select row_number() over(order by lastModifiedDate desc) uid,* from (
 
 
 documentId
+
+
+Results View = 'Nest.CreateIndexDescriptor' does not contain a definition for 'Nest' and no extension method 'Nest' accepting a first argument of type 'Nest.CreateIndexDescriptor' could be found (are you missing a using directive or an assembly reference?)
