@@ -1,0 +1,25 @@
+概念:
+	Analysis(分析过程): 包含多步的分析步骤,(过滤无用字符,分词,转换单个的term)
+	analyzer(分析器): 由一个Tokenizer,多个character filters 或 token filters组成
+elasticsearch 分析一个长串的字符串(str)过程
+1: character filters ,
+	功能:整理字符串,以备 Tokenizer 的分析
+	这一步可以是过滤 html tag or 转换一些字符(& -> and)
+2: Tokenizer 分词
+	功能:字符串被转换成单个的词条(term)
+	这一步通过一定的方式分词,比如 空白字符 或 标点符号
+3: token filters  发生转换
+	功能:对 terms 再次进行分析,
+	这一步可能改变 term ,比如 lowercasing ,删除无关词条(a and the)
+
+系统内置的 analyzer
+示例 : "Set the shape to semi-transparent by calling set_trans(5)"
+standard analyzer(默认):
+	根据单词的边界分词,移除的大部分的标点符号,把每个term转换成小写
+	分词效果: set, the, shape, to, semi, transparent, by, calling, set_trans, 5
+simple analyzer:
+	只要遇到的不是字母,就分词,并且把每一个term转换成小写
+	分词效果: set, the, shape, to, semi, transparent, by, calling, set, trans
+whitespace analyzer:
+	通过空格分词,不转换大小写
+	分词效果: Set, the, shape, to, semi-transparent, by, calling, set_trans(5)

@@ -1,0 +1,10 @@
+自定义分词过程
+注意配置文件中不能有tab空格,前后都不行
+index:
+    analysis:
+        analyzer:
+            htmlContentAnalyzer:
+                type: custom
+                tokenizer: standard
+                filter: lowercase
+                char_filter: html_strip
