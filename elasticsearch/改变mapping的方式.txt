@@ -1,0 +1,95 @@
+方式一:
+	1)首先创建一个新的index,并设置新的index 新的 mappings
+		put /my-index1/
+		{
+		   "mappings": {
+				"doc1": {
+				   "properties": {
+						"name": {
+							"type": "string",
+							"analyzer": "english"
+						},
+						"rowHtml": {
+							"type": "string",
+							"analyzer": "htmlContentAnalyzer"
+						}
+					}
+				}
+			}
+		}
+	2)通过 reindex 端点重新索引文件(version>2.3)
+		post /_reindex/
+		{
+			"source": {
+				"index": "my-index",
+				"type":"doc"
+			},
+			"dest": {
+				"index": "my-index1",
+				"type":"doc1",
+				"version_type": "external"
+			}
+		}
+	3)删掉以前的index,再用同样的方式,创建一个和以前一模一样的index,就ok
+==============================================================================
+方式二:使用别名(这种方式,应用程序可以不动)
+	1)新建一个index,并设置mappings
+		put /my-index-v1
+		{
+			"mappings": {
+				"doc": {
+				   "properties": {
+						"name": {
+							"type": "string",
+							"analyzer": "english"
+						},
+						"rowHtml": {
+							"type": "string",
+							"analyzer": "htmlContentAnalyzer"
+						}
+					}
+				}
+			}
+		}
+	2)把旧的index中的文件导入到新的index中
+		post /_reindex/
+		{
+			"source": {
+				"index": "my-index"
+			},
+			"dest": {
+				"index": "my-index-v1",
+				"version_type": "external"
+			}
+		}
+	3)给新的index起一个别名,这个别名就是在 Application 中使用的那个名称
+		如果第一次添加aliases,可以把以前的index删掉,然后在给新的 index 起这个别名,这样会导致server有一个短暂的不可用状态
+		post /_aliases
+		{
+			"actions": [
+			{
+				"add": {
+					"alias": "my-index-v1",
+					"index": "my-index"
+				}
+			}]
+		}
+		如果是第二次修改,则直接把alias指向新的index就可以了,然后删掉以前的index
+		post /_aliases
+		{
+			"actions": [
+				{ 
+					"remove": {
+						"alias": "my-index",
+						"index": "my-index-v1"
+					}
+				},
+				{ 
+					"add": {
+						"alias": "my-index",
+						"index": "my-index-v2"
+					}
+				}
+			]
+		}
+		

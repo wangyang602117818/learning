@@ -1,10 +1,20 @@
 自定义分词过程
 注意配置文件中不能有tab空格,前后都不行
 index:
-    analysis:
-        analyzer:
-            htmlContentAnalyzer:
-                type: custom
-                tokenizer: standard
-                filter: lowercase
-                char_filter: html_strip
+  analysis:
+     analyzer:
+         htmlContentAnalyzer:
+           type: custom
+           tokenizer: standard
+           filter: lowercase
+           char_filter: html_strip
+         html1:
+           type: custom
+           tokenizer: standard
+           filter: [lowercase,autocomplete_filter]
+           char_filter: html_strip
+     filter:
+         autocomplete_filter:
+           type: ngram
+           min_gram: 1
+           max_gram: 20
