@@ -11,17 +11,7 @@ http://localhost:9200/kosmos-document/permission/_query
   }
 }
 
+分词插件 
 
-疑问:
-为什么 http://localhost:9200/megacorp/employee/_query/
-post 
-{
-  "query": {
-    "term": {
-      "first_name": "jane"
-    }
-  }
-}
-执行的是创建操作??
 
-_search与_query的区别
+

@@ -106,3 +106,39 @@ suggest语法
     }
 }
 
+
+
+match的两种写法
+{
+   "query":{
+		"match":{
+			"my-field":"aaa bbb"
+		}
+   }
+}
+{
+	"query":{
+		"match":{
+			"my-field":{
+				"query":"aaa bbb",
+				"operator":"and"
+			}
+		}
+	}
+}
+
+term的两种写法
+{
+	"query":{
+		"term":{
+			"my-field":"aaa bbb"
+		}
+	}
+}
+{
+	"query":{
+		"term":{
+			"value":"aaa bbb"
+		}
+	}
+}
