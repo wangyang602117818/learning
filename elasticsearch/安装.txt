@@ -6,9 +6,11 @@
 2. 下载 elasticsearch windows 版
 	1)解压->进入到bin目录->运行 elasticsearch.bat
 	2)http://localhost:9200/  能打开则ok
-	3)以服务的形式运行:service.bat install 
+	3)以服务的形式运行:service.bat install  |  service.bat remove
 3.  安装 kibana (elasticsearch 的管理界面)
 	1)下载 kibana -> 解压 -> 进入到bin目录 -> 运行 kibana.bat(前置:elasticsearch.bat 在运行)
+		以服务的形式运行 (sc create "ElasticSearch Kibana" binPath= "{path to batch file}" depend= "elasticsearch-service-x64")
+		删除服务 sc delete "ElasticSearch Kibana 2.x.x"
 4.  安装 marvel (每一个节点的监控程序)
 	1)确保elasticsearch 和 kibana 都在运行,打开另外一个命令行,进入到 kibana/bin
 	2)执行 kibana plugin --install elasticsearch/marvel/latest
@@ -16,3 +18,16 @@
 5.  安装 head (可选,另外一种管理界面)
 	1)进入到 elasticsearch/bin ,运行 plugin install mobz/elasticsearch-head
 	2)http://localhost:9200/_plugin/head/
+=============================================================
+批量删除需要插件 delete-by-query
+进入到bin目录->运行 plugin install delete-by-query
+plugin install delete-by-query
+示例:
+http://localhost:9200/kosmos-document/permission/_query
+{
+  "query": {
+    "term": {
+      "documentId": "57a15a5595180a3dac7e99a1"
+    }
+  }
+}

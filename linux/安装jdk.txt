@@ -1,0 +1,12 @@
+下载 jdk-8u101-linux-i586.tar.gz
+解压 文件到 /usr/lib/jvm
+	sodu mkdir /usr/lib/jvm
+	sudo tar -zxf jdk-8u101-linux-i586.tar.gz -C /usr/lib/jvm
+配环境变量
+	sudo vim ~/.bashrc 在末尾加入:
+	export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_101
+    export JRE_HOME=${JAVA_HOME}/jre
+    export CLASSPATH=.:{JAVA_HOME}/lib:${JRE_HOME}/lib
+    export PATH=${JAVA_HOME}/bin:$PATH
+生效
+	source ~/.bashrc
