@@ -1,0 +1,38 @@
+mongodb 默认的文件夹里面没有配置文件
+在 windows 中启动 MongoDB
+	1)直接指定数据库路径和日志文件: mongod.exe  --dbpath=..\db --logpath ..\log\mongodb.log -logappend
+	2)使用配置文件(推荐)
+	============mongodb.conf=================
+		systemLog:
+			destination: file
+			path: C:\Program Files\MongoDB\Server\3.2\log\mongodb.log
+			logAppend: true
+		storage:
+			dbPath: C:\Program Files\MongoDB\Server\3.2\db
+	==========================================
+	启动: mongod.exe --config ..\config\mongodb.conf
+	安装为服务
+	1)使用mongo自带的命令行(所有路径必须都是绝对路径)
+		mongod.exe --install --config "C:\Program Files\MongoDB\Server\3.2\config\mongodb.conf"
+			net start MongoDB
+			net stop  MongoDB
+		mongod.exe --remove
+	2)手动创建windows服务
+		sc create MongoDB binPath= "\"C:\Program Files\MongoDB\Server\3.2\bin\mongod.exe\" --config=\"C:\Program Files\MongoDB\Server\3.2\config\mongodb.conf""
+		sc delete MongoDB
+在 Ubuntu 中启动MongoDB
+	1)直接指定数据库路径和日志文件: ./mongod --dbpath ../db --logpath ../log/mongodb.log --storageEngine=mmapv1 -journal -logappend   (--storageEngine=mmapv1 和 -journal 是32位系统要加上的)
+	2)使用配置文件(推荐)
+	============mongodb.conf=================
+		systemLog:
+			destination: file
+			path: "../log/mongodb.log"
+			logAppend: true
+		storage:
+			dbPath: ../db
+			engine: mmapv1
+			journal:
+				enabled: true
+	==========================================
+	启动: ./mongod --config ../config/mongodb.conf
+

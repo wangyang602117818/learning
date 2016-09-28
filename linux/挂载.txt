@@ -1,1 +1,5 @@
 sudo fdisk -l   =查看当前磁盘信息
+
+在 virtualBox 中设置好 windows 共享文件夹(Downloads)
+在 ubuntu 中新建一个文件夹用于挂载文件 (mkdir /mnt/shared)
+挂载: sudo mount -t vboxsf Downloads /mnt/shared/
