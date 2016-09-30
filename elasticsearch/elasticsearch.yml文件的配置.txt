@@ -5,16 +5,31 @@ index:
      analyzer:
          htmlContentAnalyzer:
            type: custom
-           tokenizer: standard
-           filter: lowercase
-           char_filter: html_strip
-         html1:
-           type: custom
+		   char_filter: html_strip
            tokenizer: standard
            filter: [lowercase,autocomplete_filter]
-           char_filter: html_strip
      filter:
          autocomplete_filter:
            type: ngram
            min_gram: 1
            max_gram: 20
+
+index:
+  analysis:
+     analyzer:
+         htmlContentAnalyzer:
+           type: custom
+		   char_filter: html_strip
+           tokenizer: ngram_tokenizer
+           filter: lowercase
+     filter:
+         autocomplete_filter:
+           type: ngram
+           min_gram: 1
+           max_gram: 20
+	 tokenizer:
+	     ngram_tokenizer:
+		   type: ngram
+		   min_gram: 1
+           max_gram: 20
+		   token_chars: [letter, digit]
