@@ -1,0 +1,19 @@
+默认启动的 mongodb 服务是没有安全认证的(局域网用户都可以访问,不需要用户名和密码)
+	1) 使用 ./mongo 登陆mongo的命令行,创建管理所有用户的用户
+	use admin
+	db.createUser(
+	  {
+		user: "userAdmin",
+		pwd: "123",
+		roles: [ { role: "userAdminAnyDatabase", db: "admin" } ]
+	  }
+	)
+	2) 启用安全认证: 在 mongodb.conf 中加入 
+	security:
+		authorization: enabled
+	重启mongo服务.这时登陆需要用户名和密码了(此用户仅仅具有管理 用户/角色 的功能,不具备操作数据的功能)
+		1)在connection时候认证:  
+			./mongo -u "userAdmin" -p "123" --authenticationDatabase "admin"
+		2)在shell内部认证: (返回 1 表示成功)
+			use admin
+			db.auth("userAdmin","123")
