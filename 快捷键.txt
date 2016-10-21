@@ -1,5 +1,8 @@
 格式化全部代码 ctrl+E，D
 格式化选中代码 ctrl+E，F
 显示代码提示 ctrl+j
-折叠全部代码 ctrl+M,O
-展开全部代码 ctrl+M,L
+折叠全部方法(c#) ctrl+M,O
+展开全部方法(c#) ctrl+M,L
+
+
+
