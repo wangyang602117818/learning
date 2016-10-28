@@ -17,3 +17,7 @@
 		2)在shell内部认证: (返回 1 表示成功)
 			use admin
 			db.auth("userAdmin","123")
+
+
+
+
