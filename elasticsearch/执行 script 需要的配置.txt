@@ -16,7 +16,7 @@
 	{
 		"query": {
 			"term": {
-			"last_name": "yang"
+				"last_name": "yang"
 			}
 		},
 		"script": {

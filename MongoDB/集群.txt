@@ -1,0 +1,73 @@
+=======副本集===============
+mongoDB中的集群叫做副本集(Replica Set)
+1:通过配置文件启动,并为每一个节点设置好集群的名字
+	replication:
+		replSetName: Kosmos
+2:随便找到集群中的一个节点,使用 ./mongo 登陆命令行
+	rs.initiate() 来初始化一个集群
+	rs.add("ip:port") 加入其它节点,
+		注意 rs.add("ip") 只能在主节点运行,使用 rs.status() 来确定主节点
+		* 虚拟机中如果节点的名称 是 计算机的名称 ,可能不能解析,导致集群失败,可以 修改节点名称 来解决
+		修改 节点名称
+			cfg = rs.conf()
+			cfg.members[0].host = "10.157.192.175:27017"
+			rs.reconfig(cfg)
+		rs.remove("ip") 移除节点
+
+========分片+副本集==========
+
+副本集1: 
+    ==========mongodb.conf========
+	replication:
+		replSetName: shardA
+	sharding:
+		clusterRole: shardsvr
+	==============================
+	机器列表:
+		10.157.192.141:30000
+		10.157.192.141:30001
+		10.157.192.141:30002
+副本集2:
+	==========mongodb.conf========
+	replication:
+		replSetName: shardB
+	sharding:
+		clusterRole: shardsvr
+	==============================
+	机器列表:
+		10.157.192.141:30100
+		10.157.192.141:30101
+		10.157.192.141:30102
+配置服务器
+	==========mongodb.conf========
+	replication:
+		replSetName: shardConf
+	sharding:
+		clusterRole: configsvr
+	==============================
+	机器列表:
+		10.157.192.141:27019
+		10.157.192.141:27020
+		10.157.192.141:27021
+mongos
+	==========mongodb.conf========
+	sharding:
+		configDB: 10.157.192.141:27019,10.157.192.141:27020,10.157.192.141:27021
+	==============================
+	机器:
+		10.157.192.141:40000
+	使用 mongos 的命令行 mongo 10.157.192.141:40000
+		1):添加分片集群
+			sh.addShard("shardA/10.157.192.141:30000,10.157.192.141:30001")
+			sh.addShard("shardB/10.157.192.141:30100,10.157.192.141:30101")
+		2):开启分片的数据库
+			sh.enableSharding("cloud-docs")
+		3):设置分片的集合和分片键
+			sh.shardCollection("cloud-docs.spreadsheets",{username:1,_id:1})
+	对该机器的操作就是对集群的操作,往 spreadsheets 集合中插入的数据 会被路由到不同的分片集群
+	
+
+
+
+
+
