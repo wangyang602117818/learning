@@ -1,5 +1,4 @@
 使用特性来自定义映射
-
  [Nest.ElasticsearchType(Name = "employee")]
     public class M
     {
@@ -16,3 +15,18 @@
 	client.CreateIndex("megacorp");
 2: 自定义映射
 	client.Map<M>(aa => aa.AutoMap());
+
+使用方法来定义映射(Keyword是5.0版本以后的,相当于NotAnalyzed)
+	elasticClient.Map<DocumentEs>(m => m
+        .Index(IndexName).Type(IndexTypeName)
+            .Properties(prop => prop
+                .Keyword(s => s.Name(p => p.DocumentTo))
+                .Keyword(s => s.Name(p => p.DocumentId))
+                .Keyword(s => s.Name(p => p.Lang))
+                .Keyword(s => s.Name(p => p.AppCode))
+                .Keyword(s => s.Name(p => p.CategoryId))
+                .Text(s => s.Name(p => p.DocumentTitle).Analyzer("htmlAnalyzer"))
+                .Text(s => s.Name(p => p.DocumentDescription).Analyzer("htmlAnalyzer"))
+                .Text(s => s.Name(p => p.DocumentText).Analyzer("htmlAnalyzer"))
+            )
+        );
