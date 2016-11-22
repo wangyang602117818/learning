@@ -1,0 +1,16 @@
+1:查询所有: db.Document.find({})
+2:单条件查询: db.Document.find({AppCode:"GTSPortalV3"})  |  db.Document.find({AppCode:{$eq:"GTSPortalV3"}}
+3:多条件查询: 
+	db.Document.find({$and:[{AppCode:"GTSPortalV3"},{Lang:"en"}]}); 
+	db.Document.find({$and:[{AppCode:{$eq:"GTSPortalV3"}},{Lang:{$eq:"en"}}]})
+4:distinct 查询
+	db.Document.distinct("DocumentId",{$and:[{AppCode:"GTSPortalV3"},{Status:"published"}]})
+5:聚合查询
+	db.Document.aggregate(
+	[
+		{$match:{$and:[{AppCode:"GTSPortalV3"},{Status:"published"},{Lang:"en"}]}},
+		{$group:{_id:null,
+				Count:{$sum:1},
+				Views:{$sum:"$Views"}}
+		}
+	])
