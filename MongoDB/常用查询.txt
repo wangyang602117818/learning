@@ -3,9 +3,17 @@
 3:多条件查询: 
 	db.Document.find({$and:[{AppCode:"GTSPortalV3"},{Lang:"en"}]}); 
 	db.Document.find({$and:[{AppCode:{$eq:"GTSPortalV3"}},{Lang:{$eq:"en"}}]})
-4:distinct 查询
+4:in查询:
+	db.Document.find({DocumentId:{$in:[
+		ObjectId("581bfa56e489d72e043ff8ff"),
+		ObjectId("582a853ce489d372d474a0cd"),
+		ObjectId("581b0389e489d24d2492c5bf"),
+		ObjectId("57d0030be489d33c7ceb9c03"),
+		ObjectId("581b0389e489d24d2492c5bf")
+	]}})
+5:distinct 查询
 	db.Document.distinct("DocumentId",{$and:[{AppCode:"GTSPortalV3"},{Status:"published"}]})
-5:聚合查询
+6:聚合查询
 	db.Document.aggregate(
 	[
 		{$match:{$and:[{AppCode:"GTSPortalV3"},{Status:"published"},{Lang:"en"}]}},
