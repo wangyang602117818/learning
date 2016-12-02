@@ -17,8 +17,5 @@
 	db.Document.aggregate(
 	[
 		{$match:{$and:[{AppCode:"GTSPortalV3"},{Status:"published"},{Lang:"en"}]}},
-		{$group:{_id:null,
-				Count:{$sum:1},
-				Views:{$sum:"$Views"}}
-		}
+		{$group:{_id:null,Count:{$sum:1},Views:{$sum:"$Views"}}}
 	])
