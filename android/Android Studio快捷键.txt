@@ -1,0 +1,2 @@
+ctrl+alt+space:代码提示
+ctrl+alt+l:代码格式化

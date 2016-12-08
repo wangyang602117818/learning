@@ -1,0 +1,33 @@
+部分属性和 LinearLayout 相同->gravity
+一: 相对父元素
+	1)相对父元素边框
+		layout_alignParentLeft="true" 默认值,相对父元素左边框对齐
+		layout_alignParentTop="true" 默认值,相对父元素上边框对齐
+		layout_alignParentRight="true" 相对父元素右边框对齐
+		layout_alignParentBottom="true" 相对父元素底部边框对齐
+	2)相对父元素位置
+		layout_centerHorizontal="true" 相对父元素水平居中
+		layout_centerVertical="true" 相对父元素垂直居中
+		layout_centerInParent="true" 相对父元素居中
+二: 相对兄弟元素
+	layout_toLeftOf="@+id/xxx"  参考xxx元素的左边对齐
+	layout_toRightOf="@+id/xxx" 参考xxx元素的右边对齐
+	layout_above="@+id/xxx" 参考xxx元素的上边对齐
+	layout_below="@+id/xxx" 参考xxx元素的下边对齐
+
+	layout_alignTop="@+id/xxx" 该元素的上边框与xxx元素的上边框对齐
+	layout_alignBottom="@+id/xxx" 该元素的下边框与xxx元素的下边框对齐
+	layout_alignLeft="@+id/xxx" 2个元素的左边框对齐
+	layout_alignRight="@+id/xxx" 2个元素的右边看对齐
+三: 微调属性(偏移量)
+    layout_margin: 四周的边距
+	layout_marginTop: 上边距
+	layout_marginLeft: 左边距
+	layout_marginRight: 右边距
+	layout_marginBottom: 底部边距
+四: 微调属性(内边距)
+	padding:  内边距
+	paddingLeft: 内部左边距
+	paddingRight: 内部右边距
+	paddingTop: 内部上边距
+	paddingBottom: 内部底部边距
