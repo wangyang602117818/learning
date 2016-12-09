@@ -1,0 +1,14 @@
+一些属性和 LinearLayout 相同
+按照给出的元素的个数,从左往右,从上到下来排列
+如果一行元素个数超过了columnCount,则换行
+如果列的个数超过了rowCount,则自动往下延伸
+父元素
+	columnCount: 列个数
+	rowCount: 行个数
+子元素
+	layout_columnSpan: 元素占多少列
+	layout_rowSpan: 元素占多少行
+	layout_gravity
+		fill_horizontal: 元素水平平铺
+		fill_vertical: 元素垂直平铺
+

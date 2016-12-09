@@ -25,6 +25,7 @@
 	center_vertical: 垂直方向居中
 	center: 水平垂直都居中
 	bottom: 底部对齐
+	fill_horizontal: 伸缩到父元素的宽度
 6) layout_weight: 权重布局
 	水平方向权重布局:
 		父: orientation: horizontal

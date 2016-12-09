@@ -1,0 +1,7 @@
+TableLayout
+	部分属性和 LinearLayout 相同-> 
+	collapseColumns: 要隐藏的列序号
+	stretchColumns: 可拉伸的列序号,如果一行空间有剩余,则该列就会自动拉伸,填充剩余空间
+	shrinkColumns: 可收缩的列序号,如果一行控件不够,则该列就会自动收缩,
+FrameLayout
+	
