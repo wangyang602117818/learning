@@ -1,0 +1,5 @@
+1 文本显示框 TextView
+	android:gravity: 文字对齐方式
+	android:textStyle: 文字样式
+	android:textSize: 文字大小
+	android:background: 背景色
