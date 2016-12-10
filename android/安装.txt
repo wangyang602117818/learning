@@ -1,0 +1,4 @@
+1: 安装 android sdk ,大个头,有20多个g
+2: 安装 eclipse,
+3: 给eclipse安装adt插件(连接eclipse和android sdk)
+4: 装好以后就可以在 eclipse 里面启动 android sdk manager了,(如果没有:windows->prospective->customize prospective找到并打开)
