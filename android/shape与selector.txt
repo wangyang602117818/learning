@@ -1,0 +1,27 @@
+shape: 安卓中定义形状的,可在一定的程度上代替图片
+shape自己的属性
+
+shape的子元素
+	corners 圆角
+	solid 内部填充色
+	gradient 渐变
+		通用属性
+			android:startColor=""      开始颜色
+			android:centerColor=""     中间颜色
+			android:endColor=""        结束颜色
+		linear:
+			android:angle=""           渐变角度
+		radial:
+			android:gradientRadius=""  渐变半径
+			android:centerX=""         渐变中心点距离x轴左边的比例(0-1)
+			android:centerY=""         渐变中心点距离y轴上边的比例(0-1)
+		sweep:
+			android:centerX=""         渐变中心点距离x轴左边的比例(0-1)
+			android:centerY=""         渐变中心点距离y轴上边的比例(0-1)   
+	stroke 描边
+		android:width=""   边框宽度
+		android:color=""   边框颜色
+		android:dashWidth=""  描边的线宽
+		android:dashGap=""    描边的线间距
+
+selector: 

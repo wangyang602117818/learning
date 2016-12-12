@@ -1,5 +1,15 @@
-1 文本显示框 TextView
+1 TextView: 文本显示框 
 	android:gravity: 文字对齐方式
 	android:textStyle: 文字样式
 	android:textSize: 文字大小
+	android:textColor: 文字颜色
 	android:background: 背景色
+	android:drawableTop: 渲染文本顶部图片(android:drawableBottom,android:drawableLeft,android:drawableRight)
+	TextView不支持边框,要使用ShapeDrawable来实现
+2 EditText: 文本输入框
+	android:hint: 提示文本
+	android:textColorHint: 提示文本的颜色
+	android:selectAllOnFocus: 获得焦点后选择文本
+	android:inputType: 类型
+3 Button: 按钮
+	
