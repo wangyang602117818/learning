@@ -1,0 +1,14 @@
+改变单个index的副本数量
+	PUT http://ywang363pri1:9200/kosmos-file/_settings
+	{
+	  "index": {
+		"number_of_replicas": 1
+	  }
+	}
+改变所有index的副本数量
+	PUT http://ywang363pri1:9200/_settings
+	{
+	  "index": {
+		"number_of_replicas": 1
+	  }
+	}
