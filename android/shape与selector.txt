@@ -1,7 +1,7 @@
 shape: 安卓中定义形状的,可在一定的程度上代替图片
 shape自己的属性
-
-shape的子元素
+	
+shape的子元素(6个)
 	corners 圆角
 	solid 内部填充色
 	gradient 渐变
@@ -23,5 +23,6 @@ shape的子元素
 		android:color=""   边框颜色
 		android:dashWidth=""  描边的线宽
 		android:dashGap=""    描边的线间距
-
+	padding 内边距
+	size 
 selector: 

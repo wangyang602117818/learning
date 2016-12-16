@@ -6,7 +6,7 @@
 2. 下载 elasticsearch windows 版
 	1)解压->进入到bin目录->运行 elasticsearch.bat
 	2)http://localhost:9200/  能打开则ok
-	3)以服务的形式运行: elasticsearch-service.bat install  |  elasticsearch-service.bat remove  (在jvm.options 中加入 -Xss1m)
+	3)以服务的形式运行: elasticsearch-service.bat install  |  elasticsearch-service.bat remove
 3.  安装 kibana (elasticsearch 的管理界面)
 	1)下载 kibana -> 解压 -> 进入到bin目录 -> 运行 kibana.bat(前置:elasticsearch.bat 在运行)
 		以服务的形式运行 (sc create "ElasticSearch Kibana" binPath= "{path to batch file}" depend= "elasticsearch-service-x64")

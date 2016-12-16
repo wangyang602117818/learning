@@ -1,0 +1,9 @@
+设置登录密码 ,安装 x-pack
+elasticsearch中
+	bin/elasticsearch-plugin install x-pack
+	启动 es
+kibana中
+	bin/kibana-plugin install x-pack
+	启动 kibana 
+	默认使用 kibana登陆到es的 默认用户名 elastic 默认密码 changeme
+

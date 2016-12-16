@@ -33,3 +33,12 @@ index:
 		   min_gram: 1
            max_gram: 20
 		   token_chars: [letter, digit]
+
+#设置绑定ip
+#可以设置为 机器名 ip _local_(包含了localhost,127.0.0.1)
+network.host: localhost           http://localhost:9200         仅localhost
+network.host: ywang363pri1        http://ywang363pri1:9200      仅机器名
+network.host: 10.157.192.169      http://10.157.192.169:9200    仅ip地址
+network.host: _local_             http://localhost:9200  http://127.0.0.1:9200  仅本机
+network.host: _site_              http://ywang363pri1:9200  http://10.157.192.169:9200    本地网络(局域网)
+network.host: [_local_,_site_]    这个比较好
