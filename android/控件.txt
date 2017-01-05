@@ -13,3 +13,6 @@
 	android:inputType: 类型
 3 Button: 按钮
 	
+4 ImageView: 图片显示
+	android:background=""    //当固定了大小,background的图片会缩放
+	android:src=""           //src的图片资源不会被缩放

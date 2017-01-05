@@ -1,6 +1,6 @@
 shape: 安卓中定义形状的,可在一定的程度上代替图片
 shape自己的属性
-	
+	android:shape = ""        rectangle(默认) oval line ring  
 shape的子元素(6个)
 	corners 圆角
 	solid 内部填充色
@@ -24,5 +24,34 @@ shape的子元素(6个)
 		android:dashWidth=""  描边的线宽
 		android:dashGap=""    描边的线间距
 	padding 内边距
-	size 
-selector: 
+	size 宽高
+	案例
+		<?xml version="1.0" encoding="utf-8"?>
+		<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+			<solid android:color="#2F90BD" />
+			<corners android:radius="200dp" />
+		</shape>
+selector: 一组 item 集合
+	每一个item设置一种状态,当设置android:drawable时,设置按钮的背景,设置android:color时,设置文字颜色
+	案例(背景) button
+		<?xml version="1.0" encoding="utf-8"?>
+		<selector xmlns:android="http://schemas.android.com/apk/res/android">
+			<item android:drawable="@drawable/btn_disabled" android:state_enabled="false" />
+			<item android:drawable="@drawable/btn_focus" android:state_pressed="true" />
+			<item android:drawable="@drawable/btn_default" /> <!--默认-->
+		</selector>
+	案例(文字颜色) btn_text_color
+		<?xml version="1.0" encoding="utf-8"?>
+		<selector xmlns:android="http://schemas.android.com/apk/res/android">
+			<item android:color="#fff" android:state_pressed="true" />
+			<item android:color="#000" />
+		</selector>
+	按钮调用
+		<Button
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="默认按钮"
+		android:background="@drawable/button"        <!--背景色-->
+		android:textColor="@drawable/btn_text_color" <!--文字颜色-->
+		android:enabled="false"
+		/>
