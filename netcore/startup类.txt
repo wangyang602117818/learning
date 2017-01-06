@@ -1,0 +1,18 @@
+该类中的方法的执行顺序 构造函数->ConfigureServices->Configure
+
+
+
+
+Configure方法
+	日志输入等级
+	Trace Debug Information Warning Error Critical None (以此提高提高)
+	loggerFactory 是通过DI的方式注入的
+	loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+		"Logging": {
+			"IncludeScopes": false,
+			"LogLevel": {
+				"Default": "Debug",      //默认的日志输出()
+				"System": "Information",
+				"Microsoft": "Information"
+			}
+		}

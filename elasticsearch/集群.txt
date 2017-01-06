@@ -1,0 +1,16 @@
+1: elasticsearch的集群:把一个集群的多个机器作为一个整体
+	StaticConnectionPool pool=new StaticConnectionPool(new List<Uri>(){new Uri("127.0.0.1:9200"),new Uri("127.0.0.1:9500")});
+	ElasticClient elasticClient=new ElasticClient(new ConnectionSettings(pool));
+	elasticClient 就是操作集群的对象
+2: 集群名称(必须)
+	cluster.name: kosmos-v2 
+3: 节点名称(非必须,默认随机字符串)
+	node.name: node-1
+4: 绑定本地地址(必须)
+	network.host: [_local_,_site_]
+5: 绑定本地端口(非必须,默认9200)
+	http.port: 9200
+6: 启用发现(必须),用于发现其他机器
+	discovery.zen.ping.unicast.hosts: ["host1", "host2"]
+	
+	
