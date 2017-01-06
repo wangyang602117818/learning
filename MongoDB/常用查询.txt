@@ -19,3 +19,9 @@
 		{$match:{$and:[{AppCode:"GTSPortalV3"},{Status:"published"},{Lang:"en"}]}},
 		{$group:{_id:null,Count:{$sum:1},Views:{$sum:"$Views"}}}
 	])
+
+更新
+db.DocumentDraft.updateMany(
+	{},                       //条件
+	{ $set:{Archive:false}}   //更新字段
+)

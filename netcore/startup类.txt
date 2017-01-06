@@ -5,14 +5,14 @@
 
 Configure方法
 	日志输入等级
-	Trace Debug Information Warning Error Critical None (以此提高提高)
+	Trace Debug Information Warning Error Critical None (依次提高)
 	loggerFactory 是通过DI的方式注入的
 	loggerFactory.AddConsole(Configuration.GetSection("Logging"));
 		"Logging": {
 			"IncludeScopes": false,
 			"LogLevel": {
-				"Default": "Debug",      //默认的日志输出()
-				"System": "Information",
+				"Default": "Debug",          //默认的日志输出(Debug及以上的全部输出)
+				"System": "Information",     //以System开头的日志输出(Information及以上的全部输出)
 				"Microsoft": "Information"
 			}
 		}
