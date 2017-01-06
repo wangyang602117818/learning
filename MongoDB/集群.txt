@@ -70,7 +70,7 @@ mongos
 	
 
 
-附录 数据服务器 和 配置服务器的 配置文件
+附录 数据服务器 配置服务器的 mongos 配置文件
 ====================数据服务器========================
 systemLog:
    destination: file
@@ -100,3 +100,14 @@ replication:
     replSetName: shardConf       /*集群的名称,名称可以随意*/
 sharding:
     clusterRole: configsvr
+
+====================mongos=====================
+systemLog:
+   destination: file
+   path: ..\log\mongos.log
+   logAppend: true
+net:
+    bindIp: 10.157.192.141
+    port: 40000
+sharding:
+   configDB: 10.157.192.141:27019,10.157.192.141:27020,10.157.192.141:27021

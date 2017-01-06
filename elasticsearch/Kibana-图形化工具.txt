@@ -1,0 +1,8 @@
+Kibana :官方推荐工具,数据可视化工具
+1: 下载 https://www.elastic.co/downloads -> 解压
+2: 打开 config\kibana.yml 文件 在末尾添加以下配置信息
+	elasticsearch.url: "http://127.0.0.1:9200/"
+3: 在命令行工具进入 kibana-5.1.1-windows-x86\bin\ 目录下,用命令行运行	
+	kibana.bat
+4: 浏览器打开 http://localhost:5601/
+	
