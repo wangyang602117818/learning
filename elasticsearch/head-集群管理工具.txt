@@ -1,1 +1,19 @@
 针对 elasticsearch 5.0.0 以后的版本
+	head是一个网站,在head中访问elasticsearch是跨域访问,所以必须在 elasticsearch 的配置文件中配置跨域访问
+	===================================
+	http.cors.enabled: true
+	http.cors.allow-origin: /http:\/\/localhost(:[0-9]+)?/
+	====================================
+因为 head 用 nodejs 写出,需要nodejs运行环境
+1) 下载 并 安装 nodejs
+2) 安装 grunt 命令行
+	npm install -g grunt-cli
+3) 下载 head 
+	方式一:(官网,需要装git):
+		1)下载: git clone git://github.com/mobz/elasticsearch-head.git   
+		2)进入目录: cd elasticsearch-head
+		3)安装必要的依赖包: npm install
+		4)启动: grunt server
+		5)完成: 打开 http://localhost:9100/
+	方式二:(下载我压好的包:不需要安装git)
+		1)下载: 
