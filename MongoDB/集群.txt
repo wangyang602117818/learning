@@ -69,6 +69,33 @@ mongos
 	
 
 
+附录 数据服务器 和 配置服务器的 
+====================数据服务器========================
+systemLog:
+   destination: file
+   path: ..\log\mongodb.log
+   logAppend: true
+storage:
+   dbPath: ..\db
+net:
+    bindIp: 10.157.192.141
+    port: 30000
+replication:
+    replSetName: shardA            /*集群的名称,名称可以随意*/
+sharding:
+    clusterRole: shardsvr
 
-
-
+====================配置服务器========================
+systemLog:
+   destination: file
+   path: ..\log\mongodb.log
+   logAppend: true
+storage:
+   dbPath: ..\db
+net:
+    bindIp: 10.157.192.141
+    port: 27019
+replication:
+    replSetName: shardConf       /*集群的名称,名称可以随意*/
+sharding:
+    clusterRole: configsvr
