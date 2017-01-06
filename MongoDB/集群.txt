@@ -3,7 +3,7 @@ mongoDB中的集群叫做副本集(Replica Set),副本集中的节点都具有�
 1:通过配置文件启动,并为每一个节点设置好集群的名字
 	replication:
 		replSetName: Kosmos
-2:随便找到集群中的一个节点,使用 ./mongo 登陆命令行
+2:随便找到集群中的一个节点,使用 ./mongo 登陆命令行 (./mongo ip:port)
 	rs.initiate() 来初始化一个集群
 	rs.add("ip:port") 往副本集中加入数据节点
 	rs.addArb("ip:port") 往副本集中加入仲裁节点
