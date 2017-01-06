@@ -5,7 +5,8 @@ mongoDB中的集群叫做副本集(Replica Set),副本集中的节点都具有�
 		replSetName: Kosmos
 2:随便找到集群中的一个节点,使用 ./mongo 登陆命令行
 	rs.initiate() 来初始化一个集群
-	rs.add("ip:port") 加入其它节点,
+	rs.add("ip:port") 往副本集中加入数据节点
+	rs.addArb("ip:port") 往副本集中加入仲裁节点
 		注意 rs.add("ip") 只能在主节点运行,使用 rs.status() 来确定主节点
 		* 虚拟机中如果节点的名称 是 计算机的名称 ,可能不能解析,导致集群失败,可以 修改节点名称 来解决
 		修改 节点名称
