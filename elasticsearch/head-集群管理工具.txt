@@ -15,5 +15,8 @@
 		3)安装必要的依赖包: npm install
 		4)启动: grunt server
 		5)完成: 打开 http://localhost:9100/
-	方式二:(下载我压好的包:不需要安装git)
-		1)下载: 
+	方式二:(下载我压好的包:不需要安装git) 
+		1)下载: https://github.com/wangyang602117818/learning/tree/master/elasticsearch/elasticsearch-head.zip 解压
+		2)进入目录: cd elasticsearch-head
+		3)启动: grunt server
+		4)完成: 打开 http://localhost:9100/
