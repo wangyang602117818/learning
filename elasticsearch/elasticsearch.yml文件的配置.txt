@@ -42,3 +42,7 @@ network.host: 10.157.192.169      http://10.157.192.169:9200    仅ip地址
 network.host: _local_             http://localhost:9200  http://127.0.0.1:9200  仅本机
 network.host: _site_              http://ywang363pri1:9200  http://10.157.192.169:9200    本地网络(局域网)
 network.host: [_local_,_site_]    这个比较好
+
+使用head需要的配置 
+http.cors.enabled: true
+http.cors.allow-origin: /http:\/\/localhost(:[0-9]+)?/
