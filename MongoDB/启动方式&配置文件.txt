@@ -10,7 +10,8 @@ mongodb 默认的文件夹里面没有配置文件
 		storage:
 			dbPath: C:\Program Files\MongoDB\Server\3.2\db
 	==========================================
-	启动: mongod.exe --config ..\config\mongodb.conf
+	启动mongo实例: mongod.exe --config ..\config\mongodb.conf
+	启动mongos实例: mongos.exe --config ..\config\mongodb.conf
 	安装为服务
 	1)使用mongo自带的命令行(所有路径必须都是绝对路径)
 		mongod.exe --install --config "C:\Program Files\MongoDB\Server\3.2\config\mongodb.conf"
