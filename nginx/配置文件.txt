@@ -1,0 +1,7 @@
+配置分成2部分
+第一部分是http的配置 在 etc/nginx/nginx.conf
+第二部分是server的配置 在 etc/nginx/conf.d/default.conf
+其中第二部分是通过 include /etc/nginx/conf.d/*.conf; 链接到第一部分中的
+
+location配置
+location上的url将会与请求的url做比较，如果匹配，则将该url加到root节点指定的url上
