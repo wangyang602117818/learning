@@ -9,5 +9,9 @@
         卸载：installutil.exe /u {服务目录的完整路径}
 
 
+(Name) ： 代码中的标识符，与显示没有关联
+Description： 计算机管理->服务中的Description
+DisplayName： 计算机管理->服务中的Name | 任务管理器中的Description
+ServiceName： 任务管理器中的Name
 
-
+** DisplayName与ServiceName设为一致
