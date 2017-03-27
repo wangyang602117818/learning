@@ -2,8 +2,11 @@
 	mongodump --host 10.157.192.141 --port 40000 --db cloud-docs --collection spreadsheets
 备份 cloud-docs数据库
     mongodump --host 10.157.192.141 --port 40000 --db cloud-docs
-
+备份整个服务器
+    mongodump --host 10.157.192.141 --port 40000
 恢复集合
 	mongorestore --host 10.157.192.141 --port 40000 --db cloud-docs --collection spreadsheets dump\cloud-docs\spreadsheets.bson
 恢复数据库
 	mongorestore --host 10.157.192.141 --port 40000 --db cloud-docs dump\cloud-docs\
+恢复整个服务器 
+	mongorestore --host 10.157.192.141 --port 40000 dump\
