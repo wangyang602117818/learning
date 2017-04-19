@@ -34,6 +34,8 @@ mongodb 默认的文件夹里面没有配置文件
 			engine: mmapv1
 			journal:
 				enabled: true
+		net:
+			port: 30000
 	==========================================
 	启动: ./mongod --config ../config/mongodb.conf
 
