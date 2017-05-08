@@ -25,3 +25,7 @@ db.DocumentDraft.updateMany(
 	{},                       //条件
 	{ $set:{Archive:false}}   //更新字段
 )
+
+
+7:排序
+    db.getCollection('DocumentDraft').find({"AppCode":"InnovationApp"}).sort({"CreateDate":-1})

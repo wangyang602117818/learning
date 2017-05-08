@@ -1,0 +1,2 @@
+box-shadow: 0 4px 20px 1px rgba(0,0,0,0.2);
+border: 1px #dfe6f6 solid;
