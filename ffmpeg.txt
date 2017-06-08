@@ -1,0 +1,18 @@
+视频参数：
+  码率=比特率=每秒播放的字节数
+	案例 6977kb/s:每秒播放6977字节(6977/8=872KB),视频大小=码率*视频时长
+  帧率(fps):每秒播放多少帧
+
+ffmpeg -i 1.wmv -vcodec h264 -acodec aac 2.mp4
+参数都是针对下一个文件的, -vcodec 简写 -c:v  -acodec 简写 -c:a
+-vcodec h264: 视频编码
+-acodec aac: 音频编码
+-r number: 帧率(fps)只能变小,太低了会影响流畅度,但不会影响视频清晰度
+-s 1280*720 : 视频宽高尺寸(画面尺寸越小，视频文件越小)
+-vn :禁用视频 (从视频提取声音：ffmpeg -i wildlife.wmv -vn w.mp3)
+-t 3 :视频持续时间
+-ss 00:10 :从输入文件的时间点开始
+	截取视频(截取10到15秒的内容)：ffmpeg -i wildlife.wmv -c copy -ss 00:10 -t 5 w.wmv
+-vframes 1:输出多少帧
+	视频截图：ffmpeg -i wildlife.wmv -ss 00:00:04.254 -vframes 1 out.png
+crf 23 : 数字越大画质越差，增大6文件大小就会减小一倍

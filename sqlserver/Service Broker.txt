@@ -1,0 +1,63 @@
+Message Type
+	分成2种，一种是接受的消息类型，一种是发送的消息类型
+		语法：
+		CREATE MESSAGE TYPE [http://ssb.csharp.at/SSB_Book/c03/RequestMessage]
+		VALIDATION = NONE
+	VALIDATION:
+		NONE:默认值，不验证,可以包含任意值
+		EMPTY:消息里面必须包含 null
+		WELL_FORMED_XML：消息是正确的xml格式
+	所在视图：select * from sys.service_message_types
+	修改 ALTER CREATE MESSAGE TYPE [http://ssb.csharp.at/SSB_Book/c03/RequestMessage]
+			VALIDATION = WELL_FORMED_XML
+	删除 DROP MESSAGE TYPE
+Contract
+	语法：
+		CREATE CONTRACT [http://ssb.csharp.at/SSB_Book/c03/HelloWorldContract]
+		(
+		[http://ssb.csharp.at/SSB_Book/c03/RequestMessage] SENT BY INITIATOR,
+		[http://ssb.csharp.at/SSB_Book/c03/ResponseMessage] SENT BY TARGET
+		)
+	所在视图：
+	select * from sys.service_contracts
+	select * from sys.service_contract_message_usages  Contract与MessageType的对应关系表
+	不能修改Contract
+Queue
+	语法（在同一台机器上测试，还需要一个TargetQueue）：
+	CREATE QUEUE InitiatorQueue
+	WITH STATUS = ON
+	所在视图：select * from sys.service_queues
+SERVICE
+	语法（在同一台机器上测试，还需要一个TargetService）：
+		CREATE SERVICE InitiatorService
+		ON QUEUE InitiatorQueue
+		(
+			[http://ssb.csharp.at/SSB_Book/c03/HelloWorldContract]
+		)
+	所在视图：select * from sys.services
+	SERVICE和Contract对应关系: select * from sys.service_contract_usages
+Conversation
+	语法
+		DECLARE @ch UNIQUEIDENTIFIER
+		BEGIN DIALOG CONVERSATION @ch
+		FROM SERVICE [InitiatorService]
+		TO SERVICE 'TargetService'
+		ON CONTRACT [http://ssb.csharp.at/SSB_Book/c03/HelloWorldContract]
+		WITH ENCRYPTION = OFF;
+	所在视图：select * from sys.conversation_endpoints
+	新创建的会话还没有发送消息之前只有一个 initiator conversation
+发送消息
+	语法
+		DECLARE @msg NVARCHAR(MAX);
+		SET @msg ='<HelloWorldRequest>Klaus Aschenbrenner</HelloWorldRequest>';
+		SEND ON CONVERSATION '362BB5F5-9749-E711-9CB2-ECB1D746B42B' MESSAGE TYPE [http://ssb.csharp.at/SSB_Book/c03/RequestMessage](@msg);
+	发送第一个消息之后，target conversation 被创建
+	发送的消息存储在接受队列中: select * from [dbo].[TargetQueue]
+处理消息
+	语法，消息只能被接收一次
+		receive top(1) * from dbo.TargetQueue
+		waitfor(receive top(1) * from targetQueue),timeout 6000
+结束会话
+	语法
+		end conversation 'C71A5B58-BE49-E711-9CB2-ECB1D746B42B'
+		加 WITH CLEANUP 表示强制结束
