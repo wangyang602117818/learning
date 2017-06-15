@@ -16,3 +16,8 @@ ffmpeg -i 1.wmv -vcodec h264 -acodec aac 2.mp4
 -vframes 1:输出多少帧
 	视频截图：ffmpeg -i wildlife.wmv -ss 00:00:04.254 -vframes 1 out.png
 crf 23 : 数字越大画质越差，增大6文件大小就会减小一倍
+
+转m3u8文件需要注意的
+ffmpeg -i Wildlife.wmv -hls_list_size 0 out.m3u8
+-hls_list_size 0  paylist包含所有ts，如果不加，只会包含6个ts分片，不完整
+-f hls   强制文件类型，如果不输入，则根据后缀自动探测

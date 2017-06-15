@@ -1,0 +1,4 @@
+var encodedName = $('<div />').text(name).html();
+
+name是数据
+jquery对象的.text()方法会自动对name中的html标签进行转码
