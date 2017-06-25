@@ -1,0 +1,4 @@
+创建固定大小的集合，此时的集合可以添加修改，无法删除，跟oplog一样，可以使用cursor监控
+	db.createCollection("messages", { capped: true, size: 100,max: 10 })
+	size:集合占用的空间大小，256(字节)的倍数
+	max:集合最大个数
