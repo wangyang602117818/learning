@@ -15,6 +15,9 @@ mongodb 默认的文件夹里面没有配置文件
 	安装为服务
 	1)使用mongo自带的命令行(所有路径必须都是绝对路径)
 		mongod.exe --install --config "C:\Program Files\MongoDB\Server\3.2\config\mongodb.conf"
+		    // --serviceName "" 
+            // --serviceDisplayName ""
+			// --serviceDescription ""
 			net start MongoDB
 			net stop  MongoDB
 		mongod.exe --remove

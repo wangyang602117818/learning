@@ -48,7 +48,7 @@ must_not 子句:必须全部为假,才返回真
             "bool" : {
               "should" : [
                  { "term" : {"price" : 20}}, 
-                 { "term" : {"productID" : "XHDK-A-1293-#fJ3"}} 
+                 { "term" : {"productID" : "XHDK-A-1293-#fJ3"}}
               ],
               "must_not" : {
                  "term" : {"price" : 30}
