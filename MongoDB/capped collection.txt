@@ -4,3 +4,16 @@
 	max:集合最大个数
 
 db.createCollection("queue", { capped: true, size: 104857600 })
+
+
+
+var cursor = await MongoCollection.FindAsync(filter, new FindOptions<BsonDocument> { CursorType = CursorType.TailableAwait });
+//监视表
+while (await cursor.MoveNextAsync())
+{
+	var batch = cursor.Current;  
+	foreach (var doc in batch) //每一个document
+    {
+
+	}
+}
