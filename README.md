@@ -2,4 +2,4 @@
 
 ### current doing ###
  - file service page design
- - plan wirte it use react.js 
+ - plan use react.js to wirte it 
