@@ -17,7 +17,50 @@
 		2)在shell内部认证: (返回 1 表示成功)
 			use admin
 			db.auth("userAdmin","123")
+	3) 使用 userAdmin 登陆创建其他用户
+		案例一:所有数据库的 read,但是看不了系统数据表的内容
+			db.createUser(
+			  {
+				user: "wang",
+				pwd: "123",
+				roles: [ { role: "readAnyDatabase", db: "admin" } ]
+			  }
+			)
+		案例二：所有数据库的 read write，但是看不了系统数据表的内容
+			db.createUser(
+			  {
+				user: "x",
+				pwd: "123",
+				roles: [ { role: "readWriteAnyDatabase", db: "admin" } ]
+			  }
+			)
+		案例二: 所有数据库的 admin,但是看不了系统数据表的内容
+			db.createUser(
+			  {
+				user: "yang",
+				pwd: "123",
+				roles: [ { role: "dbAdminAnyDatabase", db: "admin" } ]
+			  }
+			)
 
+一般的：
+创建一个至高权限的用户，给自己组的用户使用，
+use admin
+db.createUser(
+	 {
+		user: "userAdmin",
+		pwd: "123",
+		roles: [ { role: "root", db: "admin" } ]
+	}
+)
+创建一个只读的给其他人使用
+use admin
+db.createUser(
+	 {
+		user: "wang",
+		pwd: "123",
+		roles: [ { role: "readAnyDatabase", db: "admin" },{ role: "read", db: "local" }]
+	}
+)
 
-
-
+服务器与服务器之间用keyFile来认证，客户端与服务器用user认证
