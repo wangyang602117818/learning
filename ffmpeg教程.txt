@@ -1,0 +1,45 @@
+一：简介
+1：2000年由法国程序员FabriceBellard发起的开源项目，2008 google加入该
+项目，该项目的服务器全部由google免费提供
+2：FFmpeg是一个多媒体编解码器库，并提供了命令行前端
+3：自由软件，遵循GUN 协议
+4：windows，Linux，macOS多平台使用
+5：使用FFmpeg的程序暴风影音、QQPlayer、Format Factory
+
+二：视频的一些简单参数
+1：分辨率
+	跟图片的分辨率是一个意思，视频都是有图片连续播放得来的
+2：码率
+	也叫比特率，是指视频每秒播放的字节数，主要影响视频的大小、清晰度
+3：帧率
+	每秒播放多少帧，主要影响视频的流畅度
+4：视频格式与封装格式
+	一个视频里面的视频流的所采用的编码格式叫视频格式(h264,h265,MPEG)，把视频里面的视频内容和音频内容
+封装起来的格式叫封装格式，一般视频文件的后缀名字就是该视频的封装格式（.mp4 , .avi, .wmv）
+
+三：下载
+1：Static Shared Dev：
+	static：该版本提供了静态版本的FFmpeg工具，作为工具而言此版就可以满足我们的需求
+	shared：该版本的工具包括可执行文件和dll，程序运行过程必须依赖于提供的dll文件
+	dev:提供了库的头文件和dll的引导库
+2: 文件介绍
+	ffmpeg.exe: 转换视频的核心文件
+	ffplay.exe：播放视频的核心文件
+	ffprobe.exe：检测视频的核心文件
+3 ：简单命令
+	ffmpeg.exe -version
+	ffplay.exe p.mp4
+	ffprobe.exe -i p.mp4
+
+四：转换
+1：简单视频转换
+	ffmpeg.exe –i p.mp4 p.wmv
+2: 指定其他参数
+	ffmpeg-ip.wmv -vcodec h264 -acodec aac p.mp4
+	-vcodec简写-c:v -acodec简写-c:a
+
+五：播放
+1：由于 http live stream 是 apple 公司开发，所以只能在所有apple设备中播放，要想在其他设备中播放，得使用一个开源的js文件
+2: 视频切片
+	ffmpeg -i Wildlife.wmv -hls_list_size 0 out.m3u8
+
