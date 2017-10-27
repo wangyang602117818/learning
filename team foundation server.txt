@@ -6,8 +6,8 @@ Team Foundation Server的使用
 	3)在服务器上选好一个项目,然后mapping,此时服务器端还没有任何代码,
 	4)转到solution explorer 右击解决方案,add solution to source control,此时本地的项目和服务器端的项目做了一个映射,然后checkin就完成了
 3:删除项目
-	1)断开与服务器的mapping,只要删掉工作空间就行了
-	2)到网页管理界面上删除项目
+	1)断开与服务器的mapping(只要删掉工作空间就行了)[点击Workspace下拉框 -》打开manage Workspaces-> 删掉 相应的工作空间]
+	2)到网页管理界面上删除项目，控制面板-》DefaultCollection-》右键项目直接删除
 
 总结:
 新建一个空的项目是在服务器端完成的,打开本地的项目,mapping 以后才能把本地的代码传到服务器
