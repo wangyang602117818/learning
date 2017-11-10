@@ -8,6 +8,8 @@
 		roles: [ { role: "userAdminAnyDatabase", db: "admin" } ]
 	  }
 	)
+	db.system.users.find()       //列出所有用户
+	db.dropUser("userAdmin");    //删除用户
 	2) 启用安全认证: 在 mongodb.conf 中加入 
 	security:
 		authorization: enabled
