@@ -28,7 +28,7 @@ mongodb 默认的文件夹里面没有配置文件
 	1)直接指定数据库路径和日志文件: ./mongod --dbpath ../db --logpath ../log/mongodb.log --storageEngine=mmapv1 -journal -logappend   (--storageEngine=mmapv1 和 -journal 是32位系统要加上的)
 	2)使用配置文件(推荐)
 	============mongodb.conf=================
-		systemLog:
+		systemLog:mongod
 			destination: file
 			path: "../log/mongodb.log"
 			logAppend: true

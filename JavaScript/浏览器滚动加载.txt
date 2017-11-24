@@ -1,0 +1,13 @@
+jQuery(window).bind("scroll", function () {
+	scrollTop = jQuery(this).scrollTop();
+	scrollHeight = jQuery(window.document).height();
+	windowHeight = jQuery(this).height();
+	scrollBottom = scrollHeight - scrollTop - windowHeight;
+	//滚动条到达底部
+	if (scrollBottom <= 0) {
+		var pageIndex = parseInt($("#pageIndex").text(), 10);
+		var pageCount = parseInt($("#pageCount").text(), 10);
+		if (pageIndex === pageCount) return;
+		
+	}
+});
