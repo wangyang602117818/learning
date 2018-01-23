@@ -1,0 +1,34 @@
+一：简介
+	1：react是Facebook的一个前端框架，
+	2：2013年5月开源，2015年5月开源ios解决方案，2015年9月出Android解决方案，从最早的ui引擎变成了一整套前后端通吃的webapp解决方案。
+	3：learn once, write anywhere
+	4：思想的转变：由之前的直接由js操作dom变成 状态机模式 -》不需要直接操作dom了，这是react的一大创新
+二：环境搭建（案例index.html）
+	1：去 https://reactjs.org/ 下载js文件react.js react-dom.js
+	2：babel.min.js 将jsx语法转换成js语法
+三：jsx语法(案例jsx_gra)
+	1：遇到<>标签，则认为是xml标签，遇到{ } 则认为是js语法
+	2：根节点的最大数量是1
+	3：内联样式使用{{}}
+	4：外部样式，使用className=""
+	5：es6语法，js继承语法extends
+四：组件
+	1：组件的写法(组件类的第一个字母必须大写)
+		class Toggle extends React.Component {
+			constructor(props) {
+				super(props);
+			}
+			render(){
+				return(
+					<Top/>
+				)
+			}
+		}
+	2：组件的生命周期（试试）
+		componentWillMount()
+		componentDidMount()   //使用最多，用于组件加载完成后，到服务器端取数据
+		componentWillUpdate()
+		componentDidUpdate()
+		componentWillUnmount()
+	3：组件间的数据传递(案例：data_transfer)
+	    
