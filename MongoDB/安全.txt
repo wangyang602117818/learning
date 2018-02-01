@@ -74,10 +74,9 @@ db.updateUser(
 )
 ===================================================================
 服务器与服务器之间用keyFile来认证，客户端与服务器用user认证
-
-keyFile生成方法：
-	openssl rand -base64 756 > <path-to-keyfile>
-	chmod 400 <path-to-keyfile>
+							keyFile生成方法：
+								openssl rand -base64 756 > <path-to-keyfile>
+								chmod 400 <path-to-keyfile>
 配置文件(经过测试：要启用用户名和密码，则每个副本集的节点必须启用keyFile)
 security:
     authorization: enabled                  //client与server
