@@ -50,7 +50,7 @@
 use admin
 db.createUser(
 	 {
-		user: "userAdmin",
+		user: "wang",
 		pwd: "123",
 		roles: [ { role: "root", db: "admin" } ]
 	}
@@ -59,10 +59,34 @@ db.createUser(
 use admin
 db.createUser(
 	 {
-		user: "wang",
+		user: "yang",
 		pwd: "123",
 		roles: [ { role: "readAnyDatabase", db: "admin" },{ role: "read", db: "local" }]
 	}
 )
-
+更新用户
+use admin
+db.updateUser(
+   "user123",
+   {
+      pwd: "KNlZmiaNUp0B"
+   }
+)
+===================================================================
 服务器与服务器之间用keyFile来认证，客户端与服务器用user认证
+
+keyFile生成方法：
+	openssl rand -base64 756 > <path-to-keyfile>
+	chmod 400 <path-to-keyfile>
+配置文件(经过测试：要启用用户名和密码，则每个副本集的节点必须启用keyFile)
+security:
+    authorization: enabled                  //client与server
+	keyFile: D:\MongoDB3.4\key              //server与server
+=================================================================
+案例1：
+对于已经有的集群，创建用户:
+在不配置 security 节点的情况下 
+	1) 主节点添加好所有的账户 
+	2) 配置文件中启用 security(authorization,keyFile)节点 
+	3) 重启所有节点 ok
+	
