@@ -1,0 +1,17 @@
+mongodb默认是不启用慢查询记录的
+Level: 
+0 不记录慢查询(默认), 
+   db.setProfilingLevel(0)
+1 记录慢查询，要设置一个值（这个值默认是 100 毫秒）
+   db.setProfilingLevel(1, { slowms: 100, sampleRate:0.5  })
+   //记录所有大于100毫秒的慢查询到 system.profile 表中，只会记录 50% 的慢查询，这是为新能考虑
+2 记录所有查询
+   db.setProfilingLevel(2)
+
+=======================
+查询当前慢查询状态
+db.getProfilingStatus()
+
+
+
+https://docs.mongodb.com/manual/tutorial/manage-the-database-profiler/
