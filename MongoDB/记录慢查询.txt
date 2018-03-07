@@ -3,6 +3,7 @@ mongodb默认是不启用慢查询记录的
 
 use FileService
 db.setProfilingLevel(1, { slowms: 100, sampleRate:0.5  })
+//3.4版本使用 db.setProfilingLevel(1, 100)
 
 重启服务之后就恢复到不记录慢查询的默认状态
 Level: 
