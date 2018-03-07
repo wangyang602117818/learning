@@ -13,5 +13,5 @@ Level:
 db.getProfilingStatus()
 
 
-
+https://docs.mongodb.com/manual/reference/database-profiler/
 https://docs.mongodb.com/manual/tutorial/manage-the-database-profiler/
