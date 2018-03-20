@@ -3,6 +3,8 @@
 	===================================
 	http.cors.enabled: true
 	http.cors.allow-origin: /http:\/\/localhost(:[0-9]+)?/
+
+	"*":所有
 	====================================
 因为 head 用 nodejs 写出,需要nodejs运行环境
 1) 下载 并 安装 nodejs
