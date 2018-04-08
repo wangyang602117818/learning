@@ -24,3 +24,11 @@
                          
   cell.CellStyle=cellStyle;           //把样式关联到单元格
 
+
+row.HeightInPoints * 96/72 = pixel
+
+
+
+
+
+
