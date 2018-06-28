@@ -66,3 +66,36 @@ git高级之保存工作现场
      用git stash list查看工作现场，
      用git stash pop恢复工作现场
   
+--///////////////////////////  使用Gitblit创建git服务器  ////////////////////////////////.
+一：配置
+	1：安装jdk并配置好JAVA_HOME环境变量
+	2：到官网上下载windows安装包并解压(是一个站点)，修改配置文件(C:\soft\gitblit-1.8.0\data\gitblit.properties)如下，
+		server.httpPort = 0
+		server.httpsPort = 8443
+		#git仓库最大大小
+		git.packedGitLimit = 300m
+		server.shutdownPort = 8010
+		#仓库位置
+		git.repositoriesFolder = D:/GitRepository
+	3：authority.cmd 的配置请参考官网 
+	4：运行 gitblit.cmd 然后启动站点(https://cnpekappdwv035:8443)  installService.cmd 以服务形式安装
+二：用户
+	1：在自己的电脑安装git scm(https://git-scm.com/),配置好并生成一对秘钥，吧公钥复制到站点的SSH Keys
+三：上传本地已有的项目到git服务器
+	1：在站点的版本库中创建项目，不要勾选初始化提交，
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
