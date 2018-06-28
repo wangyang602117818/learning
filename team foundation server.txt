@@ -15,3 +15,11 @@ Team Foundation Server的使用
 Administration Consoel Users:配置的是可以登录web管理界面的用户列表
 
 
+TF255115: The following service did not start: TfsJobAgent
+原因：账户无法启动 Visual Studio Team Foundation Background Job Agent 这个服务造成
+解决办法：先手动安装 TfsJobAgent 服务(installutil.exe),找一个可以启动该服务的账户，记下该账户，然后卸载该服务
+在配置 tfs 向导的时候有一项 Account ，填入该账户就可以了
+
+
+
+
