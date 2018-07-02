@@ -78,9 +78,11 @@ git高级之保存工作现场
 		#仓库位置
 		git.repositoriesFolder = D:/GitRepository
 	3：authority.cmd 的配置请参考官网 
-	4：运行 gitblit.cmd 然后启动站点(https://cnpekappdwv035:8443)  installService.cmd 以服务形式安装
+	4：运行 gitblit.cmd 然后启动站点(https://cnpekappdwv035:8443)  初始用户名和密码都为admin,请修改密码
+	5：installService.cmd 以服务形式安装
 二：用户
 	1：在自己的电脑安装git scm(https://git-scm.com/),配置好并生成一对秘钥，吧公钥复制到站点的SSH Keys
+	(复制完成后，直接使用admin来创建项目、clone项目就不需要密码了)
 三：上传本地已有的项目到git服务器
 	1：在站点的版本库中创建项目，不要勾选初始化提交，
 
