@@ -27,3 +27,4 @@ ffmpeg -i Wildlife.wmv -hls_list_size 0 out.m3u8
 -use_localtime 1 
 -hls_segment_filename %Y%m%d%H%M%S.ts   开启use_localtime之后可以使用时间标记
 
+
