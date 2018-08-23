@@ -65,6 +65,10 @@ git高级之保存工作现场
      用git stash保存当前工作现场，
      用git stash list查看工作现场，
      用git stash pop恢复工作现场
+
+其他
+--从服务器端拉取文件
+git checkout origin/master -- path/to/file   
   
 --///////////////////////////  使用Gitblit创建git服务器  ////////////////////////////////.
 一：配置
