@@ -1,0 +1,34 @@
+1: 安装 Quartz
+2：创建时序工厂
+	StdSchedulerFactory factory = new StdSchedulerFactory();
+3：获取时序
+    IScheduler scheduler = await factory.GetScheduler();
+	时序的生命周期从创建(factory.GetScheduler())开始 到调用了结束(scheduler.Shutdown())为止
+4：启动时序，只有启动了时序才能往里面添加 job 和 trigger
+	await scheduler.Start();
+5：定义job
+	IJobDetail job = JobBuilder.Create<HelloJob>()
+                               .WithIdentity("job1", "group1")
+                               .Build();
+	public class HelloJob : IJob
+    {
+        public async Task Execute(IJobExecutionContext context)
+        {
+            await Console.Out.WriteLineAsync(DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss")+"Greetings from HelloJob!");
+        }
+    }
+	创建一个HelloJob，job的名字为job1，所属组为group1
+6：定义trigger
+	ITrigger trigger = TriggerBuilder.Create()
+                                     .WithIdentity("trigger1", "group1")
+                                     .StartNow()
+                                     .WithSimpleSchedule(x => x
+										 .WithIntervalInSeconds(10)
+										 .RepeatForever())
+                                     .Build();
+	创建一个名称为trigger1，组为group1的触发器，该触发器立即启动，并且每隔10s重复一次	
+7：启动job
+	await scheduler.ScheduleJob(job, trigger);
+8：销毁时序
+	await scheduler.Shutdown();
+	
