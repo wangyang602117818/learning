@@ -18,7 +18,7 @@
         }
     }
 	创建一个HelloJob，job的名字为job1，所属组为group1
-6：定义trigger
+6：定义 trigger
 	ITrigger trigger = TriggerBuilder.Create()
                                      .WithIdentity("trigger1", "group1")
                                      .StartNow()
@@ -26,7 +26,8 @@
 										 .WithIntervalInSeconds(10)
 										 .RepeatForever())
                                      .Build();
-	创建一个名称为trigger1，组为group1的触发器，该触发器立即启动，并且每隔10s重复一次	
+	创建一个名称为trigger1，组为group1的触发器，该触发器立即启动，并且每隔10s重复一次
+	每天10:00准时运行: .WithSchedule(CronScheduleBuilder.DailyAtHourAndMinute(10,0))
 7：启动job
 	await scheduler.ScheduleJob(job, trigger);
 8：销毁时序
