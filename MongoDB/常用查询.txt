@@ -43,8 +43,11 @@ db.DocumentDraft.updateMany(
 	{},                       //条件
 	{ $set:{Archive:false}}   //更新字段
 )
-
-
 7:排序
     db.getCollection('DocumentDraft').find({"AppCode":"InnovationApp"}).sort({"CreateDate":-1})
 
+8:查找重复记录，根据 AppCode,SurveyId,StaffId来聚合，找出记录大于1的人
+	db.Report.aggregate(
+		{"$group" : { "_id": {AppCode:"$AppCode",SurveyId:"$SurveyId",StaffId:"$StaffId"}, "count": { "$sum": 1 } } },
+		{"$match": {"_id" :{ "$ne" : null } , "count" : {"$gt": 1} } }
+	)
