@@ -1,0 +1,27 @@
+默认情况下查询会返回所有的结果,这可能会有一些敏感信息
+1. 只返回 _source 中指定字段的方法(get)
+	http://localhost:9200/customer/_search
+	{
+		"query": { "match_all": {} },
+		"_source": ["name", "age"]
+	}
+2.  match语法(get):查询年龄为20的所有记录
+	http://localhost:9200/customer/_search
+	{
+		"query": { "match": { "age": 20 } }
+	}
+3.  match语法(get):查询姓名中包含Jane字样的记录
+	http://localhost:9200/customer/_search
+	{
+		"query": { "match": { "name": "Doe" } }
+	}
+4.  match语法(get):查询姓名中包含 Jane 或者 Doe 的记录
+	http://localhost:9200/customer/_search
+	{
+		"query": { "match": { "name": "Jane Doe" } }
+	}
+5.  match语法(get):查询姓名中包含短语 Jane Doe 的记录
+	http://localhost:9200/customer/_search
+	{
+		"query": { "match_phrase": { "name": "Jane Doe" } }
+	}

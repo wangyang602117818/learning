@@ -1,0 +1,55 @@
+使用bool查询来组合单个查询条件,来实现复合查询(get)
+
+http://localhost:9200/customer/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        { "match": { "name": "jane" } },
+        { "match": { "age": 12 } }
+      ]
+    }
+  }
+}
+其中 must 中的 基本条件 是并且的关系, 所有的条件都为true就满足
+
+http://localhost:9200/customer/_search
+{
+  "query": {
+    "bool": {
+      "should": [
+        { "match": { "name": "jane" } },
+        { "match": { "age": 20 } }
+      ]
+    }
+  }
+}
+其中 should 中的 基本条件 是或者的关系,单个条件只要有一个为true就满足
+
+http://localhost:9200/customer/_search
+{
+  "query": {
+    "bool": {
+      "must_not": [
+        { "match": { "name": "jane" } },
+        { "match": { "age": 20 } }
+      ]
+    }
+  }
+}
+其中 must_not 中的 基本条件 是并且的关系,所有条件都不为true就满足
+
+http://localhost:9200/customer/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        { "match": { "name": "jane" } }
+      ],
+      "must_not": [
+        { "match": { "age": "21" } }
+      ]
+    }
+  }
+}
+其中 must 和 must_not 都满足 则整个bool就返回true

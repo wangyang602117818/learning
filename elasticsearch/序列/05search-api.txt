@@ -1,0 +1,11 @@
+search api 有2种方式来执行查询,2种方式都已 _search 节点结尾
+1: 通过url的方式(get):
+	http://localhost:9200/customer/_search?q=*&sort=age:asc
+2: 通过body的方式(get):
+	http://localhost:9200/customer/_search
+	{
+		"query": { "match_all": {} },
+		"sort": [
+			{ "age": "asc" }
+		]
+	}
