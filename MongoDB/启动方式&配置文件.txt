@@ -42,3 +42,4 @@ mongodb 默认的文件夹里面没有配置文件
 	==========================================
 	启动: ./mongod --config ../config/mongodb.conf
 
+mongod.exe --install --config "C:\Program Files\MongoDB\Server\4.0\bin\mongod.cfg"

@@ -1,1 +1,0 @@
-1:下载quartz.net程序集,在bin目录中找到所需的dll(quartz.dll,Common.Logging.dll)

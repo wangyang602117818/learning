@@ -69,7 +69,11 @@ git高级之保存工作现场
 其他
 --从服务器端拉取文件
 git checkout origin/master -- path/to/file
-  
+新增排除文件
+git rm -r --cached .
+git add .
+git commit -m "add ignore"
+git push
 --///////////////////////////  使用Gitblit创建git服务器  ////////////////////////////////.
 一：配置
 	1：安装jdk并配置好JAVA_HOME环境变量
