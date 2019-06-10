@@ -1,0 +1,4 @@
+1. 安装 Elasticsearch : 下载windows版的 es, 已经包含了java环境
+	命令行中运行 elasticsearch.bat ,则es服务器已经启动,
+	如果以服务器的形式来运行,需要配置JAVA_HOME
+	elasticsearch-service.bat install

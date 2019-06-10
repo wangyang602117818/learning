@@ -1,0 +1,23 @@
+1. 基本命令
+	集群健康(get): http://localhost:9200/_cat/health?v
+	节点个数(get): http://localhost:9200/_cat/nodes?v
+	列举所有index(get): http://localhost:9200/_cat/indices?v
+	创建index(put): http://localhost:9200/customer
+	删除index(delete): http://localhost:9200/customer
+	创建document(put): http://localhost:9200/customer/_doc/1
+		{"name":"John Doe","age",20}
+	查询document(get): http://localhost:9200/customer/_doc/1
+	更新document(post): http://localhost:9200/customer/_doc/1
+		{ "name": "Jane Doe","age":12 }
+	删除document(delete): http://localhost:9200/customer/_doc/1
+2. 批处理 文件末尾必须加回车
+    action必须是 index, create(已存在则报错), delete, update
+	批量添加document(post): http://localhost:9200/customer/_bulk
+		{"index":{"_id":"1"}}
+		{"name": "John Doe","age":20 }
+		{"index":{"_id":"2"}}
+		{"name": "Jane Doe","age":12 }
+	更新第一项删除第二项document(post): http://localhost:9200/customer/_bulk
+		{"update":{"_id":"1"}}
+		{"doc": { "name": "John Doe becomes Jane Doe" } }
+		{"delete":{"_id":"2"}}
