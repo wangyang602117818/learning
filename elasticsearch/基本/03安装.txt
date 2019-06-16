@@ -1,0 +1,12 @@
+1. 安装 Elasticsearch : 下载windows版的 es, 已经包含了java环境
+	命令行中运行 elasticsearch.bat ,则es服务器已经启动,
+	如果以服务器的形式来运行,需要配置JAVA_HOME
+	elasticsearch-service.bat install
+2. elasticsearch主要包含3种配置文件(elasticsearch.yml,jvm.options,log4j2.properties)
+	elasticsearch.yml: yml格式的配置文件
+	jvm.options: 以 - 开头的配置就是对java虚拟机的设置(-Xmx2g)
+	log4j2.properties: 
+	3个基本属性:
+	${sys:es.logs.base_path}: 目录基路径
+	${sys:es.logs.cluster_name}: 集群名称
+	${sys:es.logs.node_name}: 节点名称
