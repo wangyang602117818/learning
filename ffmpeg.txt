@@ -13,6 +13,7 @@ ffmpeg -i 1.wmv -vcodec h264 -acodec aac 2.mp4
 -t 3 :视频持续时间
 -ss 00:10 :从输入文件的时间点开始
 	截取视频(截取10到15秒的内容)：ffmpeg -i wildlife.wmv -c copy -ss 00:10 -t 5 w.wmv
+	放大声音2倍 -vol 200
 -vframes 1:输出多少帧
 	视频截图：ffmpeg -i wildlife.wmv -ss 00:00:04.254 -vframes 1 out.png
 	这种速速要快：ffmpeg -ss 00:00:04.254 -i wildlife.wmv -vframes 1 out.png
