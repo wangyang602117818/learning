@@ -1,0 +1,158 @@
+tmpl模板可以把html中的标记替换成值
+模板一般定义在script标签中
+	<script id="movieTemplate" type="text/x-jquery-tmpl"></script>
+注意: js的执行要在 模板定义之后
+1. 基本替换语法: ${Name}
+	<script id="movieTemplate" type="text/x-jquery-tmpl">
+		<li>
+			<b>${Name}</b> (${ReleaseYear})
+		</li>
+	</script>
+	<script>
+		var movie = { 
+			Name: "The Red Violin", 
+			ReleaseYear: "1998" 
+		};
+		$("#movieTemplate").tmpl(movie).appendTo("body");
+	</script>
+3. 自动循环语法: 如果传入的是对象是数组的话,则自动就会循环
+	<script id="movieTemplate" type="text/x-jquery-tmpl">
+		<li>
+			<b>${Name}</b> (${ReleaseYear})
+		</li>
+	</script>
+	<script>
+		var movies = [
+			{ Name: "The Red Violin", ReleaseYear: "1998" },
+			{ Name: "Eyes Wide Shut", ReleaseYear: "1999" },
+			{ Name: "The Inheritance", ReleaseYear: "1976" }
+		];
+		$("#movieTemplate").tmpl(movies).appendTo("body");
+	</script>
+4. 手动循环语法: 如果传入的对象中包含数组,则可以使用each手动循环 $index $value this
+    <script id="movieTemplate" type="text/x-jquery-tmpl">
+		<table>
+			<tr>
+				<td>${Title}</td>
+				<td>
+					- Languages:
+					<em>
+						{%each Languages%}
+							${$index} - ${$value.Name} - ${this.Name}
+						{%/each%}
+					</em>
+				</td>
+			</tr>
+		</table>
+	</script>
+	<script>
+		var movies = [
+			{
+				Title: "Meet Joe Black",
+				Languages: [
+					{ Name: "English" },
+					{ Name: "French" }
+				]
+			}
+		];
+		$("#movieTemplate").tmpl(movies).appendTo("body");
+	</script>
+5. if else 语法:
+	<script id="movieTemplate" type="text/x-jquery-tmpl">
+		<table>
+			<tr>
+				<td>${Title}: </td>
+				<td>
+					{%if Languages%}
+						<em>${Languages}</em>.
+					{%elif Subtitles%}
+						<em>${Subtitles}</em>.
+					{%else%}
+						without subtitles.
+					{%/if%}
+				</td>
+			</tr>
+		</table>
+	</script>
+	<script>
+		var movies = [
+			{
+				Title: "Meet Joe Black",
+				Languages: "English and French",
+				Subtitles: "English"
+			},
+			{
+				Title: "Eyes Wide Shut",
+				Subtitles: "French and Spanish"
+			},
+			{
+				Title: "The Mighty"
+			}
+		];
+		$("#movieTemplate").tmpl(movies).appendTo("body");
+	</script>
+6. html tag: 默认情况下如果字符串中包含html tag的话,则会被转义,要使它按照html的标签来解析,使用html tag
+	<script id="movieTemplate" type="text/x-jquery-tmpl">
+		<table>
+			<tr>
+				<td>${Title}</td>
+				<td class="synopsis">{{html Synopsis}}</td>
+			</tr>
+		</table>
+	</script>
+	<script>
+		var movies = [
+			{
+				Title: "Eyes Wide Shut",
+				Synopsis: "Director <b>Stanley Kubrick's</b> final film"
+			}
+		];
+		$("#movieTemplate").tmpl(movies).appendTo("body");
+	</script>
+7. 在模板中调用javascript方法
+	<script id="movieTemplate" type="text/x-jquery-tmpl">
+		<li>
+			<b>${Name}</b> (${reComputYear(ReleaseYear)})
+		</li>
+	</script>
+	<script>
+		function reComputYear(year) {
+			return parseInt(year) + 1;
+		}
+		var movies = [
+			{ Name: "The Red Violin", ReleaseYear: "1998" },
+			{ Name: "Eyes Wide Shut", ReleaseYear: "1999" },
+			{ Name: "The Inheritance", ReleaseYear: "1976" }
+		];
+		$("#movieTemplate").tmpl(movies).appendTo("body");
+	</script>
+8. 模板嵌套
+	<script id="movieTemplate" type="text/x-jquery-tmpl">
+		<tr>
+			<td>${Name}</td>
+			<td>{%tmpl(Languages) languageTemplate%}</td>
+		</tr>
+	</script>
+	<script id="languageTemplate" type="text/x-jquery-tmpl">
+		<div>${Name}</div>
+	</script>
+	<script>
+		var movies = [
+			{
+				Name: "Meet Joe Black",
+				Languages: [
+					{ Name: "English" },
+					{ Name: "French" }
+				]
+			},
+			{
+				Name: "Eyes Wide Shut",
+				Languages: [
+					{ Name: "French" },
+					{ Name: "German" },
+					{ Name: "Spanish" }
+				]
+			}
+		];
+		$("#movieTemplate").tmpl(movies).appendTo("body");
+	</script>
