@@ -73,7 +73,7 @@ git checkout origin/master -- path/to/file
 git rm -r --cached .
 git add .
 git commit -m "add ignore"
-git push
+git  
 --///////////////////////////  使用Gitblit创建git服务器  ////////////////////////////////.
 一：配置
 	1：安装jdk并配置好JAVA_HOME环境变量

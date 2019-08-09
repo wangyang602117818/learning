@@ -1,0 +1,7 @@
+1: 安装 nodejs 最新版
+	下载最新的exe安装包就行
+2: 安装vue命令行
+	npm install -g @vue/cli
+3: 使用命令行创建新项目
+	vue create wwwroot
+	

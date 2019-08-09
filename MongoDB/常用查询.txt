@@ -38,6 +38,33 @@
 		   $sort:{_id:1}
 		}
 	])
+	db.tbl_visit.aggregate([
+		{
+			$match:{VisitDate:{$gte:ISODate("2019-07-01T00:00:00.00Z"),$lte:ISODate("2019-07-31T00:00:00.00Z")}}
+		},
+		{
+			$project:{
+				date:{ $dateToString: {"format": "%Y-%m-%d","date": "$VisitDate"} },
+				staffId:"$StaffId",
+				staffName:"$StaffName",
+				userAgent:"$UserAgent",
+				visitDate:"$date",
+				url:"$Url"
+			}    
+		},
+		{
+			$group:{
+				_id:{date:"$date",staffId:"$staffId"},
+				count:{$sum:1},
+				staffId:{$first:"$staffId"},
+				staffName:{$first:"$staffName"},
+				userAgent:{$first:"$userAgent"},
+				visitDate:{$first:"$date"},
+				url:{$first:"$url"},
+			}
+		}
+	])
+ 
 更新
 db.DocumentDraft.updateMany(
 	{},                       //条件
