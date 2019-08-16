@@ -5,3 +5,9 @@
 3: 使用命令行创建新项目
 	vue create wwwroot
 	
+基本概念:内部维护一个状态,改变这个状态会自动触发页面渲染
+
+路由:
+1: 安装route
+   npm install vue-router
+ 

@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script type="text/x-template" id="hello-world-template">
+        <li v-on:click="printText" v-bind:id="todo.id">{{ todo.text }}</li>
+    </script>
+</head>
+<body>
+    <div id="app-7" v-on:click="printApp">
+        <ol>
+            <todo-item v-for="item in groceryList"
+                       v-bind:todo="item"
+                       v-bind:key="item.id"></todo-item>
+        </ol>
+    </div>
+</body>
+</html>
+<script>
+    Vue.component('todo-item', {
+        props: ['todo'],
+        methods: {
+            printText: function (event) {
+                alert(event.target.innerText);
+            }
+        },
+        template: '#hello-world-template'   //script魔板,维护起来相比字符串魔板好一点,但是一旦项目大了,这种script变多
+    });
+    var vm = new Vue({
+        el: '#app-7',
+        methods: {
+            printApp: function (event) {
+                alert(event.target.id);
+            }
+        },
+        data: {
+            groceryList: [
+                { id: 0, text: '蔬菜' },
+                { id: 1, text: '奶酪' },
+                { id: 2, text: '随便其它什么人吃的东西' }
+            ]
+        }
+    })
+</script>
