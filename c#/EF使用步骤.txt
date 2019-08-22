@@ -1,0 +1,30 @@
+1. 使用 code first
+	1) 在 nuget 中安装 EntityFramework,此时web.config中会自动添加ef配置信息
+	2) 需要多少张表就创建多少个class
+	3) 创建数据库上下文(2张表)
+		public class BloggingContext : DbContext
+		{
+			public DbSet<Blog> Blogs { get; set; }
+			public DbSet<Post> Posts { get; set; }
+			public BloggingContext() : base("BloggingContext")
+			{
+			}
+		}
+	4)	使用数据库上下文的 实例对象 来增删改查
+		var db = new BloggingContext()
+		var blog = new Blog { Name = name };
+        db.Blogs.Add(blog);
+        db.SaveChanges();
+	5)	Enable-Migrations 启用结构迁移
+		此步骤会生成2个文件
+		Configuration: 升级数据库结构会调用
+		<timestamp>_InitialCreate: 标识数据库结构发生变化后的历史记录
+	6)	表结构发生变化了依次执行以下命令
+		Add-Migration AddUrl: 程序会自动对比变化,生成新的迁移文件
+		Update-Database: 更新结构到数据库
+2. 表数据注解
+	[Key] : 主键(不指定主键则框架自动寻找名称为Id的字段 或者 字段里面有Id 字样的字段)
+	[StringLength(20)] : 有长度的string
+	[Index]: 索引
+	[ForeignKey]: 外键
+	[DatabaseGenerated]: 数据库自动生成的字段
