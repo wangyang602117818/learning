@@ -1,0 +1,18 @@
+--host,-h  :主机
+--port     :端口(默认27017)
+--username,-u :用户名
+--password,-p :密码
+--db,-d     :数据库
+--collection,-c: 集合
+--out,-o :导出的文件名
+--query,-q :条件导出
+
+导出集合 mongoexport -h 127.0.0.1 --port 27017 -d StartupDatabaseUAT -c tbl_company -o company.csv
+
+
+--file : 要导入的文件
+--upsert : 更新或添加已有记录
+
+导入集合 mongoimport -h 127.0.0.1 --port 27017 -d StartupDatabaseUAT -c tbl_company --upsert --file company.csv
+
+

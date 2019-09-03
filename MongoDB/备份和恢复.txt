@@ -1,3 +1,10 @@
+--host,-h  :主机
+--port     :端口(默认27017)
+--username,-u :用户名
+--password,-p :密码
+--db,-d     :数据库
+--collection,-c: 集合
+
 备份 cloud-docs数据库的 spreadsheets集合:
 	mongodump --host 10.157.192.141 --port 27017 --db cloud-docs --collection spreadsheets
 备份 cloud-docs数据库
