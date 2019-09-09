@@ -28,3 +28,6 @@
 	[Index]: 索引
 	[ForeignKey]: 外键
 	[DatabaseGenerated]: 数据库自动生成的字段
+3. 外键规则
+	
+	
