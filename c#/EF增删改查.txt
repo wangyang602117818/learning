@@ -17,7 +17,7 @@ Db1Entities db = new Db1Entities();  --EF上下文对象
         不按照主键删除会引发错误："存储区更新、插入或删除语句影响到了意外的行数(0)。实体在加载后可能被修改或删除。刷新 ObjectStateManager 项。"
 方式二：course c = new course() { classId = 9 };
         DbEntityEntry<course> entry = db.Entry<course>(c); 
-        entry.State = System.Data.EntityState.Deleted;  --修改对象的状态为删除
+        entry.State = System.Data.Entity.EntityState.Deleted;  --修改对象的状态为删除
         db.SaveChanges();
         同样需要按照主键删除，否则报错
 
