@@ -1,0 +1,5 @@
+该配置文件对空格敏感,不要加入额外的空格
+3个基本属性:
+	${sys:es.logs.base_path}: 目录基路径
+	${sys:es.logs.cluster_name}: 集群名称
+	${sys:es.logs.node_name}: 节点名称
