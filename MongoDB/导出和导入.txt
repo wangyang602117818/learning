@@ -5,7 +5,8 @@
 --db,-d     :数据库
 --collection,-c: 集合
 --out,-o :导出的文件名
---query,-q :条件导出
+--query,-q :条件导出 {x:{$gt:1}}
+--fields,-f :字段 c01,c02
 
 导出集合 mongoexport -h 127.0.0.1 --port 27017 -d StartupDatabaseUAT -c tbl_company -o company.csv
 
