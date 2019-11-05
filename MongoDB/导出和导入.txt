@@ -7,7 +7,7 @@
 --out,-o :导出的文件名
 --query,-q :条件导出 {x:{$gt:1}}
 --fields,-f :字段 c01,c02
- --authenticationDatabase :
+--authenticationDatabase :
  
 导出集合 mongoexport -h 127.0.0.1 --port 27017 -d StartupDatabaseUAT -c tbl_company -o company.csv
 
@@ -21,4 +21,6 @@
 .\mongoexport.exe -h HKDBSUWV601 -d StartupDatabaseUAT -c report_tag -o report.csv
 
 .\mongoexport.exe -h HKDBSPWV730 -p 29031 -u StartupDatabaseXiniuUser -p QFs278YtBiJX5AGV6P4Z -d StartupDatabaseXiniu -c tbl_company -f _id -o tbl_company.csv
+
+ .\mongoexport.exe -h HKDBSPWV730 -p 29031 -u StartupDatabaseXiniuUser -p QFs278YtBiJX5AGV6P4Z -d StartupDatabaseXiniu -c tbl_research -q {page:0} -o tbl_research.csv
 
