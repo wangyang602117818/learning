@@ -33,3 +33,23 @@
 8：销毁时序
 	await scheduler.Shutdown();
 	
+
+触发器案例:
+
+WithSimpleSchedule(简单触发器)
+	//每隔5秒执行一次
+	.WithSimpleSchedule(x => x
+        .WithIntervalInSeconds(5)
+        .RepeatForever()
+    )
+	
+WithDailyTimeIntervalSchedule(每天某时段间隔多少时间执行)
+    //每天12点到18点，间隔5秒执行一次
+	.WithDailyTimeIntervalSchedule(x=>x
+		.StartingDailyAt(new TimeOfDay(12, 00))
+        .EndingDailyAt(new TimeOfDay(18, 00))
+		.WithIntervalInSeconds(5)
+	)
+WithCalendarIntervalSchedule(日历触发器)
+
+WithCronSchedule(表达式触发器)
