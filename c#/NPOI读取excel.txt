@@ -1,5 +1,5 @@
 1 创建工作表sheet1
-  HSSFWorkbook wb=new HSSFWorkbook();                             //创建wb工作簿
+  HSSFWorkbook wb=new HSSFWorkbook();                             //创建wb工作簿 XSSFWorkbook
   Sheet sheet1=wb.CreateSheet("sheet1");                          //创建sheet1工作表
         //设置格式//////////////
         sheet1.DefaultRowHeightInPoints=15;                        //默认行高15px

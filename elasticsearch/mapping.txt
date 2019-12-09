@@ -1,4 +1,17 @@
-方式一:
+添加新的mapping
+put /my-index1/doc/_mapping
+{
+  "properties": {
+    "com_funds": {
+      "properties": {
+        "money_rmb": {
+          "type": "long"
+        }
+      }
+    }
+  }
+}
+改变mapping方式一:
 	1)首先创建一个新的index,并设置新的index 新的 mappings
 		put /my-index1/
 		{
@@ -32,7 +45,7 @@
 		}
 	3)删掉以前的index,再用同样的方式,创建一个和以前一模一样的index,就ok
 ==============================================================================
-方式二:使用别名(这种方式,应用程序可以不动)
+改变mapping方式二:使用别名(这种方式,应用程序可以不动)
 	1)新建一个index,并设置mappings
 		put /my-index-v1
 		{

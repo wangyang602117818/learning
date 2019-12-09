@@ -7,3 +7,7 @@ op:
 当 op="i"	字段 o 里面存储的是添加的整条记录
 当 op="u"   字段 o2 里面的_id是更新字段的唯一id
 当 op="d"   字段 o 里面存储的_id是删除字段的唯一id
+
+
+改变oplog为10GB
+db.adminCommand({replSetResizeOplog:1, size: 10240})
