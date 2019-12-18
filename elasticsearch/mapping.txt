@@ -39,7 +39,7 @@ put /my-index1/doc/_mapping
 			},
 			"dest": {
 				"index": "my-index1",
-				"type":"doc1",
+				"type":"doc",
 				"version_type": "external"
 			}
 		}
