@@ -38,7 +38,11 @@ git的一般使用流程(基本使用)：
     1 情况一：没有放到暂存区，文件会回到前一次commit的状态（没有放到暂存区直接修改文件就ok了，还用什么命令？）
     2 情况二：文件已经放到暂存区，文件会回退到暂存区的文件状态
     3 情况三：使用git reset head 001.txt 命令把001.txt文件从暂存区撤销掉
-
+git封版本
+	--打tag,默认标签是打在最新提交的版本上的,指定 -a -m "备注"
+	git tag -a version-2.0 -m  "version 2.0 released"
+	--将tag推送到远程
+	git push origin version-2.0
 git高级之搭建GitHub服务器
    --从本地库创建远程库
    1 使用ssh-keygen -t rsa -C "youremail@example.com"命令创建私钥(id_rsa)和公钥(id_rsa.pub)
