@@ -1,0 +1,1 @@
+电脑: netsh wlan show profiles {WiFi名称} key=clear
