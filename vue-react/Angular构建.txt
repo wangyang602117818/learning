@@ -1,0 +1,13 @@
+1: 安装 nodejs 最新版
+	下载最新的exe安装包就行
+2: 全局安装ng命令行	
+	npm install -g @angular/cli
+3: 使用命令行创建新项目空间
+	ng new my-app
+4: 运行应用
+	ng serve 或者 npm start
+====================
+创建新组件
+	ng generate component heroes
+创建服务
+	ng generate service hero
