@@ -11,3 +11,4 @@
 1: 安装route
    npm install vue-router
  
+react在做手机页面的时候,怎么保证返回到长列表的时候保存之前的状态

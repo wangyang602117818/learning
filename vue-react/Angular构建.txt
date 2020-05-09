@@ -7,7 +7,11 @@
 4: 运行应用
 	ng serve 或者 npm start
 ====================
+--no-spec: 不生成spec文件
+-it: 不生成魔板文件
 创建新组件
 	ng generate component heroes
 创建服务
 	ng generate service hero
+创建路由
+	ng generate module app-routing --flat --module=app
