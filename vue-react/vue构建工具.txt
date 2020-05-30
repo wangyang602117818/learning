@@ -10,5 +10,11 @@
 路由:
 1: 安装route
    npm install vue-router
- 
+
+在已有的项目中添加 Framework7
+1: 添加库
+	npm install framework7
+2: 添加framework7-vue
+	npm install framework7-vue
+	
 react在做手机页面的时候,怎么保证返回到长列表的时候保存之前的状态

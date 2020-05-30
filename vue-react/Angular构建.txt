@@ -2,16 +2,28 @@
 	下载最新的exe安装包就行
 2: 全局安装ng命令行	
 	npm install -g @angular/cli
-3: 使用命令行创建新项目空间
+3: 使用命令行创建新项目空间 
 	ng new my-app
+	--createApplication="false"   //仅创建工作空间,不创建项目
 4: 运行应用
 	ng serve 或者 npm start
 ====================
 --no-spec: 不生成spec文件
 -it: 不生成魔板文件
-创建新组件
+1: 创建新项目:
+	ng generate application my-first-app  //在工作空间中创建项目
+2: 创建新组件
 	ng generate component heroes
-创建服务
+3: 创建服务
 	ng generate service hero
-创建路由
+4: 创建路由
 	ng generate module app-routing --flat --module=app
+	
+=========== ionic ======
+1: 在已有的项目中添加 ionic
+	npm install @ionic/angular@latest --save
+	ng add @ionic/angular  --添加必要的import
+2: 添加全局命令行: 
+	npm install -g @ionic/cli
+3: 初始化应用: 
+	ionic start myproj

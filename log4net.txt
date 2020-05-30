@@ -9,6 +9,9 @@ mvc项目：
      方法2：在Application_Start方法下配置读取log4net.config文件
         string path = Server.MapPath("~/log4net.config");
         log4net.Config.XmlConfigurator.Configure(File.OpenRead(path));
+		//或者
+		FileInfo fileInfo = new FileInfo(AppDomain.CurrentDomain.BaseDirectory + "bin\\log4net.config");
+        log4net.Config.XmlConfigurator.ConfigureAndWatch(fileInfo);
   4  在程序中获取日志对象，记录日志
      log4net.ILog _log = log4net.LogManager.GetLogger("FileAppender");
      _log.Error("错误信息");
