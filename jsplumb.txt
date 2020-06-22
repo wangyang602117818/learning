@@ -1,4 +1,0 @@
-basic:[1,2,4]
-tag:[5,4,8]
-funding:[45,23,9]
-industry:[4,2,45]

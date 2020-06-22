@@ -53,6 +53,12 @@ git高级之搭建GitHub服务器
    1 使用 git clone git@github.com:wangyang/learngit.git
    
 git高级之分支管理
+	查看远程分支: 
+		git branch -r
+    查看本地分支: 
+		git branch
+	拉取远程分支并在本地切换到该分支(自动关联分支): 
+		git checkout -b dev origin/dev
    1 创建并切换分支 git checkout -b dev 等价于 git checkout dev(创建分支), git branch dev(切换分支)
    2 合并分支 git merge dev(将dev分支合并到当前分支)
    3 删除分支 git branch -d dev
