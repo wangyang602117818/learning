@@ -59,7 +59,7 @@ git高级之分支管理
 		git branch
 	拉取远程分支并在本地切换到该分支(自动关联分支): 
 		git checkout -b dev origin/dev
-   1 创建并切换分支 git checkout -b dev 等价于 git checkout dev(创建分支), git branch dev(切换分支)
+   1 创建并切换分支 git checkout -b dev 等价于 git branch dev(创建分支), git checkout dev(切换分支)
    2 合并分支 git merge dev(将dev分支合并到当前分支)
    3 删除分支 git branch -d dev
    4 解决冲突 当把新分支修改提交后，本来要用主分支来合并新分支的，但是又修改了主分支，这时合并就会产生冲突
