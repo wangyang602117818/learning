@@ -20,7 +20,7 @@
 		Configuration: 升级数据库结构会调用
 		<timestamp>_InitialCreate: 标识数据库结构发生变化后的历史记录
 	6)	表结构发生变化了依次执行以下命令
-		Add-Migration Add: 程序会自动对比变化,生成新的迁移文件
+		Add-Migration init: 程序会自动对比变化,生成新的迁移文件
 		Update-Database: 更新结构到数据库
 2. 表数据注解
 	[Key] : 主键(不指定主键则框架自动寻找名称为Id的字段 或者 字段里面有Id 字样的字段)
