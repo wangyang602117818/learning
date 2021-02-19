@@ -1,0 +1,9 @@
+SELECT 
+    a.name AS 存储过程名称,
+    a.create_date AS 创建日期,
+    a.modify_date AS 修改日期,
+    b.last_execution_time AS 最后执行日期,
+    b.execution_count AS 执行次数
+FROM sys.procedures a 
+LEFT JOIN sys.dm_exec_procedure_stats b ON a.object_id = b.object_id
+WHERE a.is_ms_shipped =0 and a.name='SP_ZYL_Data_GetMonitor'
