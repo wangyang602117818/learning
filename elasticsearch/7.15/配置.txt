@@ -1,0 +1,8 @@
+1. 设置自动创建index
+	elasticsearch.yml
+	# 不自动创建index
+	action.auto_create_index: false
+	# 自动创建index(默认)
+    action.auto_create_index: true
+	# 可以创建指定的index
+	action.auto_create_index: .monitoring*,.watches,.triggered_watches,.watcher-history*,.ml*
