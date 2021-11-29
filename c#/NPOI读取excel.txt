@@ -27,8 +27,32 @@
 
 row.HeightInPoints * 96/72 = pixel
 
+                             /////npoi最新经验//////
+1. 读取excel模板
+FileStream stream = new FileInfo(AppDomain.CurrentDomain.BaseDirectory + "monitor_template.xlsx").OpenRead();
+XSSFWorkbook wb = new XSSFWorkbook(stream);
+ISheet sheet = wb.GetSheet("Sheet1");
+//保存
+MemoryStream memoryStream = new MemoryStream();
+wb.Write(memoryStream);
+wb.Close();
+return File(memoryStream.ToArray(), "application/octet-stream", "企业信用信息报告.xlsx");
 
-
+2. 读取word模板
+FileStream stream = new FileInfo(AppDomain.CurrentDomain.BaseDirectory + "1.docx").OpenRead();
+XWPFDocument doc = new XWPFDocument(stream);
+//所有段落集合
+foreach (var item in doc.Paragraphs){
+    //替换特定字符
+	var text = item.ParagraphText;
+    if (text.Contains("{CompanyName}")) item.ReplaceText("{CompanyName}", companyDetail.CompanyName);
+}
+//所有table集合
+var tables = doc.Tables;
+//增加table的row
+var row = tables[0].CreateRow();
+//设置单元格内容
+row.GetCell(0).SetText("xx");
 
 
 
