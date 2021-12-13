@@ -54,5 +54,11 @@ var row = tables[0].CreateRow();
 //设置单元格内容
 row.GetCell(0).SetText("xx");
 
-
+3. 写入文件到磁盘
+string filename = AppDomain.CurrentDomain.BaseDirectory + companyDetail.CompanyName + ".docx";
+using (FileStream out1 = new FileStream(filename, FileMode.Create))
+{
+	doc.Write(out1);
+	doc.Close();
+}
 
