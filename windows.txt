@@ -1,8 +1,3 @@
 1 查看进程端口号：
    netstat -ano                //列举
    netstat -ano|findstr "2564"    //查找相应PID项
-2 创建服务
-	sc create 服务名称 binPath= "{path to batch file}"
-	binPath 后面有一个空格
-3 卸载服务
-	sc delete 服务名称

@@ -15,3 +15,10 @@ DisplayName： 计算机管理->服务中的Name | 任务管理器中的Description
 ServiceName： 任务管理器中的Name
 
 ** DisplayName与Description设为一致
+
+
+1 创建服务
+	sc create 服务名称 binPath= "{path to batch file}" start= auto 
+	binPath 后面有一个空格
+2 卸载服务
+	sc delete 服务名称

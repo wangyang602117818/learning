@@ -1,0 +1,14 @@
+对于:asp.netcore5.0项目
+1. 添加引用(Microsoft.Extensions.Hosting.WindowsServices)
+2. 使用 .UseWindowsService()
+	Host.CreateDefaultBuilder(args)
+		.UseWindowsService()
+		.ConfigureWebHostDefaults(webBuilder =>
+		{
+			webBuilder.UseStartup<Startup>();
+		});
+3. 发布项目并且按照服务
+	sc create 服务名称 binPath= "{path to batch file}" start= auto
+
+
+

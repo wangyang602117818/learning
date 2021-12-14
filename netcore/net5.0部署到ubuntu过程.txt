@@ -1,13 +1,27 @@
-1. 对于net5.0,work service服务项目:
+1. 对于net5.0项目:
 	1)  引用Microsoft.Extensions.Hosting.Systemd (.UseSystemd())
 		window是Microsoft.Extensions.Hosting.WindowsServices
 	    以自宿主环境发布包
+			using IHost host = Host.CreateDefaultBuilder(args)
+			.UseSystemd()
+			//.UseWindowsService(options =>
+			//{
+			//    options.ServiceName = "SCS数据同步服务";
+			//})
+			.ConfigureServices(services =>
+			{
+				services.AddHostedService<Worker>();
+			})
+			.Build();
 	2) 新建linux服务配置文件(/etc/systemd/system/HelloWorld.service)
 		[Unit]
 		Description=服务描述
 		[Service]
 		Type=notify
+		WorkingDirectory=/srv/HelloWorld/
 		ExecStart=/srv/HelloWorld/HelloWorld(文件路径)  --port=43(可选)
+		Restart=always
+		RestartSec=10
 		[Install]
 		WantedBy=multi-user.target
 	3) sudo systemctl daemon-reload (让系统加载刚刚添加的配置文件)
