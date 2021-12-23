@@ -17,6 +17,11 @@
 /usr/share/nginx/ 静态文件目录
 /usr/share/man/man8/nginx.8.gz 帮助文档
 
+--查看端口占用
+sudo netstat -lnp | grep 80 
+--结束进程
+kill pid
+
 sudo nginx  启动nginx
 nginx -s stop 停止服务
 nginx -s quit 优雅停止

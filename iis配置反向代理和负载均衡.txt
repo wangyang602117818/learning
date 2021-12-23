@@ -1,0 +1,21 @@
+1. 安装 Web Platform Installer(在iis顶层节点的属性窗口):
+2. 安装反向代理插件(Application Request Routing),和Url Rewrite插件,并在iis中的Application Request Routing中启用代理
+3. 在配置文件web.config中配置或者在iis界面配置以下属性(将匹配www.proxy.com的url重写到http://localhost:8011)
+<system.webServer>
+    <rewrite>
+      <rules>
+        <rule name="web">
+          <match url="^(.*)"/>
+          <conditions>
+            <add input="{HTTP_HOST}" pattern="^www.proxy.com$"/>
+          </conditions>
+          <action type="Rewrite" url="http://localhost:8011/{R:1}"/>
+        </rule>
+      </rules>
+    </rewrite>
+</system.webServer>
+
+
+
+1. 安装Application Request Routing和Web Deploy
+2. 

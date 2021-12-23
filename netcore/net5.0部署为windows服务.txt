@@ -7,7 +7,7 @@
 		{
 			webBuilder.UseStartup<Startup>();
 		});
-3. 发布项目并且按照服务
+3. 发布项目并且安装服务
 	sc create 服务名称 binPath= "{path to batch file}" start= auto
 
 
