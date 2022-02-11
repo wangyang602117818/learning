@@ -85,6 +85,10 @@ git rm -r --cached .
 git add .
 git commit -m "add ignore"
 
+如果之前设置过单独提交某个文件,设置ignore是无效的
+--手动设置文件不要提交
+git update-index --assume-unchanged {filename}
+
 --///////////////////////////  使用Gitblit创建git服务器  ////////////////////////////////.
 一：配置
 	1：安装jdk并配置好JAVA_HOME环境变量
