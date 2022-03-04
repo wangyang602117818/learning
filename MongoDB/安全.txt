@@ -19,6 +19,7 @@
 		2)在shell内部认证: (返回 1 表示成功)
 			use admin
 			db.auth("userAdmin","123")
+		3) 连接字符串: mongodb://admin:123@localhost:27017/admin
 	3) 使用 userAdmin 登陆创建其他用户
 		案例一:所有数据库的 read,但是看不了系统数据表的内容
 			db.createUser(
