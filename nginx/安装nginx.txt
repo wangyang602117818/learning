@@ -24,7 +24,19 @@ kill pid
 
 sudo nginx  启动nginx
 nginx -s stop 停止服务
-nginx -s quit 优雅停止
+nginx -s quit 优雅停止,等待处理完请求再停止
 nginx -s reload 重新加载配置
 
+------windows版
+nginx 是以单独的进程启动的,并非一个服务
+1. 下载并且解压 nginx
+2. 转到根目录
+start nginx  --启动nginx
+nginx -s stop   --停止nginx
+nginx -s quit   --等待处理完请求再停止
+nginx -s reload  --重新加载配置
+nginx -s reopen	 --重新打开日志文件
 
+
+
+ 
