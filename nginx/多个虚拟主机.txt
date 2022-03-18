@@ -3,17 +3,19 @@ http {
  server {
 	 listen          80;
 	 server_name     www.a.com;
+	 root            /var/data;
+	 index           index.html;
 	 location / {
-		 index index.html;
-		 root  /var/data;
+		 try_files $uri $uri/ =404;
 	 }
  }
  server {
 	 listen          80;
 	 server_name     www.b.com;
+	 root            /var/www/html;
+	 index index.html index.nginx-debian.html;
 	 location / {
-		 index index.nginx-debian.html;
-		 root  /var/www/html;
+		 try_files $uri $uri/ =404;
 	 }
  }
 }

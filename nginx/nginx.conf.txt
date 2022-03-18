@@ -1,4 +1,5 @@
 /etc/nginx/nginx.conf
+配置行末要加;
 配置节点
 	#nginx启动的进程数
 	worker_processes auto;
@@ -17,14 +18,37 @@
 	    # $uri 被匹配成 my.html, 按照 my.html my.html/index.html 的顺序查找文件, 如果不存在,返回404 
 		try_files $uri $uri/ =404;
 	}
-	
+
 检测配置文件是否配置正确 nginx -t
 
-
-
-
-location配置
+location节点
 location上的url将会与请求的url做比较，如果匹配，则将该url加到root节点指定的url上
+配置多个 location 案例
+	root /var/www/html;
+	location / {
+		try_files $uri $uri/ =404;
+	}
+	location /data/ {
+		root /var;
+	}
+默认访问会到 /var/www/html 中去找,包含 /data 的路由会到 /var/data 文件夹中去找
 
+location通配符
+=  完全匹配
+~  正则匹配,区分大小写
+~* 正则匹配,不区分大小写
+@  定义区段
+	# 访问路径如果完全匹配 /data/index.html 则停止搜索直接返回文件 /var/data/index.html
+	location = /data/index.html {
+		root /var;  
+	}
+	# 区分大写匹配,此时 data/images/abc.jpg 无法匹配到,因为Data是大写
+	location ~ /Data {
+		root /var;  
+	}
+	# 不区分大写匹配,此时 data/images/abc.jpg 可以匹配到
+	location ~* /Data {
+		root /var;  
+	}
 
 
