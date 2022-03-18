@@ -1,0 +1,21 @@
+#在http模块中使用多个server节点
+http {
+ server {
+	 listen          80;
+	 server_name     www.a.com;
+	 location / {
+		 index index.html;
+		 root  /var/data;
+	 }
+ }
+ server {
+	 listen          80;
+	 server_name     www.b.com;
+	 location / {
+		 index index.nginx-debian.html;
+		 root  /var/www/html;
+	 }
+ }
+}
+
+2个server节点都监听80端口,根据server_name来决定使用哪一个,如果没有匹配到就使用第一个默认的节点处理

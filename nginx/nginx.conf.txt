@@ -1,0 +1,30 @@
+/etc/nginx/nginx.conf
+配置节点
+	#nginx启动的进程数
+	worker_processes auto;
+	#连接数上限
+	events {
+	  worker_connections 768;
+	}
+	#站点的根目录
+	root /var/www/html;
+	#站点的默认页面列表
+	index index.html index.htm index.nginx-debian.html;
+	#_匹配所有主机,""处理不带主机名的请求
+	server_name _;
+	#匹配根路径 ,案例: http://localhost/my.html
+	location / {
+	    # $uri 被匹配成 my.html, 按照 my.html my.html/index.html 的顺序查找文件, 如果不存在,返回404 
+		try_files $uri $uri/ =404;
+	}
+	
+检测配置文件是否配置正确 nginx -t
+
+
+
+
+location配置
+location上的url将会与请求的url做比较，如果匹配，则将该url加到root节点指定的url上
+
+
+

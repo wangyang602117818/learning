@@ -38,9 +38,13 @@ pdfobject
 
 
 
-Login 添加basePath 退出用
 cookie滑动过期时间
 cookie过期之后跳转,判断之前是否登录过,如果登录过,则跳到登录,否则自动登录
 不跳转登录
+
+
+
+
+
 
 
