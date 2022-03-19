@@ -1,0 +1,12 @@
+两者都是用来设置站点的目录的
+1. alias 配置只能位于location块中,root 可以不在locatio块
+2. root不会丢弃location匹配的部分,alias会丢弃(有点类似于绝对路径),一下两种配置效果一样
+    # 访问 http://www.a.com/about/a.html 会返回 /home/www/about/a.html 的两种不同的配置方法
+    index  index.html;
+    location /about/ {
+      root /home/www/;
+	}
+	location /about/ {
+      alias /home/www/about/;
+	}
+	
