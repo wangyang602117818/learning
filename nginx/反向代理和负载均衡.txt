@@ -1,0 +1,22 @@
+-------------反向代理-----------------------
+server {
+	 listen          80;
+	 server_name     www.a.com;
+	 root            /var/data;
+	 index           index.html;
+	 location / {
+		 proxy_pass https://www.baidu.com/;            #后台服务器
+		 proxy_set_header X-Forward-For $remote_addr;  #请求头
+	 }
+}
+
+该节点配置 baidu 的访问代理
+用户访问 www.a.com 实际会代理到baidu的网站
+
+其他参数
+proxy_set_header Host $host;   #设置请求头
+proxy_connect_timeout 90;      #代理连接超时
+proxy_send_timeout 90;         #代理发送超时
+proxy_read_timeout 90;         #代理发送超时
+
+------------负载均衡------------------
