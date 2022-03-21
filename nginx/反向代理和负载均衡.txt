@@ -20,3 +20,21 @@ proxy_send_timeout 90;         #代理发送超时
 proxy_read_timeout 90;         #代理发送超时
 
 ------------负载均衡------------------
+在http模块中定义以下节点
+	upstream myapp1 {
+	    ip_hash;
+		least_conn;
+		fair;
+        server localhost:8011 weight=10;
+        server localhost:8022 weight=1;
+    }
+	server {
+		location / {
+			proxy_pass https://myapp1;
+			proxy_set_header X-Forward-For $remote_addr;
+		}
+	}
+weight: 权重
+ip_hash: 每个访客固定访问一个服务器
+least_conn: 请求被分配到最少连接的服务器上
+fair: 按照响应时间来分配请求
