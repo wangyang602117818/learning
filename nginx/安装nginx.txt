@@ -1,14 +1,17 @@
 1 对于 Debian ubuntu 系统来说,为了验证安装软件的来源安全性,有必要先添加key,公钥
+    sudo wget http://nginx.org/keys/nginx_signing.key
 	sudo apt-key add nginx_signing.key  (nginx_signing.key 在官网下载)
-2 添加源(在文件 /etc/apt/sourcelist 末尾追加一下两行)
+2 添加源(在文件 /etc/apt/sources.list 末尾追加一下两行)
+    推荐 gedit 编辑器 : sudo gedit /etc/apt/sources.list
 	deb http://nginx.org/packages/ubuntu/ codename nginx
     deb-src http://nginx.org/packages/ubuntu/ codename nginx
-	(其中 codename 对应不同的 ubuntu版本号,比如我的是 Ubuntu 16.04.1 对应 xenial)
+	(其中 codename 对应不同的 ubuntu版本号,比如我的是 Ubuntu 18.04:bionic ,Ubuntu 20.04:focal,Ubuntu 21.10:impish)
 3 更新源
 	apt-get update
 4 安装 nginx
 	apt-get install nginx
 	如果之前安装了 nginx 这时会报错 ，运行 apt-get autoremove nginx 删除依赖，在重新安装
+	这种方式清除安装和配置文件 sudo apt-get purge nginx nginx-common
 
 装好了以后的目录
 /usr/sbin/nginx   可执行文件
@@ -24,7 +27,7 @@ kill pid
 
 sudo nginx  启动nginx
 nginx -s stop 停止服务
-nginx -s quit 优雅停止,等待处理完请求再停止
+nginx -s quit 等待处理完请求再停止
 nginx -s reload 重新加载配置
 
 

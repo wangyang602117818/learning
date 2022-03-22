@@ -1,17 +1,26 @@
--------------反向代理-----------------------
+-------------Url重写-----------------------
+url重写是通过前端重定向来完成
+    # 该匹配把 http://localhost/content/login/index.90d3a164.css 重定向到 http://api.ssoutil.cn/content/login/index.90d3a164.css
+	location ~* /content {
+	   rewrite ^/(.*) http://api.ssoutil.cn/$1 break;
+	}
+^/(.*) 匹配完整的路径
+flag标记: last(匹配完成后继续向下匹配) break(匹配完成即终止) redirect(302临时重定向) permanent(301永久重定向)
+-------------反向代理(请求转发)-----------------------
+#此时访问 www.a.com 会被代理到 https://www.baidu.com
 server {
 	 listen          80;
 	 server_name     www.a.com;
 	 root            /var/data;
 	 index           index.html;
 	 location / {
-		 proxy_pass https://www.baidu.com/;            #后台服务器
+		 proxy_pass https://www.baidu.com;            #后台服务器
 		 proxy_set_header X-Forward-For $remote_addr;  #请求头
 	 }
 }
-
-该节点配置 baidu 的访问代理
-用户访问 www.a.com 实际会代理到baidu的网站
+#proxy_pass 加/代表绝对路径,不加代表相对路径
+proxy_pass https://www.baidu.com/;  #访问 http://localhost/img/peak-result.png 会代理到 https://www.baidu.com/peak-result.png
+proxy_pass https://www.baidu.com;  #访问 http://localhost/img/peak-result.png 会代理到 https://www.baidu.com/img/peak-result.png
 
 其他参数
 proxy_set_header Host $host;   #设置请求头
@@ -26,11 +35,11 @@ proxy_read_timeout 90;         #代理发送超时
 		least_conn;
 		fair;
         server localhost:8011 weight=10;
-        server localhost:8022 weight=1;
+        server localhost:8022 weight=1 backup;
     }
 	server {
 		location / {
-			proxy_pass https://myapp1;
+			proxy_pass http://myapp1;
 			proxy_set_header X-Forward-For $remote_addr;
 		}
 	}
@@ -38,3 +47,7 @@ weight: 权重
 ip_hash: 每个访客固定访问一个服务器
 least_conn: 请求被分配到最少连接的服务器上
 fair: 按照响应时间来分配请求
+backup: 作为备份节点
+
+
+
