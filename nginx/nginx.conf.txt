@@ -52,14 +52,18 @@ location通配符
 	}
 	
 ----------------nginx参数---------------
+$uri         请求路径地址,不带请求参数,带上了默认的页面,真实的请求页面- /foo/index.html
 $remote_addr 客户端地址(ip)-127.0.0.1
 $remote_user 客户端名称- --
 $time_local  访问时间- 22/Mar/2022:17:49:38 +0800
 $request     url和协议- GET / HTTP/1.1
-$http_host   域名- www.a.com
+$http_host   浏览器输入的地址- www.a.com
 $status      状态码- 304
+$host        主机名- www.a.com
+$host_name    服务器机器名- wang-virtualbox
 $body_bytes_sent 发送给客户端内容大小- 0
 $http_user_agent 浏览器代理- Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:98.0) Gecko/20100101 Firefox/98.0
-$request_uri 请求路径地址- /aw/1.jpg
-$server_name 服务器名称- localhost
+$request_uri 请求路径地址- /aw/1.jpg?a=123
+$server_name 服务器名称- www.a.com
 $server_addr 服务器ip地址- 127.0.0.1
+
