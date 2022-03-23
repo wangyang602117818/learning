@@ -5,7 +5,12 @@ url重写是通过前端重定向来完成
 	   rewrite ^/(.*) http://api.ssoutil.cn/$1 break;
 	}
 ^/(.*) 匹配完整的路径
-flag标记: last(匹配完成后继续向下匹配) break(匹配完成即终止) redirect(302临时重定向) permanent(301永久重定向)
+flag标记: 
+	 last(匹配完成后继续向下匹配)
+	 break(匹配完成即终止) 
+	 redirect(302临时重定向)
+	 permanent(301永久重定向)
+	 
 -------------反向代理(请求转发)-----------------------
 #此时访问 www.a.com 会被代理到 https://www.baidu.com
 server {
