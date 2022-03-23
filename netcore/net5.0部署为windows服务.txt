@@ -1,4 +1,6 @@
-对于:asp.netcore5.0项目
+net5.0测试所得:
+如果仅仅是测试项目,发布之后双击exe即可运行,要是以服务的方式运行,使用一下方法
+
 1. 添加引用(Microsoft.Extensions.Hosting.WindowsServices)
 2. 使用 .UseWindowsService()
 	Host.CreateDefaultBuilder(args)

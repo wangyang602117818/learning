@@ -1,35 +1,37 @@
-1. 对于net5.0项目:
-	1)  引用Microsoft.Extensions.Hosting.Systemd (.UseSystemd())
-		window是Microsoft.Extensions.Hosting.WindowsServices
-	    以自宿主环境发布包
-			using IHost host = Host.CreateDefaultBuilder(args)
-			.UseSystemd()
-			//.UseWindowsService(options =>
-			//{
-			//    options.ServiceName = "SCS数据同步服务";
-			//})
-			.ConfigureServices(services =>
-			{
-				services.AddHostedService<Worker>();
-			})
-			.Build();
-	2) 新建linux服务配置文件(/etc/systemd/system/HelloWorld.service)
-		[Unit]
-		Description=服务描述
-		[Service]
-		Type=notify
-		WorkingDirectory=/srv/HelloWorld/
-		ExecStart=/srv/HelloWorld/HelloWorld(文件路径)  --port=43(可选)
-		Restart=always
-		RestartSec=10
-		[Install]
-		WantedBy=multi-user.target
-	3) sudo systemctl daemon-reload (让系统加载刚刚添加的配置文件)
-	   sudo systemctl start HelloWorld.service (启动服务)
-	   sudo systemctl stop HelloWorld.service (停止服务)
-	   sudo systemctl restart HelloWorld.service (重启服务)
-	   sudo systemctl enable HelloWorld.service (服务随系统启动)
-	   sudo systemctl status HelloWorld.service  (服务状态)
+net5.0测试所得:
+如果仅仅是发布到linux测试所用,直接发布然后使用 ./包名 来运行就行
+要使用 类似于windows的服务形式 的运行方式在linux上运行,则使用以下方法
+1)  引用Microsoft.Extensions.Hosting.Systemd (.UseSystemd())
+	window是Microsoft.Extensions.Hosting.WindowsServices
+	以自宿主环境发布包
+		using IHost host = Host.CreateDefaultBuilder(args)
+		.UseSystemd()
+		//.UseWindowsService(options =>
+		//{
+		//    options.ServiceName = "SCS数据同步服务";
+		//})
+		.ConfigureServices(services =>
+		{
+			services.AddHostedService<Worker>();
+		})
+		.Build();
+2) 新建linux服务配置文件(/etc/systemd/system/HelloWorld.service)
+	[Unit]
+	Description=服务描述
+	[Service]
+	Type=notify
+	WorkingDirectory=/srv/HelloWorld/
+	ExecStart=/srv/HelloWorld/HelloWorld(文件路径)  --port=43(可选)
+	Restart=always
+	RestartSec=10
+	[Install]
+	WantedBy=multi-user.target
+3) sudo systemctl daemon-reload (让系统加载刚刚添加的配置文件)
+   sudo systemctl start HelloWorld.service (启动服务)
+   sudo systemctl stop HelloWorld.service (停止服务)
+   sudo systemctl restart HelloWorld.service (重启服务)
+   sudo systemctl enable HelloWorld.service (服务随系统启动)
+   sudo systemctl status HelloWorld.service  (服务状态)
 
 
 
