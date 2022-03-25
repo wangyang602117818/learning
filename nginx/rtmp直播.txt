@@ -1,0 +1,17 @@
+1. 安装 rtmp 模块
+2. 配置节点
+rtmp {
+    server {
+        listen 1935; #监听的端口
+        chunk_size 4096;
+        application hls { #rtmp推流请求路径
+            live on;
+            hls on;
+            hls_path /var/data/hls;
+            hls_fragment 5s;
+        }
+    }
+}
+3. 访问: rtmp://192.168.117.179:1935/live
+
+
