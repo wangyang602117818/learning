@@ -30,7 +30,8 @@ net5.0测试所得:
    sudo systemctl start HelloWorld.service (启动服务)
    sudo systemctl stop HelloWorld.service (停止服务)
    sudo systemctl restart HelloWorld.service (重启服务)
-   sudo systemctl enable HelloWorld.service (服务随系统启动)
+   sudo systemctl enable HelloWorld.service (开机自启动)
+   sudo systemctl disable HelloWorld.service (停止开机自启动)
    sudo systemctl status HelloWorld.service  (服务状态)
 
 
