@@ -2,16 +2,15 @@
 2. 配置节点
 rtmp {
     server {
-        listen 1935;       #监听的端口
+        listen 1935;      
         chunk_size 4096;
-        application live { #rtmp推流请求路径
+        application hls {
             live on;
             hls on;
             hls_path /var/data/hls;
-            hls_fragment 5s;
+            hls_fragment 1s;
         }
     }
 }
-3. 使用obs推流到: rtmp://192.168.31.212:1935/live, 会在 /var/data/hls 文件夹下生产m3u8播放文件
+3. 使用obs推流到: rtmp://192.168.31.212:1935/hls, 会在 /var/data/hls 文件夹下生产m3u8播放文件
 4. 使用播放器播放 m3u8 文件
-
