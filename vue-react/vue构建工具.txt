@@ -18,3 +18,5 @@
 	npm install framework7-vue
 	
 react在做手机页面的时候,怎么保证返回到长列表的时候保存之前的状态
+
+ncu -u 更新所有包

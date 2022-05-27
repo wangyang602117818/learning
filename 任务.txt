@@ -36,16 +36,10 @@ office online server
 sqlserver大数据集群
 pdfobject
 
+string path = AppDomain.CurrentDomain.BaseDirectory + "一键导出评估报告-V10_En.docx";
 
+string filename = AppDomain.CurrentDomain.BaseDirectory + "download\\一键导出评估报告" + DateTime.Now.ToString("yyyyMMddHHmmss") + "_En.docx";
 
-cookie滑动过期时间
-cookie过期之后跳转,判断之前是否登录过,如果登录过,则跳到登录,否则自动登录
-不跳转登录
-
-nginx https
-urlrewrite
-
-
-
+return File(filename, "application/word");
 
 
