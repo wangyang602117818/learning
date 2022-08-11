@@ -34,7 +34,14 @@ net5.0测试所得:
    sudo systemctl disable HelloWorld.service (停止开机自启动)
    sudo systemctl status HelloWorld.service  (服务状态)
 
-
+4) 终结点配置(监听端口)
+"Kestrel": {
+    "Endpoints": {
+      "Http": {
+        "Url": "http://*:8011"
+      }
+    }
+}
 
 
 
