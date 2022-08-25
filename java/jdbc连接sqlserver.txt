@@ -1,0 +1,8 @@
+1. 连接字符串的几种形式:
+用户名和密码:
+jdbc:sqlserver://localhost\\MSSQLSERVER1;TrustServerCertificate=True;databaseName=UserCenter;user=user;password=pwd
+windows身份:
+jdbc:sqlserver://ip;TrustServerCertificate=True;databaseName=UserCenter;IntegratedSecurity=True
+
+
+
