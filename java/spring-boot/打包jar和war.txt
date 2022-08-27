@@ -1,0 +1,18 @@
+在pom.xml中加入以下配置:
+
+<packaging>jar</packaging>
+<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+</build>
+
+1. 打包jar包: 
+   命令行或者eclipse工具打包jar包: mvn package
+   
+2. 打包war包(把配置汇总jar改成war): 
+   命令行或者eclipse工具打包war包: mvn package
+	
