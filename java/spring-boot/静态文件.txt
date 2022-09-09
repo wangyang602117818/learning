@@ -1,0 +1,9 @@
+spring boot默认读取 resources 目录下的 /static  /public  /resources 文件夹对外部服务
+
+一般选取 static 文件夹下添加 css文件夹 js文件夹 来存放对应的文件,浏览器可以直接访问不用带上static路径 
+
+
+如果要改变这个默认行为,需要在resources目录下添加application.properties文件(未测试成功)
+配置
+spring.mvc.static-path-pattern=/resources/**
+

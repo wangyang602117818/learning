@@ -1,0 +1,85 @@
+springboot默认不提供 WebClient 实例的直接注入,而注入的是 WebClient.Builder 实例
+1. 添加依赖
+	<dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-webflux</artifactId>
+    </dependency>
+2. 通过构造函数的方式生成 WebClient 实例
+   public class IndexController {
+		private final WebClient webClient;
+		public IndexController(WebClient.Builder webClientBuilder) {
+			this.webClient = webClientBuilder.baseUrl("https://localhost:44342").build();
+		}
+   }
+================https====================
+3. 通过 WebClient 方式请求https会出现证书错误,通过以下方式绕过证书
+	1) 给springboot提供 WebClient 注入
+		@Configuration
+		public class RestTemplateConfig {
+			@Bean
+			public WebClient webClient() throws SSLException {
+				SslContext sslContext = SslContextBuilder
+						.forClient()
+						.trustManager(InsecureTrustManagerFactory.INSTANCE)
+						.build();
+				HttpClient httpClient = HttpClient.create().secure(t -> t.sslContext(sslContext));
+				return WebClient.builder().defaultHeader("","").clientConnector(new ReactorClientHttpConnector(httpClient)).build();
+			}
+		}
+	2) 直接通过注入的方式使用 WebClient
+		public class IndexController {
+			@Autowired
+			private WebClient webClient;
+		}
+===========get请求
+方式一:
+	var obj = this.webClient.get().uri(url).retrieve().bodyToMono(SystemNews.class).block();
+方式二:
+	var obj = this.webClient.get().uri("xxx/{id}", "123").retrieve().bodyToMono(SystemNews.class).block();
+方式三:
+	Map<String, Object> uriVariables = new HashMap<>();
+	uriVariables.put("p1", "news");
+	uriVariables.put("p2", "123");
+	var obj = this.webClient.get().uri("{p1}/{p2}", uriVariables).retrieve().bodyToMono(SystemNews.class).block();
+===========post请求
+--模拟form
+	MultiValueMap<String, String> formData = new LinkedMultiValueMap<>();
+	formData.add("username", "u123");
+	formData.add("password", "p123");
+	String mono = webClient.post().uri("")
+					.contentType(MediaType.APPLICATION_FORM_URLENCODED)
+					.body(BodyInserters.fromFormData(formData))
+					.retrieve()
+					.bodyToMono(String.class).block();
+--提交json
+ 	PostBean postBean = new PostBean();
+    postBean.setTitle("abc");
+	Mono<String> mono = webClient
+                .post()
+                .uri("/posts")
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .bodyValue(postBean)
+                .retrieve()
+                .bodyToMono(String.class);
+--提交文件
+	ClassPathResource classPathResource = new ClassPathResource("static\\images\\healthy.png");  //resources需要加入build path
+	MultipartBodyBuilder builder = new MultipartBodyBuilder();
+	builder.part("files", new FileSystemResource(classPathResource.getFile()));
+	var param = builder.build();
+	String resp = WebClient.create().post()
+                .uri(url)
+                .header("Authorization", "")
+                .contentType(MediaType.MULTIPART_FORM_DATA)
+                .body(BodyInserters.fromMultipartData(param))
+                .retrieve().bodyToMono(String.class).block();
+
+
+
+
+
+
+
+
+
+
+	

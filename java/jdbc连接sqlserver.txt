@@ -2,7 +2,7 @@
 用户名和密码:
 jdbc:sqlserver://localhost\\MSSQLSERVER1;TrustServerCertificate=True;databaseName=UserCenter;user=user;password=pwd
 windows身份:
-jdbc:sqlserver://ip;TrustServerCertificate=True;databaseName=UserCenter;IntegratedSecurity=True
+jdbc:sqlserver://ip;TrustServerCertificate=True;databaseName=UserCenter;TrustServerCertificate=True;IntegratedSecurity=True
 
 
 
