@@ -39,6 +39,8 @@ public Person M2(@RequestBody Person p) {
 		public String id;
 		@NotBlank(message = "name不能为空")
 		public String name;
+		@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+		public Date birthday;
 		public long age;
 	}
 3) 定制化验证失败之后的返回值
@@ -74,6 +76,9 @@ public Person M2(@RequestBody Person p) {
 			return responseModel;
 		}
 	}
+	
+
+
 注解列表:
 @NotNull: 参数要存在,可以为""
 @NotEmpty: 参数不能为空,但是可以为" "
