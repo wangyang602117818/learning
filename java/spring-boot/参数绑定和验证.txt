@@ -1,0 +1,117 @@
+一. 参数绑定
+1) get方法的参数
+案例1:自动映射(/m1?a=123)
+	@GetMapping("/m1")
+	public String M1(String a) {
+		return a;
+	}
+案例2:使用 @PathVariable 来映射url中匹配的部分(/a123)
+    @GetMapping("/{userId}")
+	public String hello(@PathVariable long userId) {
+		
+	}
+2) post方法的参数(使用 @RequestBody 来接收post中的参数)
+@PostMapping("/m2")
+public Person M2(@RequestBody Person p) {
+	return p;
+}
+
+二.参数验证
+
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-validation</artifactId>
+</dependency>
+
+1) get参数的验证(需要在controller上添加@Validated),如果验证失败,则抛出 ConstraintViolationException 异常
+    @GetMapping("/m1")
+	public String M1(@NotEmpty String a) {
+		return a;
+	}
+	
+2) post参数的验证 如果验证失败,则抛出 MethodArgumentNotValidException 异常
+	@PostMapping("/m2")
+	public Person M2(@Valid @RequestBody Person p) {
+		return p;
+	}
+    public class Person {
+		@NotNull(message = "id不能为空")
+		public String id;
+		@NotBlank(message = "name不能为空")
+		public String name;
+		public long age;
+	}
+3) 定制化验证失败之后的返回值
+    @ControllerAdvice
+	public class MyExceptionHandler {
+		@ResponseBody
+		@ExceptionHandler
+		public ResponseModel<String> handerException(HttpServletRequest request, HttpServletResponse response,
+				Exception ex) {
+			ResponseModel<String> responseModel = new ResponseModel<String>(ErrorCode.server_exception, ex.getMessage());
+			return responseModel;
+		}
+
+		@ResponseBody
+		@ExceptionHandler(ConstraintViolationException.class)
+		public ResponseModel<List<String>> handerParamsException(ConstraintViolationException ex) {
+			List<String> resultList = new ArrayList<String>();
+			for (ConstraintViolation<?> oe : ex.getConstraintViolations())
+				resultList.add(oe.getMessage());
+			ResponseModel<List<String>> responseModel = new ResponseModel<List<String>>(ErrorCode.invalid_params,
+					resultList);
+			return responseModel;
+		}
+
+		@ResponseBody
+		@ExceptionHandler(MethodArgumentNotValidException.class)
+		public ResponseModel<List<String>> handerParamsException(MethodArgumentNotValidException ex) {
+			List<String> resultList = new ArrayList<String>();
+			for (ObjectError oe : ex.getAllErrors())
+				resultList.add(oe.getDefaultMessage());
+			ResponseModel<List<String>> responseModel = new ResponseModel<List<String>>(ErrorCode.params_valid_fault,
+					resultList);
+			return responseModel;
+		}
+	}
+注解列表:
+@NotNull: 参数要存在,可以为""
+@NotEmpty: 参数不能为空,但是可以为" "
+@NotBlank: 参数不能为空,并且不能是" "
+邮箱验证
+	@Email(message = "邮箱地址不合法")
+字符串范围:
+	@Size(min = 3,max = 5,message = "name必须是3到5个字符")
+正数验证:
+	@PositiveOrZero(message = "age必须是正数或者0")
+	@Positive(message = "age必须是正数")
+	@NegativeOrZero(message = "age必须是负数或者0")
+	@Negative(message = "age必须是负数")
+日期认证(Date):
+    @Past(message = "不能大于当前时间")
+	@Future(message = "不能小于当前时间")
+逻辑验证:
+	@AssertTrue(message = "male必须是true")
+	@AssertFalse(message = "male必须是false")
+数字范围(int):
+	@Range(min = 1, max = 150,message = "age范围不合法")
+	@Min(value = 1, message = "年龄不能小于1")
+	@Max(value = 150, message = "年龄不能大于100")
+金额验证(Double):
+	@Digits(integer = 3, fraction = 2,message = "金额的整数不能超过3位，小数部分不能超过2位")
+	@DecimalMin(message = "金额不能小于0.99",value = "0.99")
+	@DecimalMax(message = "金额不能大于99.99",value = "99.99")
+正则表达式:
+	@Pattern(regexp = "^[A-Za-z0-9-]*",message = "email只能是数字字母")
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,110 @@
+springboot默认使用slf4j和logback记录日志
+手动记录方法
+public class IndexController {
+	Logger logger = LoggerFactory.getLogger(IndexController.class);
+	public void index() {
+        logger.info("An INFO Message");
+        logger.warn("A WARN Message");
+        logger.error("An ERROR Message");
+	}
+}
+
+自动记录日志到文件的方法:
+1. 在resources目录下建立文件(logback-spring.xml),则springboot会自动加载改文件记录日志到控制台和文件
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+	<property name="LOG_PATH" value="./logs" />
+	<property name="LOG_FILE_NAME" value="logfile" />
+	<appender name="ConsoleOutput" class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%date{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{50} %line - %msg%n</pattern>
+		</layout>
+	</appender>
+	<appender name="LogFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_PATH}/${LOG_FILE_NAME}.log</file>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>%date{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{50} %line : %msg%n</Pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_PATH}/archived/${LOG_FILE_NAME}-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+			<MaxHistory>30</MaxHistory>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>10MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+	</appender>
+	<root level="info">
+		<appender-ref ref="ConsoleOutput" />
+		<appender-ref ref="LogFile" />
+	</root>
+</configuration>
+2. 新建全局错误处理异常类
+@ControllerAdvice
+public class MyExceptionHandler {
+	@ResponseBody
+	@ExceptionHandler
+	public ResponseModel<String> handerException(HttpServletRequest request, HttpServletResponse response, Exception ex) {
+		ResponseModel<String> responseModel = new ResponseModel<String>(ErrorCode.server_exception, ex.getMessage());
+		return responseModel;
+	}
+}
+//返回类
+public class ResponseModel<T> {
+	private int code;
+	private String message;
+	private T result;
+	private int count;
+	public ResponseModel(ErrorCode code, T result) {
+		this(code, result, 0);
+	}
+	public ResponseModel(ErrorCode code, T result, long count) {
+		this.code = code.getValue();
+		this.message = code.toString();
+		this.result = result;
+		this.count = count;
+	}
+	public int getCode() {
+		return code;
+	}
+	public void setCode(int code) {
+		this.code = code;
+	}
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	public T getResult() {
+		return result;
+	}
+	public void setResult(T result) {
+		this.result = result;
+	}
+
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
+}
+//返回编号
+public enum ErrorCode {
+	success(0),invalid_params(105),params_valid_fault(106),server_exception(-1000);
+
+	private final int id;
+
+	ErrorCode(int id) {
+		this.id = id;
+	}
+
+	public int getValue() {
+		return id;
+	}
+}
+
+
+

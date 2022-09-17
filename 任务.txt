@@ -23,20 +23,10 @@ flag=original    //80% quality
 
 flag="" or no flag //flag = thumbnail
 
-Servlet控制器√
-JSP视图√
-EL表达式√
-JSTL标签库√
-HTTP状态管理√
-过滤器监听器√
-文件上传
-AJAX与Applet
-服务器异步
-服务器推送
-jdbc
-Struts2
-Hibernate
-Spring(IOC,AOP)
+全局参数验证
+请求日志
+多语言
+
 
 朝阳区东三环中路7号北京财富中心写字楼A座17楼财务部
 Davis j qi 65335779
