@@ -23,7 +23,7 @@ flag=original    //80% quality
 
 flag="" or no flag //flag = thumbnail
 
-全局参数验证
+
 请求日志
 多语言
 

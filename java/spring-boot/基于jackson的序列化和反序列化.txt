@@ -1,0 +1,12 @@
+public class JsonSerializerHelper {
+	// 序列化
+	public static String Serialize(Object obj) throws Exception {
+		return new ObjectMapper().writeValueAsString(obj);
+	}
+
+	// 反序列化
+	public static <T> T Deserialize(String str, Class<T> valueType) throws Exception {
+		ObjectMapper objectMapper = new ObjectMapper();
+		return objectMapper.readValue(str, valueType);
+	}
+}

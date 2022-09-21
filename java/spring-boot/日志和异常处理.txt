@@ -40,6 +40,7 @@ public class IndexController {
 	</root>
 </configuration>
 2. 新建全局错误处理异常类
+//这种方式处理404以外的所有异常
 @ControllerAdvice
 public class MyExceptionHandler {
 	@ResponseBody
@@ -48,6 +49,16 @@ public class MyExceptionHandler {
 		ResponseModel<String> responseModel = new ResponseModel<String>(ErrorCode.server_exception, ex.getMessage());
 		return responseModel;
 	}
+}
+//这种方式处理404异常
+@RestController
+public class NotFoundException implements ErrorController {
+	@RequestMapping(value = {"/error"})
+    @ResponseBody
+    public Object error(HttpServletRequest request) {
+		ResponseModel<String> responseModel = new ResponseModel<String>(ErrorCode.page_not_found,"");
+		return responseModel;
+    }
 }
 //返回类
 public class ResponseModel<T> {
