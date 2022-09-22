@@ -1,0 +1,42 @@
+1. 引用 thymeleaf 包
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-thymeleaf</artifactId>
+	</dependency>
+2. 项目启动默认访问顺序 static/index.html,templates/index.html
+3. 通过controller访问:
+	@Controller
+	public class IndexController {
+		@GetMapping(value =  "/")
+		public String divide(Model model) {
+			model.addAttribute("p", "ppp");
+			return "index";
+		}
+	}
+4. thymeleaf语法:
+设置元素的内容
+<span th:text="${p}"></span>   
+<span th:utext="${p}"></span>
+设置元素的值
+<input type="text" th:value="${p}" />
+对象
+<div th:object="${thObject}">
+	<p>ID: <span th:text="*{id}" /></p>
+	<p>TH: <span th:text="*{thName}" /></p>
+	<p>DE: <span th:text="*{desc}" /></p>
+</div>
+遍历数组
+<div th:each="message : ${thEach}">
+    <p th:text="${message}" />
+</div>
+遍历对象数组
+<div>
+    <p th:each="user : ${ulist}" th:object="${user}">
+        <span th:text="*{id}"></span>
+        <span th:text="*{name}"></span>
+        <span th:text="*{phone}"></span>
+    </p>
+</div>
+
+
+

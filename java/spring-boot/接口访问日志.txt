@@ -1,0 +1,51 @@
+1. 定义拦截器
+@Component
+public class ProductServiceInterceptor implements HandlerInterceptor {
+	@Override
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+			throws Exception {
+		request.setAttribute("log_time_start", System.currentTimeMillis());
+		request.setAttribute("step", 1);
+		return true;
+	}
+
+	@Override
+	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
+			ModelAndView modelAndView) throws Exception {
+		int step = (int) request.getAttribute("step");
+		request.setAttribute("step", step + 1);
+	}
+
+	@Override
+	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler,
+			Exception exception) throws Exception {
+		int step = (int) request.getAttribute("step");
+		HandlerMethod handlerMethod = (HandlerMethod) handler;
+		String controller = handlerMethod.getBeanType().getSimpleName();
+		String action = handlerMethod.getMethod().getName();
+		String route = request.getRequestURI();
+		String queryString = request.getQueryString();
+		String host = request.getRemoteHost().toString();
+		String agent = request.getHeader("USER-AGENT");
+		Long time = System.currentTimeMillis() - (long) request.getAttribute("log_time_start");
+		boolean exp = false;
+		if (exception != null) {
+			exp = true;
+		} else {
+			exp = step == 1 ? true : false;
+		}
+	}
+}
+
+//注册拦截器到系统
+@Configuration
+public class ProductServiceInterceptorAppConfig implements WebMvcConfigurer {
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		InterceptorRegistration interceptorRegistration = registry.addInterceptor(new ProductServiceInterceptor());
+		// 拦截所有请求
+		interceptorRegistration.addPathPatterns("/**");
+		// 哪些请求不用拦截
+		interceptorRegistration.excludePathPatterns("/","/index.html", "/**/*.html", "/**/*.js", "/**/*.css");
+	}
+}
