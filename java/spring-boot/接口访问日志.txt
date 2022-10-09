@@ -1,6 +1,6 @@
 1. 定义拦截器
 @Component
-public class ProductServiceInterceptor implements HandlerInterceptor {
+public class LogInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
@@ -20,6 +20,8 @@ public class ProductServiceInterceptor implements HandlerInterceptor {
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler,
 			Exception exception) throws Exception {
 		int step = (int) request.getAttribute("step");
+		if (!(handler instanceof HandlerMethod))
+			return;
 		HandlerMethod handlerMethod = (HandlerMethod) handler;
 		String controller = handlerMethod.getBeanType().getSimpleName();
 		String action = handlerMethod.getMethod().getName();
@@ -42,7 +44,7 @@ public class ProductServiceInterceptor implements HandlerInterceptor {
 public class ProductServiceInterceptorAppConfig implements WebMvcConfigurer {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		InterceptorRegistration interceptorRegistration = registry.addInterceptor(new ProductServiceInterceptor());
+		InterceptorRegistration interceptorRegistration = registry.addInterceptor(new LogInterceptor());
 		// 拦截所有请求
 		interceptorRegistration.addPathPatterns("/**");
 		// 哪些请求不用拦截

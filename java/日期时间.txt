@@ -1,0 +1,55 @@
+旧的日期时间类型
+java.util.Date 类的时区存在问题已经被淘汰
+java.util.Calendar
+
+1. 获取和转换时间 Date
+	Date date = new Date();
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	String datString = sdf.format(date);
+	Date date1 = sdf.parse("2022-01-02 12:20:11");
+2. 获取和转换时间 Calendar
+	// 字符串到 Calendar
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	Date date = sdf.parse("2022-01-02 12:20:11");  //先转 date
+	Calendar instance = Calendar.getInstance();  //北京: Calendar.getInstance(Locale.CHINA)
+	instance.setTime(date); //把date
+	// Calendar到字符串
+	String datString = sdf.format(instance.getTime());
+3. Date 转	LocalDateTime
+   LocalDateTime ldt = LocalDateTime.ofInstant(date.toInstant(),ZoneOffset.UTC);  //ZoneOffset.ofHours(8)
+	
+新的时间日期类型(Java 8)
+java.time.LocalDateTime
+java.time.ZonedDateTime
+java.time.ZoneId
+
+1. 获取当前时间(LocalDateTime,LocalDate,LocalTime):
+	LocalDateTime localDateTime = LocalDateTime.now();  //当前的日期和时间 2022-09-30T10:05:27.5292857
+
+2. 解析时间字符串:
+	DateTimeFormatter dateTimeFormatter=DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");  //日期格式
+	LocalDateTime.parse("2022-01-02 12:20:11",dateTimeFormatter)  //LocalDateTime 解析
+	localDateTime.format(dateTimeFormatter)  //LocalDateTime 转字符串
+3. LocalDateTime转Date
+	Date date = Date.from(LocalDateTime.now().atZone(ZoneId.of("Asia/Shanghai")).toInstant());
+	Date date = Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
+
+//系统当前的时间戳(毫秒)
+Long m = System.currentTimeMillis()
+//Date时间戳(毫秒)
+Long m = date.getTime()
+//Calendar时间戳(毫秒)
+Calendar instance = Calendar.getInstance();
+Long m = instance.getTime().getTime()
+//LocalDateTime时间戳
+LocalDateTime localDateTime = LocalDateTime.now();
+long epochMilli = localDateTime.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+
+
+
+
+
+
+
+
+

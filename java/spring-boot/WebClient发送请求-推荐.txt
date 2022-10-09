@@ -57,7 +57,7 @@ springboot默认不提供 WebClient 实例的直接注入,而注入的是 WebCli
 	Mono<String> mono = webClient
                 .post()
                 .uri("/posts")
-                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(postBean)
                 .retrieve()
                 .bodyToMono(String.class);
