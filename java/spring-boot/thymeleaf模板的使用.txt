@@ -14,6 +14,15 @@
 		}
 	}
 4. thymeleaf语法:
+添加 th 标记:
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+    <script th:src="@{/js/j.js}"></script>
+   </head>
+</html>
+
 设置元素的内容
 <span th:text="${p}"></span>   
 <span th:utext="${p}"></span>
