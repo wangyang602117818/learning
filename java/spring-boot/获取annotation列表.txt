@@ -1,0 +1,21 @@
+//获取指定类型的 Annotation 列表
+@RestController
+public class IndexController {
+	@Autowired
+	ApplicationContext applicationContext;
+	@GetMapping(value = "/")
+	public List<String> divide(HttpServletResponse response, HttpServletRequest request) throws Exception {
+		List<String> list = new ArrayList<String>();
+		RequestMappingHandlerMapping requestMappingHandlerMapping = applicationContext
+				.getBean("requestMappingHandlerMapping", RequestMappingHandlerMapping.class);
+		Map<RequestMappingInfo, HandlerMethod> map = requestMappingHandlerMapping.getHandlerMethods();
+		for (var item : map.keySet()) {
+			var key = item;
+			var value = map.get(key);
+			var authNameAnnotation = value.getMethod().getAnnotation(SSOAuthorize.class);
+			if (authNameAnnotation != null)
+				list.add(authNameAnnotation.name());
+		}
+		return list;
+	}
+}

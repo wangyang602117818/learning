@@ -24,10 +24,11 @@ flag=original    //80% quality
 flag="" or no flag //flag = thumbnail
 
 
-生成 token时候 from 要不要拿出来
-
 多语言
-
+日志
+权限提取
+文件上传下载
+日志服务器不能使用处理
 
 朝阳区东三环中路7号北京财富中心写字楼A座17楼财务部
 Davis j qi 65335779
