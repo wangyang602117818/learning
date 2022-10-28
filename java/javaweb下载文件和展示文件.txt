@@ -1,0 +1,15 @@
+OutputStream outputStream = response.getOutputStream();
+1. 下载文件
+	response.setHeader("Content-Disposition", "attachment; filename=" + file.FileName);
+2. 浏览器展示图片
+	response.setHeader("Content-Disposition", "inline; filename=" + file.FileName);
+	response.setContentType(file.ContentType);
+
+
+byte[] buffer = new byte[1024];
+int len;
+while ((len = file.FileStream.read(buffer)) > 0) {
+	outputStream.write(buffer, 0, len);
+}
+file.FileStream.close();
+

@@ -1,0 +1,49 @@
+引用:
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-jdbc</artifactId>
+</dependency>
+<dependency>
+	<groupId>com.microsoft.sqlserver</groupId>
+	<artifactId>mssql-jdbc</artifactId>
+	<scope>runtime</scope>
+</dependency>
+-. application.properties中配置好连接字符串
+	spring.datasource.url=jdbc:sqlserver://localhost\\MSSQLSERVER1;TrustServerCertificate=True;databaseName=UserCenter
+	spring.datasource.username=wang
+	spring.datasource.password=123
+-. 注入JdbcTemplate实例
+	@RestController
+	public class DataController {
+		@Autowired
+		private JdbcTemplate jdbcTemplate;
+	}
+1. 查询单行单列的值(queryForObject)
+	String str = jdbcTemplate.queryForObject("select name from role where id=?", String.class, 2);
+2. 查询列表,返回基本类型
+    List<Map<String, Object>> list = jdbcTemplate.queryForList("select * from [role]");
+	//取单个
+	Map<String, Object> obj = list.size()==0?null:list.get(0)
+	要在转成Role对象,使用序列化完成
+3. 查询列表,返回对象类型(需要Role字段具有set,get属性)
+   List<Role> customers = jdbcTemplate.query("select * from role", BeanPropertyRowMapper.newInstance(Role.class));
+4. 更新语句
+	//更新返回受影响的行数
+   var rows = jdbcTemplate.update("update role set Description=? where id=?","编辑x",2);
+5. 插入语句
+    String inserString="insert into role(Name,Description)values(?,?)";
+	//插入返回受影响的行数
+	var rows = jdbcTemplate.update(inserString,"name1","desc1");
+	//插入返回主键id
+	GeneratedKeyHolder generatedKeyHolder = new GeneratedKeyHolder();
+		int rows = jdbcTemplate.update(conn->{
+			PreparedStatement preparedStatement = conn.prepareStatement(inserString, Statement.RETURN_GENERATED_KEYS);
+			 preparedStatement.setString(1, "name2");
+			 preparedStatement.setString(2, "描述");
+			return preparedStatement;
+		},generatedKeyHolder);
+	Integer index = generatedKeyHolder.getKey().intValue(); //主键
+6. 删除返回受影响的行数
+    String deleteString="delete from role where id=?";
+	var rows = jdbcTemplate.update(deleteString,15);
+	

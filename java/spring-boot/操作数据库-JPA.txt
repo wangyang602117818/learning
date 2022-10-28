@@ -1,0 +1,24 @@
+jpa是springboot框架自带orm,使用Hibernate作为默认实现
+引用
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-data-jpa</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>com.microsoft.sqlserver</groupId>
+		<artifactId>mssql-jdbc</artifactId>
+		<scope>runtime</scope>
+	</dependency>
+application.properties
+	spring.datasource.url=jdbc:sqlserver://localhost\\MSSQLSERVER1;TrustServerCertificate=True;databaseName=UserCenter
+	spring.datasource.username=wang
+	spring.datasource.password=123
+	#除了基本的连接字符串配置外,还可以配置以下节点
+	spring.datasource.driver-class-name=com.microsoft.sqlserver.jdbc.SQLServerDriver
+	#是否自动生成schme(none): create,create-drop,update,validate,none
+	spring.jpa.hibernate.ddl-auto=update
+	spring.jpa.show-sql=true
+	spring.jpa.properties.hibernate.format_sql=true
+	spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.SQLServer2008Dialect
+	#不自动转换下划线的数据表字段名称
+	spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl

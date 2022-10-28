@@ -13,15 +13,16 @@ public class IndexController {
 1. 在resources目录下建立文件(logback-spring.xml),则springboot会自动加载改文件记录日志到控制台和文件
 <?xml version="1.0" encoding="UTF-8" ?>
 <configuration>
-	<property name="LOG_PATH" value="./logs" />
-	<property name="LOG_FILE_NAME" value="logfile" />
-	<appender name="ConsoleOutput" class="ch.qos.logback.core.ConsoleAppender">
+
+	<property name="log.path" value="../logs/springweb.log" />
+
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
 		<layout class="ch.qos.logback.classic.PatternLayout">
 			<pattern>%date{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{50} %line - %msg%n</pattern>
 		</layout>
 	</appender>
-	<appender name="LogFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>${LOG_PATH}/${LOG_FILE_NAME}.log</file>
+	<appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${log.path}</file>
 		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
 			<Pattern>%date{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{50} %line : %msg%n</Pattern>
 			<charset>UTF-8</charset>
@@ -35,8 +36,8 @@ public class IndexController {
 		</rollingPolicy>
 	</appender>
 	<root level="info">
-		<appender-ref ref="ConsoleOutput" />
-		<appender-ref ref="LogFile" />
+		<appender-ref ref="console" />
+		<appender-ref ref="file" />
 	</root>
 </configuration>
 2. 新建全局错误处理异常类
