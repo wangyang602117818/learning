@@ -1,0 +1,165 @@
+添加引用
+	<dependency>
+		<groupId>org.mybatis.spring.boot</groupId>
+		<artifactId>mybatis-spring-boot-starter</artifactId>
+		<version>2.2.2</version>
+	</dependency>
+	<dependency>
+		<groupId>com.microsoft.sqlserver</groupId>
+		<artifactId>mssql-jdbc</artifactId>
+		<scope>runtime</scope>
+	</dependency>
+application.properties
+    #指定全局配置文件,没有该配置则使用默认值(resources目录下)
+	mybatis.config-locations=classpath:mybatis-config.xml
+	#指定所有的映射文件(resources\mapper目录下)
+	mybatis.mapper-locations=classpath:mapper/*.xml
+	
+mybatis-config.xml 案例:
+	<?xml version="1.0" encoding="UTF-8"?>
+	<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+	<configuration>
+		<typeAliases></typeAliases>
+	</configuration>
+mapper.xml 案例:
+	<?xml version="1.0" encoding="UTF-8" ?>
+	<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="role">
+		<select id="selectRoleById" resultType="com.example.demo.data.Role">
+			select * from Role where id = #{id}
+		</select>
+	</mapper>
+简单查询案例:
+@Component
+public class RoleDao {
+	@Autowired
+	private SqlSession sqlSession;
+
+	public Role selectCityById(long id) {
+		return this.sqlSession.selectOne("selectRoleById", id);
+	}
+}
+	
+==============================其他查询语法 (http://www.mybatis.cn/mybatis/1942.html) =================================
+
+1. 新增数据返回受影响行数
+<insert id="addRole" parameterType="com.example.demo.data.Role">
+	insert into role(Name,PermissionCount,CreateTime) values (#{name},#{permissionCount},#{createTime})
+</insert>
+2. 新增数据返回主键id
+<insert id="addRole" parameterType="com.example.demo.data.Role" useGeneratedKeys="true" keyProperty="id">
+	insert into role(Name,PermissionCount,CreateTime) values (#{name},#{permissionCount},#{createTime})
+</insert>
+<!--或者-->
+<insert id="addRole" parameterType="com.example.demo.data.Role">
+	<selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+			SELECT @@IDENTITY AS id
+	</selectKey> 
+	insert into role(Name,PermissionCount,CreateTime) values (#{name},#{permissionCount},#{createTime})
+</insert>
+3. if查询
+<select id="selectEmployeeByIdLike" resultType="cn.mybatis.domain.Employee">
+    SELECT * FROM tb_employee WHERE state = 'ACTIVE'
+	<!-- 可选条件，如果传进来的参数有id属性，则加上id查询条件-->
+    <if test="id != null and id !='' ">
+        and id = #{id}
+    </if>
+</select>
+public List<Employee> selectEmployeeByIdLike(HashMap<String, Object> params) {
+	return this.sqlSession.selectList("selectEmployeeByIdLike", params);
+}
+4. if else用法
+<select id="findActiveBlogLike" resultType="Blog">
+  SELECT * FROM BLOG WHERE state = ‘ACTIVE’
+  <choose>
+    <when test="title != null">
+      AND title like #{title}
+    </when>
+    <when test="author != null and author.name != null">
+      AND author_name like #{author.name}
+    </when>
+    <otherwise>
+      AND featured = 1
+    </otherwise>
+  </choose>
+</select>
+5. where标签在有条件的情况才会出现,消除无关的and,or
+<select id="selectEmployeeLike" resultType="cn.mybatis.domain.Employee">
+SELECT * EROM tb_employee
+    <where>
+      <if test="state != null ">
+        state = #{state}
+      </if>
+      <if test="id != null ">
+        and id = #{id}
+      </if>
+      <if test="loginname != null and password != null">
+        and loginname = #{loginname} and password = #{password}
+      </if>
+    </where>
+</select>
+6. set标签在有条件的情况下才会出现,消除无关逗号
+<update id="updateEmployeeIfNecessary" parameterType="cn.mybatis.domain.Employee">
+    update tb_employee
+    <set>
+      <if test="loginname != null">loginname=#{loginname} ,</if>
+      <if test="password != null">password=#{password} ,</if>
+      <if test="name != null">name=#{name},</if>
+      <if test="sex != null">sex=#{sex},</if>
+      <if test="age != null">age=#{age},</if>
+      <if test="phone != null">phone=#{phone} ,</if>
+      <if test="sal != null">sal=#{sal},</if>
+      <if test="state != null">state=#{state}</if>
+    </set>
+    where id=#{id}
+</update>
+7. foreach 标签
+list类型
+<select id="selectByIds" resultType="cn.mybatis.domain.User">
+    select * from t_users where id in
+    <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+        #{item}
+    </foreach>
+</select>
+array类型
+<select id="selectByIds" resultType="cn.mybatis.domain.User">
+    select * from t_user where id in
+    <foreach collection="array" index="index" item="item" open="(" separator="," close=")">
+        #{item}
+    </foreach>
+</select>
+map类型获取键值对
+<select id="getUserInfo" resultType="cn.mybatis.domain.User">
+    SELECT * FROM t_users where
+    <if test="user!= null and user.size() >0">
+        (USERNAME,AGE) IN
+        <foreach collection="user.entrySet()" item="value" index="key" separator="," open="(" close=")">
+            (#{key},#{value})
+        </foreach>
+    </if>
+</select>
+map类型只获取key
+<select id="getUserInfo" resultType="cn.mybatis.domain.User">
+    SELECT * FROM t_users where
+    <if test="user!= null and user.size() >0">
+    (USERNAME) IN
+        <foreach collection="user.keys" item="key"  separator="," open="(" close=")">
+            #{key}
+        </foreach>
+    </if>
+</select>
+map类型只获取value
+<select id="getUserInfo" resultType="cn.mybatis.domain.User">
+    SELECT * FROM t_users where
+    <if test="user!= null and user.size() >0">
+        (USERNAME) IN
+        <foreach collection="user.values" item="value"  separator="," open="(" close=")">
+            #{key}
+        </foreach>
+    </if>
+</select>
+
+==============================事务用法 =================================
+在启动类上添加 @EnableTransactionManagement 注解
+在方法上添加 @Transactional
+

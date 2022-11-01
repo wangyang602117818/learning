@@ -24,11 +24,10 @@ flag=original    //80% quality
 flag="" or no flag //flag = thumbnail
 
 
-多语言
-mybatis-spring-boot-starter
 maven module
-数据库
+gRPC
 服务项目
+spring Cloud
 
 朝阳区东三环中路7号北京财富中心写字楼A座17楼财务部
 Davis j qi 65335779
