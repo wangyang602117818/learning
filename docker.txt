@@ -1,0 +1,58 @@
+1. Ubuntu上安装Docker Engine（来自于官方文档）
+     卸载:  sudo apt-get remove docker docker-engine docker.io containerd runc
+  1) 更新源+使用https通过repository安装
+	  sudo apt-get update
+	  sudo apt-get install ca-certificates curl gnupg lsb-release
+  2) 添加官方的GPG key
+	  sudo mkdir -p /etc/apt/keyrings
+	  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+  3) 添加源
+	  echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+  4) 更新源 
+	  sudo apt-get update
+  5) 安装docker engine
+	  sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+  6) 拉取镜像并且运行
+      sudo docker run hello-world
+	
+2. 基本命令
+	docker version              #查看docker的版本
+	docker search ubuntu        #搜索官方镜像
+	docker pull ubuntu          #拉取镜像
+3. 镜像命令
+	docker image ls                          #查看镜像列表(docker images)
+	docker image rm centos:centos7           #删除镜像
+	docker image inspect centos:centos7      #查看镜像的详情
+	docker run -it centos:centos7 /bin/bash  #利用镜像启动一个容器,并且进入容器的命令行(每次启动一个镜像就会创建一个新的容器运行)
+4. 容器(exit退出容器)
+	docker ps -a                             #查看所有容器(docker container ls --all)
+	docker commit d14b63e3809d centos7:centos-git #容器转镜像
+	docker start 5dee86048f06                #启动存在的容器
+	docker exec -it 5dee86048f06 /bin/bash   #进入正在运行的容器
+	docker kill 5dee86048f06  #停止容器
+	docker rm 5dee86048f06    #删除容器
+	docker container prune    #删除所有停止的容器
+5. 使用dockerfile 构建镜像
+    1) 新增dockerfile文件
+		from centos:centos7
+		add openjdk-19.tar.gz /usr/local/
+		add tomcat-9.tar.gz /usr/local/
+		env JAVA_HOME /usr/local/jdk-19
+		env CLASSPATH $JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+		env CATALINA_HOME /usr/local/apache-tomcat-9.0.68
+		env CATALINA_BASE /usr/local/apache-tomcat-9.0.68
+		env PATH $PATH:$JAVA_HOME/bin:$CATALINA_HOME/lib
+		add ./spr.war /usr/local/apache-tomcat-9.0.68/webapps
+		EXPOSE 8080
+		CMD /usr/local/apache-tomcat-9.0.68/bin/catalina.sh run
+	2) 构建镜像命名为webapp
+		docker build -t webapp .
+		该命令会在当前目录下寻找Dockerfile文件，并自动完成构建。
+	3) docker run -d -p 8080:8080 webapp
+6.  将容器中生成的日志文件夹(logs)拷贝到/root 目录
+    docker cp 2c8e0430e46d:/usr/local/apache-tomcat-9.0.68/logs /root
+	#拷贝文件到容器目录
+	docker cp ./spr.war 2c8e0430e46d:/usr/local/apache-tomcat-9.0.68/webapps
+	
+	
+	
