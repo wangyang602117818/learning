@@ -10,11 +10,11 @@ public class IndexController {
 }
 
 自动记录日志到文件的方法:
-1. 在resources目录下建立文件(logback-spring.xml),则springboot会自动加载改文件记录日志到控制台和文件
+1. 在resources目录下建立文件(logback-spring.xml),则springboot会自动加载该文件记录日志到控制台和文件,因部署路径无法确定,log.path使用绝对路径,部署到服务器需要修改
 <?xml version="1.0" encoding="UTF-8" ?>
 <configuration>
 
-	<property name="log.path" value="../logs/springweb.log" />
+	<property name="log.path" value="C:/JavaWorkspace/springwebmvc02/logs/springweb.log" />
 
 	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
 		<layout class="ch.qos.logback.classic.PatternLayout">

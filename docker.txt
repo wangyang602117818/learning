@@ -48,7 +48,10 @@
 	2) 构建镜像命名为webapp
 		docker build -t webapp .
 		该命令会在当前目录下寻找Dockerfile文件，并自动完成构建。
-	3) docker run -d -p 8080:8080 webapp
+	3) 运行镜像
+		docker run -d -p 80:8080 webapp
+		#随操作系统启动自动启动
+		docker run --restart=always -d  -p 80:8080 webapp
 6.  将容器中生成的日志文件夹(logs)拷贝到/root 目录
     docker cp 2c8e0430e46d:/usr/local/apache-tomcat-9.0.68/logs /root
 	#拷贝文件到容器目录

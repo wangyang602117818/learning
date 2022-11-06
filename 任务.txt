@@ -27,7 +27,6 @@ flag="" or no flag //flag = thumbnail
 maven module
 spring Cloud
 springboot测试
-catalina启动日志在哪里
 服务项目
 
 朝阳区东三环中路7号北京财富中心写字楼A座17楼财务部

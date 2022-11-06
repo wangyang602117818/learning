@@ -32,7 +32,28 @@
 		<Context path="" docBase="\"/>
 	</Host>
 	这时多个主机就会共享一个ip,如果我们用ip来访问tomcat服务器,则所有的虚拟主机都不匹配,服务器会使用配置的默认虚拟主机来响应
+六: 部署为ubuntu服务
+	#1. 新增服务文件(/etc/systemd/system/tomcat9.service)
+	[Unit]
+	Description=tomcat9
+	After=network.target
+	[Service]
+	Type=forking
+	Environment="JAVA_HOME=/root/openjdk-19"
+	Environment="CATALINA_BASE=/root/apache-tomcat-9.0.68"
+	Environment="CATALINA_HOME=/root/apache-tomcat-9.0.68"
+	Environment="CATALINA_PID=/root/apache-tomcat-9.0.68/temp/tomcat.pid"
+	ExecStart=/root/apache-tomcat-9.0.68/bin/startup.sh
+	ExecStop=/root/apache-tomcat-9.0.68/bin/shutdown.sh
+	[Install]
+	WantedBy=multi-user.target
 	
-
-
+	#2. 命令操作
+	sudo systemctl daemon-reload (让系统加载刚刚添加的配置文件)
+    sudo systemctl start tomcat9.service (启动服务)
+    sudo systemctl stop tomcat9.service (停止服务)
+    sudo systemctl restart tomcat9.service (重启服务)
+    sudo systemctl enable tomcat9.service (开机自启动)
+    sudo systemctl disable tomcat9.service (停止开机自启动)
+    sudo systemctl status tomcat9.service  (服务状态)
 
