@@ -1,4 +1,4 @@
-1. Ubuntu上安装Docker Engine（来自于官方文档）
+1. Ubuntu上安装Docker Engine（来自于官方文档 https://docs.docker.com/engine/install/ubuntu/）
      卸载:  sudo apt-get remove docker docker-engine docker.io containerd runc
   1) 更新源+使用https通过repository安装
 	  sudo apt-get update
@@ -32,7 +32,7 @@
 	docker kill 5dee86048f06  #停止容器
 	docker rm 5dee86048f06    #删除容器
 	docker container prune    #删除所有停止的容器
-5. 使用dockerfile 构建镜像
+5. 使用 dockerfile 构建镜像
     1) 新增dockerfile文件
 		from centos:centos7
 		add openjdk-19.tar.gz /usr/local/
@@ -52,10 +52,13 @@
 		docker run -d -p 80:8080 webapp
 		#随操作系统启动自动启动
 		docker run --restart=always -d  -p 80:8080 webapp
-6.  将容器中生成的日志文件夹(logs)拷贝到/root 目录
+6.  操作镜像里面的文件
+	#将容器中生成的日志文件夹(logs)拷贝到/root 目录
     docker cp 2c8e0430e46d:/usr/local/apache-tomcat-9.0.68/logs /root
 	#拷贝文件到容器目录
 	docker cp ./spr.war 2c8e0430e46d:/usr/local/apache-tomcat-9.0.68/webapps
-	
-	
+7. 导出导入镜像
+	#通过镜像导出导入
+	docker save -o image.tar 镜像名字
+	docker load -i image.tar
 	
