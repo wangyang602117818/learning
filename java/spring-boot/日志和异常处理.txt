@@ -1,5 +1,8 @@
 springboot默认使用slf4j和logback记录日志
 手动记录方法
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class IndexController {
 	Logger logger = LoggerFactory.getLogger(IndexController.class);
 	public void index() {

@@ -10,10 +10,18 @@
 		<scope>runtime</scope>
 	</dependency>
 application.properties
+	#驱动
+	#spring.datasource.driverClassName=com.mysql.jdbc.Driver
     #指定全局配置文件,没有该配置则使用默认值(resources目录下)
 	mybatis.config-locations=classpath:mybatis-config.xml
 	#指定所有的映射文件(resources\mapper目录下)
 	mybatis.mapper-locations=classpath:mapper/*.xml
+application.yml
+  datasource:
+    username: wang 
+    password: 123  
+    url: jdbc:sqlserver://localhost\\MSSQLSERVER1;TrustServerCertificate=True;databaseName=UserCenter
+    #driver-class-name: com.microsoft.sqlserver.jdbc.SqlserverDriver	   
 	
 mybatis-config.xml 案例:
 	<?xml version="1.0" encoding="UTF-8"?>
