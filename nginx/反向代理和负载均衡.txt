@@ -44,7 +44,7 @@ proxy_read_timeout 90;         #代理发送超时
     }
 	server {
 		location / {
-			proxy_pass http://myapp1;
+			proxy_pass http://myapp1;   #指向定义的 myapp1
 			proxy_set_header X-Forward-For $remote_addr;
 		}
 	}
