@@ -24,12 +24,12 @@ flag=original    //80% quality
 flag="" or no flag //flag = thumbnail
 
 
+slatejs
+prosemirror
+
 maven module
-spring Cloud
 springboot测试
 
-朝阳区东三环中路7号北京财富中心写字楼A座17楼财务部
-Davis j qi 65335779
 
 北京易淘无限网络技术有限公司(2014.12->2016.4)
 北京普腾德永数码科技有限公司(2016.5->2019.10)
