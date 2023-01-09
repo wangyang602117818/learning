@@ -25,9 +25,10 @@ flag="" or no flag //flag = thumbnail
 
 
 maven module
-spring Cloud
-springboot测试
 服务项目
+elaticsearch
+mongodb
+
 
 朝阳区东三环中路7号北京财富中心写字楼A座17楼财务部
 Davis j qi 65335779
