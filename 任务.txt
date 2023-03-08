@@ -31,6 +31,7 @@ maven module
 服务项目
 elaticsearch
 mongodb
+Jenkins
 
 
 北京易淘无限网络技术有限公司(2014.12->2016.4)
@@ -41,7 +42,15 @@ mongodb
 
 .abcdefghigklmnopqrstuwvxyz
 
-https://ghelper.me/clash/8aa23a90562e2a544a4fef79cfee124c
+https://app-dev.digiqal.com/support/supportportaldev02/
+P@ssw0rd
 
+https://xd.adobe.com/view/577bfce2-958b-4d46-9ec8-76ee8452eb46-0228/specs/
+
+
+Tenant id
+2794c2a4-f606-42b0-bc97-1504ce98ea3a
+Client id
+916df681-d90e-4dcc-8a1f-ea498bdacf18
 
 

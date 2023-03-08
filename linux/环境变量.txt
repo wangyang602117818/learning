@@ -1,3 +1,9 @@
+通过 apt-get 安装的java 查找jdk目录:
+1) which java  #查看可执行文件目录 (/usr/bin/java)
+2) ls -l /usr/bin/java #查看文件详情 (/usr/bin/java -> /etc/alternatives/java)
+3) ls -l /etc/alternatives/java #查看文件详情 (/usr/lib/jvm/java-11-openjdk-amd64/bin/java)
+4) JAVA_Home=/usr/lib/jvm/java-11-openjdk-amd64
+
 有3种方式设置环境变量
 export JAVA_HOME=/root/openjdk-19
 export PATH=$JAVA_HOME/bin:$JAVA_HOME/jre/bin:$PATH
@@ -29,8 +35,8 @@ export CLASSPATH=$CLASSPATH:.:$JAVA_HOME/lib:$JAVA_HOME/jre/lib
 	cat /etc/environment
 
 
-
-
+查看位置
+echo $JAVA_HOME
 
 
 
