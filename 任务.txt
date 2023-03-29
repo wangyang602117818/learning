@@ -48,9 +48,17 @@ P@ssw0rd
 https://xd.adobe.com/view/577bfce2-958b-4d46-9ec8-76ee8452eb46-0228/specs/
 
 
-Tenant id
-2794c2a4-f606-42b0-bc97-1504ce98ea3a
-Client id
-916df681-d90e-4dcc-8a1f-ea498bdacf18
+hdfs: 9870
+mr: 8088
+history: 19888
+
+mapred --daemon start historyserver
+
+docker run --name=java_hadoop_ssh -it -p 19888:19888 -p 50022:22 -p 8088:8088 -p 9870:9870 java_had_ssh /bin/bash
+
+ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa
+cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+chmod 0600 ~/.ssh/authorized_keys
+
 
 

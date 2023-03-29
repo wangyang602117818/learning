@@ -39,4 +39,13 @@ export CLASSPATH=$CLASSPATH:.:$JAVA_HOME/lib:$JAVA_HOME/jre/lib
 echo $JAVA_HOME
 
 
+========================.bashrc================================================
+
+export JAVA_HOME=/usr/local/jdk-11
+export PATH=/usr/local/jdk-11/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+export CLASSPATH=:.:/usr/local/jdk-11/lib
+
+export HADOOP_HOME=/usr/local/hadoop-3.3.4
+export PATH=/usr/local/jdk-11/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/hadoop-3.3.4/bin
+
 

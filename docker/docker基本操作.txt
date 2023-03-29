@@ -23,7 +23,7 @@
 	docker images                            #查看镜像列表(docker image ls)
 	docker image rm centos:centos7           #删除镜像
 	docker image inspect centos:centos7      #查看镜像的详情
-	docker run -it --name=java_tomcat centos:centos7 /bin/bash  #利用镜像启动一个名称为 java_tomcat 的容器,并且进入容器的命令行(每次启动一个镜像就会创建一个新的容器运行)
+	docker run -it --name=java_tomcat -p 80:80 centos:centos7 /bin/bash  #利用镜像启动一个名称为 java_tomcat 的容器,并且进入容器的命令行(每次启动一个镜像就会创建一个新的容器运行)
 4. 容器(exit退出容器)
 	docker ps -a                             #查看所有容器(docker container ls --all)
 	docker commit d14b63e3809d centos7:centos-git #容器转镜像(REPOSITORY:TAG)
