@@ -1,3 +1,6 @@
+
+nuget: CefSharp.WinForms.NETCore
+
 1. 在应用程序启动之前初始化,在应用程序关闭之后关闭
 	//初始化
 	var settings = new CefSettings();
@@ -9,13 +12,18 @@
 	//关闭
 	Cef.Shutdown();
 2. 	browser加入到页面的容器控件
-	string basePath = AppDomain.CurrentDomain.BaseDirectory;
-	this._browser = new ChromiumWebBrowser(basePath + "\\html\\form1.html")
+    public partial class Form1 : Form
 	{
-		Dock = DockStyle.Fill
-	};
-	this.panel1.Controls.Add(this._browser);
-	
+		public ChromiumWebBrowser _browser = null;
+		public Form1(){
+			string basePath = AppDomain.CurrentDomain.BaseDirectory;
+			this._browser = new ChromiumWebBrowser(basePath + "\\html\\form1.html")
+			{
+				Dock = DockStyle.Fill
+			};
+			this.panel1.Controls.Add(this._browser);
+		}
+	}
 3. _browser加载完成之后调用前端方法
 	this._browser.FrameLoadEnd += (sender, args) =>
 	{
@@ -75,4 +83,10 @@
             }
         }
     }
+6. 利用扩展方法调用其他窗体
+	formInstance.InvokeOnUiThreadIfRequired(() =>
+	{
+		Form2 form2 = new Form2();
+		form2.ShowDialog();
+	});
 	

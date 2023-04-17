@@ -64,3 +64,39 @@
 	docker cp ./spr.war 2c8e0430e46d:/usr/local/apache-tomcat-9.0.68/webapps
 
 	
+=========================================== docker-compose 命令========================================
+
+#启动服务器(-d 后台运行)
+docker-compose up
+docker-compose -f docker-compose-ha.yml up
+#停止服务
+docker-compose down
+#列出运行的服务
+docker-compose ps
+#重启服务
+docker-compose restart
+#启动已存在的服务
+docker-compose start
+
+
+/////////////////////////////////////docker-compose.yml///////////////////////////////////
+version: '3'
+services:
+  service01:
+    image: java_had_ssh
+	container_name: java_hadoop_ssh_01
+	ports:
+      - 9870:9870
+	  - 19888:19888
+	  - 50022:22
+	  - 8088:8088
+	stdin_open: true
+	tty: true
+    command: /sbin/sshd -D
+
+
+
+
+
+
+

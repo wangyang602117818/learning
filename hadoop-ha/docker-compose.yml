@@ -1,0 +1,49 @@
+# yaml 配置
+version: '3'
+services:
+  master1:
+    image: hadoop_lean-distributed:v1
+    container_name: master1
+    ports:
+      - 19000:9000
+      - 19870:9870
+      - 18088:8088
+      - 50022:22
+    stdin_open: true
+    tty: true
+    command: /sbin/sshd -D
+  master2:
+    image: hadoop_lean-distributed:v1
+    container_name: master2
+    ports:
+      - 29000:9000
+      - 29870:9870
+      - 28088:8088
+      - 50023:22
+    stdin_open: true
+    tty: true
+    command: /sbin/sshd -D
+  worker1:
+    image: hadoop_lean-distributed:v1
+    container_name: worker1
+    ports:
+      - 50024:22
+    stdin_open: true
+    tty: true
+    command: /sbin/sshd -D
+  worker2:
+    image: hadoop_lean-distributed:v1
+    container_name: worker2
+    ports:
+      - 50025:22
+    stdin_open: true
+    tty: true
+    command: /sbin/sshd -D
+  worker3:
+    image: hadoop_lean-distributed:v1
+    container_name: worker3
+    ports:
+      - 50026:22
+    stdin_open: true
+    tty: true
+    command: /sbin/sshd -D

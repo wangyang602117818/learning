@@ -1,0 +1,79 @@
+本文档使用docker配置 hadoop 高可用环境
+使用的各个软件版本是 openjdk-11, hadoop-3.3.4, zookeeper-3.8.1
+
+=======================================环境配置==================================
+1. 准备好docker的容器(ubuntu-22.04.2)
+2. 安装 openssh-server
+	apt-get update
+	apt-get install openssh-server
+	echo "Port 22">>/etc/ssh/sshd_config
+	echo "PermitRootLogin yes">>/etc/ssh/sshd_config
+	#启动ssh服务 
+	service ssh start
+	#配置远程登录密码
+	passwd
+3. 下载以下三个软件并且解压
+	/app/jdk-11
+	/app/hadoop-3.3.4
+	/app/apache-zookeeper-3.8.1
+4. 配置java环境变量
+	echo -e >> ~/.bashrc
+	echo "export JAVA_HOME=/app/jdk-11" >> ~/.bashrc
+	source ~/.bashrc
+	echo "export PATH=$JAVA_HOME/bin:$JAVA_HOME/jre/bin:$PATH" >> ~/.bashrc
+	echo "export CLASSPATH=$CLASSPATH:.:$JAVA_HOME/lib:$JAVA_HOME/jre/lib" >> ~/.bashrc
+	source ~/.bashrc
+	cat ~/.bashrc
+5. 创建以下目录
+	/data/hdfs #存储hdfs的namenode和datanode
+	/data/qjmdata #存储namenode变更记录
+	/data/zookeeper #存储zookeeper运行文件
+6. 配置hadoop运行环境
+	1) 修改 hadoop-env.sh(各种User和JAVA_HOME)
+	2) 修改 core-site.xml 配置文件
+	3) 修改 hdfs-site.xml 配置文件
+	4) 修改 mapred-site.xml 配置文件
+	5) 修改 yarn-site.xml 配置文件
+	6) 在 workers 文件中添加workers列表
+7. 配置zookeeper环境
+	1) 修改zoo_sample.cfg为zoo.cfg, 并且改变以下配置
+	    #修改以下配置
+		dataDir=/data/zookeeper
+		#添加以下配置
+		server.1=master1:2888:3888
+		server.2=master2:2888:3888
+		server.3=worker1:2888:3888
+		server.4=worker2:2888:3888
+		server.5=worker3:2888:3888
+	2) 在 data/zookeeper 目录添加 myid 空文件
+8. 配置ssh免登录
+	ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa
+	cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+	chmod 0600 ~/.ssh/authorized_keys
+	
+配置好以上单个环境之后,生成该docker的镜像
+	docker commit hadoop_lean hadoop_lean-distributed:v1
+利用docker-compose.yml生成该镜像的5个容器
+	docker-compose up
+	
+=======================================集群配置==================================
+1. 启动 zkServer
+	1) 修改每个节点上的myid文件,内容为server.id中的id值
+	2) 启动zkServer
+	 /app/apache-zookeeper-3.8.1/bin/zkServer.sh start
+2. 在随意节点上初始化 ZooKeeper 
+	/app/hadoop-3.3.4/bin/hdfs zkfc -formatZK
+3. 启动3个worker的 QJM
+	/app/hadoop-3.3.4/bin/hdfs --daemon start journalnode
+4. 格式化namenode
+	1) 格式化第一个节点的namenode并且启动namenode
+		/app/hadoop-3.3.4/bin/hdfs namenode -format
+		/app/hadoop-3.3.4/bin/hdfs --daemon start namenode
+	2) 后序的namenode节点获取第一个节点的格式化结果
+		/app/hadoop-3.3.4/bin/hdfs namenode -bootstrapStandby
+5. 启动 hdfs 集群
+	/app/hadoop-3.3.4/sbin/start-dfs.sh
+6. 启动 yarn 集群
+	/app/hadoop-3.3.4/sbin/start-yarn.sh
+
+	
