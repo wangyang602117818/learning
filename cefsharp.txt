@@ -90,3 +90,7 @@ nuget: CefSharp.WinForms.NETCore
 		form2.ShowDialog();
 	});
 	
+7. 调试方法
+	添加菜单,点菜单的时候调用相应的方法
+	this._browser.ShowDevTools();  //打开调试器
+	this._browser.Reload(); //重新加载浏览器

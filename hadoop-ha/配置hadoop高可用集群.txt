@@ -76,4 +76,13 @@
 6. 启动 yarn 集群
 	/app/hadoop-3.3.4/sbin/start-yarn.sh
 
-	
+配置好之后后序的启动只需要1,5,6步骤
+
+
+如果想在任意目录运行 hdfs hadoop 命令,需要添加环境变量
+	echo -e >> ~/.bashrc
+	echo "export HADOOP_HOME=/app/hadoop-3.3.4" >> ~/.bashrc
+	source ~/.bashrc
+	echo "export PATH=$PATH:$HADOOP_HOME/bin" >> ~/.bashrc
+	source ~/.bashrc
+		

@@ -1,8 +1,0 @@
-现在完成时
-	动作发生在过去,对现在造成的影响
-	句式: have|has + 动词过去分词
-		They have already arrived in shanghai
-过去完成时
-	过去已经完成,对过去造成的影响
-	句式: had + 动词过去分词
-		They had already arrived in shanghai
