@@ -76,18 +76,30 @@ docker commit hadoop.ha hadoop-distributed:v2
 
 /app/zookeeper/bin/zkServer.sh start
 
+下载 zookeeper 
+
+/usr/local/hadoop-3.3.4/bin/hdfs zkfc -formatZK
 
 启动ha的步骤
 一. 启动3个worker的qjm
 	/usr/local/hadoop-3.3.4/bin/hdfs --daemon start journalnode
 二. 同步namenode的格式
 1 格式化第一个节点的namenode并且启动namenode: 
-	hdfs namenode -format
-	hdfs --daemon start namenode
+	/usr/local/hadoop-3.3.4/bin/hdfs namenode -format
+	/usr/local/hadoop-3.3.4/bin/hdfs --daemon start namenode
 2 后序的节点获取第一个节点的格式化结果:
-	hdfs namenode -bootstrapStandby
+	/usr/local/hadoop-3.3.4/bin/hdfs namenode -bootstrapStandby
 三. 启动
 	/usr/local/hadoop-3.3.4/sbin/start-dfs.sh
 	
 	
+
+@Digiqal2023
+
+Source Han Sans CN
+Montserrat
+
+https://app.digiqal.com/dgq/enablement/api/Resource/montserrat-medium.ttf
+https://app.digiqal.com/dgq/enablement/api/Resource/nav_proj.svg
+
 
