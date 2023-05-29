@@ -1,0 +1,9 @@
+apache-hive-3.1.3 默认仅支持到java8,使用hive必须把系统的jdk版本修改到java8
+1. 下载 apache-hive 并解压
+2. 配置环境变量
+	echo -e >> ~/.bashrc
+	echo "export HIVE_HOME=/usr/local/apache-hive-3.1.3-bin" >> ~/.bashrc
+	source ~/.bashrc
+	echo "export PATH=$HIVE_HOME/bin:$PATH" >> ~/.bashrc
+	source ~/.bashrc
+	

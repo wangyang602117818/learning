@@ -1,0 +1,35 @@
+
+1. 下载etcd安装包,解压并且复制 etcd etcdctl 到 /k8s/etcd/bin/ 目录
+2. 配置文件: /k8s/etcd/cfg/conf
+#[Member]
+name: etc01
+data-dir: /k8s/etcd/data
+listen-client-urls: http://0.0.0.0:2379
+listen-peer-urls: http://0.0.0.0:2380
+#[Clustering]
+#advertise-client-urls: http://k8s_master:2379
+#initial-advertise-peer-urls: http://k8s_master:2380
+#initial-cluster: etc01=http://k8s_master:2380,etc02=http://k8s_node1:2380,etc03=http://k8s_node2:2380
+#initial-cluster-token: etcd-cluster
+#initial-cluster-state: new
+
+3. service文件: /etc/systemd/system/etcd.service
+[Unit]
+Description=Etcd Server
+After=network.target
+After=network-online.target
+Wants=network-online.target
+[Service]
+Type=notify
+ExecStart=/k8s/etcd/bin/etcd --config-file /k8s/etcd/cfg/conf
+Restart=on-failure
+[Install]
+WantedBy=multi-user.target
+
+
+4. 启动
+systemctl start etcd
+
+#查看集群列表
+./etcdctl member list
+

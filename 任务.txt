@@ -74,32 +74,71 @@ hadoop fs -cat /outpu/part-r-00000
 
 docker commit hadoop.ha hadoop-distributed:v2
 
-/app/zookeeper/bin/zkServer.sh start
 
-下载 zookeeper 
+create table records (year string,temperature int,quality int)
+row format delimited
+ fields terminated by '\t'
 
-/usr/local/hadoop-3.3.4/bin/hdfs zkfc -formatZK
 
-启动ha的步骤
-一. 启动3个worker的qjm
-	/usr/local/hadoop-3.3.4/bin/hdfs --daemon start journalnode
-二. 同步namenode的格式
-1 格式化第一个节点的namenode并且启动namenode: 
-	/usr/local/hadoop-3.3.4/bin/hdfs namenode -format
-	/usr/local/hadoop-3.3.4/bin/hdfs --daemon start namenode
-2 后序的节点获取第一个节点的格式化结果:
-	/usr/local/hadoop-3.3.4/bin/hdfs namenode -bootstrapStandby
-三. 启动
-	/usr/local/hadoop-3.3.4/sbin/start-dfs.sh
-	
-	
+http://123.57.128.147/testdata/index.html#/offline?cps=expand&rps=hide&nav=1&ha=0&la=0&out=1&rt=1
 
-@Digiqal2023
+1 配置etcd
+新建目录
+/k8s/etcd/bin
+/k8s/etcd/data
+/k8s/etcd/cfg
+/k8s/kubernetes/bin
+/k8s/kubernetes/cfg
+拷贝 etcd etcdctl 到 /k8s/etcd/bin
+新建配置文件 etcd.cfg 到 /k8s/etcd/cfg
+#[Member]
+name: etcd01
+data-dir: /k8s/etcd/data
+listen-client-urls: http://0.0.0.0:2379
+listen-peer-urls: http://0.0.0.0:2380
+#[Clustering]
+initial-advertise-peer-urls: http://0.0.0.0:2380
+advertise-client-urls: http://0.0.0.0:2379
+initial-cluster: etc01=k8s_master:2380,etc02=k8s_node1:2380,etc03=k8s_node2:2380
+initial-cluster-token: etcd-cluster
+initial-cluster-state: new
 
-Source Han Sans CN
-Montserrat
+====master
+#[Member]
+name: etcd01
+data-dir: /k8s/etcd/data
+listen-client-urls: http://0.0.0.0:2379
+listen-peer-urls: http://0.0.0.0:2380
+#[Clustering]
+initial-advertise-peer-urls: http://0.0.0.0:2380
+advertise-client-urls: http://0.0.0.0:2379
+initial-cluster: etc01=k8s_master:2380,etc02=k8s_node1:2380,etc03=k8s_node2:2380
+initial-cluster-token: etcd-cluster
+initial-cluster-state: new
 
-https://app.digiqal.com/dgq/enablement/api/Resource/montserrat-medium.ttf
-https://app.digiqal.com/dgq/enablement/api/Resource/nav_proj.svg
+====node1
+#[Member]
+name: etcd02
+data-dir: /k8s/etcd/data
+listen-client-urls: http://0.0.0.0:2379
+listen-peer-urls: http://0.0.0.0:2380
+#[Clustering]
+initial-advertise-peer-urls: http://0.0.0.0:2380
+advertise-client-urls: http://0.0.0.0:2379
+initial-cluster: etc01=k8s_master:2380,etc02=k8s_node1:2380,etc03=k8s_node2:2380
+initial-cluster-token: etcd-cluster
+initial-cluster-state: new
 
+[Unit]
+Description=Etcd Server
+After=network.target
+After=network-online.target
+Wants=network-online.target
+[Service]
+Type=notify
+EnvironmentFile=/k8s/etcd/cfg/etcd.conf
+ExecStart=/k8s/ectd/bin/etcd
+Restart=on-failure
+[Install]
+WantedBy=multi-user.target
 

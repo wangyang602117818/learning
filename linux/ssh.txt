@@ -1,0 +1,25 @@
+#切换用户为wang
+sudo su wang
+#切换用户为root
+sudo su
+
+#root用户可以密码登录,也能使用pri_key登录
+PermitRootLogin yes
+PubkeyAuthentication yes
+
+#root用户不能密码登录,只能使用pri_key登录
+PermitRootLogin prohibit-password
+PubkeyAuthentication yes
+
+root账户通过key连接服务器要满足
+	1. 服务器中的authorized_keys里面必须有公钥
+	2. 客户端连接工具中配置的是私钥
+	3. root目录(或者是其他用户目录)和文件的权限必须是0774以下: chmod 774 /root -R
+	4. /etc/ssh/sshd_config配置正确
+
+root用户使用key登录的步骤:
+	1. 登录系统
+	2. 切换为root账户: sudo su 
+	3. 配置/etc/ssh/sshd_config(可能要修改权限777),然后重启sshd: systemctl restart sshd
+	4. 将公钥加入/root/.ssh/authorized_keys,然后修改权限774
+

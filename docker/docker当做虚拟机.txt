@@ -8,7 +8,7 @@
 6. 写入端口和远程登录
    echo "Port 22">>/etc/ssh/sshd_config
    echo "PermitRootLogin yes">>/etc/ssh/sshd_config
-7. service ssh start  #启动ssh服务器
+7. service ssh start  #启动ssh服务器(可执行文件位置: /etc/init.d/ssh)
 8. 配置密码以便登录所用
 	passwd
 

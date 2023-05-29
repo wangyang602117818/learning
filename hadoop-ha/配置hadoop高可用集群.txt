@@ -16,12 +16,20 @@
 	/app/jdk-11
 	/app/hadoop-3.3.4
 	/app/apache-zookeeper-3.8.1
-4. 配置java环境变量
+4. 配置环境变量
+	#java环境变量
 	echo -e >> ~/.bashrc
 	echo "export JAVA_HOME=/app/jdk-11" >> ~/.bashrc
 	source ~/.bashrc
 	echo "export PATH=$JAVA_HOME/bin:$JAVA_HOME/jre/bin:$PATH" >> ~/.bashrc
 	echo "export CLASSPATH=$CLASSPATH:.:$JAVA_HOME/lib:$JAVA_HOME/jre/lib" >> ~/.bashrc
+	source ~/.bashrc
+	cat ~/.bashrc
+	#hadoop环境变量
+	echo -e >> ~/.bashrc
+	echo "export HADOOP_HOME=/app/hadoop-3.3.4" >> ~/.bashrc
+	source ~/.bashrc
+	echo "export PATH=$HADOOP_HOME/bin:$PATH" >> ~/.bashrc
 	source ~/.bashrc
 	cat ~/.bashrc
 5. 创建以下目录
