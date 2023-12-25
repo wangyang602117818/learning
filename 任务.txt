@@ -15,15 +15,6 @@ Keras
 
 ffmpeg -hide_banner -v warning -i 01.gif -filter_complex "[0:v] scale=320:-1:flags=lanczos,split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse" logo-320.gif
 
-
-flag=thumbnail   //150px*150px
-flag=preview     //20% quality
-flag=sliders     //50% quality
-flag=original    //80% quality
-
-flag="" or no flag //flag = thumbnail
-
-
 slatejs
 prosemirror
 
@@ -82,63 +73,13 @@ row format delimited
 
 http://123.57.128.147/testdata/index.html#/offline?cps=expand&rps=hide&nav=1&ha=0&la=0&out=1&rt=1
 
-1 配置etcd
-新建目录
-/k8s/etcd/bin
-/k8s/etcd/data
-/k8s/etcd/cfg
-/k8s/kubernetes/bin
-/k8s/kubernetes/cfg
-拷贝 etcd etcdctl 到 /k8s/etcd/bin
-新建配置文件 etcd.cfg 到 /k8s/etcd/cfg
-#[Member]
-name: etcd01
-data-dir: /k8s/etcd/data
-listen-client-urls: http://0.0.0.0:2379
-listen-peer-urls: http://0.0.0.0:2380
-#[Clustering]
-initial-advertise-peer-urls: http://0.0.0.0:2380
-advertise-client-urls: http://0.0.0.0:2379
-initial-cluster: etc01=k8s_master:2380,etc02=k8s_node1:2380,etc03=k8s_node2:2380
-initial-cluster-token: etcd-cluster
-initial-cluster-state: new
 
-====master
-#[Member]
-name: etcd01
-data-dir: /k8s/etcd/data
-listen-client-urls: http://0.0.0.0:2379
-listen-peer-urls: http://0.0.0.0:2380
-#[Clustering]
-initial-advertise-peer-urls: http://0.0.0.0:2380
-advertise-client-urls: http://0.0.0.0:2379
-initial-cluster: etc01=k8s_master:2380,etc02=k8s_node1:2380,etc03=k8s_node2:2380
-initial-cluster-token: etcd-cluster
-initial-cluster-state: new
 
-====node1
-#[Member]
-name: etcd02
-data-dir: /k8s/etcd/data
-listen-client-urls: http://0.0.0.0:2379
-listen-peer-urls: http://0.0.0.0:2380
-#[Clustering]
-initial-advertise-peer-urls: http://0.0.0.0:2380
-advertise-client-urls: http://0.0.0.0:2379
-initial-cluster: etc01=k8s_master:2380,etc02=k8s_node1:2380,etc03=k8s_node2:2380
-initial-cluster-token: etcd-cluster
-initial-cluster-state: new
 
-[Unit]
-Description=Etcd Server
-After=network.target
-After=network-online.target
-Wants=network-online.target
-[Service]
-Type=notify
-EnvironmentFile=/k8s/etcd/cfg/etcd.conf
-ExecStart=/k8s/ectd/bin/etcd
-Restart=on-failure
-[Install]
-WantedBy=multi-user.target
+
+
+
+
+
+
 

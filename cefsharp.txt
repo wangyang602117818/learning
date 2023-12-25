@@ -58,6 +58,13 @@ nuget: CefSharp.WinForms.NETCore
 				alert(actualResult);
 			});
 		})();
+                //或者
+	  CefSharp.BindObjectAsync("boundObjectForm1").then(function (result) {
+		  boundObjectForm1.upload(16, 2).then(function (res) {
+			  alert('dss');
+			 
+		  });
+	  });
 		
 5. Control的扩展方法(这样调用就不会发送阻塞)
 	public static class ControlExtensions

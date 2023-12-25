@@ -33,3 +33,62 @@ systemctl start etcd
 #查看集群列表
 ./etcdctl member list
 
+
+
+=========flanneld.service====
+[Unit]
+Description=Flanneld overlay address etcd agent
+After=network-online.target network.target
+Before=docker.service
+[Service]
+Type=notify
+ExecStart=/k8s/kubernetes/bin/flanneld --etcd-endpoints=http://192.168.236.161:2379,http://192.168.236.191:2379,http://192.168.236.105:2379
+ExecStartPost=/k8s/kubernetes/bin/mk-docker-opts.sh -k DOCKER_NETWORK_OPTIONS -d /run/flanneld/subnet.env
+Restart=on-failure
+[Install]
+WantedBy=multi-user.target
+
+
+
+openssl genrsa -out rsa_private_key.pem 1024
+openssl rsa -in rsa_private_key.pem -pubout -out rsa_public_key.pem
+===========kube-apiserver.service=====
+[Unit]
+Description=Kubernetes API Server
+After=network.target
+[Service]
+ExecStart=/k8s/kubernetes/bin/kube-apiserver \
+--etcd-servers=http://192.168.236.161:2379,http://192.168.236.191:2379,http://192.168.236.105:2379 \
+--advertise-address=192.168.236.161 \
+--allow-privileged=true \
+--service-cluster-ip-range=10.0.0.1/24 \
+--enable-admission-plugins=NamespaceLifecycle,NamespaceExists,LimitRanger,ResourceQuota \
+--audit-log-maxage=30 \
+--audit-log-maxbackup=3 \
+--audit-log-maxsize=100 \
+--audit-log-path=/k8s/kubernetes/log/audit.log \
+--v=2 \
+--service-account-key-file=/k8s/keys/rsa_public_key.pem \
+--service-account-signing-key-file=/k8s/keys/rsa_private_key.pem \
+--service-account-issuer=api
+Restart=on-failure
+Type=notify
+[Install]
+WantedBy=multi-user.target
+============================================
+==========kube-scheduler.service============
+[Unit]
+Description=Kubernetes Scheduler
+[Service]
+ExecStart=/k8s/kubernetes/bin/kube-scheduler --master=192.168.236.161:8080 --leader-elect
+Restart=on-failure
+[Install]
+WantedBy=multi-user.target
+============================================
+
+/k8s/kubernetes/bin/kube-apiserver --etcd-servers=http://192.168.236.161:2379,http://192.168.236.191:2379,http://192.168.236.105:2379 --advertise-address=192.168.236.161 --allow-privileged=true --service-cluster-ip-range=10.0.0.1/24 --enable-admission-plugins=NamespaceLifecycle,NamespaceExists,LimitRanger,ResourceQuota --audit-log-maxage=30 --audit-log-maxbackup=3 --audit-log-maxsize=100 --audit-log-path=/k8s/kubernetes/log/audit.log --service-account-key-file=/k8s/keys/rsa_public_key.pem --service-account-signing-key-file=/k8s/keys/rsa_private_key.pem --service-account-issuer=api
+
+
+
+
+

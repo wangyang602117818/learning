@@ -21,5 +21,6 @@ root用户使用key登录的步骤:
 	1. 登录系统
 	2. 切换为root账户: sudo su 
 	3. 配置/etc/ssh/sshd_config(可能要修改权限777),然后重启sshd: systemctl restart sshd
-	4. 将公钥加入/root/.ssh/authorized_keys,然后修改权限774
+	4. 修改/root目录为777权限: chmod 777 /root -R
+	5. 将公钥加入/root/.ssh/authorized_keys,然后修改权限: chmod 774 /root -R
 
