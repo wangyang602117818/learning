@@ -11,6 +11,6 @@ net5.0测试所得:
 		});
 3. 发布项目并且安装服务
 	sc create 服务名称 binPath= "{path to batch file}" start= auto
-
+                sc delete CGJobs
 
 
