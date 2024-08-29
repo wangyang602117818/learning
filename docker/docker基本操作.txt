@@ -37,6 +37,7 @@
 	docker kill 5dee86048f06  #停止容器
 	docker rm 5dee86048f06    #删除容器
 	docker container prune    #删除所有停止的容器
+	docker restart 5dee86048f06 #重启容器
 	docker rename oldname newname #重命名容器
 5. 导入导出镜像
 	导出镜像(把webapp镜像导出为image.tar文件)
