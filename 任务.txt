@@ -9,14 +9,9 @@ ffmpeg.exe -i Wildlife.mp4 -hls_time 2 -hls_list_size 0 -hls_allow_cache 0 -hls_
 
 ai开源项目 http://scikit-learn.org/stable/
 
-Monaco Editor
-
 Keras
 
 ffmpeg -hide_banner -v warning -i 01.gif -filter_complex "[0:v] scale=320:-1:flags=lanczos,split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse" logo-320.gif
-
-slatejs
-prosemirror
 
 maven module
 服务项目
@@ -31,55 +26,11 @@ Jenkins
 深圳前海捷创未来技术服务有限公司北京分公司(2022.10->今)
 
 
-.abcdefghigklmnopqrstuwvxyz
-
-https://app-dev.digiqal.com/support/supportportaldev02/
-P@ssw0rd
-
-https://xd.adobe.com/view/577bfce2-958b-4d46-9ec8-76ee8452eb46-0228/specs/
-
-
-hdfs: 9870
-mr: 8088
-history: 19888
-
-mapred --daemon start historyserver
-
 docker run --name=java_hadoop_ssh -it -p 19888:19888 -p 50022:22 -p 8088:8088 -p 9870:9870 java_had_ssh /bin/bash
 
-ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa
-cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
-chmod 0600 ~/.ssh/authorized_keys
 
+密码：Pass01.
 
-hadoop fs -mkdir /user/tom/
-hadoop fs -rm /output
-hadoop fs -copyFromLocal 00.txt /user/tom/
-
-拷贝整个文件夹到服务器
-hadoop fs -copyFromLocal input /input
-
-hdfs://localhost/user/tom/00.txt
-
-hadoop fs -cat /outpu/part-r-00000
-
-docker commit hadoop.ha hadoop-distributed:v2
-
-
-create table records (year string,temperature int,quality int)
-row format delimited
- fields terminated by '\t'
-
-
-http://123.57.128.147/testdata/index.html#/offline?cps=expand&rps=hide&nav=1&ha=0&la=0&out=1&rt=1
-
-
-
-
-
-
-
-
-
-
+ssh root@192.168.3.47
+b6e8249d31574832a8975ae76476b8b7
 
