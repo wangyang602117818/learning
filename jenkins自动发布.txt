@@ -1,12 +1,22 @@
+
 1. 编译项目（使用Execute Windows batch command）：目标系统：linux-x64 linux-x64
 	D:
 	cd D:\workspace\WebApplication1\WebApplication1
 	dotnet build
-	dotnet publish --runtime linux-x64 --self-contained false -o C:\ProgramData\Jenkins\.jenkins\workspace\app01\
+	dotnet publish --runtime linux-x64 --self-contained false -o C:\ProgramData\Jenkins\.jenkins\workspace\web01\
 2. 发布项目(Publish over SSH 插件)
 	1）先在system中配置Publish over SSH插件的服务器地址 用户名 密码 发布的路径，其中路径是发布路径的基本路径
 	2）新增构建步骤 Send files or execute commands over SSH，在 SSH Publishers 配置中填入：
-	##这个是相对当前的工作路径
-	Source files：**/* 
-	##这个是相对路径
-	Remote directory：/WebApplication1/
+	##Source files（当前工作区所有文件）
+		**/*
+	##Source files（当前工作区多个文件用,隔开）
+		**/WebApplication1.dll,**/WebApplication1.pdb
+	##Remote directory(远程目录，这个是相对路径)
+		/WebApplication1/
+	##Exclude files（多个文件 服务器已经存在的不会删除）
+		**/*.log,**/appsettings.json,**/appsettings.Development.json
+	##Exclude files（排除文件夹）
+		**/wwwroot/      ##排除wwwroot所有文件和文件夹
+		**/wwwroot/*     ##排除wwwroot下所有文件，但是不排除文件夹和文件夹下的子文件
+		**/wwwroot/**    ##排除wwwroot所有文件和文件夹
+		
