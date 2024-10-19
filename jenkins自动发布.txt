@@ -15,10 +15,19 @@
 		**/**   ##当前工作区所有文件（包含子文件夹）
 		**/WebApplication1.dll,**/WebApplication1.pdb   ##当前工作区多个文件用,隔开
 	##Remote directory(远程目录，这个是相对路径)
-		/WebApplication1/
+		/home/ubuntu/app01/
 	##Exclude files
 		**/*.log,**/appsettings.json,**/appsettings.Development.json  ##多个文件 服务器已经存在的不会删除
 		**/wwwroot/      ##排除wwwroot所有文件和文件夹
 		**/wwwroot/*     ##排除wwwroot下所有文件，但是不排除文件夹和文件夹下的子文件
 		**/wwwroot/**    ##排除wwwroot所有文件和文件夹
-		
+	注意：
+	最终传到服务器的目录的路径是 Remote directory的路径+Source files的路径，需要合理配置Source files来移除路径字符串
+	
+	
+案例1：传输工作目录下 **/WebApplication1/bin/Release/* 文件到远程服务器的 /home/ubuntu/app01/ 目录下的配置
+	Source files： **/WebApplication1/bin/Release/*
+	Remove prefix：WebApplication1/bin/Release
+	Remote directory：/home/ubuntu/app01/
+
+
