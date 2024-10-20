@@ -147,10 +147,10 @@ curl -i http://k8s_node1:2379
 
 
 
-docker run --restart=always -v D:/docker_apps/app01:/app -d -p 5010:80 --entrypoint "dotnet /app/WebApplication1.dll" --name=mcr.microsoft.com/dotnet/aspnet:6.0
+docker run --restart=always -v /home/ubuntu/WebApplication1/:/app -d -p 8889:80 --entrypoint "dotnet /app/WebApplication1.dll" --name=mcr.microsoft.com/dotnet/aspnet:6.0
 
 
-
+sudo docker run --name app02 -d --restart=always -p 8081:80 -v /home/ubuntu/WebApplication1:/app --entrypoint "dotnet /app/WebApplication1.dll" mcr.microsoft.com/dotnet/aspnet:6.0
 
 
 
