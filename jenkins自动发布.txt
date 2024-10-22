@@ -29,5 +29,24 @@
 	Source files： **/WebApplication1/bin/Release/*
 	Remove prefix：WebApplication1/bin/Release
 	Remote directory：/home/ubuntu/app01/
+案例2：
+	jenkins在docker中部署：
+	##拉取镜像
+	docker pull jenkins/jenkins
+	##开启容器
+	docker run -d --name=jenkins_dotnet6.0 -p 8080:8080 jenkins/jenkins
+	##获取初始密码
+	docker exec jenkins_server tail /var/jenkins_home/secrets/initialAdminPassword
+案例3：在jenkins中设置dotne运行时
+	#Dockerfile
+	FROM jenkins/jenkins AS base
+	#添加sdk，不会保留压缩包到容器中
+	add dotnet-sdk-6.0.tar.gz /usr/local/dotnet-sdk-6.0
+	#设置dotnet环境变量
+	ENV DOTNET_ROOT=/usr/local/dotnet-sdk-6.0
+	env PATH $PATH:$DOTNET_ROOT
+	EXPOSE 8080
+
+
 
 
