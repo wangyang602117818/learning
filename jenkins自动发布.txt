@@ -45,6 +45,8 @@
 	#设置dotnet环境变量
 	ENV DOTNET_ROOT=/usr/local/dotnet-sdk-6.0
 	env PATH $PATH:$DOTNET_ROOT
+	run apt-get update
+	run apt-get install -y libicu-dev
 	EXPOSE 8080
 	===================================================
 	#build镜像
