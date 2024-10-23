@@ -1,12 +1,12 @@
 
-1. 编译本地项目（使用Execute Windows batch command）：目标系统：linux-x64 linux-x64
-	D:
-	cd D:\workspace\WebApplication1\WebApplication1
-	dotnet publish --runtime linux-x64 --self-contained false -o C:\ProgramData\Jenkins\.jenkins\workspace\web01\
-	编译git项目（使用Execute Windows batch command）：目标系统：linux-x64 linux-x64，引用工作目录：%WORKSPACE%
-	c:
-	cd %WORKSPACE%\WebApplication1\
-	dotnet publish --runtime linux-x64 --self-contained false -o %WORKSPACE%\WebApplication1\bin\Release\
+1. 编译本地项目（使用Execute Windows batch command）：目标系统：linux-x64 win-x64
+	#windows: (使用Execute Windows batch command),引用工作目录：%WORKSPACE%
+		c:
+		cd %WORKSPACE%\WebApplication1\
+		dotnet publish --runtime linux-x64 --self-contained false -o %WORKSPACE%\WebApplication1\bin\Release\
+	#linux: (使用shell),引用工作目录：$WORKSPACE
+		cd $WORKSPACE/WebApplication1
+		dotnet publish --runtime linux-x64 --self-contained false -o $WORKSPACE/WebApplication1/bin/Release
 2. 发布项目(Publish over SSH 插件)
 	1）先在system中配置Publish over SSH插件的服务器地址 用户名 密码 发布的路径，其中路径是发布路径的基本路径
 	2）新增构建步骤 Send files or execute commands over SSH，在 SSH Publishers 配置中填入：
@@ -36,9 +36,9 @@
 	##开启容器
 	docker run -d --name=jenkins_dotnet6.0 -p 8080:8080 jenkins/jenkins
 	##获取初始密码
-	docker exec jenkins_server tail /var/jenkins_home/secrets/initialAdminPassword
+	docker exec enkins_dotnet6.0 tail /var/jenkins_home/secrets/initialAdminPassword
 案例3：在jenkins中设置dotne运行时
-	#Dockerfile
+	#===================Dockerfile======================
 	FROM jenkins/jenkins AS base
 	#添加sdk，不会保留压缩包到容器中
 	add dotnet-sdk-6.0.tar.gz /usr/local/dotnet-sdk-6.0
@@ -46,7 +46,11 @@
 	ENV DOTNET_ROOT=/usr/local/dotnet-sdk-6.0
 	env PATH $PATH:$DOTNET_ROOT
 	EXPOSE 8080
-
-
-
+	===================================================
+	#build镜像
+	docker build -t jenkins-dotnet_sdk_6.0 .
+	#启动容器
+	docker run -d --name=jenkins-dotnet_sdk_6.0-01 -p 8080:8080 jenkins-dotnet_sdk_6.0
+	#查看jenkins的初始密码
+	docker exec jenkins-dotnet_sdk_6.0-01 tail /var/jenkins_home/secrets/initialAdminPassword
 
