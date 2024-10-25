@@ -1,0 +1,60 @@
+
+1. 编译本地项目（使用Execute Windows batch command）：目标系统：linux-x64 win-x64
+	#windows: (使用Execute Windows batch command)=====================================================
+		#引用工作目录方式：%WORKSPACE%
+		#解决方案的路径: %WORKSPACE%\WebApplication1.sln(/var/jenkins_home/workspace/web01/WebApplication1.sln)
+		
+		c:
+		cd %WORKSPACE%\WebApplication1\
+		dotnet publish --runtime linux-x64 --self-contained false -o %WORKSPACE%\WebApplication1\bin\Release\
+		
+	#linux: (使用shell)===============================================================================
+		#引用工作目录方式：$WORKSPACE
+		#项目的路径: $WORKSPACE\WebApplication1\WebApplication1.csproj(/var/jenkins_home/workspace/web01/WebApplication1/WebApplication1.csproj)
+		
+		cd $WORKSPACE/WebApplication1
+		dotnet publish --runtime linux-x64 --self-contained false -o $WORKSPACE/WebApplication1/bin/Release
+		
+2. 发布项目(Publish over SSH 插件)
+	1）先在system中配置Publish over SSH插件的服务器地址 用户名 密码 发布的路径，其中路径是发布路径的基本路径
+	2）新增构建步骤 Send files or execute commands over SSH，在 SSH Publishers 配置中填入：
+	##Source files（）
+		**/*    ##当前工作区所有文件（不包含子文件夹）
+		**/**   ##当前工作区所有文件（包含子文件夹）
+		**/WebApplication1.dll,**/WebApplication1.pdb   ##当前工作区多个文件用,隔开
+	##Remote directory(远程目录，这个是相对路径)
+		/home/ubuntu/app01/
+	##Exclude files
+		**/*.log,**/appsettings.json,**/appsettings.Development.json  ##多个文件 服务器已经存在的不会删除
+		**/wwwroot/      ##排除wwwroot所有文件和文件夹
+		**/wwwroot/*     ##排除wwwroot下所有文件，但是不排除文件夹和文件夹下的子文件
+		**/wwwroot/**    ##排除wwwroot所有文件和文件夹
+	注意：
+	最终传到服务器的目录的路径是 Remote directory的路径+Source files的路径，需要合理配置 Remove prefix 来移除路径字符串
+	
+	案例：传输工作目录 **/WebApplication1/bin/Release 下所有文件到远程服务器的 /home/ubuntu/app01/ 目录下
+		Source files： **/WebApplication1/bin/Release/**
+		Remove prefix：WebApplication1/bin/Release
+		Remote directory：/home/ubuntu/app01/
+
+案例2：在jenkins中设置dotnet-sdk（编译环境）
+#===================Dockerfile======================
+FROM jenkins/jenkins AS base
+#添加sdk，不会保留压缩包到容器中
+add dotnet-sdk-6.0.tar.gz /usr/local/dotnet-sdk-6.0
+#设置dotnet环境变量
+ENV DOTNET_ROOT=/usr/local/dotnet-sdk-6.0
+env PATH $PATH:$DOTNET_ROOT
+#dotnet编译的环境
+user root
+run apt-get update
+run apt-get install -y libicu-dev
+EXPOSE 8080
+===================================================
+#build镜像
+docker build -t jenkins-dotnet_sdk_6.0 .
+#启动容器
+docker run -d --name=jenkins-dotnet_sdk_6.0-01 -p 8080:8080 jenkins-dotnet_sdk_6.0
+#查看jenkins的初始密码
+docker exec {name} tail /var/jenkins_home/secrets/initialAdminPassword
+

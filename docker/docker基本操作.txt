@@ -55,13 +55,21 @@
 2. 可以直接在本地修改文件并立即在容器中看到效果
 3. 不需要在容器内手动复制文件，减少了管理复杂性
 步骤：
-1. 拉取镜像 mcr.microsoft.com/dotnet/aspnet:6.0
-2. 使用 Dockerfile 构建新的启动镜像起名为 webapp（参考：dockerfile-netcore 节点）
-3. 利用新的镜像启动容器并且挂载整个项目目录：
-	docker run --name app01 -d --restart=always -p 8080:80 -v /root/web/app01:/app webapp
+1. 新建文件夹 app01-base, 放入 Dockerfile 文件：
+===========Dockerfile=================
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
+#这是必须的,启动会拷贝文件
+copy . /app
+WORKDIR /app
+EXPOSE 80
+ENTRYPOINT ["dotnet", "WebApplication1.dll"]
+==============================================
+2. 构建镜像,名称为：app01-base
+   docker build -t app01-base .
+3. 启动镜像新建容器命名为：app01,并且挂载整个项目目录：
+   docker run --name app01 -d --restart=always -p 8888:80 -v /home/ubuntu/app01:/app app01-base
 
-
-===========================================   dockerfile  ========================================
+	
 ===========dockerfile-java===================
 from centos:centos7
 add openjdk-19.tar.gz /usr/local/
@@ -75,17 +83,6 @@ add ./spr.war /usr/local/apache-tomcat-9.0.68/webapps
 EXPOSE 8080
 CMD /usr/local/apache-tomcat-9.0.68/bin/catalina.sh run
 ==============================================
-
-===========dockerfile-netcore=================
-FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
-COPY . /app
-WORKDIR /app
-EXPOSE 80
-ENTRYPOINT ["dotnet", "Weather.dll"]
-==============================================
--t: 指定构建镜像命名为webapp
-docker build -t webapp .
-该命令会在当前目录下寻找 Dockerfile 文件，并自动完成构建。
 
 =========================================== docker-compose 命令========================================
 
