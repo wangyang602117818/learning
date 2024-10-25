@@ -1,12 +1,20 @@
 
 1. 编译本地项目（使用Execute Windows batch command）：目标系统：linux-x64 win-x64
-	#windows: (使用Execute Windows batch command),引用工作目录：%WORKSPACE%
+	#windows: (使用Execute Windows batch command)=====================================================
+		#引用工作目录方式：%WORKSPACE%
+		#解决方案的路径: %WORKSPACE%\WebApplication1.sln(/var/jenkins_home/workspace/web01/WebApplication1.sln)
+		
 		c:
 		cd %WORKSPACE%\WebApplication1\
 		dotnet publish --runtime linux-x64 --self-contained false -o %WORKSPACE%\WebApplication1\bin\Release\
-	#linux: (使用shell),引用工作目录：$WORKSPACE
+		
+	#linux: (使用shell)===============================================================================
+		#引用工作目录方式：$WORKSPACE
+		#项目的路径: $WORKSPACE\WebApplication1\WebApplication1.csproj(/var/jenkins_home/workspace/web01/WebApplication1/WebApplication1.csproj)
+		
 		cd $WORKSPACE/WebApplication1
 		dotnet publish --runtime linux-x64 --self-contained false -o $WORKSPACE/WebApplication1/bin/Release
+		
 2. 发布项目(Publish over SSH 插件)
 	1）先在system中配置Publish over SSH插件的服务器地址 用户名 密码 发布的路径，其中路径是发布路径的基本路径
 	2）新增构建步骤 Send files or execute commands over SSH，在 SSH Publishers 配置中填入：
@@ -22,22 +30,14 @@
 		**/wwwroot/*     ##排除wwwroot下所有文件，但是不排除文件夹和文件夹下的子文件
 		**/wwwroot/**    ##排除wwwroot所有文件和文件夹
 	注意：
-	最终传到服务器的目录的路径是 Remote directory的路径+Source files的路径，需要合理配置Source files来移除路径字符串
+	最终传到服务器的目录的路径是 Remote directory的路径+Source files的路径，需要合理配置 Remove prefix 来移除路径字符串
 	
-	
-案例1：传输工作目录 **/WebApplication1/bin/Release 下所有文件到远程服务器的 /home/ubuntu/app01/ 目录下
-	Source files： **/WebApplication1/bin/Release/**
-	Remove prefix：WebApplication1/bin/Release
-	Remote directory：/home/ubuntu/app01/
-案例2：
-	jenkins在docker中部署：
-	##拉取镜像
-	docker pull jenkins/jenkins
-	##开启容器
-	docker run -d --name=jenkins_dotnet6.0 -p 8080:8080 jenkins/jenkins
-	##获取初始密码
-	docker exec enkins_dotnet6.0 tail /var/jenkins_home/secrets/initialAdminPassword
-案例3：在jenkins中设置dotne运行时
+	案例：传输工作目录 **/WebApplication1/bin/Release 下所有文件到远程服务器的 /home/ubuntu/app01/ 目录下
+		Source files： **/WebApplication1/bin/Release/**
+		Remove prefix：WebApplication1/bin/Release
+		Remote directory：/home/ubuntu/app01/
+
+案例2：在jenkins中设置dotne运行时
 	#===================Dockerfile======================
 	FROM jenkins/jenkins AS base
 	#添加sdk，不会保留压缩包到容器中
