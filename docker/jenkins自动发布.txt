@@ -37,24 +37,24 @@
 		Remove prefix：WebApplication1/bin/Release
 		Remote directory：/home/ubuntu/app01/
 
-案例2：在jenkins中设置dotne运行时
-	#===================Dockerfile======================
-	FROM jenkins/jenkins AS base
-	#添加sdk，不会保留压缩包到容器中
-	add dotnet-sdk-6.0.tar.gz /usr/local/dotnet-sdk-6.0
-	#设置dotnet环境变量
-	ENV DOTNET_ROOT=/usr/local/dotnet-sdk-6.0
-	env PATH $PATH:$DOTNET_ROOT
-	#dotnet编译的环境
-	user root
-	run apt-get update
-	run apt-get install -y libicu-dev
-	EXPOSE 8080
-	===================================================
-	#build镜像
-	docker build -t jenkins-dotnet_sdk_6.0 .
-	#启动容器
-	docker run -d --name=jenkins-dotnet_sdk_6.0-01 -p 8080:8080 jenkins-dotnet_sdk_6.0
-	#查看jenkins的初始密码
-	docker exec {name} tail /var/jenkins_home/secrets/initialAdminPassword
+案例2：在jenkins中设置dotnet-sdk（编译环境）
+#===================Dockerfile======================
+FROM jenkins/jenkins AS base
+#添加sdk，不会保留压缩包到容器中
+add dotnet-sdk-6.0.tar.gz /usr/local/dotnet-sdk-6.0
+#设置dotnet环境变量
+ENV DOTNET_ROOT=/usr/local/dotnet-sdk-6.0
+env PATH $PATH:$DOTNET_ROOT
+#dotnet编译的环境
+user root
+run apt-get update
+run apt-get install -y libicu-dev
+EXPOSE 8080
+===================================================
+#build镜像
+docker build -t jenkins-dotnet_sdk_6.0 .
+#启动容器
+docker run -d --name=jenkins-dotnet_sdk_6.0-01 -p 8080:8080 jenkins-dotnet_sdk_6.0
+#查看jenkins的初始密码
+docker exec {name} tail /var/jenkins_home/secrets/initialAdminPassword
 
