@@ -33,7 +33,7 @@
 	docker ps -a                             #查看所有容器(docker container ls --all)
 	docker commit d14b63e3809d centos7:centos-git #容器转镜像(REPOSITORY:TAG)
 	docker start 5dee86048f06                #启动存在的容器
-	docker exec -it 5dee86048f06 /bin/bash   #进入正在运行的容器
+	docker exec -it --user root 5dee86048f06 /bin/bash   #进入正在运行的容器
 	docker kill 5dee86048f06  #停止容器
 	docker rm 5dee86048f06    #删除容器
 	docker container prune    #删除所有停止的容器
