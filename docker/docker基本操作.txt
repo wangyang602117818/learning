@@ -58,7 +58,6 @@
 1. 新建文件夹 app01-base, 放入 Dockerfile 文件：
 ===========Dockerfile=================
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
-#这是必须的,启动会拷贝文件
 copy . /app
 WORKDIR /app
 EXPOSE 80
