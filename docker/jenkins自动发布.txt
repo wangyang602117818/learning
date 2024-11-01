@@ -25,10 +25,10 @@
 	##Remote directory(远程目录，这个是相对路径)
 		/home/ubuntu/app01/
 	##Exclude files
-		**/*.log,**/appsettings.json,**/appsettings.Development.json  ##多个文件 服务器已经存在的不会删除
-		**/wwwroot/      ##排除wwwroot所有文件和文件夹
-		**/wwwroot/*     ##排除wwwroot下所有文件，但是不排除文件夹和文件夹下的子文件
-		**/wwwroot/**    ##排除wwwroot所有文件和文件夹
+		**/*.log,**/*.json,**/*.pdb    ##多个文件 服务器已经存在的不会删除
+		**/wwwroot/                    ##排除wwwroot所有文件和文件夹
+		**/wwwroot/*                   ##排除wwwroot下所有文件，但是不排除文件夹和文件夹下的子文件
+		**/wwwroot/**                  ##排除wwwroot所有文件和文件夹
 	注意：
 	最终传到服务器的目录的路径是 Remote directory的路径+Source files的路径，需要合理配置 Remove prefix 来移除路径字符串
 	
@@ -57,4 +57,19 @@ docker build -t jenkins-dotnet_sdk_6.0 .
 docker run -d --name=jenkins-dotnet_sdk_6.0-01 -p 8080:8080 jenkins-dotnet_sdk_6.0
 #查看jenkins的初始密码
 docker exec {name} tail /var/jenkins_home/secrets/initialAdminPassword
+
+备份还原步骤：
+1. 在发布之前执行备份语法($BUILD_NUMBE：为当前编译的版本号)：
+	sudo tar --exclude="*.json" --exclude="*.pdb" -czf /home/ubuntu/app01-backup/backup_before_$BUILD_NUMBER.tar.gz -C /home/ubuntu/app01 .
+2. 新建自由风格项目来还原($version：手动指定参数化的版本号)
+	sudo tar -xzf /home/ubuntu/app01-backup/backup_before_$version.tar.gz -C /home/ubuntu/app01
+
+每次发布之前都通过当前发布的版本号会备份当前线上的内容，所以多次发布还原，可能会发送混乱
+发布遇到问题需要还原的话：记住第一次发布的版本号，后序的还原直接用这个版本号还原
+
+
+
+
+
+
 
