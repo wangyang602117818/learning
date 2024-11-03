@@ -3,7 +3,7 @@
 	#windows: (使用Execute Windows batch command)=====================================================
 		#引用工作目录方式：%WORKSPACE%
 		#解决方案的路径: %WORKSPACE%\WebApplication1.sln(/var/jenkins_home/workspace/web01/WebApplication1.sln)
-		
+		#对于路径中有中文的情况需要添加改变字符集的命令：chcp 65001 > NUL
 		c:
 		cd %WORKSPACE%\WebApplication1\
 		dotnet publish --runtime linux-x64 --self-contained false -o %WORKSPACE%\WebApplication1\bin\Release\
