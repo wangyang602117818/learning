@@ -34,3 +34,24 @@ docker run --name=java_hadoop_ssh -it -p 19888:19888 -p 50022:22 -p 8088:8088 -p
 ssh root@192.168.3.47
 b6e8249d31574832a8975ae76476b8b7
 
+FROM mcr.microsoft.com/dotnet/sdk:3.1 AS base
+user root
+add openjdk-21.tar.gz /usr/local/
+env JAVA_HOME /usr/local/jdk-21
+env CLASSPATH $JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+env PATH $PATH:$JAVA_HOME/bin
+COPY jenkins.war /usr/local/
+RUN apt-get update
+RUN apt-get install -y libfreetype6
+EXPOSE 8080
+CMD ["java", "-jar", "/usr/local/jenkins.war"]
+
+--测试命令
+docker build -t jenkins-dotnet_sdk_3.1 .
+docker run -it --name=jenkins-dotnet_sdk_3.1-01 -p 8081:8080 jenkins-dotnet_sdk_3.1 /bin/bash 
+
+docker rm jenkins-dotnet_sdk_3.1-01
+docker image rm jenkins-dotnet_sdk_3.1
+
+
+
