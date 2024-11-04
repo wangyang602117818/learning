@@ -13,12 +13,6 @@ Keras
 
 ffmpeg -hide_banner -v warning -i 01.gif -filter_complex "[0:v] scale=320:-1:flags=lanczos,split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse" logo-320.gif
 
-maven module
-服务项目
-elaticsearch
-mongodb
-Jenkins
-
 
 北京易淘无限网络技术有限公司(2014.12->2016.4)
 北京普腾德永数码科技有限公司(2016.5->2019.10)
