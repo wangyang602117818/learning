@@ -36,7 +36,7 @@ env CLASSPATH $JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
 env PATH $PATH:$JAVA_HOME/bin
 COPY jenkins.war /usr/local/
 RUN apt-get update
-RUN apt-get install -y libfreetype6
+RUN apt-get install -y fontconfig libfreetype6
 EXPOSE 8080
 CMD ["java", "-jar", "/usr/local/jenkins.war"]
 
