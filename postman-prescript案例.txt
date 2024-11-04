@@ -1,0 +1,43 @@
+let time = new Date();
+var timestamp = time.getFullYear() + "-" + (time.getMonth() + 1) + "-" + time.getDate() + " " + time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds();
+var appkey = pm.request.url.query.get('app_key');
+var method= pm.request.url.query.get('method');
+//优先使用参数上的app_secret
+var app_secret = GetQueryParams('app_secret');
+if(!app_secret) app_secret =  pm.environment.get("app_secret");
+
+var data = GetQueryParams('data');
+//console.log(data,1);
+//取formdata参数
+if(data==''||data==undefined) data = GetFormParams("data");
+
+//console.log(data,2);
+
+var tempstring = app_secret + "app_key" + appkey + "data" + data + "method" + method + "timestamp" + timestamp + app_secret;
+console.log(tempstring,300);
+var sign = require('crypto-js').MD5(tempstring).toString().toUpperCase();
+pm.request.url.query.add("sign="+sign);
+pm.request.url.query.add("timestamp="+timestamp);
+console.log(sign,301);
+
+function GetQueryParams(name){
+    for(var i=0; i<pm.request.url.query.members.length; i++){
+        var item = pm.request.url.query.members[i];
+        if(item.disabled) continue;
+        if(item.key==name) return item.value;
+    }
+}
+function GetFormParams(name){
+    console.log(pm.request.body.formdata,100);
+    if(pm.request.body.formdata){
+        for(var i=0; i<pm.request.body.formdata.members.length; i++){
+            var item = pm.request.body.formdata.members[i];
+            if(item.disabled) continue;
+            if(item.key==name) return item.value;
+        }
+    }
+}
+//添加header方法
+function SetHeader(key,val){
+    pm.request.headers.add({key:key,value:val})
+}
