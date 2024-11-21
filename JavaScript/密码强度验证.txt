@@ -1,0 +1,30 @@
+function checkPasswordValid(str) {
+    var len = str.length;
+    //密码位数不对
+    if (len < 8 || len > 20) return 1;
+    var upLetters = 0;
+    var lowerLetters = 0;
+    var numbers = 0;
+    var specials = 0;
+    for (var i = 0; i < str.length; i++) {
+        var charCode = str[i].charCodeAt(0);
+        if (charCode >= 48 && charCode <= 57) {
+            numbers++;
+        }
+        else if (charCode >= 65 && charCode <= 90) {
+            upLetters++;
+        }
+        else if (charCode >= 97 && charCode <= 122) {
+            lowerLetters++;
+        } else {
+            specials++;
+        }
+    }
+    //缺少数字
+    if (numbers == 0) return 2;
+    //缺少字母
+    if (upLetters + lowerLetters == 0) return 3;
+    //缺少特殊字符
+    if (specials == 0) return 4;
+    return 0;
+}
