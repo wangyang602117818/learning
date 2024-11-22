@@ -49,8 +49,9 @@
     docker cp 2c8e0430e46d:/usr/local/apache-tomcat-9.0.68/logs /root
 	#拷贝文件到容器目录
 	docker cp ./spr.war 2c8e0430e46d:/usr/local/apache-tomcat-9.0.68/webapps
-7. 查看docker最近的输出日志
-    docker logs sh-mvc8890
+7. 查看docker最近的100条输出日志，和最近5分钟日志输出 
+    docker logs --tail 100 sh-mvc8890
+    docker logs --since 5m sh-mvc8890   
 实际操作中挂载整个目录有以下特点：
 1. 可以实时查看代码更改，适合开发环境
 2. 可以直接在本地修改文件并立即在容器中看到效果
