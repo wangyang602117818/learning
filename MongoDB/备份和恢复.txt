@@ -2,6 +2,7 @@
 --port     :端口(默认27017)
 --username,-u :用户名
 --password,-p :密码
+--authenticationDatabase admin
 --db,-d     :数据库
 --collection,-c: 集合
 
