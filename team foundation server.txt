@@ -1,4 +1,4 @@
-Team Foundation Server的使用 
+Team Foundation Server的使用
 1:下载tfs服务器安装好,安装好后在服务器控制台,可以看到项目collection信息(这一步在服务器上进行)
 2:把项目传到TFS服务器
 	1)打开tfs管理界面(http://ywang363pri1:8080/tfs/) ,新建一个团队项目,此时该项目还是空的,没有任何代码
