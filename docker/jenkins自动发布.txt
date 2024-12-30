@@ -72,6 +72,7 @@ EXPOSE 8080
 CMD ["java", "-jar", "/usr/local/jenkins.war"]
 ===================dotnet3.1=======================
 
+
 备份还原步骤：
 1. 在发布之前执行备份语法($BUILD_NUMBE：为当前编译的版本号)：
 	sudo tar --exclude="*.json" --exclude="*.pdb" -czf /home/ubuntu/app01-backup/backup_before_$BUILD_NUMBER.tar.gz -C /home/ubuntu/app01 .
@@ -82,8 +83,7 @@ CMD ["java", "-jar", "/usr/local/jenkins.war"]
 发布遇到问题需要还原的话：记住第一次发布的版本号，后序的还原直接用这个版本号还原
 
 
-
-
+copy \Y CRM.*.dll CRM.*.exe Shared.dll D:\publish\crm_dlls\
 
 
 
