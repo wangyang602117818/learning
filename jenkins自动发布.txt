@@ -1,12 +1,12 @@
 
 1. 编译本地项目（使用Execute Windows batch command）：目标系统：linux-x64 win-x64
-	#windows: (使用Execute Windows batch command),引用工作目录：%WORKSPACE%, Jenkins跟目录: %JENKINS_HOME%
+	#windows: (使用Execute Windows batch command),引用工作目录：%WORKSPACE%
 		c:
 		cd %WORKSPACE%\WebApplication1\
-		dotnet publish --runtime win-x64 --self-contained false -o %JENKINS_HOME%\Publish\API
-	#linux: (使用shell),引用工作目录：$WORKSPACE, Jenkins跟目录: $JENKINS_HOME
+		dotnet publish --runtime win-x64 --self-contained false -o %WORKSPACE%\Publish\API
+	#linux: (使用shell),引用工作目录：$WORKSPACE, Jenkins跟目录: $WORKSPACE
 		cd $WORKSPACE/WebApplication1
-		dotnet publish --runtime linux-x64 --self-contained false -o $JENKINS_HOME/Publish/API
+		dotnet publish --runtime linux-x64 --self-contained false -o $WORKSPACE/Publish/API
 2. 发布项目(Publish over SSH 插件)
 	1）先在system中配置Publish over SSH插件的服务器地址 用户名 密码 发布的路径，其中路径是发布路径的基本路径
 	2）新增构建步骤 Send files or execute commands over SSH，在 SSH Publishers 配置中填入：
@@ -57,4 +57,17 @@
 	docker run -d --name=jenkins-dotnet_sdk_6.0-01 -p 8080:8080 jenkins-dotnet_sdk_6.0
 	#查看jenkins的初始密码
 	docker exec jenkins-dotnet_sdk_6.0-01 tail /var/jenkins_home/secrets/initialAdminPassword
+
+
+
+windows下openssh的发布:
+iis问题:
+	停止iis站点: C:\Windows\System32\inetsrv\appcmd.exe stop site "crm-api"
+	开启iis站点: C:\Windows\System32\inetsrv\appcmd.exe start site crm-api
+Remote directory路径问题:
+	全局SSH Server的Remote Directory路径配置为 /
+	发布的时候路径直接填 C:\publish\crm
+
+
+
 
