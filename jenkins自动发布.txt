@@ -59,6 +59,18 @@
 	docker exec jenkins-dotnet_sdk_6.0-01 tail /var/jenkins_home/secrets/initialAdminPassword
 
 
+备份还原步骤：
+1. 在发布之前执行备份语法($BUILD_NUMBE：为当前编译的版本号)：
+	sudo tar --exclude="*.json" --exclude="*.pdb" -czf /home/ubuntu/app01-backup/backup_before_$BUILD_NUMBER.tar.gz -C /home/ubuntu/app01 .
+2. 新建自由风格项目来还原($version：手动指定参数化的版本号)
+	sudo tar -xzf /home/ubuntu/app01-backup/backup_before_$version.tar.gz -C /home/ubuntu/app01
+
+每次发布之前都通过当前发布的版本号会备份当前线上的内容，所以多次发布还原，可能会发送混乱
+发布遇到问题需要还原的话：记住第一次发布的版本号，后序的还原直接用这个版本号还原
+
+
+copy \Y CRM.*.dll CRM.*.exe Shared.dll D:\publish\crm_dlls\
+
 
 windows下openssh的发布:
 iis问题:
